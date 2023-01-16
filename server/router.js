@@ -9,11 +9,11 @@ const authMiddleware = require ('./middleware/auth')
 
 router.post('/register', upload.single('avatar'), userController.createProfile);
 router.put('/editProfile/:id', authMiddleware.decodeToken, userController.updateProfile)
-router.get('/getUserById/:id', /*authMiddleware.decodeToken,*/ userController.getProfile)
+router.get('/users/:id', /*authMiddleware.decodeToken,*/ userController.getProfile)
 
-router.get('/home', itemController.getItems);
-router.get('/:category', itemController.getByCategory)
-router.get('/item/:id', itemController.getItemById)
+router.get('/items', itemController.getItems);
+router.get('items/:category', itemController.getByCategory);
+router.get('/items/:id', itemController.getItemById);
 router.post('/items', /*authMiddleware.decodeToken,*/ upload.single('image'), itemController.createItem)
 router.put('/editItem/:id',authMiddleware.decodeToken, upload.single('image'), itemController.updateItem)
 router.delete('/items/:id',authMiddleware.decodeToken, itemController.deleteItem);

@@ -1,0 +1,182 @@
+
+import { useState } from "react"
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { IconButton } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
+import { addItem } from "../services";
+
+export default function AddItem() {
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [location, setLocation] = useState("");
+  const [category, setCategory] = useState("");
+  const [image, setImage] = useState("")
+
+
+  const [open, setOpen] = useState(false);
+
+
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
+
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(title, description, category, price, quantity, location, image);
+    const formData = new FormData();
+        formData.append('image', image);
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('category', category);
+        formData.append('price', price);
+        formData.append('quantity', quantity);
+        formData.append('location', location);
+
+    postItem(formData)
+    setTitle('');
+    setDescription('');
+    setCategory('');
+    setPrice('');
+    setQuantity('');
+    setLocation('');
+    setImage('');
+    // handleClose()
+  };
+
+
+
+  return (
+    <div>
+      {/* <Button variant="contained" sx={{display: { xs: 'none', md: 'block'} }} onClick={handleClickOpen}>
+        Log in/ Register
+      </Button>
+      <Button variant="contained" size='small' sx={{display: { xs: 'block', md: 'none'} }} onClick={handleClickOpen}>
+        Log in/ Register
+      </Button>
+      <Dialog open={open} onClose={handleClose} >
+      <DialogActions>
+      <IconButton sx={{padding: 0}} onClick={handleClose} >
+            <CloseIcon sx={{fontSize: '1.3em'}}/>
+          </IconButton>
+        </DialogActions>
+        <DialogTitle sx={{textAlign: 'center', padding: 0}}>Register</DialogTitle>
+        <DialogContent> */}
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-around",
+          alignItems: "center",
+          padding: "2rem",
+          maxWidth: '600px'
+        }}
+      >
+        <TextField
+          sx={{ width: '30em', marginBottom: '0.7em' }}
+          label="Title"
+          type="text"
+          variant="outlined"
+          required
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <TextField
+          sx={{ width: '30em', marginBottom: '0.7em' }}
+          multiline
+          rows={4}
+          label="Description"
+          variant="standard"
+          required
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        <TextField
+          sx={{ width: '30em', marginBottom: '0.7em' }}
+          label="Category"
+          variant="outlined"
+          required
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        />
+        <div display="flex" flexDirection="rows">
+          <TextField
+            sx={{ width: '10em', marginBottom: '0.7em' }}
+            label="Price"
+            variant="outlined"
+            required
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          />
+
+          <TextField
+            sx={{ width: '10em', marginBottom: '0.7em' }}
+            label="Quantity"
+            variant="outlined"
+            required
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+          />
+
+          <TextField
+            sx={{ width: '10em', marginBottom: '0.7em' }}
+            label="Location"
+            variant="outlined"
+            required
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          />
+        </div>
+        <input
+          accept="image/*"
+          style={{ display: 'none' }}
+          id="contained-button-file"
+          // value={image}
+          multiple
+          type="file"
+          onChange={(e) => setImage(e.target.files[0])}
+        />
+        <label htmlFor="contained-button-file">
+          <Button variant="contained" component="span">
+            Upload
+          </Button>
+        </label>
+
+        <Button
+          sx={{ width: '16em', height: '3em' }}
+          variant="contained"
+          color="primary"
+          type="submit"
+        >
+          Add item
+        </Button>
+      </form>
+      {/* </DialogContent>
+
+      </Dialog> */}
+    </div >
+  );
+}
+
+const postItem = async (data) => {
+  // const newItem = { title, description, category, price, quantity, location, image }
+  // console.log(newItem)
+  const post = await addItem(data);
+  // if (newItem._id) {
+  //   setItems(items => [...items, newItem])
+  // }
+}

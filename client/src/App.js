@@ -2,8 +2,13 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { createTheme, ThemeProvider } from '@mui/material';
+import Banner from './components/Banner';
 import Navbar from './components/Navbar';
+import { createTheme, ThemeProvider } from '@mui/material';
+import ItemList from './components/ItemsList';
+import Footer from './components/Footer';
+import Register from './components/Register';
+import AddItem from './components/AddItem';
 
 const theme = createTheme({
   typography: {
@@ -14,9 +19,10 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      main: "#00ff00"
+      main: '#63171D',
+      secondary: "#E25F1C"
     }
-}
+  }
 });
 
 function App() {
@@ -58,14 +64,19 @@ function App() {
   //   }
   // });
   return (
-
-    <Navbar />
-    /* <BrowserRouter>
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-
-    </Routes>
-    </BrowserRouter > */
+    <ThemeProvider theme={theme}>
+      <Navbar />
+      <Banner />
+      <ItemList />
+      <AddItem />
+      <Footer />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/Home" element={<Home />} />
+          <Route path="/AddItem" element={<AddItem />} />
+        </Routes>
+      </BrowserRouter >
+    </ThemeProvider>
   );
 }
 
