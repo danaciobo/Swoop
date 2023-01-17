@@ -1,6 +1,24 @@
 
 const baseURL = "http://localhost:3005"
 
+// export const getData = async () => {
+//   try {
+//     const response = await fetch(`${baseURL}/items`);
+//     if (!response.ok) {
+//       throw new Error(
+//         `This is an HTTP error: The status is ${response.status}`
+//       );
+//     }
+//     const actualData = await response.json();
+//     console.log(items)
+//     if (actualData) {
+//       setItems(actualData);
+//     }
+
+//   } catch (err) {
+//     console.log(err)
+//   }
+// }
 
 export const addItem = async (data) => {
   try {

@@ -7,7 +7,7 @@ exports.createProfile = async (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       phoneNumber: req.body.phoneNumber,
-      avatar: req.file.path
+      // avatar: req.file.path
 
     })
     return res.status(201).send(newUser);
@@ -33,6 +33,15 @@ exports.getProfile = async (req, res) => {
     const profile = await User.findById(id)
     return res.status(200).json(profile);
 
+  } catch (e) {
+    console.log(e);
+    res.status(500);
+  }
+};
+exports.getUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    return res.status(200).json(users);
   } catch (e) {
     console.log(e);
     res.status(500);

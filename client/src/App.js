@@ -9,6 +9,12 @@ import ItemList from './components/ItemsList';
 import Footer from './components/Footer';
 import Register from './components/Register';
 import AddItem from './components/AddItem';
+import Profile from './components/Profile';
+import Login from './components/Login';
+import { useEffect, useState } from 'react';
+import { DataProvider } from './context';
+
+const myURL = "http://localhost:3005/items"
 
 const theme = createTheme({
   typography: {
@@ -26,6 +32,30 @@ const theme = createTheme({
 });
 
 function App() {
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+
+    const getData = async () => {
+      try {
+        const response = await fetch(myURL);
+        if (!response.ok) {
+          throw new Error(
+            `This is an HTTP error: The status is ${response.status}`
+          );
+        }
+        const actualData = await response.json();
+        console.log(items)
+        if (actualData) {
+          setItems(actualData);
+        }
+
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getData()
+  }, []);
+
 
   //   const auth = getAuth();
   // createUserWithEmailAndPassword(auth, email, password)
@@ -65,17 +95,21 @@ function App() {
   // });
   return (
     <ThemeProvider theme={theme}>
-      <Navbar />
+      {/* <DataProvider> */}
+      <Navbar setItems={setItems} />
+      {/* <ItemList items={items} /> */}
       <Banner />
-      <ItemList />
-      <AddItem />
-      <Footer />
       <BrowserRouter>
         <Routes>
-          <Route path="/Home" element={<Home />} />
-          <Route path="/AddItem" element={<AddItem />} />
+          <Route path="/" element={<ItemList items={items} />} />
+          <Route path="/Profile" element={<Profile items={items} />} />
+          {/* <Route path="/AddItem" element={<AddItem />} /> */}
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Register" element={<Register />} />
         </Routes>
       </BrowserRouter >
+      <Footer />
+      {/* </DataProvider> */}
     </ThemeProvider>
   );
 }

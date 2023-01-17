@@ -5,13 +5,17 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { IconButton } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { addItem } from "../services";
+import AddIcon from '@mui/icons-material/Add';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
-export default function AddItem() {
+export default function AddItem({ setItems }) {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -20,154 +24,159 @@ export default function AddItem() {
   const [location, setLocation] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState("")
-
-
   const [open, setOpen] = useState(false);
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
-
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     console.log(title, description, category, price, quantity, location, image);
     const formData = new FormData();
-        formData.append('image', image);
-        formData.append('title', title);
-        formData.append('description', description);
-        formData.append('category', category);
-        formData.append('price', price);
-        formData.append('quantity', quantity);
-        formData.append('location', location);
+    formData.append('image', image);
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('category', category);
+    formData.append('price', price);
+    formData.append('quantity', quantity);
+    formData.append('location', location);
 
     postItem(formData)
-    setTitle('');
-    setDescription('');
-    setCategory('');
-    setPrice('');
-    setQuantity('');
-    setLocation('');
-    setImage('');
-    // handleClose()
+    e.target.reset();
+    handleClose()
   };
+  const postItem = async (data) => {
+    try {
+      const post = await addItem(data);
 
+      setItems(items => [...items, post])
+
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
 
   return (
     <div>
-      {/* <Button variant="contained" sx={{display: { xs: 'none', md: 'block'} }} onClick={handleClickOpen}>
-        Log in/ Register
-      </Button>
-      <Button variant="contained" size='small' sx={{display: { xs: 'block', md: 'none'} }} onClick={handleClickOpen}>
-        Log in/ Register
+      <Button variant="contained" startIcon={<AddIcon />} sx={{ display: { xs: 'none', md: 'flex', background: '#E25F1C' } }} onClick={handleClickOpen}>
+        Sell Now
       </Button>
       <Dialog open={open} onClose={handleClose} >
-      <DialogActions>
-      <IconButton sx={{padding: 0}} onClick={handleClose} >
-            <CloseIcon sx={{fontSize: '1.3em'}}/>
+        <DialogActions>
+          <IconButton sx={{ padding: 0 }} onClick={handleClose} >
+            <CloseIcon sx={{ fontSize: '1.3em' }} />
           </IconButton>
         </DialogActions>
-        <DialogTitle sx={{textAlign: 'center', padding: 0}}>Register</DialogTitle>
-        <DialogContent> */}
-      <form
-        onSubmit={handleSubmit}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-around",
-          alignItems: "center",
-          padding: "2rem",
-          maxWidth: '600px'
-        }}
-      >
-        <TextField
-          sx={{ width: '30em', marginBottom: '0.7em' }}
-          label="Title"
-          type="text"
-          variant="outlined"
-          required
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <TextField
-          sx={{ width: '30em', marginBottom: '0.7em' }}
-          multiline
-          rows={4}
-          label="Description"
-          variant="standard"
-          required
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <TextField
-          sx={{ width: '30em', marginBottom: '0.7em' }}
-          label="Category"
-          variant="outlined"
-          required
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        />
-        <div display="flex" flexDirection="rows">
-          <TextField
-            sx={{ width: '10em', marginBottom: '0.7em' }}
-            label="Price"
-            variant="outlined"
-            required
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          />
+        <DialogTitle sx={{ textAlign: 'center', padding: 0 }}>Add new item for sale</DialogTitle>
+        <DialogContent>
+          <form
+            onSubmit={handleSubmit}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-around",
+              alignItems: "center",
+              padding: "2rem",
+              maxWidth: '600px'
+            }}
+          >
+            <TextField
+              sx={{ width: '30em', marginBottom: '0.7em' }}
+              label="Title"
+              type="text"
+              variant="outlined"
+              required
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <TextField
+              sx={{ width: '30em', marginBottom: '0.7em' }}
+              multiline
+              rows={4}
+              label="Description"
+              variant="standard"
+              required
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <FormControl id="cat-select-label" sx={{ width: '30em', marginBottom: '0.7em' }}>
+              <InputLabel id="cat-select-label">Category</InputLabel>
+              <Select
+                labelId="cat-select-label"
+                value={category}
+                label="Category"
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <MenuItem value={'clothes'}>Clothes</MenuItem>
+                <MenuItem value={'accessories'}>Accesories</MenuItem>
+                <MenuItem value={'home'}>Home & Garden</MenuItem>
+                <MenuItem value={'electronics'}>Electronics</MenuItem>
+                <MenuItem value={'hobbies'}>Hobbies</MenuItem>
+                <MenuItem value={'freebies'}>Freebies</MenuItem>
+              </Select>
+            </FormControl>
+            <div display="flex" flexDirection="rows">
+              <TextField
+                sx={{ width: '10em', marginBottom: '0.7em' }}
+                label="Price"
+                variant="outlined"
+                required
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
 
-          <TextField
-            sx={{ width: '10em', marginBottom: '0.7em' }}
-            label="Quantity"
-            variant="outlined"
-            required
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-          />
+              <TextField
+                sx={{ width: '10em', marginBottom: '0.7em' }}
+                label="Quantity"
+                variant="outlined"
+                required
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+              />
 
-          <TextField
-            sx={{ width: '10em', marginBottom: '0.7em' }}
-            label="Location"
-            variant="outlined"
-            required
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-          />
-        </div>
-        <input
-          accept="image/*"
-          style={{ display: 'none' }}
-          id="contained-button-file"
-          // value={image}
-          multiple
-          type="file"
-          onChange={(e) => setImage(e.target.files[0])}
-        />
-        <label htmlFor="contained-button-file">
-          <Button variant="contained" component="span">
-            Upload
-          </Button>
-        </label>
+              <TextField
+                sx={{ width: '10em', marginBottom: '0.7em' }}
+                label="Location"
+                variant="outlined"
+                required
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+              />
+            </div>
+            <input
+              accept="image/*"
+              style={{ display: 'none' }}
+              id="contained-button-file"
+              // value={image}
+              multiple
+              type="file"
+              onChange={(e) => setImage(e.target.files[0])}
+            />
+            <label htmlFor="contained-button-file">
+              <Button variant="contained" component="span">
+                Upload
+              </Button>
+            </label>
 
-        <Button
-          sx={{ width: '16em', height: '3em' }}
-          variant="contained"
-          color="primary"
-          type="submit"
-        >
-          Add item
-        </Button>
-      </form>
-      {/* </DialogContent>
+            <Button
+              sx={{ width: '16em', height: '3em' }}
+              variant="contained"
+              color="primary"
+              type="submit"
+            >
+              Add item
+            </Button>
+          </form>
+        </DialogContent>
 
-      </Dialog> */}
+      </Dialog>
     </div >
   );
 }
@@ -175,7 +184,11 @@ export default function AddItem() {
 const postItem = async (data) => {
   // const newItem = { title, description, category, price, quantity, location, image }
   // console.log(newItem)
-  const post = await addItem(data);
+  try {
+    const post = await addItem(data);
+  } catch (e) {
+    console.log(e);
+  }
   // if (newItem._id) {
   //   setItems(items => [...items, newItem])
   // }

@@ -6,21 +6,19 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { IconButton } from "@mui/material";
+import { IconButton, Link } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
+import { registerUser } from "../services";
 
 
 export default function Register() {
 
+  const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  const [phoneNumber, setphoneNumber] = useState("");
   const [password, setPassword] = useState("");
-  const [phoneNumber, setphoneNumber] = useState("")
-
-
-  const [open, setOpen] = useState(false);
-
+  const [open, setOpen] = useState(true);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -32,12 +30,13 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(firstName, lastName, email, password, phoneNumber);
+    const newUser = { email, firstName, lastName, phoneNumber }
+    setEmail('');
     setFirstName('');
     setLastName('');
     setphoneNumber('');
-    setEmail('');
     setPassword('');
+    registerUser(newUser);
     handleClose();
   };
 
@@ -45,19 +44,19 @@ export default function Register() {
 
   return (
     <div>
-      <Button variant="contained" sx={{display: { xs: 'none', md: 'block'} }} onClick={handleClickOpen}>
+      {/* <Button variant="contained" sx={{ display: { xs: 'none', md: 'block' } }} onClick={handleClickOpen}>
         Log in/ Register
       </Button>
-      <Button variant="contained" size='small' sx={{display: { xs: 'block', md: 'none'} }} onClick={handleClickOpen}>
+      <Button variant="contained" size='small' sx={{ display: { xs: 'block', md: 'none' } }} onClick={handleClickOpen}>
         Log in/ Register
-      </Button>
+      </Button> */}
       <Dialog open={open} onClose={handleClose} >
-      <DialogActions>
-      <IconButton sx={{padding: 0}} onClick={handleClose} >
-            <CloseIcon sx={{fontSize: '1.3em'}}/>
+        <DialogActions>
+          <IconButton sx={{ padding: 0 }} onClick={handleClose} >
+            <CloseIcon sx={{ fontSize: '1.3em' }} />
           </IconButton>
         </DialogActions>
-        <DialogTitle sx={{textAlign: 'center', padding: 0}}>Register</DialogTitle>
+        <DialogTitle sx={{ textAlign: 'center', padding: 0 }}>Register</DialogTitle>
         <DialogContent>
           <form
             onSubmit={handleSubmit}
@@ -71,47 +70,49 @@ export default function Register() {
             }}
           >
             <TextField
-              sx={{ width: '17em', marginBottom: '0.7em'  }}
+              sx={{ width: '17em', marginBottom: '0.7em' }}
               label="Email"
               type="email"
               variant="outlined"
               required
               value={email}
-              onChange = {(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
+            <div display="flex" flexDirection="rows">
+              <TextField
+                sx={{ width: '8.5em', marginBottom: '0.7em' }}
+                label="First Name"
+                variant="outlined"
+                required
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+              <TextField
+                sx={{ width: '8.5em', marginBottom: '0.7em' }}
+                label="Last Name"
+                variant="outlined"
+                required
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </div>
             <TextField
-              sx={{ width: '17em', marginBottom: '0.7em'  }}
-              label="First Name"
-              variant="outlined"
-              required
-              value={firstName}
-              onChange = {(e) => setFirstName(e.target.value)}
-            />
-            <TextField
-              sx={{ width: '17em', marginBottom: '0.7em'  }}
-              label="Last Name"
-              variant="outlined"
-              required
-              value={lastName}
-              onChange = {(e) => setLastName(e.target.value)}
-            />
-            <TextField
-              sx={{ width: '17em', marginBottom: '0.7em'  }}
+              sx={{ width: '17em', marginBottom: '0.7em' }}
               label="Phone Number"
               variant="outlined"
               required
               value={phoneNumber}
-              onChange = {(e) => setphoneNumber(e.target.value)}
+              onChange={(e) => setphoneNumber(e.target.value)}
             />
 
             <TextField
-               sx={{ width: '17em', marginBottom: '0.7em'  }}
+              sx={{ width: '17em', marginBottom: '0.7em' }}
               label="Password"
               type="password"
               variant="outlined"
               required
               value={password}
-              onChange = {(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <Button
               sx={{ width: '16em', height: '3em' }}
@@ -122,6 +123,9 @@ export default function Register() {
             >
               Register
             </Button>
+            <Link href="/Login" variant="body2" sx={{ padding: 3 }}>
+              Already have an account? Sign in
+            </Link>
           </form>
         </DialogContent>
 

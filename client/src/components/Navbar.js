@@ -9,13 +9,13 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import AddIcon from '@mui/icons-material/Add';
 import Logo from '../Swoop.jpg';
-import { Menu, MenuItem, Stack } from '@mui/material';
-import Register from './Register';
-import { Link } from 'react-router-dom';
+import { Link, Menu, MenuItem, Stack } from '@mui/material';
 
-const pages = ['Clothes', 'Footwear', 'Home & Garden', 'Health & Beauty', 'Electronics', 'Hobbies', 'Freebies' ];
+import AddItem from './AddItem';
+import Login from './Login';
+
+const pages = ['All', 'Clothes', 'Accessories', 'Home', 'Electronics', 'Hobbies', 'Freebies' ];
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -60,7 +60,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Navbar() {
+export default function Navbar({setItems}) {
 
   const [anchorElNav, setAnchorElNav] = useState(null);
 
@@ -94,22 +94,20 @@ export default function Navbar() {
           />
         </Search>
         <Stack direction="row" spacing={2} >
-      <Button variant="contained" startIcon={<AddIcon />} sx={{display: { xs: 'none', md: 'flex',background: '#E25F1C' } }}>
-        Sell Now
-      </Button>
-      <Register />
+      <AddItem setItems = {setItems}/>
+      <Login />
     </Stack>
       </Toolbar>
 
       <Toolbar sx={{color: 'white', justifyContent: 'space-between'}}>
-      <Typography
+      {/* <Typography
           variant="h6"
           noWrap
           component="div"
-          sx={{ flexGrow: 1, display: { xs: 'none', md: 'block' } }}
+          sx={{ flexGrow: 1, paddingLeft: 5, display: { xs: 'none', md: 'block' } }}
         >
-          Categories
-        </Typography>
+          CATEGORIES
+        </Typography> */}
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -155,15 +153,17 @@ export default function Navbar() {
             inputProps={{ 'aria-label': 'search' }}
           />
         </Search>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' , justifyContent: 'center'} }}>
             {pages.map((page) => (
+               <Link to={'/categories/'+{page}}>
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'white', display: 'block', marginRight: 5}}
               >
                 {page}
               </Button>
+              </Link>
             ))}
           </Box>
       </Toolbar>

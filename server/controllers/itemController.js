@@ -22,6 +22,10 @@ exports.getByCategory = async (req, res) => {
 
 exports.getItemById = async (req, res) => {
   try {
+    console.log(req.params);
+    const id = req.params.id
+    const item = await Item.findById(id)
+    return res.status(200).json(item);
 
   } catch (e) {
     console.log(e);
