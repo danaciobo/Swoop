@@ -14,19 +14,23 @@ import { Link, Menu, MenuItem, Stack } from '@mui/material';
 
 import AddItem from './AddItem';
 import Login from './Login';
+import { grey } from '@mui/material/colors';
 
-const pages = ['All', 'Clothes', 'Accessories', 'Home', 'Electronics', 'Hobbies', 'Freebies' ];
+const pages = ['All', 'Clothes', 'Accessories', 'Home', 'Electronics', 'Hobbies', 'Freebies'];
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha(theme.palette.common.white, 0.75),
+    border : 'solid',
+    borderColor: '#bdbdbd',
+    borderWidth: 1
   },
   marginLeft: 0,
   width: 'auto',
-  maxWidth: 700,
+  maxWidth: 550,
   [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(1),
     width: 'auto',
@@ -60,7 +64,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Navbar({setItems}) {
+export default function Navbar({ setItems, setFilteredItems, items}) {
 
   const [anchorElNav, setAnchorElNav] = useState(null);
 
@@ -71,44 +75,54 @@ export default function Navbar({setItems}) {
     setAnchorElNav(null);
   };
 
+const handleChange = (e) => {
+  e.preventDefault()
+    const searchWord = e.target.value;
+    const filtered = items.filter((item)=> item.title.toLowerCase().includes(searchWord.toLowerCase()))
+  if(filtered.length > 0) {
+  setFilteredItems(filtered)
+
+}else {setFilteredItems(items)
+}
+
+}
+
+
+
   return (
-  <Box sx={{ flexGrow: 1 }}>
-    <AppBar position="static" >
-      <Toolbar sx={{ background: 'white', color: 'black', justifyContent: 'space-between'}}>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" >
+        <Toolbar sx={{ background: 'white', color: 'black', justifyContent: 'space-between' }}>
 
-        <Typography
-          // noWrap
-          component= 'div'
-          sx={{ mr: 2 , display : 'flex'}}
-        >
-          <img src={Logo} width='150' height='45' max-width= '100%' alt='swoop logo' />
-        </Typography>
+          <Typography
+            // noWrap
+            component='div'
+            sx={{ mr: 2, display: 'flex' }}
+          >
+            <img src={Logo} width='150' height='45' max-width='100%' alt='swoop logo' />
+          </Typography>
 
-        <Search sx={{ background: '#EBE6DD', flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            placeholder="Search…"
-            inputProps={{ 'aria-label': 'search' }}
-          />
-        </Search>
-        <Stack direction="row" spacing={2} >
-      <AddItem setItems = {setItems}/>
-      <Login />
-    </Stack>
-      </Toolbar>
+          <Search sx={{ background: '#EBE6DD', flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
 
-      <Toolbar sx={{color: 'white', justifyContent: 'space-between'}}>
-      {/* <Typography
-          variant="h6"
-          noWrap
-          component="div"
-          sx={{ flexGrow: 1, paddingLeft: 5, display: { xs: 'none', md: 'block' } }}
-        >
-          CATEGORIES
-        </Typography> */}
-        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                onChange={handleChange}
+              />
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+
+          </Search>
+          <Stack direction="row" spacing={2} >
+            <AddItem setItems={setItems} />
+            <Login />
+          </Stack>
+        </Toolbar>
+
+        <Toolbar sx={{ color: 'white', justifyContent: 'space-between' }}>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -144,31 +158,32 @@ export default function Navbar({setItems}) {
               ))}
             </Menu>
           </Box>
-          <Search sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none', marginLeft: '10px'} }}>
-          <SearchIconWrapper>
-            <SearchIcon color='#393937' />
-          </SearchIconWrapper>
-          <StyledInputBase
-            placeholder="Search…"
-            inputProps={{ 'aria-label': 'search' }}
-          />
-        </Search>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' , justifyContent: 'center'} }}>
+          <Search sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none', marginLeft: '10px' } }}>
+            <SearchIconWrapper>
+              <SearchIcon color='#393937' />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+              onChange={handleChange}
+            />
+          </Search>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'center' } }}>
             {pages.map((page) => (
-               <Link to={'/categories/'+{page}}>
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block', marginRight: 5}}
-              >
-                {page}
-              </Button>
+              <Link to={'/categories/' + { page }}>
+                <Button
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block', marginRight: 5 }}
+                >
+                  {page}
+                </Button>
               </Link>
             ))}
           </Box>
-      </Toolbar>
-    </AppBar>
-  </Box>
-)
+        </Toolbar>
+      </AppBar>
+    </Box >
+  )
 
 }

@@ -33,6 +33,7 @@ const theme = createTheme({
 
 function App() {
   const [items, setItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([])
   useEffect(() => {
 
     const getData = async () => {
@@ -47,6 +48,7 @@ function App() {
         console.log(items)
         if (actualData) {
           setItems(actualData);
+          setFilteredItems(actualData)
         }
 
       } catch (err) {
@@ -96,12 +98,12 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       {/* <DataProvider> */}
-      <Navbar setItems={setItems} />
+      <Navbar setItems={setItems} items={items} setFilteredItems={setFilteredItems} />
       {/* <ItemList items={items} /> */}
       <Banner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<ItemList items={items} />} />
+          <Route path="/" element={<ItemList items={filteredItems}/>} />
           <Route path="/Profile" element={<Profile items={items} />} />
           {/* <Route path="/AddItem" element={<AddItem />} /> */}
           <Route path="/Login" element={<Login />} />
