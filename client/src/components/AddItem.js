@@ -14,8 +14,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
 
-export default function AddItem({ setItems }) {
+export default function AddItem({ setItems, setFilteredItems, items }) {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -46,7 +47,7 @@ export default function AddItem({ setItems }) {
     formData.append('price', price);
     formData.append('quantity', quantity);
     formData.append('location', location);
-
+    
     postItem(formData)
     e.target.reset();
     handleClose()
@@ -55,7 +56,7 @@ export default function AddItem({ setItems }) {
     try {
       const post = await addItem(data);
 
-      setItems(items => [...items, post])
+      setItems(items => [...items, post]);
 
     } catch (e) {
       console.log(e);
@@ -99,7 +100,7 @@ export default function AddItem({ setItems }) {
             <TextField
               sx={{ width: '30em', marginBottom: '0.7em' }}
               multiline
-              rows={4}
+              rows={5}
               label="Description"
               variant="standard"
               required
@@ -150,23 +151,30 @@ export default function AddItem({ setItems }) {
                 onChange={(e) => setLocation(e.target.value)}
               />
             </div>
-            <input
-              accept="image/*"
-              style={{ display: 'none' }}
-              id="contained-button-file"
-              // value={image}
-              multiple
-              type="file"
-              onChange={(e) => setImage(e.target.files[0])}
-            />
-            <label htmlFor="contained-button-file">
-              <Button variant="contained" component="span">
-                Upload
-              </Button>
-            </label>
+
+              <input
+                accept="image/*"
+                style={{ display: 'none' }}
+                id="contained-button-file"
+                // value={image}
+                multiple
+                type="file"
+                onChange={(e) => setImage(e.target.files[0])}
+                margin='2'
+              />
+              <label htmlFor="contained-button-file">
+                <Button variant="contained" component="span">
+                  Upload
+                </Button>
+                <IconButton color="primary" aria-label="upload picture" component="label">
+
+                  <PhotoCamera />
+                </IconButton>
+              </label>
+
 
             <Button
-              sx={{ width: '16em', height: '3em' }}
+              sx={{ width: '16em', height: '3em', margin: 1 }}
               variant="contained"
               color="primary"
               type="submit"
@@ -181,15 +189,4 @@ export default function AddItem({ setItems }) {
   );
 }
 
-const postItem = async (data) => {
-  // const newItem = { title, description, category, price, quantity, location, image }
-  // console.log(newItem)
-  try {
-    const post = await addItem(data);
-  } catch (e) {
-    console.log(e);
-  }
-  // if (newItem._id) {
-  //   setItems(items => [...items, newItem])
-  // }
-}
+

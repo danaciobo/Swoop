@@ -16,7 +16,7 @@ export default function ItemList({items}) {
         alignItems="stretch"
         spacing={{ xs: 3, md: 4 }}
       >
-        {items? items.map((item, index) =>
+        {items? items.sort((a, b) => new Date(b.date_added) - new Date(a.date_added)).map((item, index) =>
         (
           <Grid item key={item._id} >
             <ItemCard item={item} />

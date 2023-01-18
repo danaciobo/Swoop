@@ -61,6 +61,16 @@ export const getUserById = async (id) => {
   }
 }
 
+export const getUserByEmail = async (email) => {
+  try {
+    const response = await fetch(`${baseURL}/users/${email}`)
+    return response.json();
+  } catch (err) {
+    console.log(err)
+    return false
+  }
+}
+
 export const getItemById = async (id) => {
   try {
     const response = await fetch(`${baseURL}/items/${id}`)

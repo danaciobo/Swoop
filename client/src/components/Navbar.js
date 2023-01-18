@@ -24,7 +24,7 @@ const Search = styled('div')(({ theme }) => ({
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   '&:hover': {
     backgroundColor: alpha(theme.palette.common.white, 0.75),
-    border : 'solid',
+    border: 'solid',
     borderColor: '#bdbdbd',
     borderWidth: 1
   },
@@ -64,7 +64,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Navbar({ setItems, setFilteredItems, items}) {
+export default function Navbar({ setItems, setFilteredItems, items, setUser}) {
 
   const [anchorElNav, setAnchorElNav] = useState(null);
 
@@ -75,20 +75,31 @@ export default function Navbar({ setItems, setFilteredItems, items}) {
     setAnchorElNav(null);
   };
 
-const handleChange = (e) => {
-  e.preventDefault()
+  const handleChange = (e) => {
+    e.preventDefault();
     const searchWord = e.target.value;
-    const filtered = items.filter((item)=> item.title.toLowerCase().includes(searchWord.toLowerCase()))
-  if(filtered.length > 0) {
-  setFilteredItems(filtered)
+    const filtered = items.filter((item) => item.title.toLowerCase().includes(searchWord.toLowerCase()) || item.category.toLowerCase().includes(searchWord.toLowerCase()))
+    if (filtered.length > 0) {
+      setFilteredItems(filtered);
 
-}else {setFilteredItems(items)
-}
+    } else {
+      setFilteredItems(items);
+    }
 
-}
+  }
 
-
-
+  const handleFilterCategory = (e) => {
+    e.preventDefault();
+    console.log(e)
+    const activeCategory = e.target.value;
+    const filtered = items.filter((item) => item.category.toLowerCase() === (activeCategory.toLowerCase()))
+    if (activeCategory.toLowerCase() === 'all') {
+      console.log(items)
+      setFilteredItems(items);
+    } else {
+      setFilteredItems(filtered);
+    }
+  }
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" >
@@ -103,20 +114,20 @@ const handleChange = (e) => {
           </Typography>
 
           <Search sx={{ background: '#EBE6DD', flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ 'aria-label': 'search' }}
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
 
-                onChange={handleChange}
-              />
+              onChange={handleChange}
+            />
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
 
           </Search>
           <Stack direction="row" spacing={2} >
-            <AddItem setItems={setItems} />
-            <Login />
+            <AddItem setItems={setItems} setFilteredItems={setFilteredItems} items={items}/>
+            <Login setUser={setUser} />
           </Stack>
         </Toolbar>
 
@@ -170,15 +181,16 @@ const handleChange = (e) => {
           </Search>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'center' } }}>
             {pages.map((page) => (
-              <Link to={'/categories/' + { page }}>
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block', marginRight: 5 }}
-                >
-                  {page}
-                </Button>
-              </Link>
+
+              <Button
+                key={page}
+                value={page}
+                onClick={handleFilterCategory}
+                sx={{ my: 2, color: 'white', display: 'block', marginRight: 5 }}
+              >
+                {page}
+              </Button>
+
             ))}
           </Box>
         </Toolbar>

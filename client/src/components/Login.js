@@ -7,14 +7,16 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { IconButton, Link } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
+import { getUserByEmail } from "../services";
 
 
 
-export default function Login() {
+export default function Login({ setUser }) {
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [loggEmail, setLoggEmail] = useState("");
+  const [loggPassword, setLoggPassword] = useState("");
   const [open, setOpen] = useState(false);
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -26,11 +28,13 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const user = { email, password }
-    setEmail('');
-    setPassword('');
-    // registerUser(newUser);
-    handleClose();
+    console.log(e.target.value)
+    const user = { email: loggEmail, password: loggPassword }
+    // const loggedInUser = getUserByEmail(user);
+    // setUser(loggedInUser)
+    // setLoggEmail('');
+    // setLoggPassword('');
+    // handleClose();
   };
 
 
@@ -67,8 +71,8 @@ export default function Login() {
               type="email"
               variant="outlined"
               required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={loggEmail}
+              onChange={(e) => setLoggEmail(e.target.value)}
             />
 
             <TextField
@@ -77,18 +81,22 @@ export default function Login() {
               type="password"
               variant="outlined"
               required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={loggPassword}
+              onChange={(e) => setLoggPassword(e.target.value)}
             />
-            <Button
-              sx={{ width: '16em', height: '3em' }}
-              variant="contained"
-              color="primary"
-              type="submit"
-              onClick={handleClose}
-            >
-              Login
-            </Button>
+            <Link href="/Profile" >
+              <Button
+                sx={{ width: '16em', height: '3em' }}
+                variant="contained"
+                color="primary"
+                type="submit"
+                onClick={handleClose}
+              >
+                Login
+              </Button>
+
+            </Link>
+
             <Link href="/Register" variant="body2" sx={{ padding: 3 }}>
               Don't have an account yet? Register here
             </Link>

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const DB_NAME = 'swoopDB'
+const DB_NAME = 'swoopDB2'
 const DB_PORT = '27017'
 
 mongoose.connect(

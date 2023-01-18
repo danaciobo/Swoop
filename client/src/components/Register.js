@@ -30,6 +30,7 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(e.target.value)
     const newUser = { email, firstName, lastName, phoneNumber }
     setEmail('');
     setFirstName('');

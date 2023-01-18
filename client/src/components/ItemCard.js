@@ -57,7 +57,7 @@ export default function ItemCard({ item }) {
         </CardContent>
       </CardActionArea>
       <CardHeader
-        title={'$' + item.price}
+        title={'£' + item.price}
         subheader={item.title}
         action={<Button variant='contained' sx={{background: '#E25F1C'}}>
         <ShoppingCartIcon />
@@ -78,7 +78,7 @@ export default function ItemCard({ item }) {
         <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
         <Typography paragraph >
-            Seller: {item.seller? item.seller : 'Dana Chubs'}
+            Seller: {item.seller? item.seller : 'Dana C'}
           </Typography>
           <Typography paragraph>
             Location: {item.location}

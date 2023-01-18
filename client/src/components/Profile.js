@@ -8,12 +8,12 @@ import ListItemText from '@mui/material/ListItemText';
 
 
 
-export default function Profile(id, { items }) {
+export default function Profile({items}) {
 
-  const [user, setUser] = useState([]);
+  const [user,setUser] = useState('')
 
   useEffect(() => {
-    getUserById('63c51a84307d1a8459e0a66d')
+    getUserById('63c726deeed0a1cc3069691a')
       .then(response => {
         console.log(response)
         setUser(response)
@@ -127,7 +127,7 @@ export default function Profile(id, { items }) {
               // columns={{ xs: 4, sm: 8, md: 12 }}
               spacing='5'
             >
-              {items ? items.slice(0,5).map((item, index) =>
+              {items.length >100 ? items.slice(0,5).map((item, index) =>
               (
                 <Grid item key={item._id} >
                   <Card sx={{ width: 100, height: 120 }}>
