@@ -34,7 +34,7 @@ const theme = createTheme({
 function App() {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([])
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState(null)
   useEffect(() => {
 
     const getData = async () => {
@@ -104,7 +104,7 @@ function App() {
       <Banner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<ItemList items={items}/>} />
+          <Route path="/" element={<ItemList items={filteredItems}/>} />
           <Route path="/Profile" element={<Profile items={items} user={user} />} />
           {/* <Route path="/AddItem" element={<AddItem />} /> */}
           <Route path="/Login" element={<Login />} />

@@ -47,16 +47,18 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
     formData.append('price', price);
     formData.append('quantity', quantity);
     formData.append('location', location);
-    
+
     postItem(formData)
     e.target.reset();
     handleClose()
   };
+  const itemsList = items;
   const postItem = async (data) => {
     try {
       const post = await addItem(data);
 
       setItems(items => [...items, post]);
+      setFilteredItems(filteredItems => [...itemsList, post])
 
     } catch (e) {
       console.log(e);

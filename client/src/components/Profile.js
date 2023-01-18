@@ -8,18 +8,18 @@ import ListItemText from '@mui/material/ListItemText';
 
 
 
-export default function Profile({items}) {
+export default function Profile({items, user}) {
 
-  const [user,setUser] = useState('')
+  // const [user,setUser] = useState('')
 
-  useEffect(() => {
-    getUserById('63c726deeed0a1cc3069691a')
-      .then(response => {
-        console.log(response)
-        setUser(response)
-      })
-      .catch(err => console.log(err))
-  }, [])
+  // useEffect(() => {
+  //   getUserById('63c726deeed0a1cc3069691a')
+  //     .then(response => {
+  //       console.log(response)
+  //       setUser(response)
+  //     })
+  //     .catch(err => console.log(err))
+  // }, [])
 
 
   return (

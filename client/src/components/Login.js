@@ -30,7 +30,8 @@ export default function Login({ setUser }) {
     e.preventDefault();
     console.log(e.target.value)
     const user = { email: loggEmail, password: loggPassword }
-    // const loggedInUser = getUserByEmail(user);
+    console.log(user)
+    // const loggedInUser = getUserByEmail(user.email);
     // setUser(loggedInUser)
     // setLoggEmail('');
     // setLoggPassword('');
