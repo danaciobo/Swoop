@@ -5,18 +5,6 @@ Swoop is an online marketplace for pre-owned items where people can declutter th
 
 # Swoop![Screenshot 2023-01-18 at 19 39 31](https://user-images.githubusercontent.com/89812036/213278664-2f9cd4cb-5313-4be3-b3dc-908a65afe26a.png)
 
-
-Getting started
-
-
-Tech Stack
-
-React JS
-Redux
-Other dependencies:
-React Native Background Geolocation
-React Native Maps
-
 Getting started
 
 Clone the repo
@@ -26,7 +14,7 @@ Install dependencies in both /Client and /Server forders
 npm install
 
 Start development server
-cd /Server 
+cd /Server
 nodemon index.js (recommended) or node index.js
 The pictures uploaded on the Browser will be saved to Server/uploads directory
 
