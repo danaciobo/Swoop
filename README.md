@@ -1,5 +1,5 @@
 
-Swoon
+Swoop
 
 Swoop is an online marketplace for pre-owned items where people can declutter their houses or swoop for a bargain while helping the environment by reusing items already in circulation.
 
