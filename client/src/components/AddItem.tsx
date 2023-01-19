@@ -16,6 +16,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 
+
 export default function AddItem({ setItems, setFilteredItems, items }) {
 
   const [title, setTitle] = useState("");
