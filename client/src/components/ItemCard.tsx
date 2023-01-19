@@ -8,11 +8,15 @@ import { Avatar, Button, CardActionArea, CardActions, Collapse, IconButton, styl
 import AddIcon from '@mui/icons-material/Add';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useState } from 'react';
-import ItemDetails from './ItemDetails';
+import ItemDetails from './ItemDetails(Empty)';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import moment from 'moment'
+import React from 'react'
+import { ExpandProps } from '../Types/Types';
 
-const ExpandMore = styled((props) => {
+
+
+const ExpandMore = styled((props: ExpandProps) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
@@ -23,6 +27,9 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
+// onClick={handleExpandClick}
+//           aria-expanded={expanded}
+//           aria-label="show more"
 
 
 export default function ItemCard({ item }) {
@@ -32,17 +39,17 @@ export default function ItemCard({ item }) {
     setExpanded(!expanded);
   };
 
-  const [itemClicked, setItemClicked] = useState(null);
+  const [itemClicked, setItemClicked] = useState<null | Item>(null);
 
   const handleClick = (e) => {
 
-    setItemClicked(e)
+      setItemClicked(e)
 
+    }
+    if (itemClicked) {
+      console.log(itemClicked._id)
+      return <ItemDetails id={itemClicked._id} onBack={() => setItemClicked(null)} />
   }
-  if (itemClicked) {
-    console.log(itemClicked._id)
-    return <ItemDetails id={itemClicked._id} onBack={() => setItemClicked(null)} />
-}
 
   return (
     <Card sx={{ width: 250, height: 'auto'}}>
@@ -71,7 +78,7 @@ export default function ItemCard({ item }) {
           aria-expanded={expanded}
           aria-label="show more"
         >
-          <ExpandMoreIcon />
+          <ExpandMoreIcon/>
         </ExpandMore>
 
         </CardActions>
