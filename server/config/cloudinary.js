@@ -6,9 +6,9 @@ cloudinary.config({
 });
 
 console.log(cloudinary.config({
-  cloud_name: dt9lltsq3,
-  api_key : 435495744527896,
-  api_secret: AQmgKAMXwj10PQGhRZ2dwClVhaQ
+  cloud_name: du13z5eh1,
+  api_key : 559448568735465,
+  api_secret: dgYrZrombH5MgeJH5CwDnb20zyw
 }
 ));
 
