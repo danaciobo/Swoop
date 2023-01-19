@@ -1,3 +1,5 @@
+import React from 'react';
+import {FC} from 'react'
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home'
@@ -23,10 +25,13 @@ const theme = createTheme({
       'Roboto'
     ].join(','),
   },
+  //if ui breaks this is culprit
   palette: {
     primary: {
-      main: '#63171D',
-      secondary: "#E25F1C"
+      main: '#63171D'
+    },
+    secondary: {
+      main: "#E25F1C"
     }
   }
 });
@@ -58,6 +63,32 @@ function App() {
     }
     getData()
   }, []);
+
+
+  return (
+    <ThemeProvider theme={theme}>
+      {/* <DataProvider> */}
+      <Navbar setItems={setItems} items={items} setFilteredItems={setFilteredItems} user={user} setUser={setUser}/>
+      {/* <ItemList items={items} /> */}
+      <Banner />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<ItemList items={filteredItems}/>} />
+          <Route path="/Profile" element={<Profile items={items} /*user={user} has it own user state, change after redux*/ />} />
+          {/* <Route path="/AddItem" element={<AddItem />} /> */}
+          <Route path="/Login" element={<Login setUser={setUser}/>} />
+          <Route path="/Register" element={<Register />} />
+        </Routes>
+      </BrowserRouter >
+      <Footer />
+      {/* </DataProvider> */}
+    </ThemeProvider>
+  );
+}
+
+export default App;
+
+
 
 
   //   const auth = getAuth();
@@ -96,25 +127,3 @@ function App() {
   //     // ...
   //   }
   // });
-  return (
-    <ThemeProvider theme={theme}>
-      {/* <DataProvider> */}
-      <Navbar setItems={setItems} items={items} setFilteredItems={setFilteredItems} user={user} setUser={setUser}/>
-      {/* <ItemList items={items} /> */}
-      <Banner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<ItemList items={filteredItems}/>} />
-          <Route path="/Profile" element={<Profile items={items} user={user} />} />
-          {/* <Route path="/AddItem" element={<AddItem />} /> */}
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Register" element={<Register />} />
-        </Routes>
-      </BrowserRouter >
-      <Footer />
-      {/* </DataProvider> */}
-    </ThemeProvider>
-  );
-}
-
-export default App;

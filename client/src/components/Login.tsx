@@ -8,14 +8,14 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { IconButton, Link } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { getUserByEmail } from "../services";
-
+import React from "react";
 
 
 export default function Login({ setUser }) {
 
-  const [loggEmail, setLoggEmail] = useState("");
-  const [loggPassword, setLoggPassword] = useState("");
-  const [open, setOpen] = useState(false);
+  const [loggEmail, setLoggEmail] = useState<string>("");
+  const [loggPassword, setLoggPassword] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(false);
 
 
   const handleClickOpen = () => {
