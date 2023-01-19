@@ -1,7 +1,12 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import Home from './pages/Home';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from 'firebase/auth';
 import Banner from './components/Banner';
 import Navbar from './components/Navbar';
 import { createTheme, ThemeProvider } from '@mui/material';
@@ -13,31 +18,33 @@ import Profile from './components/Profile';
 import Login from './components/Login';
 import { useEffect, useState } from 'react';
 import { DataProvider } from './context';
+import { Auth0Provider } from '@auth0/auth0-react';
 
-const myURL = "http://localhost:3005/items"
+import LoginButton from './login';
+import LogoutButton from './logout';
+
+const myURL = 'http://localhost:3005/items';
 
 const theme = createTheme({
   typography: {
-    fontFamily: [
-      'Source Sans Pro',
-      'Roboto'
-    ].join(','),
+    fontFamily: ['Source Sans Pro', 'Roboto'].join(','),
   },
   palette: {
     primary: {
       main: '#63171D',
-      secondary: "#E25F1C"
-    }
-  }
+      secondary: '#E25F1C',
+    },
+  },
 });
 
 function App() {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
+
   const [user, setUser] = useState({});
 
-  useEffect(() => {
 
+  useEffect(() => {
     const getData = async () => {
       try {
         const response = await fetch(myURL);
@@ -47,19 +54,17 @@ function App() {
           );
         }
         const actualData = await response.json();
-        console.log(items)
+        console.log(items);
         if (actualData) {
           setItems(actualData);
-          setFilteredItems(actualData)
+          setFilteredItems(actualData);
         }
-
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
-    }
-    getData()
+    };
+    getData();
   }, []);
-
 
   //   const auth = getAuth();
   // createUserWithEmailAndPassword(auth, email, password)
@@ -98,6 +103,7 @@ function App() {
   //   }
   // });
   return (
+
     <ThemeProvider theme={theme}>
       {/* <DataProvider> */}
       <Navbar setItems={setItems} items={items} setFilteredItems={setFilteredItems} user={user} setUser={setUser}/>
@@ -118,6 +124,39 @@ function App() {
       <Footer />
       {/* </DataProvider> */}
     </ThemeProvider>
+
+    <>
+      <LoginButton />
+      <LogoutButton />
+
+      <ThemeProvider theme={theme}>
+        {/* <DataProvider> */}
+        <Navbar
+          setItems={setItems}
+          items={items}
+          setFilteredItems={setFilteredItems}
+          user={user}
+          setUser={setUser}
+        />
+        {/* <ItemList items={items} /> */}
+        <Banner />
+        
+          <Routes>
+            <Route path='/' element={<ItemList items={filteredItems} />} />
+            <Route
+              path='/Profile'
+              element={<Profile items={items} user={user} />}
+            />
+            {/* <Route path="/AddItem" element={<AddItem />} /> */}
+            <Route path='/Login' element={<Login />} />
+            <Route path='/Register' element={<Register />} />
+          </Routes>
+      
+        <Footer />
+        {/* </DataProvider> */}
+      </ThemeProvider>
+    </>
+
   );
 }
 
