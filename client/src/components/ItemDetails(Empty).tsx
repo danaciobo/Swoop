@@ -83,3 +83,12 @@
 //     </Container>
 //   )
 // }
+import React from 'react'
+
+function ItemDetails(Empty)() {
+  return (
+    <div>ItemDetails(Empty)</div>
+  )
+}
+
+export default ItemDetails(Empty)
