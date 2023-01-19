@@ -74,7 +74,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<ItemList items={filteredItems}/>} />
-          <Route path="/Profile" element={<Profile items={items} user={user} />} />
+          <Route path="/Profile" element={<Profile items={items} /*user={user} has it own user state, change after redux*/ />} />
           {/* <Route path="/AddItem" element={<AddItem />} /> */}
           <Route path="/Login" element={<Login setUser={setUser}/>} />
           <Route path="/Register" element={<Register />} />
