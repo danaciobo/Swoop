@@ -64,7 +64,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Navbar({ setItems, setFilteredItems, items, setUser}) {
+export default function Navbar({ setItems, setFilteredItems, items, setUser, user}) {
 
   const [anchorElNav, setAnchorElNav] = useState(null);
 

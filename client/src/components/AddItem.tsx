@@ -15,18 +15,19 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import React from 'react'
 
 
 export default function AddItem({ setItems, setFilteredItems, items }) {
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [quantity, setQuantity] = useState("");
-  const [location, setLocation] = useState("");
-  const [category, setCategory] = useState("");
-  const [image, setImage] = useState("")
-  const [open, setOpen] = useState(false);
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [price, setPrice] = useState<string>("");
+  const [quantity, setQuantity] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+  const [image, setImage] = useState<string | File>("")
+  const [open, setOpen] = useState<boolean>(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -45,8 +46,8 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
     formData.append('title', title);
     formData.append('description', description);
     formData.append('category', category);
-    formData.append('price', price);
-    formData.append('quantity', quantity);
+    formData.append('price', price == undefined ? '0' : price);
+    formData.append('quantity', quantity == undefined ? '0' : quantity);
     formData.append('location', location);
 
     postItem(formData)
@@ -66,6 +67,10 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
     }
   }
 
+  let itemPosition = {
+    display: "flex",
+    flexDirection: "row"
+  }
 
   return (
     <div>
@@ -126,7 +131,7 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
                 <MenuItem value={'freebies'}>Freebies</MenuItem>
               </Select>
             </FormControl>
-            <div display="flex" flexDirection="rows">
+            <div style={itemPosition as React.CSSProperties}>
               <TextField
                 sx={{ width: '10em', marginBottom: '0.7em' }}
                 label="Price"
@@ -157,13 +162,12 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
 
               <input
                 accept="image/*"
-                style={{ display: 'none' }}
+                style={{ display: 'none', margin: "2px" }}
                 id="contained-button-file"
                 // value={image}
                 multiple
                 type="file"
-                onChange={(e) => setImage(e.target.files[0])}
-                margin='2'
+                onChange={(e) => setImage(e.target.files === null ? "" : e.target.files[0])}
               />
               <label htmlFor="contained-button-file">
                 <Button variant="contained" component="span">
