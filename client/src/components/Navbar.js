@@ -10,7 +10,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import Logo from '../Swoop.jpg';
-import { Link, Menu, MenuItem, Stack } from '@mui/material';
+import { Menu, MenuItem, Stack } from '@mui/material';
+import { Link } from 'react-router-dom'
 
 import AddItem from './AddItem';
 import Login from './Login';
@@ -164,7 +165,11 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser}) {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center">
+                    <Link style={{textDecoration: 'none', color:'white'}} to={`/${page}`}>
+                    {page}
+                    </Link>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -188,7 +193,9 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser}) {
                 onClick={handleFilterCategory}
                 sx={{ my: 2, color: 'white', display: 'block', marginRight: 5 }}
               >
-                {page}
+                <Link style={{textDecoration: 'none', color:'white'}} to={`/${page}`}>
+                    {page}
+                </Link>
               </Button>
 
             ))}
