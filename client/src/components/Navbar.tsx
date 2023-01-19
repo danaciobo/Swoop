@@ -15,6 +15,7 @@ import { Link, Menu, MenuItem, Stack } from '@mui/material';
 import AddItem from './AddItem';
 import Login from './Login';
 import { grey } from '@mui/material/colors';
+import React from 'react';
 
 const pages = ['All', 'Clothes', 'Accessories', 'Home', 'Electronics', 'Hobbies', 'Freebies'];
 
@@ -64,11 +65,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Navbar({ setItems, setFilteredItems, items, setUser}) {
+export default function Navbar({ setItems, setFilteredItems, items, setUser, user}) {
 
-  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElNav, setAnchorElNav] = useState<null | EventTarget>(null);
 
-  const handleOpenNavMenu = (e) => {
+  const handleOpenNavMenu = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     setAnchorElNav(e.currentTarget);
   };
   const handleCloseNavMenu = () => {
@@ -146,7 +147,7 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser}) {
             </IconButton>
             <Menu
               id="menu-appbar"
-              anchorEl={anchorElNav}
+              anchorEl={anchorElNav as Element}
               anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'left',

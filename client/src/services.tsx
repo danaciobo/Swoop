@@ -20,7 +20,7 @@ const baseURL = "http://localhost:3005"
 //   }
 // }
 
-export const addItem = async (data) => {
+export const addItem = async (data: FormData) => {
   try {
     const response = await fetch(`${baseURL}/items`,{
       method: 'POST',
@@ -35,7 +35,7 @@ export const addItem = async (data) => {
 }
 }
 
-export const registerUser = async (userInfo) => {
+export const registerUser = async (userInfo: User) => {
   try {
     const response = await fetch(`${baseURL}/register`, {
       method: 'POST',
@@ -51,7 +51,7 @@ export const registerUser = async (userInfo) => {
   }
 }
 
-export const getUserById = async (id) => {
+export const getUserById = async (id: String) => {
   try {
     const response = await fetch(`${baseURL}/users/${id}`)
     return response.json();
@@ -61,7 +61,7 @@ export const getUserById = async (id) => {
   }
 }
 
-export const getUserByEmail = async (email) => {
+export const getUserByEmail = async (email:String) => {
   try {
     const response = await fetch(`${baseURL}/users/${email}`)
     return response.json();
@@ -71,7 +71,7 @@ export const getUserByEmail = async (email) => {
   }
 }
 
-export const getItemById = async (id) => {
+export const getItemById = async (id:String) => {
   try {
     const response = await fetch(`${baseURL}/items/${id}`)
     return response.json();
@@ -81,7 +81,7 @@ export const getItemById = async (id) => {
   }
 }
 
-export const getItemByCategory = async (category) => {
+export const getItemByCategory = async (category:String) => {
   try {
     const response = await fetch(`${baseURL}/items/category/${category}`)
     return response.json();
