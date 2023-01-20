@@ -19,6 +19,8 @@ import Login from './components/Login';
 import { useEffect, useState } from 'react';
 import { DataProvider } from './context';
 import { Auth0Provider } from '@auth0/auth0-react';
+import ItemDetails from './components/ItemDetails';
+import Categories from './pages/Categories'
 
 import LoginButton from './login';
 import LogoutButton from './logout';
@@ -42,6 +44,8 @@ function App() {
   const [filteredItems, setFilteredItems] = useState([]);
 
   const [user, setUser] = useState({});
+
+  const [currentItem, setCurrentItem] = useState({});
 
 
   useEffect(() => {
@@ -112,12 +116,15 @@ function App() {
 
 
         <Routes>
-          <Route path="/" element={<ItemList items={filteredItems}/>} />
+          <Route path="/All" element={<ItemList items={filteredItems} currentItem={currentItem} setCurrentItem={setCurrentItem}/>} />
+          {/* <Route path="/All" element={<Categories items={filteredItems} currentItem={currentItem} setCurrentItem={setCurrentItem}/>} /> */}
+          {/* <Route path="/Accessories" element={<Categories items={filteredItems} currentItem={currentItem} setCurrentItem={setCurrentItem}/>} /> */}
           <Route path="/Home" element={<Home/>} />
-          <Route path="/Profile" element={<Profile items={items} user={user} />} />
+          <Route path="/Profile" element={<Profile items={items} user={user} setCurrentItem={setCurrentItem}/>} />
           {/* <Route path="/AddItem" element={<AddItem />} /> */}
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
+          <Route path="/ItemDetails" element={<ItemDetails item={currentItem} setCurrentItem={setCurrentItem}/>} />
         </Routes>
 
 
@@ -125,11 +132,11 @@ function App() {
       {/* </DataProvider> */}
     </ThemeProvider>
 
-    
+
       <LoginButton />
       <LogoutButton />
 
-    
+
     </>
 
   );
