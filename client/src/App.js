@@ -103,7 +103,7 @@ function App() {
   //   }
   // });
   return (
-
+<>
     <ThemeProvider theme={theme}>
       {/* <DataProvider> */}
       <Navbar setItems={setItems} items={items} setFilteredItems={setFilteredItems} user={user} setUser={setUser}/>
@@ -125,7 +125,7 @@ function App() {
       {/* </DataProvider> */}
     </ThemeProvider>
 
-    <>
+    
       <LoginButton />
       <LogoutButton />
 

@@ -21,7 +21,7 @@ root.render(
       clientId='EMPkHXnEaeR62SaSJbXNbcT7sJh0Zvgg'
       authorizationParams={{
         redirect_uri: 'http://localhost:3000/',
-      }}
+      }}>
       <BrowserRouter>
       <App />
        </BrowserRouter>
