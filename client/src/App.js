@@ -10,11 +10,11 @@ import Footer from './components/Footer';
 import Register from './components/Register';
 import AddItem from './components/AddItem';
 import Profile from './components/Profile';
-import Login from './components/Login';
 import { useEffect, useState } from 'react';
 import { DataProvider } from './context';
 import { Auth0Provider } from '@auth0/auth0-react';
-
+import Payment from './Payment';
+import Completion from './Completion';
 
 const myURL = 'http://localhost:3005/items';
 
@@ -46,7 +46,6 @@ function App() {
           );
         }
         const actualData = await response.json();
-        console.log(items);
         if (actualData) {
           setItems(actualData);
           setFilteredItems(actualData);
@@ -80,10 +79,14 @@ function App() {
             path='/Profile'
             element={<Profile items={items} user={user} />}
           />
+          <Route path='/' element = {<Payment/>} /> 
+          <Route path='/completion' element = {<Completion/>} /> 
+          
           {/* <Route path="/AddItem" element={<AddItem />} /> */}
-          <Route path='/Login' element={<Login />} />
+          {/* <Route path='/Login' element={<Login />} /> */}
           <Route path='/Register' element={<Register />} />
         </Routes>
+
 
         <Footer />
         {/* </DataProvider> */}

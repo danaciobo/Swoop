@@ -6,7 +6,6 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 
 import { Auth0Provider } from '@auth0/auth0-react';
-import LoginButton from './login';
 
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
