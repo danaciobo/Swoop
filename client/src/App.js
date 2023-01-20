@@ -14,6 +14,8 @@ import Login from './components/Login';
 import { useEffect, useState } from 'react';
 import { DataProvider } from './context';
 import { Auth0Provider } from '@auth0/auth0-react';
+import ItemDetails from './components/ItemDetails';
+import Categories from './pages/Categories'
 
 
 const myURL = 'http://localhost:4001/items';
@@ -36,6 +38,8 @@ function App() {
 
   const [user, setUser] = useState({});
 
+
+  const [currentItem, setCurrentItem] = useState({})
   useEffect(() => {
     const getData = async () => {
       try {
@@ -74,20 +78,29 @@ function App() {
         <Banner />
 
         <Routes>
-          <Route path='/' element={<ItemList items={filteredItems} />} />
-          <Route path='/Home' element={<Home />} />
-          <Route
-            path='/Profile'
-            element={<Profile items={items} user={user} />}
-          />
+
+          <Route path="/All" element={<ItemList items={filteredItems} currentItem={currentItem} setCurrentItem={setCurrentItem}/>} />
+          {/* <Route path="/All" element={<Categories items={filteredItems} currentItem={currentItem} setCurrentItem={setCurrentItem}/>} /> */}
+          {/* <Route path="/Accessories" element={<Categories items={filteredItems} currentItem={currentItem} setCurrentItem={setCurrentItem}/>} /> */}
+          <Route path="/Home" element={<Home/>} />
+          <Route path="/Profile" element={<Profile items={items} user={user} setCurrentItem={setCurrentItem}/>} />
           {/* <Route path="/AddItem" element={<AddItem />} /> */}
-          <Route path='/Login' element={<Login />} />
-          <Route path='/Register' element={<Register />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Register" element={<Register />} />
+          <Route path="/ItemDetails" element={<ItemDetails item={currentItem} setCurrentItem={setCurrentItem}/>} />
         </Routes>
 
-        <Footer />
-        {/* </DataProvider> */}
-      </ThemeProvider>
+
+      <Footer />
+      {/* </DataProvider> */}
+    </ThemeProvider>
+
+
+      <LoginButton />
+      <LogoutButton />
+
+
+
     </>
   );
 }

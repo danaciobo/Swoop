@@ -4,13 +4,14 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { Avatar, Button, CardActionArea, CardActions, Collapse, IconButton, styled } from '@mui/material';
+import { Avatar, Button, CardActionArea, CardActions, Collapse, IconButton, styled, Link } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useState } from 'react';
 import ItemDetails from './ItemDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import moment from 'moment'
+import moment from 'moment';
+import { Routes, Route, Link as RouterLink} from 'react-router-dom';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -25,7 +26,7 @@ const ExpandMore = styled((props) => {
 
 
 
-export default function ItemCard({ item }) {
+export default function ItemCard({ item, setCurrentItem }) {
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
@@ -37,23 +38,39 @@ export default function ItemCard({ item }) {
   const handleClick = (e) => {
 
     setItemClicked(e)
+    setCurrentItem(item)
+    console.log(item)
 
   }
-  if (itemClicked) {
-    console.log(itemClicked._id)
-    return <ItemDetails id={itemClicked._id} onBack={() => setItemClicked(null)} />
-}
+
+  // DO WE NEED THIS?
+
+//   if (itemClicked) {
+//     console.log(itemClicked._id)
+
+//     return <ItemDetails id={itemClicked._id}
+//     // onBack={() => setItemClicked(null)}
+//     />
+// }
 
   return (
+    <>
     <Card sx={{ width: 250, height: 'auto'}}>
       <CardActionArea onClick={() => handleClick(item)}>
         <CardContent sx={{ padding: 0 }}>
+
+          <Link component={RouterLink} to="/ItemDetails">
+        
+
           <img
             src={item.image}
+
             height="200px"
             width="100%"
             alt={item.title}
           />
+            </Link>
+
         </CardContent>
       </CardActionArea>
       <CardHeader
@@ -96,6 +113,12 @@ export default function ItemCard({ item }) {
         </CardContent>
       </Collapse>
     </Card>
+
+    {/* <Routes>
+      <Route path="/ItemDetails" element={<ItemDetails id={itemClicked._id}/>} />
+    </Routes> */}
+
+    </>
   )
 
 }

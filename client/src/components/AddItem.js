@@ -52,6 +52,7 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
 
     // console.log(title, description, category, price, quantity, location, image);
     const formData = new FormData();
+
     formData.append("image", image);
     formData.append("title", title);
     formData.append("description", description);
@@ -61,6 +62,7 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
     formData.append("location", location);
     console.log(formData)
     postItem({title, description, category, price, quantity, location, image});
+
 
     e.target.reset();
     handleClose();

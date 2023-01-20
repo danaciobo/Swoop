@@ -7,7 +7,7 @@ import ItemCard from './ItemCard';
 
 
 
-export default function ItemList({items}) {
+export default function ItemList({items, currentItem, setCurrentItem}) {
   console.log(items)
   return (
     <Container maxWidth={false} sx={{ justifyContent: 'space-between', width: '100%', paddingTop: '40px', background: '#EBE6DD' }}>
@@ -19,7 +19,7 @@ export default function ItemList({items}) {
         {items? items.sort((a, b) => new Date(b.date_added) - new Date(a.date_added)).map((item, index) =>
         (
           <Grid item key={item._id} >
-            <ItemCard item={item} />
+            <ItemCard item={item} setCurrentItem={setCurrentItem}/>
           </Grid>)) : <p>Loading..</p>
         }
       </Grid>
