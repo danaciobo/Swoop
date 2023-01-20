@@ -1,7 +1,9 @@
-const Item = require('../models/item');
+const Item = require('../models/item')
+// const { Request, Response, NextFunction } =  require('express');
+import { Request, Response } from "express";
 
 
-exports.getItems = async (req, res) => {
+export const getItems = async (req:Request, res:Response) => {
   try {
     const items = await Item.find();
     return res.status(200).json(items);
@@ -11,7 +13,7 @@ exports.getItems = async (req, res) => {
   }
 };
 
-exports.getByCategory = async (req, res) => {
+export const getByCategory = async (req:Request, res:Response) => {
   try {
 
   } catch (e) {
@@ -20,9 +22,8 @@ exports.getByCategory = async (req, res) => {
   }
 };
 
-exports.getItemById = async (req, res) => {
+export const getItemById = async (req:Request, res:Response) => {
   try {
-    console.log(req.params);
     const id = req.params.id
     const item = await Item.findById(id)
     return res.status(200).json(item);
@@ -33,7 +34,7 @@ exports.getItemById = async (req, res) => {
   }
 };
 
-exports.createItem = async (req, res) => {
+export const createItem = async (req:Request, res:Response) => {
   try {
     console.log(req.body)
       const newItem = await Item.create({
@@ -43,7 +44,7 @@ exports.createItem = async (req, res) => {
         price: req.body.price,
         quantity: req.body.quantity,
         location: req.body.location,
-        image: req.file.path,
+        image: req.body.file.path,
         date_added: Date.now(),
         // seller: req.body.user._id
       });
@@ -54,7 +55,7 @@ exports.createItem = async (req, res) => {
   }
 };
 
-exports.updateItem = async (req, res) => {
+export const updateItem = async (req:Request, res:Response) => {
   try {
 
   } catch (e) {
@@ -63,7 +64,7 @@ exports.updateItem = async (req, res) => {
   }
 };
 
-exports.deleteItem = async (req, res) => {
+export const deleteItem = async (req:Request, res:Response) => {
   try {
 
   } catch (e) {
@@ -72,3 +73,4 @@ exports.deleteItem = async (req, res) => {
   }
 };
 
+export default {getItemById, getByCategory, deleteItem, updateItem, createItem, getItems}

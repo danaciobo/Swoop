@@ -1,4 +1,4 @@
-const mongoose = require('../db.js');
+import mongoose from '../db.js';
 
 const orderSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -27,4 +27,4 @@ const orderSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Order', orderSchema);
+export default mongoose.model('Order', orderSchema);

@@ -1,4 +1,4 @@
-
+import {User} from './Types/Types'
 const baseURL = "http://localhost:3005"
 
 // export const getData = async () => {

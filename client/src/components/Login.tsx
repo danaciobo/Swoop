@@ -9,9 +9,10 @@ import { IconButton, Link } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { getUserByEmail } from "../services";
 import React from "react";
+import {User} from "../Types/Types"
 
 
-export default function Login({ setUser }: {setUser: any}) {
+export default function Login({ setUser }: {setUser: React.Dispatch<React.SetStateAction<User | null>>}) {
 
   const [loggEmail, setLoggEmail] = useState<string>("");
   const [loggPassword, setLoggPassword] = useState<string>("");

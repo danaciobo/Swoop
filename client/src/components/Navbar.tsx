@@ -96,9 +96,8 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, use
 
   }
 
-  const handleFilterCategory = (e:React.MouseEvent<HTMLAnchorElement | MouseEvent>) => {
+  const handleFilterCategory = (e:React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log(e)
     const target = e.target as HTMLButtonElement
     const activeCategory = target.value;
     const filtered = items.filter((item) => item.category.toLowerCase() === (activeCategory.toLowerCase()))
@@ -180,7 +179,7 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, use
           </Box>
           <Search sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none', marginLeft: '10px' } }}>
             <SearchIconWrapper>
-              <SearchIcon color='#393937' />
+              <SearchIcon style = {{color: 'blue'}}/>
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"

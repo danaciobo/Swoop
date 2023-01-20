@@ -1,6 +1,8 @@
-const User = require('../models/user');
+import User from '../models/user';
+import { Request, Response, NextFunction } from 'express';
 
-exports.createProfile = async (req, res) => {
+
+export const createProfile = async (req:Request, res:Response) => {
   try {
     const newUser = await User.create({
       email: req.body.email,
@@ -17,7 +19,7 @@ exports.createProfile = async (req, res) => {
   }
 };
 
-exports.updateProfile = async (req, res) => {
+export const updateProfile = async (req:Request, res:Response) => {
   try {
 
   } catch (e) {
@@ -26,7 +28,7 @@ exports.updateProfile = async (req, res) => {
   }
 };
 
-exports.getProfile = async (req, res) => {
+export const getProfile = async (req:Request, res:Response) => {
   try {
     console.log(req.params);
     const id = req.params.id
@@ -39,7 +41,7 @@ exports.getProfile = async (req, res) => {
   }
 };
 
-exports.getUserByEmail = async (req, res) => {
+export const getUserByEmail = async (req:Request, res:Response) => {
   try {
     console.log(req.params);
     const email = req.params.email
@@ -51,7 +53,7 @@ exports.getUserByEmail = async (req, res) => {
     res.status(500);
   }
 };
-exports.getUsers = async (req, res) => {
+export const getUsers = async (req:Request, res:Response) => {
   try {
     const users = await User.find();
     return res.status(200).json(users);
@@ -60,3 +62,5 @@ exports.getUsers = async (req, res) => {
     res.status(500);
   }
 };
+
+export default  {getUsers, getUserByEmail, getProfile, updateProfile, createProfile}

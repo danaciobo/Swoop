@@ -1,11 +1,11 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import { ConnectOptions } from 'mongoose';
 
 const DB_NAME = 'swoopDB2'
 const DB_PORT = '27017'
 
 mongoose.connect(
   `mongodb://localhost:${DB_PORT}/${DB_NAME}`,
-  { useNewUrlParser: true, useUnifiedTopology: true },
   (err) => {
     if (err) {
       console.log(`Sorry, something went wrong! ${err}`);
@@ -15,4 +15,4 @@ mongoose.connect(
  }
 );
 
-module.exports = mongoose;
+export default mongoose;

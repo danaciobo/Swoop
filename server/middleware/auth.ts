@@ -1,5 +1,5 @@
 const admin = require('../config/firebase-config')
-
+import { Response, Request } from "express";
 class Middleware {
   async decodeToken(req, res, next) {
     try {
@@ -17,4 +17,4 @@ class Middleware {
   }
 }
 
-module.exports = new Middleware();
+export default new Middleware();

@@ -45,8 +45,8 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
     formData.append('title', title);
     formData.append('description', description);
     formData.append('category', category);
-    formData.append('price', price == undefined ? '0' : price);
-    formData.append('quantity', quantity == undefined ? '0' : quantity);
+    formData.append('price', price === undefined ? '0' : price);
+    formData.append('quantity', quantity === undefined ? '0' : quantity);
     formData.append('location', location);
 
     postItem(formData)
