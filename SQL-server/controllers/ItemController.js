@@ -1,5 +1,5 @@
 const Item = require("../models/item");
-
+const cloudinary = require('../cloudinary')
 exports.getItems = async (req, res) => {
   try {
     const items = await Item.findAll();
@@ -26,7 +26,7 @@ exports.getItemById = async (req, res) => {
 
 exports.createItem = async (req, res) => {
   try {
-    console.log(req.body);
+    const img = await cloudinary.uploader.upload(req.body.image)
     const newItem = await Item.create({
       title: req.body.title,
       description: req.body.description,
@@ -34,11 +34,12 @@ exports.createItem = async (req, res) => {
       price: req.body.price,
       quantity: req.body.quantity,
       location: req.body.location,
-      // image: req.file.path,
-      // date_added: Date.now(),
+      image: img.secure_url,
+      imageId: img,
       seller: req.body.seller,
     });
     res.status(201).send(newItem);
+    console.log(newItem)
   } catch (e) {
     console.log(e);
     res.status(500);

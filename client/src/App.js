@@ -16,7 +16,7 @@ import { DataProvider } from './context';
 import { Auth0Provider } from '@auth0/auth0-react';
 
 
-const myURL = 'http://localhost:3005/items';
+const myURL = 'http://localhost:4001/items';
 
 const theme = createTheme({
   typography: {

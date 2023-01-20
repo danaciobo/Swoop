@@ -94,7 +94,7 @@ export default function Profile({items, user}) {
                     <CardActionArea>
                       <CardContent sx={{ padding: 0 }}>
                         <img
-                          src={`http://localhost:3005/${item.image}`}
+                          src={`http://localhost:3007/${item.image}`}
                           height="70px"
                           width="100%"
                           alt={item.title}

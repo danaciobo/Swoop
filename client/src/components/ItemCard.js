@@ -49,7 +49,7 @@ export default function ItemCard({ item }) {
       <CardActionArea onClick={() => handleClick(item)}>
         <CardContent sx={{ padding: 0 }}>
           <img
-            src={`http://localhost:3005/${item.image}`}
+            src={item.image}
             height="200px"
             width="100%"
             alt={item.title}
