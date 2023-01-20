@@ -10,12 +10,16 @@ import Footer from './components/Footer';
 import Register from './components/Register';
 import AddItem from './components/AddItem';
 import Profile from './components/Profile';
-import Login from './components/Login';
 import { useEffect, useState } from 'react';
 import { DataProvider } from './context';
 import { Auth0Provider } from '@auth0/auth0-react';
+
+import Payment from './Payment';
+import Completion from './Completion';
+
 import ItemDetails from './components/ItemDetails';
 import Categories from './pages/Categories'
+
 
 
 const myURL = 'http://localhost:4001/items';
@@ -50,7 +54,6 @@ function App() {
           );
         }
         const actualData = await response.json();
-        console.log(items);
         if (actualData) {
           setItems(actualData);
           setFilteredItems(actualData);
@@ -79,6 +82,9 @@ function App() {
 
         <Routes>
 
+ <Route path='/' element = {<Payment/>} /> 
+          <Route path='/completion' element = {<Completion/>} /> 
+
           <Route path="/All" element={<ItemList items={filteredItems} currentItem={currentItem} setCurrentItem={setCurrentItem}/>} />
           {/* <Route path="/All" element={<Categories items={filteredItems} currentItem={currentItem} setCurrentItem={setCurrentItem}/>} /> */}
           {/* <Route path="/Accessories" element={<Categories items={filteredItems} currentItem={currentItem} setCurrentItem={setCurrentItem}/>} /> */}
@@ -98,6 +104,7 @@ function App() {
 
       <LoginButton />
       <LogoutButton />
+
 
 
 
