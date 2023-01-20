@@ -14,7 +14,7 @@ import AddItem from './components/AddItem';
 import Profile from './components/Profile';
 import Login from './components/Login';
 import { useEffect, useState } from 'react';
-import { DataProvider } from './context';
+
 
 const myURL = "http://localhost:3005/items"
 
