@@ -100,7 +100,7 @@ export default function Profile({items, user, setCurrentItem}) {
                       <CardContent sx={{ padding: 0 }}>
                       {/* <Link component={RouterLink} to="/ItemDetails"> */}
                         <img
-                          src={`http://localhost:3005/${item.image}`}
+                          src={`http://localhost:3007/${item.image}`}
                           height="70px"
                           width="100%"
                           alt={item.title}

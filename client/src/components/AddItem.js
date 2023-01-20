@@ -1,32 +1,44 @@
-
-import { useState } from "react"
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
+import { useState } from "react";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
 import { IconButton } from "@mui/material";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 import { addItem } from "../services";
-import AddIcon from '@mui/icons-material/Add';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import AddIcon from "@mui/icons-material/Add";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
 export default function AddItem({ setItems, setFilteredItems, items }) {
-
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [location, setLocation] = useState("");
   const [category, setCategory] = useState("");
-  const [image, setImage] = useState("")
+  const [image, setImage] = useState("");
   const [open, setOpen] = useState(false);
-
+  const [previewSource, setPreviewSource] = useState();
+  const [fileInputState] = useState("");
+  const handleFileInputChange = (e) => {
+    console.log(e);
+    const file = e;
+    previewFile(file);
+  };
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImage(reader.result);
+      setPreviewSource(reader.result)
+    };
+  };
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -40,44 +52,52 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
 
     // console.log(title, description, category, price, quantity, location, image);
     const formData = new FormData();
-    formData.append('image', image);
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('category', category);
-    formData.append('price', price);
-    formData.append('quantity', quantity);
-    formData.append('location', location);
-console.log(formData)
-    postItem(formData)
+
+    formData.append("image", image);
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("category", category);
+    formData.append("price", price);
+    formData.append("quantity", quantity);
+    formData.append("location", location);
+    console.log(formData)
+    postItem({title, description, category, price, quantity, location, image});
+
+
     e.target.reset();
-    handleClose()
+    handleClose();
   };
   const itemsList = items;
   const postItem = async (data) => {
     try {
       const post = await addItem(data);
 
-      setItems(items => [...items, post]);
-      setFilteredItems(filteredItems => [...itemsList, post])
-
+      setItems((items) => [...items, post]);
+      setFilteredItems((filteredItems) => [...itemsList, post]);
     } catch (e) {
       console.log(e);
     }
-  }
-
+  };
 
   return (
     <div>
-      <Button variant="contained" startIcon={<AddIcon />} sx={{ display: { xs: 'none', md: 'flex', background: '#E25F1C' } }} onClick={handleClickOpen}>
+      <Button
+        variant="contained"
+        startIcon={<AddIcon />}
+        sx={{ display: { xs: "none", md: "flex", background: "#E25F1C" } }}
+        onClick={handleClickOpen}
+      >
         Sell Now
       </Button>
-      <Dialog open={open} onClose={handleClose} >
+      <Dialog open={open} onClose={handleClose}>
         <DialogActions>
-          <IconButton sx={{ padding: 0 }} onClick={handleClose} >
-            <CloseIcon sx={{ fontSize: '1.3em' }} />
+          <IconButton sx={{ padding: 0 }} onClick={handleClose}>
+            <CloseIcon sx={{ fontSize: "1.3em" }} />
           </IconButton>
         </DialogActions>
-        <DialogTitle sx={{ textAlign: 'center', padding: 0 }}>Add new item for sale</DialogTitle>
+        <DialogTitle sx={{ textAlign: "center", padding: 0 }}>
+          Add new item for sale
+        </DialogTitle>
         <DialogContent>
           <form
             onSubmit={handleSubmit}
@@ -87,11 +107,11 @@ console.log(formData)
               justifyContent: "space-around",
               alignItems: "center",
               padding: "2rem",
-              maxWidth: '600px'
+              maxWidth: "600px",
             }}
           >
             <TextField
-              sx={{ width: '30em', marginBottom: '0.7em' }}
+              sx={{ width: "30em", marginBottom: "0.7em" }}
               label="Title"
               type="text"
               variant="outlined"
@@ -100,7 +120,7 @@ console.log(formData)
               onChange={(e) => setTitle(e.target.value)}
             />
             <TextField
-              sx={{ width: '30em', marginBottom: '0.7em' }}
+              sx={{ width: "30em", marginBottom: "0.7em" }}
               multiline
               rows={5}
               label="Description"
@@ -109,7 +129,10 @@ console.log(formData)
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
-            <FormControl id="cat-select-label" sx={{ width: '30em', marginBottom: '0.7em' }}>
+            <FormControl
+              id="cat-select-label"
+              sx={{ width: "30em", marginBottom: "0.7em" }}
+            >
               <InputLabel id="cat-select-label">Category</InputLabel>
               <Select
                 labelId="cat-select-label"
@@ -117,17 +140,17 @@ console.log(formData)
                 label="Category"
                 onChange={(e) => setCategory(e.target.value)}
               >
-                <MenuItem value={'clothes'}>Clothes</MenuItem>
-                <MenuItem value={'accessories'}>Accesories</MenuItem>
-                <MenuItem value={'home'}>Home & Garden</MenuItem>
-                <MenuItem value={'electronics'}>Electronics</MenuItem>
-                <MenuItem value={'hobbies'}>Hobbies</MenuItem>
-                <MenuItem value={'freebies'}>Freebies</MenuItem>
+                <MenuItem value={"clothes"}>Clothes</MenuItem>
+                <MenuItem value={"accessories"}>Accesories</MenuItem>
+                <MenuItem value={"home"}>Home & Garden</MenuItem>
+                <MenuItem value={"electronics"}>Electronics</MenuItem>
+                <MenuItem value={"hobbies"}>Hobbies</MenuItem>
+                <MenuItem value={"freebies"}>Freebies</MenuItem>
               </Select>
             </FormControl>
             <div display="flex" flexDirection="rows">
               <TextField
-                sx={{ width: '10em', marginBottom: '0.7em' }}
+                sx={{ width: "10em", marginBottom: "0.7em" }}
                 label="Price"
                 variant="outlined"
                 required
@@ -136,7 +159,7 @@ console.log(formData)
               />
 
               <TextField
-                sx={{ width: '10em', marginBottom: '0.7em' }}
+                sx={{ width: "10em", marginBottom: "0.7em" }}
                 label="Quantity"
                 variant="outlined"
                 required
@@ -145,7 +168,7 @@ console.log(formData)
               />
 
               <TextField
-                sx={{ width: '10em', marginBottom: '0.7em' }}
+                sx={{ width: "10em", marginBottom: "0.7em" }}
                 label="Location"
                 variant="outlined"
                 required
@@ -154,29 +177,32 @@ console.log(formData)
               />
             </div>
 
-              <input
-                accept="image/*"
-                style={{ display: 'none' }}
-                id="contained-button-file"
-                // value={image}
-                multiple
-                type="file"
-                onChange={(e) => setImage(e.target.files[0])}
-                margin='2'
-              />
-              <label htmlFor="contained-button-file">
-                <Button variant="contained" component="span">
-                  Upload
-                </Button>
-                <IconButton color="primary" aria-label="upload picture" component="label">
+            <input
+              accept="image/*"
+              style={{ display: "none" }}
+              id="contained-button-file"
+              value={fileInputState}
+              multiple
+              type="file"
+              onChange={(e) => handleFileInputChange(e.target.files[0])}
+              margin="2"
+            />
 
-                  <PhotoCamera />
-                </IconButton>
-              </label>
-
+            <label htmlFor="contained-button-file">
+              <Button variant="contained" component="span">
+                Upload
+              </Button>
+              <IconButton
+                color="primary"
+                aria-label="upload picture"
+                component="label"
+              >
+                <PhotoCamera />
+              </IconButton>
+            </label>
 
             <Button
-              sx={{ width: '16em', height: '3em', margin: 1 }}
+              sx={{ width: "16em", height: "3em", margin: 1 }}
               variant="contained"
               color="primary"
               type="submit"
@@ -184,11 +210,11 @@ console.log(formData)
               Add item
             </Button>
           </form>
+          {previewSource && (
+            <img src={previewSource} alt="chosen" style={{ height: "200px" }} />
+          )}
         </DialogContent>
-
       </Dialog>
-    </div >
+    </div>
   );
 }
-
-

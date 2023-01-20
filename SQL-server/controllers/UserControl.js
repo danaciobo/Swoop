@@ -28,7 +28,7 @@ exports.createProfile = async (req, res) => {
   };
   
  
-  
+  //for the profile page
   exports.getUserByEmail = async (req, res) => {
     try {
       console.log(req.params);

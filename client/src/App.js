@@ -1,12 +1,7 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-} from 'firebase/auth';
+
 import Banner from './components/Banner';
 import Navbar from './components/Navbar';
 import { createTheme, ThemeProvider } from '@mui/material';
@@ -22,10 +17,8 @@ import { Auth0Provider } from '@auth0/auth0-react';
 import ItemDetails from './components/ItemDetails';
 import Categories from './pages/Categories'
 
-import LoginButton from './login';
-import LogoutButton from './logout';
 
-const myURL = 'http://localhost:3005/items';
+const myURL = 'http://localhost:4001/items';
 
 const theme = createTheme({
   typography: {
@@ -45,9 +38,8 @@ function App() {
 
   const [user, setUser] = useState({});
 
-  const [currentItem, setCurrentItem] = useState({});
 
-
+  const [currentItem, setCurrentItem] = useState({})
   useEffect(() => {
     const getData = async () => {
       try {
@@ -70,52 +62,23 @@ function App() {
     getData();
   }, []);
 
-  //   const auth = getAuth();
-  // createUserWithEmailAndPassword(auth, email, password)
-  //   .then((userCredential) => {
-  //     // Signed in
-  //     const user = userCredential.user;
-  //     // ...
-  //   })
-  //   .catch((error) => {
-  //     const errorCode = error.code;
-  //     const errorMessage = error.message;
-  //     // ..
-  //   });
 
-  // signInWithEmailAndPassword(auth, email, password)
-  //   .then((userCredential) => {
-  // Signed in
-  //   const user = userCredential.user;
-  //   // ...
-  // })
-  // .catch((error) => {
-  //   const errorCode = error.code;
-  //   const errorMessage = error.message;
-  // });
-
-  // const auth = getAuth();
-  // onAuthStateChanged(auth, (user) => {
-  //   if (user) {
-  //     // User is signed in, see docs for a list of available properties
-  //     // https://firebase.google.com/docs/reference/js/firebase.User
-  //     const uid = user.uid;
-  //     // ...
-  //   } else {
-  //     // User is signed out
-  //     // ...
-  //   }
-  // });
   return (
-<>
-    <ThemeProvider theme={theme}>
-      {/* <DataProvider> */}
-      <Navbar setItems={setItems} items={items} setFilteredItems={setFilteredItems} user={user} setUser={setUser}/>
-      {/* <ItemList items={items} /> */}
-      <Banner />
-
+    <>
+      <ThemeProvider theme={theme}>
+        {/* <DataProvider> */}
+        <Navbar
+          setItems={setItems}
+          items={items}
+          setFilteredItems={setFilteredItems}
+          user={user}
+          setUser={setUser}
+        />
+        {/* <ItemList items={items} /> */}
+        <Banner />
 
         <Routes>
+
           <Route path="/All" element={<ItemList items={filteredItems} currentItem={currentItem} setCurrentItem={setCurrentItem}/>} />
           {/* <Route path="/All" element={<Categories items={filteredItems} currentItem={currentItem} setCurrentItem={setCurrentItem}/>} /> */}
           {/* <Route path="/Accessories" element={<Categories items={filteredItems} currentItem={currentItem} setCurrentItem={setCurrentItem}/>} /> */}
@@ -137,8 +100,8 @@ function App() {
       <LogoutButton />
 
 
-    </>
 
+    </>
   );
 }
 

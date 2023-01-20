@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 
 import AddItem from './AddItem';
 import Login from './Login';
+import Logout from './Logout';
 import { grey } from '@mui/material/colors';
 
 const pages = ['All', 'Clothes', 'Accessories', 'Home', 'Electronics', 'Hobbies', 'Freebies'];
@@ -128,7 +129,8 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser}) {
           </Search>
           <Stack direction="row" spacing={2} >
             <AddItem setItems={setItems} setFilteredItems={setFilteredItems} items={items}/>
-            <Login setUser={setUser} />
+            <Login />
+            <Logout/>
           </Stack>
         </Toolbar>
 
