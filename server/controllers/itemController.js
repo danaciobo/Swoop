@@ -45,7 +45,7 @@ exports.createItem = async (req, res) => {
         location: req.body.location,
         image: req.file.path,
         date_added: Date.now(),
-        // seller: req.body.user._id
+        // seller: req.body.user.
       });
       res.status(201).send(newItem);
   } catch (e) {

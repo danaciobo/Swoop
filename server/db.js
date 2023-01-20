@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const DB_NAME = 'swoopDB2'
 const DB_PORT = '27017'
-
+mongoose.set('strictQuery', 'false')
 mongoose.connect(
-  `mongodb://localhost:${DB_PORT}/${DB_NAME}`,
+ 'mongodb+srv://Matthew:Whakedw1@cluster0.men6wel.mongodb.net/?retryWrites=true&w=majority',
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err) => {
     if (err) {

@@ -35,6 +35,8 @@ function App() {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([])
   const [user, setUser] = useState(null)
+
+  //store  current user in State
   useEffect(() => {
 
     const getData = async () => {
