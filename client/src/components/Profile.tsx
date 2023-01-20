@@ -4,16 +4,18 @@ import Box from '@mui/material/Box';
 import { Avatar, Card, CardActionArea, CardContent, CardHeader, CardMedia, Container, Grid, Typography } from "@mui/material";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import React from "react";
 import ListItemText from '@mui/material/ListItemText';
+import { User } from "../Types/Types";
 
 
 
-export default function Profile({items, user}) {
+export default function Profile({items}) {
 
-  const [user, setUser] = useState('')
+  const [User, setUser] = useState<User>()
 
   useEffect(() => {
-    getUserById('63c726deeed0a1cc3069691a')
+    getUserById('63c983992fed3945324e68f9')
       .then(response => {
         console.log(response)
         setUser(response)
@@ -25,7 +27,7 @@ export default function Profile({items, user}) {
   return (
     <Container >
       <Typography variant='h4' mt={4}>
-        Welcome {user.firstName}
+        Welcome {User?.firstName}
       </Typography>
       <Box
         sx={{
@@ -46,18 +48,18 @@ export default function Profile({items, user}) {
           <Card sx={{ maxWidth: 400, padding: '10', height: '100%', background: '#EBE6DD'}}>
             <CardHeader sx={{ height: 5 }}></CardHeader>
             <CardMedia sx={{ height: 100 }} >
-              <Avatar sx={{ margin: 5, backgroundColor: '#E25F1C', width: 70, height: 70, margin: 'auto' }}> DC</Avatar>
+              <Avatar sx={{ margin: 5, backgroundColor: '#E25F1C', width: 70, height: 70}}> DC</Avatar>
             </CardMedia>
             <CardContent sx={{ alignFont: 'center' }}>
               <Typography gutterBottom variant="h5" component="div" align='center'>
-                {user.firstName + ' ' + user.lastName}
+                {User?.firstName + ' ' + User?.lastName}
               </Typography>
               <List sx={{ width: '100%', maxWidth: 360, marginTop: 1 }}>
                 <ListItem>
-                  <ListItemText primary="Email address" secondary={user.email} />
+                  <ListItemText primary="Email address" secondary={User?.email} />
                 </ListItem>
                 <ListItem>
-                  <ListItemText primary="Phone number" secondary={user.phoneNumber} />
+                  <ListItemText primary="Phone number" secondary={User?.phoneNumber} />
                 </ListItem>
               </List>
             </CardContent>
