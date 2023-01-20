@@ -129,32 +129,7 @@ function App() {
       <LoginButton />
       <LogoutButton />
 
-      <ThemeProvider theme={theme}>
-        {/* <DataProvider> */}
-        <Navbar
-          setItems={setItems}
-          items={items}
-          setFilteredItems={setFilteredItems}
-          user={user}
-          setUser={setUser}
-        />
-        {/* <ItemList items={items} /> */}
-        <Banner />
-        
-          <Routes>
-            <Route path='/' element={<ItemList items={filteredItems} />} />
-            <Route
-              path='/Profile'
-              element={<Profile items={items} user={user} />}
-            />
-            {/* <Route path="/AddItem" element={<AddItem />} /> */}
-            <Route path='/Login' element={<Login />} />
-            <Route path='/Register' element={<Register />} />
-          </Routes>
-      
-        <Footer />
-        {/* </DataProvider> */}
-      </ThemeProvider>
+    
     </>
 
   );
