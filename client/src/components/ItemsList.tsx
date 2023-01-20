@@ -2,13 +2,12 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { Box, Container, Grid, Paper } from '@mui/material';
 import ItemCard from './ItemCard';
-
+import { Item } from '../Types/Types';
 
 
 
 
 export default function ItemList({items}) {
-  console.log(items)
   return (
     <Container maxWidth={false} sx={{ justifyContent: 'space-between', width: '100%', paddingTop: '40px', background: '#EBE6DD' }}>
       <Grid container
@@ -16,7 +15,7 @@ export default function ItemList({items}) {
         alignItems="stretch"
         spacing={{ xs: 3, md: 4 }}
       >
-        {items? items.sort((a, b) => new Date(b.date_added) - new Date(a.date_added)).map((item, index) =>
+        {items? items.sort((a, b) => new Date(b.date_added).valueOf() - new Date(a.date_added).valueOf()).map((item, index) =>
         (
           <Grid item key={item._id} >
             <ItemCard item={item} />

@@ -26,5 +26,4 @@ export interface ExpandProps {
     'aria-expanded':boolean,
     'aria-label':string,
     children?: Element
-
 }
