@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -10,15 +10,14 @@ import { IconButton, Link } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { registerUser } from "../services";
 
-
 export default function Register() {
 
-  const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phoneNumber, setphoneNumber] = useState("");
-  const [password, setPassword] = useState("");
-  const [open, setOpen] = useState(true);
+  const [email, setEmail] = useState<string>("");
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+  const [phoneNumber, setphoneNumber] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(true);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -28,9 +27,9 @@ export default function Register() {
     setOpen(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(e.target.value)
+    console.log(e.currentTarget.value)
     const newUser = { email, firstName, lastName, phoneNumber }
     setEmail('');
     setFirstName('');
@@ -79,7 +78,7 @@ export default function Register() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <div display="flex" flexDirection="rows">
+            <div style={{display: 'flex', flexDirection: 'row'}}>
               <TextField
                 sx={{ width: '8.5em', marginBottom: '0.7em' }}
                 label="First Name"
