@@ -15,8 +15,8 @@ import React from 'react'
 import { ExpandProps } from '../Types/Types';
 
 
-
-const ExpandMore = styled((props: ExpandProps) => {
+// make this something other than any
+const ExpandMore = styled((props: any) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
@@ -26,10 +26,6 @@ const ExpandMore = styled((props: ExpandProps) => {
     duration: theme.transitions.duration.shortest,
   }),
 }));
-
-// onClick={handleExpandClick}
-//           aria-expanded={expanded}
-//           aria-label="show more"
 
 
 export default function ItemCard({ item }) {
