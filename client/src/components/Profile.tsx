@@ -6,11 +6,12 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import React from "react";
 import ListItemText from '@mui/material/ListItemText';
-import { User } from "../Types/Types";
+import { User, Item } from "../Types/Types";
 
 
 
-export default function Profile({items}) {
+
+export default function Profile({items}: {items: Item[]}) {
 
   const [User, setUser] = useState<User>()
 
@@ -89,7 +90,7 @@ export default function Profile({items}) {
               // columns={{ xs: 4, sm: 8, md: 12 }}
               spacing='5'
             >
-              {items ? items.slice(0,5).map((item, index) =>
+              {items ? items.slice(0,5).map((item:Item) =>
               (
                 <Grid item key={item._id} >
                   <Card sx={{ width: 100, height: 120 }}>
@@ -129,7 +130,7 @@ export default function Profile({items}) {
               // columns={{ xs: 4, sm: 8, md: 12 }}
               spacing='5'
             >
-              {items.length >100 ? items.slice(0,5).map((item, index) =>
+              {items.length >100 ? items.slice(0,5).map((item:Item)=>
               (
                 <Grid item key={item._id} >
                   <Card sx={{ width: 100, height: 120 }}>

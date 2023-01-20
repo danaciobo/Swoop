@@ -2,7 +2,7 @@
 
 // const DataContext = createContext({});
 
-// export const DataProvider = ({children}) => {
+// export const context = ({children}) => {
 
 //   const [items, setItems] = useState([]);
 
@@ -19,4 +19,14 @@
 // }
 
 
-// export default DataContext;
+// export default context;
+
+import React from 'react'
+
+function context () {
+  return (
+    <div>context</div>
+  )
+}
+
+export default context

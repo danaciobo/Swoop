@@ -11,11 +11,12 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import Logo from '../Swoop.jpg';
 import { Link, Menu, MenuItem, Stack } from '@mui/material';
-
 import AddItem from './AddItem';
 import Login from './Login';
 import { grey } from '@mui/material/colors';
 import React from 'react';
+
+import {User, Item} from '../Types/Types'
 
 const pages = ['All', 'Clothes', 'Accessories', 'Home', 'Electronics', 'Hobbies', 'Freebies'];
 
@@ -65,7 +66,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Navbar({ setItems, setFilteredItems, items, setUser, user}) {
+export default function Navbar({ setItems, setFilteredItems, items, setUser, user }: {
+  setItems: React.Dispatch<React.SetStateAction<Item[]>>;
+  setFilteredItems: React.Dispatch<React.SetStateAction<Item[]>>;
+  items: Item[];
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  user: User | null
+}) {
 
   const [anchorElNav, setAnchorElNav] = useState<null | EventTarget>(null);
 
@@ -76,7 +83,7 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, use
     setAnchorElNav(null);
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     e.preventDefault();
     const searchWord = e.target.value;
     const filtered = items.filter((item) => item.title.toLowerCase().includes(searchWord.toLowerCase()) || item.category.toLowerCase().includes(searchWord.toLowerCase()))
@@ -89,10 +96,11 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, use
 
   }
 
-  const handleFilterCategory = (e) => {
+  const handleFilterCategory = (e:React.MouseEvent<HTMLAnchorElement | MouseEvent>) => {
     e.preventDefault();
     console.log(e)
-    const activeCategory = e.target.value;
+    const target = e.target as HTMLButtonElement
+    const activeCategory = target.value;
     const filtered = items.filter((item) => item.category.toLowerCase() === (activeCategory.toLowerCase()))
     if (activeCategory.toLowerCase() === 'all') {
       console.log(items)
@@ -186,7 +194,7 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, use
               <Button
                 key={page}
                 value={page}
-                onClick={handleFilterCategory}
+                onClick={handleFilterCategory as React.MouseEventHandler<HTMLButtonElement>}
                 sx={{ my: 2, color: 'white', display: 'block', marginRight: 5 }}
               >
                 {page}

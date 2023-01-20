@@ -1,22 +1,23 @@
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
+// import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+// import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Avatar, Button, CardActionArea, CardActions, Collapse, IconButton, styled } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+// import AddIcon from '@mui/icons-material/Add';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useState } from 'react';
-import ItemDetails from './ItemDetails(Empty)';
+import ItemDetails from './ItemDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import moment from 'moment'
-import React from 'react'
-import { ExpandProps, Item } from '../Types/Types';
+import {Item} from '../Types/Types'
+// import React from 'react'
+import { ExpandProps } from '../Types/Types';
 
 
 // make this something other than any
-const ExpandMore = styled((props: any) => {
+const ExpandMore = styled((props: ExpandProps) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
@@ -28,7 +29,7 @@ const ExpandMore = styled((props: any) => {
 }));
 
 
-export default function ItemCard({ item }) {
+export default function ItemCard({ item }: {item: Item}) {
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
@@ -37,7 +38,7 @@ export default function ItemCard({ item }) {
 
   const [itemClicked, setItemClicked] = useState<null | Item>(null);
 
-  const handleClick = (e) => {
+  const handleClick = (e:any) => {
 
       setItemClicked(e)
 
@@ -80,8 +81,8 @@ export default function ItemCard({ item }) {
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-        <Typography paragraph >
-            Seller: {item.seller? item.seller : 'Dana C'}
+        <Typography paragraph>
+            Seller: {item.seller ? item.seller.firstName + ' ' + item.seller.lastName[0] : 'Dana C'}
           </Typography>
           <Typography paragraph>
             Location: {item.location}

@@ -15,9 +15,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import React from 'react'
+import { Item } from "../Types/Types";
 
-
-export default function AddItem({ setItems, setFilteredItems, items }) {
+export default function AddItem({ setItems, setFilteredItems, items }: {setItems: React.Dispatch<React.SetStateAction<Item[]>>, setFilteredItems: React.Dispatch<React.SetStateAction<Item[]>>, items: Item[]}) {
 
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -36,7 +36,7 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
     setOpen(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     console.log(title, description, category, price, quantity, location, image);
@@ -50,16 +50,19 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
     formData.append('location', location);
 
     postItem(formData)
-    e.target.reset();
+    if (e.target) {
+      const target = e.target as HTMLFormElement
+      target.reset();
+    }
     handleClose()
   };
   const itemsList = items;
-  const postItem = async (data) => {
+  const postItem = async (data: FormData) => {
     try {
       const post = await addItem(data);
 
-      setItems(items => [...items, post]);
-      setFilteredItems(filteredItems => [...itemsList, post])
+      setItems((items: Item[]) => [...items, post]);
+      setFilteredItems((filteredItems:Item[]) => [...itemsList, post])
 
     } catch (e) {
       console.log(e);

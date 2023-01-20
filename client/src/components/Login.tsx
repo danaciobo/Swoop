@@ -11,7 +11,7 @@ import { getUserByEmail } from "../services";
 import React from "react";
 
 
-export default function Login({ setUser }) {
+export default function Login({ setUser }: {setUser: any}) {
 
   const [loggEmail, setLoggEmail] = useState<string>("");
   const [loggPassword, setLoggPassword] = useState<string>("");
@@ -26,7 +26,7 @@ export default function Login({ setUser }) {
     setOpen(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e:any) => {
     e.preventDefault();
     console.log(e.target.value)
     const user = { email: loggEmail, password: loggPassword }

@@ -1,8 +1,8 @@
 import { Box, Typography } from "@mui/material";
 import MainImage from '../main-image.jpg';
+
+
 export default function Banner() {
-
-
   return (
     <Box
         component="img"

@@ -1,5 +1,4 @@
 import React from 'react';
-import {FC} from 'react'
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home'
@@ -8,13 +7,13 @@ import Banner from './components/Banner';
 import Navbar from './components/Navbar';
 import { createTheme, ThemeProvider } from '@mui/material';
 import ItemList from './components/ItemsList';
-import Footer from './components/Footer';
 import Register from './components/Register';
+import Footer from './components/Footer'
 import AddItem from './components/AddItem';
 import Profile from './components/Profile';
 import Login from './components/Login';
 import { useEffect, useState } from 'react';
-
+import { Item, User } from './Types/Types';
 
 const myURL = "http://localhost:3005/items"
 
@@ -37,9 +36,9 @@ const theme = createTheme({
 });
 
 function App() {
-  const [items, setItems] = useState([]);
-  const [filteredItems, setFilteredItems] = useState([])
-  const [user, setUser] = useState(null)
+  const [items, setItems] = useState<Item[]>([]);
+  const [filteredItems, setFilteredItems] = useState<Item[]>([])
+  const [user, setUser] = useState<null | User>(null)
   useEffect(() => {
 
     const getData = async () => {

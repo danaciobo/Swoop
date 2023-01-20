@@ -25,5 +25,5 @@ export interface ExpandProps {
     onClick: () => void,
     'aria-expanded':boolean,
     'aria-label':string,
-    children?: Element
+    children?: JSX.Element | JSX.Element
 }

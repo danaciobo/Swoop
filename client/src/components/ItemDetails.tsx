@@ -83,12 +83,21 @@
 //     </Container>
 //   )
 // }
+// import React from 'react'
+
+// function ItemDetails(Empty) {
+//   return (
+//     <div>ItemDetails(Empty)</div>
+//   )
+// }
+
+// export default ItemDetails(Empty)
 import React from 'react'
 
-function ItemDetails(Empty) {
+function ItemDetails({ id }: any) {
   return (
-    <div>ItemDetails(Empty)</div>
+    <div>ItemDetails</div>
   )
 }
 
-export default ItemDetails(Empty)
+export default ItemDetails
