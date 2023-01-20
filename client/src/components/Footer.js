@@ -8,7 +8,7 @@ export default function Footer () {
 
     <Typography sx={{paddingTop:5, backgroundColor: '#EBE6DD', width: '100%', textAlign: 'center'}}>
 
-        All &copy; copy rights are reserved to Dana Tech {fullYear}
+        All &copy; copy rights are reserved to The Band {fullYear}
     </Typography>
 
   );

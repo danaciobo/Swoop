@@ -1,37 +1,26 @@
-import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import Banner from "./components/Banner";
+import Navbar from "./components/Navbar";
+import { createTheme, ThemeProvider } from "@mui/material";
+import ItemList from "./components/ItemsList";
+import Footer from "./components/Footer";
+import Profile from "./components/Profile";
+import { useEffect, useState } from "react";
+import Payment from "./Payment";
+import Completion from "./Completion";
+import ItemDetails from "./components/ItemDetails";
 
-import Banner from './components/Banner';
-import Navbar from './components/Navbar';
-import { createTheme, ThemeProvider } from '@mui/material';
-import ItemList from './components/ItemsList';
-import Footer from './components/Footer';
-import Register from './components/Register';
-import AddItem from './components/AddItem';
-import Profile from './components/Profile';
-import { useEffect, useState } from 'react';
-import { DataProvider } from './context';
-import { Auth0Provider } from '@auth0/auth0-react';
-
-import Payment from './Payment';
-import Completion from './Completion';
-
-import ItemDetails from './components/ItemDetails';
-import Categories from './pages/Categories'
-
-
-
-const myURL = 'http://localhost:4001/items';
+const myURL = "http://localhost:4001/items";
 
 const theme = createTheme({
   typography: {
-    fontFamily: ['Source Sans Pro', 'Roboto'].join(','),
+    fontFamily: ["Source Sans Pro", "Roboto"].join(","),
   },
   palette: {
     primary: {
-      main: '#63171D',
-      secondary: '#E25F1C',
+      main: "#63171D",
+      secondary: "#E25F1C",
     },
   },
 });
@@ -42,8 +31,7 @@ function App() {
 
   const [user, setUser] = useState({});
 
-
-  const [currentItem, setCurrentItem] = useState({})
+  const [currentItem, setCurrentItem] = useState({});
   useEffect(() => {
     const getData = async () => {
       try {
@@ -65,11 +53,9 @@ function App() {
     getData();
   }, []);
 
-
   return (
     <>
       <ThemeProvider theme={theme}>
-        {/* <DataProvider> */}
         <Navbar
           setItems={setItems}
           items={items}
@@ -77,37 +63,45 @@ function App() {
           user={user}
           setUser={setUser}
         />
-        {/* <ItemList items={items} /> */}
+
         <Banner />
 
         <Routes>
+          <Route path="/" element={<Payment />} />
+          <Route path="/completion" element={<Completion />} />
+          <Route
+            path="/All"
+            element={
+              <ItemList
+                items={filteredItems}
+                currentItem={currentItem}
+                setCurrentItem={setCurrentItem}
+              />
+            }
+          />
 
- <Route path='/' element = {<Payment/>} /> 
-          <Route path='/completion' element = {<Completion/>} /> 
-
-          <Route path="/All" element={<ItemList items={filteredItems} currentItem={currentItem} setCurrentItem={setCurrentItem}/>} />
-          {/* <Route path="/All" element={<Categories items={filteredItems} currentItem={currentItem} setCurrentItem={setCurrentItem}/>} /> */}
-          {/* <Route path="/Accessories" element={<Categories items={filteredItems} currentItem={currentItem} setCurrentItem={setCurrentItem}/>} /> */}
-          <Route path="/Home" element={<Home/>} />
-          <Route path="/Profile" element={<Profile items={items} user={user} setCurrentItem={setCurrentItem}/>} />
-          {/* <Route path="/AddItem" element={<AddItem />} /> */}
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Register" element={<Register />} />
-          <Route path="/ItemDetails" element={<ItemDetails item={currentItem} setCurrentItem={setCurrentItem}/>} />
+          <Route
+            path="/Profile"
+            element={
+              <Profile
+                items={items}
+                user={user}
+                setCurrentItem={setCurrentItem}
+              />
+            }
+          />
+        
+         
+          <Route
+            path="/ItemDetails"
+            element={
+              <ItemDetails item={currentItem} setCurrentItem={setCurrentItem} />
+            }
+          />
         </Routes>
-
-
-      <Footer />
-      {/* </DataProvider> */}
-    </ThemeProvider>
-
-
-      <LoginButton />
-      <LogoutButton />
-
-
-
-
+        <Footer />
+      </ThemeProvider>
+     
     </>
   );
 }

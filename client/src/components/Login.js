@@ -1,20 +1,18 @@
-import Button from '@mui/material/Button';
-import { useAuth0 } from '@auth0/auth0-react';
-import React from 'react';
+import Button from "@mui/material/Button";
+import { useAuth0 } from "@auth0/auth0-react";
+import React from "react";
 
 const Login = () => {
+  const { loginWithRedirect, isAuthenticated, user } = useAuth0();
 
-  const { loginWithRedirect, isAuthenticated, user} = useAuth0();
-
-  console.log(user)
-
+  console.log(user);
 
   return (
     <>
       {!isAuthenticated && (
         <Button
-          variant='contained'
-          sx={{ display: { xs: 'none', md: 'block' } }}
+          variant="contained"
+          sx={{ display: { xs: "none", md: "block" } }}
           onClick={() => loginWithRedirect()}
         >
           Log In

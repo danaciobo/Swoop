@@ -1,11 +1,10 @@
 import { getItemById } from "../services"
-import { useState, useEffect } from 'react'
-import { Box, Card, CardActionArea, CardContent, CardHeader, CardMedia, List, ListItem, ListItemText, Typography } from "@mui/material";
-import { bgcolor, Container } from "@mui/system";
+import {  useEffect } from 'react'
+import { Box, List, ListItem, ListItemText, Typography } from "@mui/material";
+import {  Container } from "@mui/system";
 
 export default function ItemDetails({ id, item , setCurrentItem}) {
 
-  // const [item, setItem] = useState([]);
 
   useEffect(() => {
     getItemById(id)
@@ -36,7 +35,7 @@ borderColor: 'red'        }}
       }}>
 
         <img
-          src={`http://localhost:3005/${item.image}`}
+          src={item.image}
           alt={item.title}
           height='100%'
           width='100%'

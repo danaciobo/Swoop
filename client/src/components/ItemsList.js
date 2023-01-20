@@ -1,30 +1,38 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
-import { Box, Container, Grid, Paper } from '@mui/material';
-import ItemCard from './ItemCard';
+import React from "react";
+import { Container, Grid } from "@mui/material";
+import ItemCard from "./ItemCard";
 
-
-
-
-
-export default function ItemList({items, currentItem, setCurrentItem}) {
-  console.log(items)
+export default function ItemList({ items, setCurrentItem }) {
+  console.log(items);
 
   return (
-    <Container maxWidth={false} sx={{ justifyContent: 'space-between', width: '100%', paddingTop: '40px', background: '#EBE6DD' }}>
-      <Grid container
+    <Container
+      maxWidth={false}
+      sx={{
+        justifyContent: "space-between",
+        width: "100%",
+        paddingTop: "40px",
+        background: "#EBE6DD",
+      }}
+    >
+      <Grid
+        container
         direction="row"
         alignItems="stretch"
         spacing={{ xs: 3, md: 4 }}
       >
-        {items? items.sort((a, b) => new Date(b.date_added) - new Date(a.date_added)).map((item, index) =>
-        (
-          <Grid item key={item._id} >
-            <ItemCard item={item} setCurrentItem={setCurrentItem}/>
-          </Grid>)) : <p>Loading..</p>
-        }
+        {items ? (
+          items
+            .sort((a, b) => new Date(b.date_added) - new Date(a.date_added))
+            .map((item) => (
+              <Grid item key={item._id}>
+                <ItemCard item={item} setCurrentItem={setCurrentItem} />
+              </Grid>
+            ))
+        ) : (
+          <p>Loading..</p>
+        )}
       </Grid>
     </Container>
   );
 }
-
