@@ -85,8 +85,8 @@ export default function Login({ setUser }) {
               value={loggPassword}
               onChange={(e) => setLoggPassword(e.target.value)}
             />
-            <Link href="/Profile" >
-              <Button
+            {/* <Link href="/Profile" > */}
+              <Button href="/Profile"
                 sx={{ width: '16em', height: '3em' }}
                 variant="contained"
                 color="primary"
@@ -96,7 +96,7 @@ export default function Login({ setUser }) {
                 Login
               </Button>
 
-            </Link>
+            {/* </Link> */}
 
             <Link href="/Register" variant="body2" sx={{ padding: 3 }}>
               Don't have an account yet? Register here

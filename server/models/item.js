@@ -3,23 +3,23 @@ const mongoose = require('../db.js');
 const itemSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true,
+        required: false,
         minlength: 3,
         maxlength: 25,
     },
     description: {
         type: String,
-        required: true,
+        required: false,
         minlength: 10,
         maxlength: 500,
     },
     category:{
         type: String,
-        required: true
+        required: false
     },
     price: {
         type: Number,
-        required: true
+        required: false
     },
     quantity: {
       type: Number,
@@ -27,11 +27,11 @@ const itemSchema = new mongoose.Schema({
     },
     location: {
       type: String,
-      required: true,
+      required: false,
     },
     image: {
       type: String,
-      required: true,
+      required: false,
     },
     date_added: {
         type: Date,
