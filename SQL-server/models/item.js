@@ -28,7 +28,7 @@ const Item = sequelize.define("Item", {
     },
     image: {
         type: DataTypes.STRING,
-        allowNull : false,
+        allowNull : true,
     },
     date_added: {
         type: DataTypes.DATE,

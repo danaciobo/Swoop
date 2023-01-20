@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const userCtrl = require('./controllers/UserControl');
+const itemCtrl =  require('./controllers/ItemController')
 // const itemController = require('./controllers/itemController');
 // // const authController = require('./controllers/authController');
 // const orderController = require('./controllers/orderController')
@@ -10,6 +11,10 @@ const userCtrl = require('./controllers/UserControl');
 router.post('/users', userCtrl.createProfile);
 router.put('/users', /*authMiddleware.decodeToken,*/ userCtrl.getUserByEmail)
 
+router.post('/items', itemCtrl.createItem)
+router.get('/items',itemCtrl.getItems )
+router.delete('/items' , itemCtrl.deleteItem)
+router.put('/items', itemCtrl.updateItem )
 // router.get('/items', itemController.getItems);
 // router.get('items/:category', itemController.getByCategory);
 // router.get('/items/:id', itemController.getItemById);
