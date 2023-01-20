@@ -1,6 +1,7 @@
 import { getUserById } from "../services"
 import { useState, useEffect } from 'react'
 import Box from '@mui/material/Box';
+import { Routes, Route, Link as RouterLink} from 'react-router-dom';
 import { Avatar, Card, CardActionArea, CardContent, CardHeader, CardMedia, Container, Grid, Typography } from "@mui/material";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -8,9 +9,11 @@ import ListItemText from '@mui/material/ListItemText';
 
 
 
-export default function Profile({items, user}) {
+
+export default function Profile({items, user, setCurrentItem}) {
 
   // const [user,setUser] = useState('')
+  console.log(user)
 
   // useEffect(() => {
   //   getUserById('63c726deeed0a1cc3069691a')
@@ -89,16 +92,20 @@ export default function Profile({items, user}) {
             >
               {items ? items.slice(0,5).map((item, index) =>
               (
-                <Grid item key={item._id} >
+
+                <RouterLink to="/ItemDetails">
+                <Grid item key={item._id} onClick={() => setCurrentItem(item)}>
                   <Card sx={{ width: 100, height: 120 }}>
                     <CardActionArea>
                       <CardContent sx={{ padding: 0 }}>
+                      {/* <Link component={RouterLink} to="/ItemDetails"> */}
                         <img
-                          src={`http://localhost:3005/${item.image}`}
+                          src={`http://localhost:3007/${item.image}`}
                           height="70px"
                           width="100%"
                           alt={item.title}
                         />
+                        {/* </Link> */}
                       </CardContent>
                     </CardActionArea>
                     <CardHeader
@@ -112,7 +119,8 @@ export default function Profile({items, user}) {
                       subheader={item.title}
                     />
                   </Card>
-                </Grid>)) : <p>No items for sale yet..</p>
+                </Grid>
+                </RouterLink>)) : <p>No items for sale yet..</p>
               }
             </Grid>
             </Box>

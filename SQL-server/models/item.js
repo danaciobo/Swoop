@@ -36,7 +36,7 @@ const Item = sequelize.define("Item", {
     },
     seller:{
         type: DataTypes.STRING,
-        allowNull : false
+        allowNull : true
     },
     sold: {
       type: DataTypes.BOOLEAN,

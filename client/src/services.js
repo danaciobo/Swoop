@@ -1,5 +1,5 @@
 
-const baseURL = "http://localhost:3005"
+const baseURL = "http://localhost:4001"
 
 // export const getData = async () => {
 //   try {
@@ -24,8 +24,8 @@ export const addItem = async (data) => {
   try {
     const response = await fetch(`${baseURL}/items`,{
       method: 'POST',
-      // headers: { 'Content-Type': 'multipart/form-data' },
-      body: data
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
     })
     return response.json();
   }
