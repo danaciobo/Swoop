@@ -12,7 +12,7 @@ import ItemDetails from './ItemDetails(Empty)';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import moment from 'moment'
 import React from 'react'
-import { ExpandProps } from '../Types/Types';
+import { ExpandProps, Item } from '../Types/Types';
 
 
 // make this something other than any
