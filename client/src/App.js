@@ -1,12 +1,7 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-} from 'firebase/auth';
+
 import Banner from './components/Banner';
 import Navbar from './components/Navbar';
 import { createTheme, ThemeProvider } from '@mui/material';
@@ -20,8 +15,6 @@ import { useEffect, useState } from 'react';
 import { DataProvider } from './context';
 import { Auth0Provider } from '@auth0/auth0-react';
 
-import LoginButton from './login';
-import LogoutButton from './logout';
 
 const myURL = 'http://localhost:3005/items';
 
@@ -42,7 +35,6 @@ function App() {
   const [filteredItems, setFilteredItems] = useState([]);
 
   const [user, setUser] = useState({});
-
 
   useEffect(() => {
     const getData = async () => {
@@ -66,69 +58,9 @@ function App() {
     getData();
   }, []);
 
-  //   const auth = getAuth();
-  // createUserWithEmailAndPassword(auth, email, password)
-  //   .then((userCredential) => {
-  //     // Signed in
-  //     const user = userCredential.user;
-  //     // ...
-  //   })
-  //   .catch((error) => {
-  //     const errorCode = error.code;
-  //     const errorMessage = error.message;
-  //     // ..
-  //   });
 
-  // signInWithEmailAndPassword(auth, email, password)
-  //   .then((userCredential) => {
-  // Signed in
-  //   const user = userCredential.user;
-  //   // ...
-  // })
-  // .catch((error) => {
-  //   const errorCode = error.code;
-  //   const errorMessage = error.message;
-  // });
-
-  // const auth = getAuth();
-  // onAuthStateChanged(auth, (user) => {
-  //   if (user) {
-  //     // User is signed in, see docs for a list of available properties
-  //     // https://firebase.google.com/docs/reference/js/firebase.User
-  //     const uid = user.uid;
-  //     // ...
-  //   } else {
-  //     // User is signed out
-  //     // ...
-  //   }
-  // });
   return (
-<>
-    <ThemeProvider theme={theme}>
-      {/* <DataProvider> */}
-      <Navbar setItems={setItems} items={items} setFilteredItems={setFilteredItems} user={user} setUser={setUser}/>
-      {/* <ItemList items={items} /> */}
-      <Banner />
-
-
-        <Routes>
-          <Route path="/" element={<ItemList items={filteredItems}/>} />
-          <Route path="/Home" element={<Home/>} />
-          <Route path="/Profile" element={<Profile items={items} user={user} />} />
-          {/* <Route path="/AddItem" element={<AddItem />} /> */}
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Register" element={<Register />} />
-        </Routes>
-
-
-      <Footer />
-      {/* </DataProvider> */}
-    </ThemeProvider>
-
-    
-      <LoginButton />
-      <LogoutButton />
-
+    <>
       <ThemeProvider theme={theme}>
         {/* <DataProvider> */}
         <Navbar
@@ -140,23 +72,23 @@ function App() {
         />
         {/* <ItemList items={items} /> */}
         <Banner />
-        
-          <Routes>
-            <Route path='/' element={<ItemList items={filteredItems} />} />
-            <Route
-              path='/Profile'
-              element={<Profile items={items} user={user} />}
-            />
-            {/* <Route path="/AddItem" element={<AddItem />} /> */}
-            <Route path='/Login' element={<Login />} />
-            <Route path='/Register' element={<Register />} />
-          </Routes>
-      
+
+        <Routes>
+          <Route path='/' element={<ItemList items={filteredItems} />} />
+          <Route path='/Home' element={<Home />} />
+          <Route
+            path='/Profile'
+            element={<Profile items={items} user={user} />}
+          />
+          {/* <Route path="/AddItem" element={<AddItem />} /> */}
+          <Route path='/Login' element={<Login />} />
+          <Route path='/Register' element={<Register />} />
+        </Routes>
+
         <Footer />
         {/* </DataProvider> */}
       </ThemeProvider>
     </>
-
   );
 }
 
