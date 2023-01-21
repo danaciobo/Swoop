@@ -1,26 +1,26 @@
-import "./App.css";
-import { Route, Routes } from "react-router-dom";
-import Banner from "./components/Banner";
-import Navbar from "./components/Navbar";
-import { createTheme, ThemeProvider } from "@mui/material";
-import ItemList from "./components/ItemsList";
-import Footer from "./components/Footer";
-import Profile from "./components/Profile";
-import { useEffect, useState } from "react";
-import Payment from "./Payment";
-import Completion from "./Completion";
-import ItemDetails from "./components/ItemDetails";
+import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import Banner from './components/Banner';
+import Navbar from './components/Navbar';
+import { createTheme, ThemeProvider } from '@mui/material';
+import ItemList from './components/ItemsList';
+import Footer from './components/Footer';
+import Profile from './components/Profile';
+import { useEffect, useState } from 'react';
+import Payment from './Payment';
+import Completion from './Completion';
+import ItemDetails from './components/ItemDetails';
 
-const myURL = "http://localhost:4001/items";
+const myURL = 'http://localhost:4001/items';
 
 const theme = createTheme({
   typography: {
-    fontFamily: ["Source Sans Pro", "Roboto"].join(","),
+    fontFamily: ['Source Sans Pro', 'Roboto'].join(','),
   },
   palette: {
     primary: {
-      main: "#63171D",
-      secondary: "#E25F1C",
+      main: '#63171D',
+      secondary: '#E25F1C',
     },
   },
 });
@@ -67,10 +67,10 @@ function App() {
         <Banner />
 
         <Routes>
-          <Route path="/" element={<Payment />} />
-          <Route path="/completion" element={<Completion />} />
+          <Route path='/' element={<Payment />} />
+          <Route path='/completion' element={<Completion />} />
           <Route
-            path="/All"
+            path='/All'
             element={
               <ItemList
                 items={filteredItems}
@@ -81,7 +81,7 @@ function App() {
           />
 
           <Route
-            path="/Profile"
+            path='/Profile'
             element={
               <Profile
                 items={items}
@@ -90,10 +90,9 @@ function App() {
               />
             }
           />
-        
-         
+
           <Route
-            path="/ItemDetails"
+            path='/ItemDetails'
             element={
               <ItemDetails item={currentItem} setCurrentItem={setCurrentItem} />
             }
@@ -101,7 +100,6 @@ function App() {
         </Routes>
         <Footer />
       </ThemeProvider>
-     
     </>
   );
 }
