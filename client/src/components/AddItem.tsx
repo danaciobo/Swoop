@@ -79,7 +79,7 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
       <Button id="sellNow" variant="contained" startIcon={<AddIcon />} sx={{ display: { xs: 'none', md: 'flex', background: '#E25F1C' } }} onClick={handleClickOpen}>
         Sell Now
       </Button>
-      <Dialog open={open} onClose={handleClose} >
+      <Dialog open={open} onClose={handleClose} data-testid='closebutton' >
         <DialogActions>
           <IconButton sx={{ padding: 0 }} onClick={handleClose} >
             <CloseIcon sx={{ fontSize: '1.3em' }} />
@@ -106,6 +106,7 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
               variant="outlined"
               required
               data-testid="Title-1"
+              inputProps={{ "data-testid": "title-input" }}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -116,6 +117,7 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
               label="Description"
               variant="standard"
               data-testid="Description-1"
+              inputProps={{ "data-testid": "desc-input" }}
               required
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -127,6 +129,7 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
                 value={category}
                 label="Category"
                 data-testid="Category-1"
+                inputProps={{ "data-testid": "cat-input" }}
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <MenuItem value={'clothes'}>Clothes</MenuItem>
@@ -144,6 +147,7 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
                 variant="outlined"
                 required
                 data-testid="Price-1"
+                inputProps={{ "data-testid": "price-input" }}
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
               />
@@ -154,6 +158,7 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
                 variant="outlined"
                 required
                 data-testid="Quantity-1"
+                inputProps={{ "data-testid": "quant-input" }}
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
               />
@@ -164,6 +169,7 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
                 variant="outlined"
                 required
                 data-testid="Location-1"
+                inputProps={{ "data-testid": "location-input" }}
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
               />
