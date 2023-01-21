@@ -15,11 +15,14 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 
+
 export default function Profile({ items, user, setCurrentItem }) {
+  
+
   return (
     <Container>
       <Typography variant="h4" mt={4}>
-        Welcome {user.firstName}
+        Welcome 
       </Typography>
       <Box
         sx={{
@@ -68,7 +71,7 @@ export default function Profile({ items, user, setCurrentItem }) {
                 component="div"
                 align="center"
               >
-                {user.firstName + " " + user.lastName}
+                {user.name}
               </Typography>
               <List sx={{ width: "100%", maxWidth: 360, marginTop: 1 }}>
                 <ListItem>
