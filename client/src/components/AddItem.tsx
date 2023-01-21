@@ -76,7 +76,7 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
 
   return (
     <div>
-      <Button variant="contained" startIcon={<AddIcon />} sx={{ display: { xs: 'none', md: 'flex', background: '#E25F1C' } }} onClick={handleClickOpen}>
+      <Button id="sellNow" variant="contained" startIcon={<AddIcon />} sx={{ display: { xs: 'none', md: 'flex', background: '#E25F1C' } }} onClick={handleClickOpen}>
         Sell Now
       </Button>
       <Dialog open={open} onClose={handleClose} >
@@ -88,6 +88,7 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
         <DialogTitle sx={{ textAlign: 'center', padding: 0 }}>Add new item for sale</DialogTitle>
         <DialogContent>
           <form
+          id="sellForm"
             onSubmit={handleSubmit}
             style={{
               display: "flex",
@@ -104,6 +105,7 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
               type="text"
               variant="outlined"
               required
+              data-testid="Title-1"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -113,6 +115,7 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
               rows={5}
               label="Description"
               variant="standard"
+              data-testid="Description-1"
               required
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -123,6 +126,7 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
                 labelId="cat-select-label"
                 value={category}
                 label="Category"
+                data-testid="Category-1"
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <MenuItem value={'clothes'}>Clothes</MenuItem>
@@ -139,6 +143,7 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
                 label="Price"
                 variant="outlined"
                 required
+                data-testid="Price-1"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
               />
@@ -148,6 +153,7 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
                 label="Quantity"
                 variant="outlined"
                 required
+                data-testid="Quantity-1"
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
               />
@@ -157,6 +163,7 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
                 label="Location"
                 variant="outlined"
                 required
+                data-testid="Location-1"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
               />
@@ -168,6 +175,7 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
                 id="contained-button-file"
                 // value={image}
                 multiple
+                data-testid="Image-1"
                 type="file"
                 onChange={(e) => setImage(e.target.files === null ? "" : e.target.files[0])}
               />
@@ -187,6 +195,7 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
               variant="contained"
               color="primary"
               type="submit"
+              data-testid="Add Item-1"
             >
               Add item
             </Button>

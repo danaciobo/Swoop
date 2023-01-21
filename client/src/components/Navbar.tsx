@@ -118,14 +118,13 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, use
             component='div'
             sx={{ mr: 2, display: 'flex' }}
           >
-            <img src={Logo} width='150' height='45' max-width='100%' alt='swoop logo' />
+            <img  data-testid= 'swooplogo' src={Logo} width='150' height='45' max-width='100%' alt='swoop logo' />
           </Typography>
 
-          <Search sx={{ background: '#EBE6DD', flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Search  data-testid= 'searchbar' sx={{ background: '#EBE6DD', flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
-
               onChange={handleChange}
             />
             <SearchIconWrapper>
@@ -134,8 +133,9 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, use
 
           </Search>
           <Stack direction="row" spacing={2} >
-            <AddItem setItems={setItems} setFilteredItems={setFilteredItems} items={items}/>
-            <Login setUser={setUser} />
+            {/* help request about this cause we are confused */}
+            <AddItem  setItems={setItems} setFilteredItems={setFilteredItems} items={items}/>
+            <Login data-testid= 'hello' setUser={setUser} />
           </Stack>
         </Toolbar>
 
@@ -207,3 +207,5 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, use
   )
 
 }
+
+  

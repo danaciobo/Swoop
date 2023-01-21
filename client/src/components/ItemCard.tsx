@@ -11,9 +11,8 @@ import { useState } from 'react';
 import ItemDetails from './ItemDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import moment from 'moment'
-import {Item} from '../Types/Types'
 // import React from 'react'
-import { ExpandProps } from '../Types/Types';
+import { Item, ExpandProps } from '../Types/Types';
 
 
 // make this something other than any
@@ -49,7 +48,7 @@ export default function ItemCard({ item }: {item: Item}) {
   }
 
   return (
-    <Card sx={{ width: 250, height: 'auto'}}>
+    <Card sx={{ width: 250, height: 'auto'}} >
       <CardActionArea onClick={() => handleClick(item)}>
         <CardContent sx={{ padding: 0 }}>
           <img
@@ -61,6 +60,7 @@ export default function ItemCard({ item }: {item: Item}) {
         </CardContent>
       </CardActionArea>
       <CardHeader
+        data-testid= 'CardTitle'
         title={'£' + item.price}
         subheader={item.title}
         action={<Button variant='contained' sx={{background: '#E25F1C'}}>
@@ -74,6 +74,7 @@ export default function ItemCard({ item }: {item: Item}) {
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
+          data-testid ='ExpandButton'
         >
           <ExpandMoreIcon/>
         </ExpandMore>
@@ -81,7 +82,7 @@ export default function ItemCard({ item }: {item: Item}) {
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-        <Typography paragraph>
+        <Typography data-testid="seller" paragraph>
             Seller: {item.seller ? item.seller.firstName + ' ' + item.seller.lastName[0] : 'Dana C'}
           </Typography>
           <Typography paragraph>
@@ -90,7 +91,7 @@ export default function ItemCard({ item }: {item: Item}) {
           <Typography paragraph>
             Category: {item.category}
           </Typography>
-          <Typography paragraph>
+          <Typography paragraph data-testid="CardDesc">
             Description: {item.description}
           </Typography>
           <Typography paragraph>
