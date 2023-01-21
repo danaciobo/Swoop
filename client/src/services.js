@@ -35,6 +35,21 @@ export const addItem = async (data) => {
 }
 }
 
+export const  deleteItem = async (itemId) => {
+  try {
+    const response = await fetch(`${baseURL}/items`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({itemId})
+    })
+    return response.json();
+  } catch (err) {
+    console.log(err)
+    return false
+  }
+}
 export const registerUser = async (userInfo) => {
   try {
     const response = await fetch(`${baseURL}/register`, {
@@ -90,3 +105,4 @@ export const getItemByCategory = async (category) => {
     return false
   }
 }
+

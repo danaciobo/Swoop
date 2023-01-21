@@ -12,7 +12,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import Logo from "../Swoop.jpg";
 import { Menu, MenuItem, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
-
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AddItem from "./AddItem";
 import Login from "./Login";
 import Logout from "./Logout";
@@ -26,6 +26,7 @@ const pages = [
   "Electronics",
   "Hobbies",
   "Freebies",
+  "Profile"
 ];
 
 const Search = styled("div")(({ theme }) => ({
@@ -73,7 +74,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Navbar({ setItems, setFilteredItems, items}) {
+export default function Navbar({setUser, setItems, setFilteredItems, items}) {
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (e) => {
@@ -152,13 +153,15 @@ export default function Navbar({ setItems, setFilteredItems, items}) {
               <SearchIcon />
             </SearchIconWrapper>
           </Search>
+          <ShoppingCartIcon />
+          
           <Stack direction="row" spacing={2}>
             <AddItem
               setItems={setItems}
               setFilteredItems={setFilteredItems}
               items={items}
             />
-            <Login />
+            <Login setUser = {setUser}/>
             <Logout />
           </Stack>
         </Toolbar>
@@ -197,7 +200,7 @@ export default function Navbar({ setItems, setFilteredItems, items}) {
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
                     <Link
-                      style={{ textDecoration: "none", color: "white" }}
+                      style={{ textDecoration: "none", color: "white"  }}
                       to={`/${page}`}
                     >
                       {page}
@@ -228,6 +231,7 @@ export default function Navbar({ setItems, setFilteredItems, items}) {
               display: { xs: "none", md: "flex", justifyContent: "center" },
             }}
           >
+
             {pages.map((page) => (
               <Button
                 key={page}

@@ -10,6 +10,8 @@ const itemCtrl =  require('./controllers/ItemController')
 
 router.post('/users', userCtrl.createProfile);
 router.put('/users', /*authMiddleware.decodeToken,*/ userCtrl.getUserByEmail)
+router.get('/users' , userCtrl.getUsers )
+router.put('/user-update', userCtrl.updateUser)
 
 router.post('/items', itemCtrl.createItem)
 router.get('/items',itemCtrl.getItems )

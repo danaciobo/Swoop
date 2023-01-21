@@ -2,11 +2,10 @@ import Button from "@mui/material/Button";
 import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 
-const Login = () => {
+const Login = (props) => {
   const { loginWithRedirect, isAuthenticated, user } = useAuth0();
 
-  console.log(user);
-
+props.setUser(user)
   return (
     <>
       {!isAuthenticated && (

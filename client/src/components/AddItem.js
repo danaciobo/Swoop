@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -14,8 +14,10 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
-
+import user from './Login'
+import WebcamCapture from "./WebcamCapture";
 export default function AddItem({ setItems, setFilteredItems, items }) {
+  const [cameraPopup, setCameraPopup] = useState(false)
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -31,6 +33,13 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
     const file = e;
     previewFile(file);
   };
+
+  const openCamera = ()=>{
+    setCameraPopup(true)
+  }
+  useEffect(()=>{
+    setPreviewSource('')
+  },[])
   const previewFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -60,12 +69,13 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
     formData.append("quantity", quantity);
     formData.append("location", location);
     console.log(formData)
-    postItem({title, description, category, price, quantity, location, image});
+    postItem({title, description, category, price, quantity, location, image , seller :user.name});
 
 
     e.target.reset();
     handleClose();
   };
+  console.log(user)
   const itemsList = items;
   const postItem = async (data) => {
     try {
@@ -196,7 +206,8 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
                 aria-label="upload picture"
                 component="label"
               >
-                <PhotoCamera />
+                <PhotoCamera onClick = {openCamera}/>
+                
               </IconButton>
             </label>
 
@@ -209,6 +220,7 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
               Add item
             </Button>
           </form>
+          {cameraPopup && <WebcamCapture setPreviewSource={setPreviewSource} setImage = {setImage} setCameraPopup={setCameraPopup}/>}
           {previewSource && (
             <img src={previewSource} alt="chosen" style={{ height: "200px" }} />
           )}
