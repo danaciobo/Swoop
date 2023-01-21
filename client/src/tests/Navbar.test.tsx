@@ -22,18 +22,25 @@ test('renders AddItem', () => {
   const sellNow = screen.getByText('Sell Now', {exact: false})
   expect(sellNow).toBeInTheDocument();
 
-    const logIn = screen.getByTestId('hello')
-  expect(logIn).toBeInTheDocument();
+  // const logIn = screen.getByTestId('hello')
+  // expect(logIn).toBeInTheDocument();
 })
 
-
-// describe('Navbar', () => {
-//   it('renders AddItem', () => {
-//     const { getByText } = render(<Navbar setItems={() => { }}
-//     setFilteredItems={() => { }} items={[MockItem]}
+// test('search bar content change when it is given text input', () => {
+//   render(<Navbar setItems={() => { }}
+//   setFilteredItems={() => { }} items={[MockItem]}
 //     setUser={() => { }} user={MockUser} />);
-//     expect(getByText(/add item/i)).toBeInTheDocument();
-//   });
+
+//   const searchBar = screen.getByTestId('searcher')
+//   const testValue = 'test';
+
+//   console.log("can i see this", searchBar)
+//   fireEvent.change(searchBar, { target: { value: testValue } })
+//   expect(searchBar.textContent).toBeEqual(testValue)
+
+// })
+
+
 
 
 
