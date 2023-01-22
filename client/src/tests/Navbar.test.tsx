@@ -4,7 +4,6 @@ import Navbar from '../components/Navbar';
 import { MockItem, MockUser } from './mockFetch';
 
 
-// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 test('display first layer navbar correctly', () => {
   render(<Navbar setItems={() => { }}
     setFilteredItems={() => { }} items={[MockItem]}
@@ -14,7 +13,7 @@ test('display first layer navbar correctly', () => {
   expect(screen.getByTestId('searchbar')).toBeInTheDocument()
 })
 
-test('renders AddItem', () => {
+test('renders sell now button', () => {
    render(<Navbar setItems={() => { }}
    setFilteredItems={() => { }} items={[MockItem]}
    setUser={() => { }} user={MockUser} />);
@@ -22,23 +21,17 @@ test('renders AddItem', () => {
   const sellNow = screen.getByText('Sell Now', {exact: false})
   expect(sellNow).toBeInTheDocument();
 
-  // const logIn = screen.getByTestId('hello')
-  // expect(logIn).toBeInTheDocument();
 })
 
-// test('search bar content change when it is given text input', () => {
-//   render(<Navbar setItems={() => { }}
-//   setFilteredItems={() => { }} items={[MockItem]}
-//     setUser={() => { }} user={MockUser} />);
+test('renders login button', () => {
+   render(<Navbar setItems={() => { }}
+   setFilteredItems={() => { }} items={[MockItem]}
+   setUser={() => { }} user={MockUser} />);
+//we need to have another look at this
+  const login = screen.getAllByText('Log In/ Register', {exact: false})
+  expect(login[0]).toBeInTheDocument()
 
-//   const searchBar = screen.getByTestId('searcher')
-//   const testValue = 'test';
-
-//   console.log("can i see this", searchBar)
-//   fireEvent.change(searchBar, { target: { value: testValue } })
-//   expect(searchBar.textContent).toBeEqual(testValue)
-
-// })
+})
 
 
 

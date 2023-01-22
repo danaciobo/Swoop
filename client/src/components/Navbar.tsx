@@ -135,8 +135,8 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, use
           </Search>
           <Stack direction="row" spacing={2} >
             {/* help request about this cause we are confused */}
-            <AddItem  setItems={setItems} setFilteredItems={setFilteredItems} items={items}/>
-            <Login data-testid= 'hello' setUser={setUser} />
+            <AddItem data-testid="addItemComp" setItems={setItems} setFilteredItems={setFilteredItems} items={items}/>
+            <Login data-testid = 'login' setUser={setUser} />
           </Stack>
         </Toolbar>
 
