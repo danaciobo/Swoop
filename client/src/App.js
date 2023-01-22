@@ -1,7 +1,6 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import Banner from './components/Banner';
 import Navbar from './components/Navbar';
 import { createTheme, ThemeProvider } from '@mui/material';
@@ -13,8 +12,9 @@ import Profile from './components/Profile';
 import Login from './components/Login';
 import { useEffect, useState } from 'react';
 import { DataProvider } from './context';
+const { REACT_APP_BACKEND_HOST} = process.env;
 
-const myURL = "http://localhost:3005/items"
+const myURL = `${REACT_APP_BACKEND_HOST}/items`
 
 const theme = createTheme({
   typography: {
@@ -40,6 +40,7 @@ function App() {
     const getData = async () => {
       try {
         const response = await fetch(myURL);
+        console.log(myURL)
         if (!response.ok) {
           throw new Error(
             `This is an HTTP error: The status is ${response.status}`
@@ -59,43 +60,6 @@ function App() {
     getData()
   }, []);
 
-
-  //   const auth = getAuth();
-  // createUserWithEmailAndPassword(auth, email, password)
-  //   .then((userCredential) => {
-  //     // Signed in
-  //     const user = userCredential.user;
-  //     // ...
-  //   })
-  //   .catch((error) => {
-  //     const errorCode = error.code;
-  //     const errorMessage = error.message;
-  //     // ..
-  //   });
-
-  // signInWithEmailAndPassword(auth, email, password)
-  //   .then((userCredential) => {
-  // Signed in
-  //   const user = userCredential.user;
-  //   // ...
-  // })
-  // .catch((error) => {
-  //   const errorCode = error.code;
-  //   const errorMessage = error.message;
-  // });
-
-  // const auth = getAuth();
-  // onAuthStateChanged(auth, (user) => {
-  //   if (user) {
-  //     // User is signed in, see docs for a list of available properties
-  //     // https://firebase.google.com/docs/reference/js/firebase.User
-  //     const uid = user.uid;
-  //     // ...
-  //   } else {
-  //     // User is signed out
-  //     // ...
-  //   }
-  // });
   return (
     <ThemeProvider theme={theme}>
       {/* <DataProvider> */}

@@ -1,14 +1,10 @@
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { Avatar, Button, CardActionArea, CardActions, Collapse, IconButton, styled } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+import { Button, CardActionArea, CardActions, Collapse, IconButton, styled } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useState } from 'react';
-import ItemDetails from './ItemDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import moment from 'moment'
 
@@ -39,10 +35,10 @@ export default function ItemCard({ item }) {
     setItemClicked(e)
 
   }
-  if (itemClicked) {
-    console.log(itemClicked._id)
-    return <ItemDetails id={itemClicked._id} onBack={() => setItemClicked(null)} />
-}
+  // if (itemClicked) {
+  //   console.log(itemClicked._id)
+  //   return <ItemDetails id={itemClicked._id} onBack={() => setItemClicked(null)} />
+// }
 
   return (
     <Card sx={{ width: 250, height: 'auto'}}>

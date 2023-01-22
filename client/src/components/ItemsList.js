@@ -1,6 +1,5 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
-import { Box, Container, Grid, Paper } from '@mui/material';
+import { Container, Grid} from '@mui/material';
 import ItemCard from './ItemCard';
 
 

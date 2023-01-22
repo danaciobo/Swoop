@@ -1,10 +1,13 @@
+const dotenv = require ('dotenv');
+dotenv.config();
+const { PORT, REACT_APP_HOST} = process.env;
+
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const { PORT } = require('./config/config');
 const router = require('./router');
 const middleware = require ('./middleware/auth')
-const corsSettings = {origin: 'http://localhost:3000', credentials: true}
+const corsSettings = {origin: REACT_APP_HOST, credentials: true}
 app.use(cors(corsSettings));
 app.use('/uploads', express.static('uploads'))
 app.use(express.json());

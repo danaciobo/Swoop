@@ -84,7 +84,6 @@ export default function Profile({items}) {
               direction="row"
               justifyContent="space-around"
               alignItems="stretch"
-              // columns={{ xs: 4, sm: 8, md: 12 }}
               spacing='5'
             >
               {items ? items.slice(0,5).map((item, index) =>
@@ -124,7 +123,6 @@ export default function Profile({items}) {
               direction="row"
               justifyContent="space-around"
               alignItems="stretch"
-              // columns={{ xs: 4, sm: 8, md: 12 }}
               spacing='5'
             >
               {items.length >100 ? items.slice(0,5).map((item, index) =>

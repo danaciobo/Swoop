@@ -9,12 +9,11 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import Logo from '../Swoop.jpg';
+import Logo from '../images/Swoop.jpg';
 import { Link, Menu, MenuItem, Stack } from '@mui/material';
 
 import AddItem from './AddItem';
 import Login from './Login';
-import { grey } from '@mui/material/colors';
 
 const pages = ['All', 'Clothes', 'Accessories', 'Home', 'Electronics', 'Hobbies', 'Freebies'];
 

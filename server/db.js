@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
-const DB_NAME = 'swoopDB2'
-const DB_PORT = '27017'
+const {DB_NAME, DB_PORT} = process.env;
 
 mongoose.connect(
   `mongodb://localhost:${DB_PORT}/${DB_NAME}`,

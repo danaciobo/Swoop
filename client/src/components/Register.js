@@ -4,7 +4,6 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { IconButton, Link } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
@@ -45,12 +44,7 @@ export default function Register() {
 
   return (
     <div>
-      {/* <Button variant="contained" sx={{ display: { xs: 'none', md: 'block' } }} onClick={handleClickOpen}>
-        Log in/ Register
-      </Button>
-      <Button variant="contained" size='small' sx={{ display: { xs: 'block', md: 'none' } }} onClick={handleClickOpen}>
-        Log in/ Register
-      </Button> */}
+
       <Dialog open={open} onClose={handleClose} >
         <DialogActions>
           <IconButton sx={{ padding: 0 }} onClick={handleClose} >
