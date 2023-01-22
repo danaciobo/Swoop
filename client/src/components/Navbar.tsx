@@ -124,6 +124,7 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, use
           <Search  data-testid= 'searchbar' sx={{ background: '#EBE6DD', flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <StyledInputBase
               placeholder="Search…"
+              data-testid= 'searcher'
               inputProps={{ 'aria-label': 'search' }}
               onChange={handleChange}
             />
@@ -208,4 +209,3 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, use
 
 }
 
-  
