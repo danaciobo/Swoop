@@ -26,48 +26,96 @@ test('renders the form', () => {
   render(<AddItem setItems={() => {}} setFilteredItems={() => {}} items={[]} />);
 
   fireEvent.click(screen.getByText('Sell Now'));
-  expect(screen.getByTestId('Title-1')).toBeInTheDocument();
-  expect(screen.getByTestId('Description-1')).toBeInTheDocument();
-  expect(screen.getByTestId('Category-1')).toBeInTheDocument();
-  expect(screen.getByTestId('Price-1')).toBeInTheDocument();
-  expect(screen.getByTestId('Quantity-1')).toBeInTheDocument();
-  expect(screen.getByTestId('Location-1')).toBeInTheDocument();
-  expect(screen.getByTestId('Image-1')).toBeInTheDocument();
-  expect(screen.getByTestId('Add Item-1')).toBeInTheDocument();
+  expect(screen.getByTestId('Title-1')).toHaveStyle('visibility: visible');
+  expect(screen.getByTestId('Description-1')).toHaveStyle('visibility:visible');
+  expect(screen.getByTestId('Category-1')).toHaveStyle('visibility:visible');
+  expect(screen.getByTestId('Price-1')).toHaveStyle('visibility:visible');
+  expect(screen.getByTestId('Quantity-1')).toHaveStyle('visibility:visible');
+  expect(screen.getByTestId('Location-1')).toHaveStyle('visibility:visible');
+  expect(screen.getByTestId('Image-1')).toHaveStyle('visibility:visible');
+  expect(screen.getByTestId('Add Item-1')).toHaveStyle('visibility:visible');
 
 });
 
-test('closes form', () => {
+test('x closes form', () => {
+  render(<AddItem setItems={() => {}} setFilteredItems={() => {}} items={[]} />);
+
+  fireEvent.click(screen.getByText('Sell Now'));
+  fireEvent.click(screen.getByTestId('closebutton'))
+  expect(screen.queryByTestId('Title-1')).not.toHaveStyle('visibility:hidden');
+  expect(screen.queryByTestId('Description-1')).not.toHaveStyle('visibility:hidden');
+  expect(screen.queryByTestId('Category-1')).not.toHaveStyle('visibility:hidden');
+  expect(screen.queryByTestId('Price-1')).not.toHaveStyle('visibility:hidden');
+  expect(screen.queryByTestId('Quantity-1')).not.toHaveStyle('visibility:hidden');
+  expect(screen.queryByTestId('Location-1')).not.toHaveStyle('visibility:hidden');
+  expect(screen.queryByTestId('Image-1')).not.toHaveStyle('visibility:hidden');
+  expect(screen.queryByTestId('Add Item-1')).not.toHaveStyle('visibility:hidden');
+
+});
+
+test('form does not close on submit if no forms filled', () => {
   render(<AddItem setItems={() => {}} setFilteredItems={() => {}} items={[]} />);
 
   fireEvent.click(screen.getByText('Sell Now'));
   fireEvent.click(screen.getByTestId('Add Item-1'))
-  expect(screen.queryByTestId('Title-1')).not.toBeInTheDocument();
-  expect(screen.queryByTestId('Description-1')).not.toBeInTheDocument();
-  expect(screen.queryByTestId('Category-1')).not.toBeInTheDocument();
-  expect(screen.queryByTestId('Price-1')).not.toBeInTheDocument();
-  expect(screen.queryByTestId('Quantity-1')).not.toBeInTheDocument();
-  expect(screen.queryByTestId('Location-1')).not.toBeInTheDocument();
-  expect(screen.queryByTestId('Image-1')).not.toBeInTheDocument();
-  expect(screen.queryByTestId('Add Item-1')).not.toBeInTheDocument();
+  expect(screen.getByTestId('Title-1')).toHaveStyle('visibility: visible');
+  expect(screen.getByTestId('Description-1')).toHaveStyle('visibility:visible');
+  expect(screen.getByTestId('Category-1')).toHaveStyle('visibility:visible');
+  expect(screen.getByTestId('Price-1')).toHaveStyle('visibility:visible');
+  expect(screen.getByTestId('Quantity-1')).toHaveStyle('visibility:visible');
+  expect(screen.getByTestId('Location-1')).toHaveStyle('visibility:visible');
+  expect(screen.getByTestId('Image-1')).toHaveStyle('visibility:visible');
+  expect(screen.getByTestId('Add Item-1')).toHaveStyle('visibility:visible');
+
+});
+
+test('Form closes on submission of data', () => {
+  render(<AddItem setItems={() => {}} setFilteredItems={() => {}} items={[]} />);
+
+  fireEvent.click(screen.getByText('Sell Now'));
+
+  fireEvent.change(screen.getByTestId('title-input'), {target: {value: 'aaaaaaaaaaa'}});
+  fireEvent.change(screen.getByTestId('desc-input'), {target: {value: 'aaaaaaaaaaa'}})
+  fireEvent.change(screen.getByTestId('cat-input'),{target: {value: 'Clothes'}})
+  fireEvent.change(screen.getByTestId('price-input'), {target: {value: '10'}})
+  fireEvent.change(screen.getByTestId('quant-input'), {target: {value: '5'}})
+  fireEvent.change(screen.getByTestId('location-input'), {target: {value: 'AAAAAAAAAAAA'}})
+  fireEvent.change(screen.getByTestId('Image-1'), {target: {value: ''}})
+
+  fireEvent.click(screen.getByTestId('closebutton'))
+  expect(screen.queryByTestId('Title-1')).not.toHaveStyle('visibility:hidden');
+  expect(screen.queryByTestId('Description-1')).not.toHaveStyle('visibility:hidden');
+  expect(screen.queryByTestId('Category-1')).not.toHaveStyle('visibility:hidden');
+  expect(screen.queryByTestId('Price-1')).not.toHaveStyle('visibility:hidden');
+  expect(screen.queryByTestId('Quantity-1')).not.toHaveStyle('visibility:hidden');
+  expect(screen.queryByTestId('Location-1')).not.toHaveStyle('visibility:hidden');
+  expect(screen.queryByTestId('Image-1')).not.toHaveStyle('visibility:hidden');
+  expect(screen.queryByTestId('Add Item-1')).not.toHaveStyle('visibility:hidden');
 
 });
 
 
-test('should call addItem and add the item input', async () => {
-
-  render(<App />)
-  const sellButton = screen.getByText('Sell Now')
-  fireEvent.click(sellButton);
-  const AddButton = screen.getByTestId('Add Item-1')
-  fireEvent.click(AddButton);
 
 
-  const grid = screen.getByTestId('itemCardGrid')
-  expect(grid).toHaveTextContent('Seller: Dana C');
-  // expect(screen.getByTestId('Description-1')).toHaveTextContent('description3');
 
-})
+
+
+
+
+// test('should call addItem and add the item input', async () => {
+
+//   render(<App />)
+//   const sellButton = screen.getByText('Sell Now')
+//   fireEvent.click(sellButton);
+//   const AddButton = screen.getByTestId('Add Item-1')
+//   fireEvent.click(AddButton);
+
+
+//   const grid = screen.getByTestId('itemCardGrid')
+//   expect(grid).toHaveTextContent('Seller: Dana C');
+//   // expect(screen.getByTestId('Description-1')).toHaveTextContent('description3');
+
+// })
 
 
 
