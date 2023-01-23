@@ -35,6 +35,39 @@ export const addItem = async (data) => {
 }
 }
 
+export const updateItem = async (id, content) => {
+  try {
+    const response = await fetch(`${baseURL}/items`,{
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({itemId : id ,updates :content})
+    })
+    return response.json();
+  }
+   catch (err) {
+  console.log(err)
+  return false
+}
+}
+
+export const deleteItem = async (id) => {
+  try {
+    const response = await fetch(`${baseURL}/items`,{
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify()
+    })
+    return response.json();
+
+  }
+   catch (err) {
+  console.log(err)
+  return false
+}
+}
+
+
+
 export const registerUser = async (userInfo) => {
   try {
     const response = await fetch(`${baseURL}/register`, {

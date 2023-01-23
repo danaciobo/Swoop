@@ -1,7 +1,12 @@
-import { getItemById } from "../services"
+import { getItemById, deleteItem } from "../services"
 import {  useEffect } from 'react'
 import { Box, List, ListItem, ListItemText, Typography } from "@mui/material";
 import {  Container } from "@mui/system";
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import Stack from '@mui/material/Stack';
+import EditItem from "./EditItem";
 
 export default function ItemDetails({ id, item , setCurrentItem}) {
 
@@ -14,6 +19,19 @@ export default function ItemDetails({ id, item , setCurrentItem}) {
       })
       .catch(err => console.log(err))
   }, [])
+
+
+  const deleteThis = async () => {
+    try {
+      console.log(item.id)
+      await deleteItem(item.id);
+
+      console.log(id)
+
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <Container>
@@ -69,14 +87,37 @@ borderColor: 'red'        }}
             </List>
      </Box>
      <Box sx={{
-        width: 350,
-        height: 450,
-        marginTop: 5,
-        marginBottom: 10,
+       width: 350,
+       height: 450,
+       marginTop: 5,
+       marginBottom: 10,
       }}>
       <Typography gutterBottom variant="h5" component="div" align='left'>
               {item.seller? item.seller : 'Dana Chubs'}
             </Typography>
+        <Stack direction="row" spacing={2}>
+          <Button
+          onClick={deleteThis}
+          variant="contained"
+           sx={{ display: { xs: "none", md: "flex", background: "#E25F1C" } }}endIcon={<DeleteIcon />}>
+            Delete
+          </Button>
+
+
+          <EditItem
+              id={id}
+              item={item}
+              setCurrentItem={setCurrentItem}
+            />
+
+          {/* <Button onClick={edit} variant="contained" endIcon={<EditIcon
+          id={id}
+          item={item}
+          setCurrentItem={setCurrentItem}
+           />}>
+            Edit
+          </Button> */}
+        </Stack>
     </Box>
     </Box>
     </Container>

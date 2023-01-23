@@ -9,6 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Logo from "../Swoop.jpg";
 import { Menu, MenuItem, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -160,6 +161,14 @@ export default function Navbar({ setItems, setFilteredItems, items}) {
             />
             <Login />
             <Logout />
+            <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  to={'/ShoppingCart'}
+                >
+
+              <ShoppingCartIcon variant="outlined" fontSize="large"
+              sx={{ display: { xs: "none", md: "flex", color: "#E25F1C" } }}></ShoppingCartIcon>
+            </Link>
           </Stack>
         </Toolbar>
 
