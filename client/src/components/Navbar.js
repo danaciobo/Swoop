@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import { styled, alpha } from '@mui/material/styles';
@@ -6,6 +7,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import MenuIcon from '@mui/icons-material/Menu';
 import InputBase from '@mui/material/InputBase';
@@ -13,6 +15,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Logo from '../Swoop.jpg';
 import { Menu, MenuItem, Stack } from '@mui/material';
 import { Link } from 'react-router-dom';
+
 
 import AddItem from './AddItem';
 import Login from './Login';
@@ -164,11 +167,22 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
             />
             <Login setUser ={setUser} />
             <Logout />
+
+            <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  to={'/ShoppingCart'}
+                >
+
+              <ShoppingCartIcon variant="outlined" fontSize="large"
+              sx={{ display: { xs: "none", md: "flex", color: "#E25F1C" } }}></ShoppingCartIcon>
+            </Link>
+
             <Link  style={{ textDecoration: 'none', color:'white' }} to={'/profile'}> 
               <AccountBoxIcon variant='outlined' fontSize='large'
               sx ={{color:'black'}}
                /> 
             </Link>
+
 
           </Stack>
         </Toolbar>

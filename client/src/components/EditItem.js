@@ -7,22 +7,24 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { addItem } from "../services";
+import { updateItem } from "../services";
 import AddIcon from "@mui/icons-material/Add";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import EditIcon from '@mui/icons-material/Edit';
 
-export default function AddItem({ setItems, setFilteredItems, items }) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [quantity, setQuantity] = useState("");
-  const [location, setLocation] = useState("");
-  const [category, setCategory] = useState("");
-  const [image, setImage] = useState("");
+export default function EditItem({ setItems, setFilteredItems, items,
+id, item, setCurrentItem }) {
+  const [title, setTitle] = useState(item.title);
+  const [description, setDescription] = useState(item.description);
+  const [price, setPrice] = useState(item.price);
+  const [quantity, setQuantity] = useState(item.quantity);
+  const [location, setLocation] = useState(item.location);
+  const [category, setCategory] = useState(item.category);
+  const [image, setImage] = useState(item.image);
   const [open, setOpen] = useState(false);
   const [previewSource, setPreviewSource] = useState();
   const [fileInputState] = useState("");
@@ -31,6 +33,7 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
     const file = e;
     previewFile(file);
   };
+  console.log(item)
   const previewFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -60,34 +63,36 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
     formData.append("quantity", quantity);
     formData.append("location", location);
     console.log(formData)
-    postItem({title, description, category, price, quantity, location, image});
+    editItem(item.id, {title, description, category, price, quantity, location, image});
 
 
-    e.target.reset();
+    // e.target.reset();
     handleClose();
   };
   const itemsList = items;
-  const postItem = async (data) => {
-    try {
-      const post = await addItem(data);
-      console.log(post)
 
-      setItems((items) => [...items, post]);
-      setFilteredItems((filteredItems) => [...itemsList, post]);
+  const editItem = async (id, data) => {
+    try {
+      const edit = await updateItem(id, data);
+      console.log(edit)
+      console.log(id)
+
     } catch (e) {
       console.log(e);
     }
   };
 
+
+
   return (
     <div>
       <Button
         variant="contained"
-        startIcon={<AddIcon />}
+        endIcon={<EditIcon />}
         sx={{ display: { xs: "none", md: "flex", background: "#E25F1C" } }}
         onClick={handleClickOpen}
       >
-        Sell Now
+        EDIT
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogActions>
@@ -96,7 +101,7 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
           </IconButton>
         </DialogActions>
         <DialogTitle sx={{ textAlign: "center", padding: 0 }}>
-          Add new item for sale
+          Edit your item
         </DialogTitle>
         <DialogContent>
           <form
@@ -207,7 +212,7 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
               color="primary"
               type="submit"
             >
-              Add item
+              Edit item
             </Button>
           </form>
           {previewSource && (
