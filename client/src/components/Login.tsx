@@ -42,7 +42,7 @@ export default function Login({ setUser }: {setUser: React.Dispatch<React.SetSta
 
   return (
     <div>
-      <Button variant="contained" sx={{ display: { xs: 'none', md: 'block' } }} onClick={handleClickOpen}>
+      <Button variant="contained" sx={{ display: { xs: 'none', md: 'block' } }} onClick={handleClickOpen} data-testid='Loginbutton'>
         Log in/ Register
       </Button>
       <Button variant="contained" size='small' sx={{ display: { xs: 'block', md: 'none' } }} onClick={handleClickOpen}>
@@ -99,7 +99,7 @@ export default function Login({ setUser }: {setUser: React.Dispatch<React.SetSta
 
             </Link>
 
-            <Link href="/Register" variant="body2" sx={{ padding: 3 }}>
+            <Link href="/Register" variant="body2" sx={{ padding: 3 }} >
               Don't have an account yet? Register here
             </Link>
           </form>
