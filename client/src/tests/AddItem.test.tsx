@@ -42,14 +42,14 @@ test('x closes form', () => {
 
   fireEvent.click(screen.getByText('Sell Now'));
   fireEvent.click(screen.getByTestId('closebutton'))
-  expect(screen.queryByTestId('Title-1')).not.toHaveStyle('visibility:hidden');
-  expect(screen.queryByTestId('Description-1')).not.toHaveStyle('visibility:hidden');
-  expect(screen.queryByTestId('Category-1')).not.toHaveStyle('visibility:hidden');
-  expect(screen.queryByTestId('Price-1')).not.toHaveStyle('visibility:hidden');
-  expect(screen.queryByTestId('Quantity-1')).not.toHaveStyle('visibility:hidden');
-  expect(screen.queryByTestId('Location-1')).not.toHaveStyle('visibility:hidden');
-  expect(screen.queryByTestId('Image-1')).not.toHaveStyle('visibility:hidden');
-  expect(screen.queryByTestId('Add Item-1')).not.toHaveStyle('visibility:hidden');
+  expect(screen.queryByTestId('Title-1')).not.toHaveStyle('display:none');
+  expect(screen.queryByTestId('Description-1')).not.toHaveStyle('display:none');
+  expect(screen.queryByTestId('Category-1')).not.toHaveStyle('display:none');
+  expect(screen.queryByTestId('Price-1')).not.toHaveStyle('display:none');
+  expect(screen.queryByTestId('Quantity-1')).not.toHaveStyle('display:none');
+  expect(screen.queryByTestId('Location-1')).not.toHaveStyle('display:none');
+  expect(screen.queryByTestId('Image-1')).not.toHaveStyle('display:none');
+  expect(screen.queryByTestId('Add Item-1')).not.toHaveStyle('display:none');
 
 });
 
@@ -83,14 +83,14 @@ test('Form closes on submission of data', () => {
   fireEvent.change(screen.getByTestId('Image-1'), {target: {value: ''}})
 
   fireEvent.click(screen.getByTestId('closebutton'))
-  expect(screen.queryByTestId('Title-1')).not.toHaveStyle('visibility:hidden');
-  expect(screen.queryByTestId('Description-1')).not.toHaveStyle('visibility:hidden');
-  expect(screen.queryByTestId('Category-1')).not.toHaveStyle('visibility:hidden');
-  expect(screen.queryByTestId('Price-1')).not.toHaveStyle('visibility:hidden');
-  expect(screen.queryByTestId('Quantity-1')).not.toHaveStyle('visibility:hidden');
-  expect(screen.queryByTestId('Location-1')).not.toHaveStyle('visibility:hidden');
-  expect(screen.queryByTestId('Image-1')).not.toHaveStyle('visibility:hidden');
-  expect(screen.queryByTestId('Add Item-1')).not.toHaveStyle('visibility:hidden');
+  expect(screen.queryByTestId('Title-1')).toHaveStyle('display:none');
+  expect(screen.queryByTestId('Description-1')).toHaveStyle('display:none');
+  expect(screen.queryByTestId('Category-1')).toHaveStyle('display:none');
+  expect(screen.queryByTestId('Price-1')).toHaveStyle('display:none');
+  expect(screen.queryByTestId('Quantity-1')).toHaveStyle('display:none');
+  expect(screen.queryByTestId('Location-1')).toHaveStyle('display:none');
+  expect(screen.queryByTestId('Image-1')).toHaveStyle('display:none');
+  expect(screen.queryByTestId('Add Item-1')).toHaveStyle('display:none');
 
 });
 
