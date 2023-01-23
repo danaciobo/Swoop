@@ -52,11 +52,11 @@ export default function Register() {
       </Button> */}
       <Dialog open={open} onClose={handleClose} >
         <DialogActions>
-          <IconButton sx={{ padding: 0 }} onClick={handleClose} >
+          <IconButton sx={{ padding: 0 }} onClick={handleClose} data-testid = 'closeReg'>
             <CloseIcon sx={{ fontSize: '1.3em' }} />
           </IconButton>
         </DialogActions>
-        <DialogTitle sx={{ textAlign: 'center', padding: 0 }}>Register</DialogTitle>
+        <DialogTitle sx={{ textAlign: 'center', padding: 0 }} data-testid='RegisterTitle'>Register</DialogTitle>
         <DialogContent>
           <form
             onSubmit={handleSubmit}
@@ -74,6 +74,7 @@ export default function Register() {
               label="Email"
               type="email"
               variant="outlined"
+              inputProps={{ "data-testid": "email-input" }}
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -83,6 +84,7 @@ export default function Register() {
                 sx={{ width: '8.5em', marginBottom: '0.7em' }}
                 label="First Name"
                 variant="outlined"
+                inputProps={{ "data-testid": "first-input" }}
                 required
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
@@ -91,6 +93,7 @@ export default function Register() {
                 sx={{ width: '8.5em', marginBottom: '0.7em' }}
                 label="Last Name"
                 variant="outlined"
+                inputProps={{ "data-testid": "last-input" }}
                 required
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
@@ -100,6 +103,7 @@ export default function Register() {
               sx={{ width: '17em', marginBottom: '0.7em' }}
               label="Phone Number"
               variant="outlined"
+              inputProps={{ "data-testid": "phone-input" }}
               required
               value={phoneNumber}
               onChange={(e) => setphoneNumber(e.target.value)}
@@ -110,6 +114,7 @@ export default function Register() {
               label="Password"
               type="password"
               variant="outlined"
+              inputProps={{ "data-testid": "pass-input" }}
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -118,6 +123,7 @@ export default function Register() {
               sx={{ width: '16em', height: '3em' }}
               variant="contained"
               color="primary"
+              data-testid = 'registersub'
               type="submit"
               onClick={handleClose}
             >
