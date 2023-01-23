@@ -45,12 +45,12 @@ export default function Login({ setUser }: {setUser: React.Dispatch<React.SetSta
       <Button variant="contained" sx={{ display: { xs: 'none', md: 'block' } }} onClick={handleClickOpen} data-testid='Loginbutton'>
         Log in/ Register
       </Button>
-      <Button variant="contained" size='small' sx={{ display: { xs: 'block', md: 'none' } }} onClick={handleClickOpen}>
+      <Button variant="contained" size='small' sx={{ display: { xs: 'block', md: 'none' } }} data-testid='LoginButtonPortal' onClick={handleClickOpen}>
         Log in/ Register
       </Button>
       <Dialog open={open} onClose={handleClose} >
         <DialogActions>
-          <IconButton sx={{ padding: 0 }} onClick={handleClose} >
+          <IconButton  sx={{ padding: 0 }} onClick={handleClose} >
             <CloseIcon sx={{ fontSize: '1.3em' }} />
           </IconButton>
         </DialogActions>
@@ -88,6 +88,7 @@ export default function Login({ setUser }: {setUser: React.Dispatch<React.SetSta
             />
             <Link href="/Profile" >
               <Button
+              data-testid='LoginbuttonAccess'
                 sx={{ width: '16em', height: '3em' }}
                 variant="contained"
                 color="primary"
