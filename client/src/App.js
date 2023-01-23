@@ -45,6 +45,7 @@ function App() {
         if (actualData) {
           setItems(actualData);
           setFilteredItems(actualData);
+          setUser(user)
         }
       } catch (err) {
         console.log(err);

@@ -6,6 +6,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import MenuIcon from '@mui/icons-material/Menu';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
@@ -16,6 +17,7 @@ import { Link } from 'react-router-dom';
 import AddItem from './AddItem';
 import Login from './Login';
 import Logout from './Logout';
+
 
 const pages = [
   'All',
@@ -72,7 +74,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Navbar({ setItems, setFilteredItems, items }) {
+export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
+
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (e) => {
@@ -159,8 +162,14 @@ export default function Navbar({ setItems, setFilteredItems, items }) {
               setFilteredItems={setFilteredItems}
               items={items}
             />
-            <Login />
+            <Login setUser ={setUser} />
             <Logout />
+            <Link  style={{ textDecoration: 'none', color:'white' }} to={'/profile'}> 
+              <AccountBoxIcon variant='outlined' fontSize='large'
+              sx ={{color:'black'}}
+               /> 
+            </Link>
+
           </Stack>
         </Toolbar>
 
