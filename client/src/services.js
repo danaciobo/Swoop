@@ -1,4 +1,3 @@
-
 const baseURL = "http://localhost:4001"
 
 // export const getData = async () => {
@@ -51,14 +50,14 @@ export const updateItem = async (id, content) => {
 }
 
 export const deleteItem = async (id) => {
+  console.log(id);
   try {
     const response = await fetch(`${baseURL}/items`,{
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify()
+      body: JSON.stringify({id: id})
     })
-    return response.json();
-
+    return response
   }
    catch (err) {
   console.log(err)

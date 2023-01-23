@@ -115,7 +115,7 @@ export default function Profile({ items, user, setCurrentItem }) {
                   <RouterLink to="/ItemDetails">
                     <Grid
                       item
-                      key={item._id}
+                      key={item.id}
                       onClick={() => setCurrentItem(item)}
                     >
                       <Card sx={{ width: 100, height: 120 }}>
@@ -161,7 +161,7 @@ export default function Profile({ items, user, setCurrentItem }) {
             >
               {items.length > 100 ? (
                 items.slice(0, 5).map((item, index) => (
-                  <Grid item key={item._id}>
+                  <Grid item key={item.id}>
                     <Card sx={{ width: 100, height: 120 }}>
                       <CardActionArea>
                         <CardContent sx={{ padding: 0 }}>

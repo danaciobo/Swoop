@@ -76,7 +76,7 @@ id, item, setCurrentItem }) {
       const edit = await updateItem(id, data);
       console.log(edit)
       console.log(id)
-     
+
     } catch (e) {
       console.log(e);
     }

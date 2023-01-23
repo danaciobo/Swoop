@@ -21,13 +21,10 @@ export default function ItemDetails({ id, item , setCurrentItem}) {
   }, [])
 
 
-  const deleteThis = async () => {
+  const deleteThis = async (id) => {
     try {
-      console.log(item.id)
-      await deleteItem(item.id);
-
-      console.log(id)
-
+      const res = await deleteItem(id);
+      return res
     } catch (e) {
       console.log(e);
     }
@@ -97,7 +94,7 @@ borderColor: 'red'        }}
             </Typography>
         <Stack direction="row" spacing={2}>
           <Button
-          onClick={deleteThis}
+          onClick={() => deleteThis(item.id)}
           variant="contained"
            sx={{ display: { xs: "none", md: "flex", background: "#E25F1C" } }}endIcon={<DeleteIcon />}>
             Delete
