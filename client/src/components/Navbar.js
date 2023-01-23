@@ -1,80 +1,84 @@
-import { useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import { styled, alpha } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import InputBase from "@mui/material/InputBase";
-import SearchIcon from "@mui/icons-material/Search";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Logo from "../Swoop.jpg";
-import { Menu, MenuItem, Stack } from "@mui/material";
-import { Link } from "react-router-dom";
 
-import AddItem from "./AddItem";
-import Login from "./Login";
-import Logout from "./Logout";
+import { useState } from 'react';
+import AppBar from '@mui/material/AppBar';
+import { styled, alpha } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import MenuIcon from '@mui/icons-material/Menu';
+import InputBase from '@mui/material/InputBase';
+import SearchIcon from '@mui/icons-material/Search';
+import Logo from '../Swoop.jpg';
+import { Menu, MenuItem, Stack } from '@mui/material';
+import { Link } from 'react-router-dom';
+
+
+import AddItem from './AddItem';
+import Login from './Login';
+import Logout from './Logout';
 
 
 const pages = [
-  "All",
-  "Clothes",
-  "Accessories",
-  "Home",
-  "Electronics",
-  "Hobbies",
-  "Freebies",
+  'All',
+  'Clothes',
+  'Accessories',
+  'Home',
+  'Electronics',
+  'Hobbies',
+  'Freebies',
 ];
 
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
+  '&:hover': {
     backgroundColor: alpha(theme.palette.common.white, 0.75),
-    border: "solid",
-    borderColor: "#bdbdbd",
+    border: 'solid',
+    borderColor: '#bdbdbd',
     borderWidth: 1,
   },
   marginLeft: 0,
-  width: "auto",
+  width: 'auto',
   maxWidth: 550,
-  [theme.breakpoints.up("sm")]: {
+  [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(1),
-    width: "auto",
+    width: 'auto',
   },
 }));
 
-const SearchIconWrapper = styled("div")(({ theme }) => ({
+const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "#393937",
-  "& .MuiInputBase-input": {
+  color: '#393937',
+  '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
       },
     },
   },
 }));
 
-export default function Navbar({ setItems, setFilteredItems, items}) {
+export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
+
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (e) => {
@@ -106,7 +110,7 @@ export default function Navbar({ setItems, setFilteredItems, items}) {
     const filtered = items.filter(
       (item) => item.category.toLowerCase() === activeCategory.toLowerCase()
     );
-    if (activeCategory.toLowerCase() === "all") {
+    if (activeCategory.toLowerCase() === 'all') {
       console.log(items);
       setFilteredItems(items);
     } else {
@@ -115,52 +119,55 @@ export default function Navbar({ setItems, setFilteredItems, items}) {
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position='static'>
         <Toolbar
           sx={{
-            background: "white",
-            color: "black",
-            justifyContent: "space-between",
+            background: 'white',
+            color: 'black',
+            justifyContent: 'space-between',
           }}
         >
           <Typography
             // noWrap
-            component="div"
-            sx={{ mr: 2, display: "flex" }}
+            component='div'
+            sx={{ mr: 2, display: 'flex' }}
           >
-            <img
-              src={Logo}
-              width="150"
-              height="45"
-              max-width="100%"
-              alt="swoop logo"
-            />
+            <a href='/'>
+              <img
+                src={Logo}
+                width='150'
+                height='45'
+                max-width='100%'
+                alt='swoop logo'
+              />
+            </a>
           </Typography>
 
           <Search
             sx={{
-              background: "#EBE6DD",
+              background: '#EBE6DD',
               flexGrow: 1,
-              display: { xs: "none", md: "flex" },
+              display: { xs: 'none', md: 'flex' },
             }}
           >
             <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
+              placeholder='Search…'
+              inputProps={{ 'aria-label': 'search' }}
               onChange={handleChange}
             />
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
           </Search>
-          <Stack direction="row" spacing={2}>
+          <Stack direction='row' spacing={2}>
             <AddItem
               setItems={setItems}
               setFilteredItems={setFilteredItems}
               items={items}
             />
-            <Login />
+            <Login setUser ={setUser} />
             <Logout />
+
             <Link
                   style={{ textDecoration: "none", color: "white" }}
                   to={'/ShoppingCart'}
@@ -169,44 +176,52 @@ export default function Navbar({ setItems, setFilteredItems, items}) {
               <ShoppingCartIcon variant="outlined" fontSize="large"
               sx={{ display: { xs: "none", md: "flex", color: "#E25F1C" } }}></ShoppingCartIcon>
             </Link>
+
+            <Link  style={{ textDecoration: 'none', color:'white' }} to={'/profile'}> 
+              <AccountBoxIcon variant='outlined' fontSize='large'
+              sx ={{color:'black'}}
+               /> 
+            </Link>
+
+
           </Stack>
         </Toolbar>
 
-        <Toolbar sx={{ color: "white", justifyContent: "space-between" }}>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+        <Toolbar sx={{ color: 'white', justifyContent: 'space-between' }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
+              size='large'
+              aria-label='account of current user'
+              aria-controls='menu-appbar'
+              aria-haspopup='true'
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color='inherit'
             >
               <MenuIcon />
             </IconButton>
             <Menu
-              id="menu-appbar"
+              id='menu-appbar'
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
+                vertical: 'bottom',
+                horizontal: 'left',
               }}
               keepMounted
               transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
+                vertical: 'top',
+                horizontal: 'left',
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: "block", md: "none" },
+                display: { xs: 'block', md: 'none' },
               }}
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
+                  <Typography textAlign='center'>
                     <Link
-                      style={{ textDecoration: "none", color: "white" }}
+                      style={{ textDecoration: 'none', color: 'white' }}
                       to={`/${page}`}
                     >
                       {page}
@@ -219,22 +234,22 @@ export default function Navbar({ setItems, setFilteredItems, items}) {
           <Search
             sx={{
               flexGrow: 1,
-              display: { xs: "flex", md: "none", marginLeft: "10px" },
+              display: { xs: 'flex', md: 'none', marginLeft: '10px' },
             }}
           >
             <SearchIconWrapper>
-              <SearchIcon color="#393937" />
+              <SearchIcon color='#393937' />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
+              placeholder='Search…'
+              inputProps={{ 'aria-label': 'search' }}
               onChange={handleChange}
             />
           </Search>
           <Box
             sx={{
               flexGrow: 1,
-              display: { xs: "none", md: "flex", justifyContent: "center" },
+              display: { xs: 'none', md: 'flex', justifyContent: 'center' },
             }}
           >
             {pages.map((page) => (
@@ -242,10 +257,10 @@ export default function Navbar({ setItems, setFilteredItems, items}) {
                 key={page}
                 value={page}
                 onClick={handleFilterCategory}
-                sx={{ my: 2, color: "white", display: "block", marginRight: 5 }}
+                sx={{ my: 2, color: 'white', display: 'block', marginRight: 5 }}
               >
                 <Link
-                  style={{ textDecoration: "none", color: "white" }}
+                  style={{ textDecoration: 'none', color: 'white' }}
                   to={`/${page}`}
                 >
                   {page}
