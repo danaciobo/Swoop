@@ -9,6 +9,7 @@ const Login = ({setUser}) => {
 
   const { loginWithRedirect, isAuthenticated, user } = useAuth0();
 
+
   setUser(user)
 
   console.log(user);
