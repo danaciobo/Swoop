@@ -15,6 +15,7 @@ router.put('/user-update', userCtrl.updateUser)
 
 router.post('/items', itemCtrl.createItem)
 router.get('/items',itemCtrl.getItems )
+router.get('/items/:id', itemCtrl.getItemById)
 router.delete('/items' , itemCtrl.deleteItem)
 router.put('/items', itemCtrl.updateItem )
 // router.get('/items', itemController.getItems);

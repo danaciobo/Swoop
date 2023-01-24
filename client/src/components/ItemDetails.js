@@ -1,26 +1,27 @@
-import { getItemById, deleteItem } from "../services"
-import {  useEffect } from 'react'
-import { Box, List, ListItem, ListItemText, Typography } from "@mui/material";
-import {  Container } from "@mui/system";
+import { getItemById, deleteItem } from '../services';
+import { useEffect } from 'react';
+import { Box, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { Container } from '@mui/system';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Stack from '@mui/material/Stack';
+
 import EditItem from "./EditItem";
 import { useNavigate } from "react-router-dom";
 export default function ItemDetails({ id, item , setCurrentItem, items, setItems}) {
 
   const navigate = useNavigate()
 
+export default function ItemDetails({id, item, setCurrentItem }) {
   useEffect(() => {
     getItemById(id)
-      .then(response => {
-        console.log(response)
-        setCurrentItem(response)
+      .then((response) => {
+        console.log(response);
+        setCurrentItem(response);
       })
-      .catch(err => console.log(err))
-  }, [])
-
+      .catch((err) => console.log(err));
+  }, []);
 
   const deleteThis = async () => {
     try {
@@ -43,9 +44,11 @@ export default function ItemDetails({ id, item , setCurrentItem, items, setItems
           direction: 'row',
           pl: 5,
           m: 1,
-border: 1,
-borderColor: 'red'        }}
+          border: 1,
+          borderColor: 'red',
+        }}
       >
+
       <Box sx={{
         width: 350,
         height: 450,
@@ -104,23 +107,18 @@ borderColor: 'red'        }}
             Delete
           </Button>
 
+            <EditItem id={id} item={item} setCurrentItem={setCurrentItem} />
 
-          <EditItem
-              id={id}
-              item={item}
-              setCurrentItem={setCurrentItem}
-            />
-
-          {/* <Button onClick={edit} variant="contained" endIcon={<EditIcon
+            {/* <Button onClick={edit} variant="contained" endIcon={<EditIcon
           id={id}
           item={item}
           setCurrentItem={setCurrentItem}
            />}>
             Edit
           </Button> */}
-        </Stack>
-    </Box>
-    </Box>
+          </Stack>
+        </Box>
+      </Box>
     </Container>
-  )
+  );
 }

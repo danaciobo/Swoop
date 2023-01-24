@@ -10,13 +10,11 @@ exports.getItems = async (req, res) => {
   }
 };
 
-exports.getItemById = async (req, res) => {
+exports.getItemById = async (req,res) => {
+  const id = req.params.id
+  console.log('this is the id', id)
   try {
-    const item = await Item.findAll({
-      where: {
-        id: req.body.itemId,
-      },
-    });
+    const item = await Item.findOne({where: {id: id}})
     return res.status(200).json(item);
   } catch (e) {
     console.log(e);

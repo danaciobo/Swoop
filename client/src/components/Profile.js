@@ -21,12 +21,15 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { useEffect, useState } from 'react';
 
-export default function Profile({ items, user, setCurrentItem}) {
+export default function Profile({items, user, setCurrentItem}) {
   const [editButton, setEditButton] = useState(false);
   const [updatedUserDetails, setUpdatedUserDetails] = useState({});
 
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+
+
+  console.log(items)
 
   function handleClick() {
     setEditButton(!editButton);
@@ -172,7 +175,7 @@ export default function Profile({ items, user, setCurrentItem}) {
             >
               {items ? (
                 items.slice(0, 5).map((item, index) => (
-                  <RouterLink to='/ItemDetails'>
+                  <RouterLink to= {`/ItemDetails/${item.id}`}>
                     <Grid
                       item
                       key={item.id}
