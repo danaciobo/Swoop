@@ -10,6 +10,7 @@ import {
   Container,
   Grid,
   Typography,
+
   IconButton,
   Input,
   FormControl,
@@ -20,17 +21,20 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { useEffect, useState } from 'react';
 
-export default function Profile({ items, user, setCurrentItem }) {
+export default function Profile({items, user, setCurrentItem}) {
   const [editButton, setEditButton] = useState(false);
   const [updatedUserDetails, setUpdatedUserDetails] = useState({});
 
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [editEmail, setEditEmail] = useState(false);
 
-  console.log(items);
+
+  console.log(items)
 
   function handleClick() {
     setEditButton(!editButton);
+    setEditEmail(!editEmail);
   }
 
   function handleSubmit(e) {
@@ -73,11 +77,11 @@ export default function Profile({ items, user, setCurrentItem }) {
               background: '#EBE6DD',
             }}
           >
-              <IconButton onClick={handleClick} >
-                <EditIcon sx={{float: 'right'}}/>
-              </IconButton>
             <CardHeader sx={{ height: 5 }}></CardHeader>
             <CardMedia sx={{ height: 100 }}>
+              <IconButton  sx={{ marginLeft: 36 }} onClick={handleClick}>
+                <EditIcon />
+              </IconButton>
               <Avatar
                 sx={{
                   margin: 5,
@@ -100,7 +104,9 @@ export default function Profile({ items, user, setCurrentItem }) {
                 component='div'
                 align='center'
               >
-                {user.given_name + ' ' + user.family_name}
+
+                {user.given_name + " " + user.family_name}
+
               </Typography>
               <List sx={{ width: '100%', maxWidth: 360, marginTop: 1 }}>
                 <form onSubmit={handleSubmit}>
@@ -113,7 +119,7 @@ export default function Profile({ items, user, setCurrentItem }) {
                         ) : (
                           <Input
                             required
-                            placeholder={user.email}
+                            placeholder={updatedUserDetails.email}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                           />
@@ -121,7 +127,7 @@ export default function Profile({ items, user, setCurrentItem }) {
                       }
                     />
                   </ListItem>
-                  <ListItem>
+                  {editEmail && <ListItem>
                     <ListItemText
                       primary='Phone number'
                       secondary={
@@ -137,7 +143,7 @@ export default function Profile({ items, user, setCurrentItem }) {
                         )
                       }
                     />
-                  </ListItem>
+                  </ListItem>}
                   <input type='submit' hidden />
                 </form>
               </List>
@@ -171,11 +177,12 @@ export default function Profile({ items, user, setCurrentItem }) {
             >
               {items ? (
                 items.slice(0, 5).map((item, index) => (
-                  <RouterLink to={`/ItemDetails/${item.id}`}>
+                  <RouterLink to= {`/ItemDetails/${item.id}`}>
                     <Grid
                       item
                       key={item.id}
                       onClick={() => setCurrentItem(item)}
+                      sx={{ marginRight: 2 }}
                     >
                       <Card sx={{ width: 100, height: 120 }}>
                         <CardActionArea>
