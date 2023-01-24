@@ -14,9 +14,3 @@ app.get('*', (req, res) => {
 });
 
 app.listen(3006, () => console.log(`Server running on port ${3006};`));
-
-
-//for the json
-    // "start": "nodemon ./index.ts",
-    // "start:prod": "npm run build && node ./dist/src/server.js",
-    // "build": "npx tsc"

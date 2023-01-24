@@ -10,10 +10,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import Logo from '../Swoop.jpg';
-import { Link, Menu, MenuItem, Stack } from '@mui/material';
+import { Menu, MenuItem, Stack } from '@mui/material';
 import AddItem from './AddItem';
 import Login from './LoginButton';
-import { grey } from '@mui/material/colors';
 import React from 'react';
 import {User, Item} from '../Types/Types'
 import { useSelector, useDispatch } from 'react-redux';
@@ -131,7 +130,6 @@ export default function Navbar({ items, user }: {
 
           </Search>
           <Stack direction="row" spacing={2} >
-            {/* help request about this cause we are confused */}
             <AddItem data-testid="addItemComp"  items={items}/>
             <Login data-testid = 'login'
              />

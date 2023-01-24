@@ -7,8 +7,8 @@ import {compose, createStore} from 'redux'
 import Reducer from './reducer'
 import { Auth0Provider } from '@auth0/auth0-react'
 
-const domain:string | undefined = process.env.REACT_APP_AUTH0_DOMAIN;
-const clientId:string | undefined = process.env.REACT_APP_AUTH0_CLIENT_ID
+const domain:any = process.env.REACT_APP_AUTH0_DOMAIN
+const clientId:any = process.env.REACT_APP_AUTH0_CLIENT_ID 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

@@ -1,4 +1,3 @@
-import { useState } from "react"
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -43,7 +42,6 @@ export default function AddItem({ items }: {items: Item[]}) {
     handleClose()
   };
 
-  const itemsList = items;
 
   const postItem = async (data: any) => {
     try {
@@ -200,41 +198,3 @@ export default function AddItem({ items }: {items: Item[]}) {
   );
 }
 
-
-
-  //   const formData = {
-  //     title: addItemState.title,
-  //     description: addItemState.description,
-  //     category: addItemState.category,
-  //     price: addItemState.price,
-  //     quantity: addItemState.quantity,
-  //     location: addItemState.location,
-  //     image: addItemState.image
-  //   }
-  //   postItem(formData)
-  //   if (e.target) {
-  //     const target = e.target as HTMLFormElement
-  //     target.reset();
-  //   }
-  //   handleClose()
-  // };
-  // const itemsList = items;
-  // const postItem = async (data: any) => {
-  //   const formData = new FormData();
-  //   formData.append('image', addItemState.image);
-  //   formData.append('title', addItemState.title);
-  //   formData.append('description', addItemState.description);
-  //   formData.append('category', addItemState.category);
-  //   formData.append('price', addItemState.price === undefined ? '0' : addItemState.price);
-  //   formData.append('quantity', addItemState.quantity === undefined ? '0' : addItemState.quantity);
-  //   formData.append('location', addItemState.location);
-  //   console.log('who are you', formData)
-  //   postItem(formData)
-  //   if (e.target) {
-  //     const target = e.target as HTMLFormElement
-  //     target.reset();
-  //   }
-  //   handleClose()
-  // };
-  // const itemsList = items;
-  // const postItem = async (data: FormData) => {

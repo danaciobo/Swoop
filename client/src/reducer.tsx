@@ -76,18 +76,6 @@ const App = (state:any=initialAppState, action:any) => {
   }
 }
 
-const Login = (state: any = initialStateLogin, action: any) => {
-  switch (action.type) {
-    case 'LOGG_OPEN':
-      return { ...state, open: !state.open }
-    case 'LOGG_EMAIL':
-      return { ...state, loggEmail: action.payload }
-    case 'LOGG_PASSWORD':
-      return { ...state, loggPassword: action.payload }
-    default:
-      return state
-  }
-}
 
 const Registration = (state:any=initialStateRegistration, action: any) => {
   switch (action.type) {
@@ -134,7 +122,6 @@ const addItem = (state:any = initialAddItemState, action:any) => {
 
 const Reducer = combineReducers({
   Registration,
-  Login,
   addItem,
   App,
   Profile,

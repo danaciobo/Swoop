@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import Banner from './components/Banner';
 import Navbar from './components/Navbar';
@@ -27,7 +26,6 @@ const theme = createTheme({
       'Roboto'
     ].join(','),
   },
-  //if ui breaks this is culprit
   palette: {
     primary: {
       main: '#63171D'
@@ -41,9 +39,6 @@ const theme = createTheme({
 function App() {
 
   const { isLoading, error } = useAuth0();
-  // const [items, setItems] = useState<Item[]>([]);
-  // const [filteredItems, setFilteredItems] = useState<Item[]>([])
-  // const [user, setUser] = useState<null | User>(null)
 
   const dispatch = useDispatch();
   const appState = useSelector((state: any) => state.App)
@@ -73,11 +68,9 @@ function App() {
   return (
 
     <ThemeProvider theme={theme}>
-      {/* <DataProvider> */}
       <Navbar items={appState.items} user={appState.user} />
        {error && <p>Authentication Error</p>}
         {!error && isLoading && <p>Loading...</p>}
-      {/* <ItemList items={items} /> */}
 
       {!error && !isLoading && (
           <>
@@ -85,15 +78,13 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<ItemList items={appState.filteredItems}/>} />
-          <Route path="/Profile" element={<Profile items={appState.items} /*user={user} has it own user state, change after redux*/ />} />
-          {/* <Route path="/AddItem" element={<AddItem />} /> */}
+          <Route path="/Profile" element={<Profile items={appState.items} />} />
           <Route path="/Login" element={<LoginButton/>} />
         </Routes>
       </BrowserRouter >
           <Footer />
         </>
           )}
-      {/* </DataProvider> */}
       </ThemeProvider>
   );
 }
