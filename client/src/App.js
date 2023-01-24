@@ -11,9 +11,7 @@ import { useEffect, useState } from 'react';
 import Payment from './Payment';
 import Completion from './Completion';
 import ItemDetails from './components/ItemDetails';
-import WebcamCapture from "./components/WebcamCapture";
 
- f43a49d1c3cb1f96c304daf25b459dc4ff880599
 
 
 const myURL = 'http://localhost:4001/items';
