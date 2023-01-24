@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Grid } from "@mui/material";
 import ItemCard from "./ItemCard";
 
-export default function ItemList({ items, setCurrentItem }) {
-  console.log(items);
-
+export default function ItemList({ user, items, setCurrentItem }) {
+  
+useEffect(()=>{
+  console.log(user)
+},[])
   return (
     <Container
       maxWidth={false}

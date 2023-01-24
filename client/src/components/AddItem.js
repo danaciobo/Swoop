@@ -29,7 +29,7 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
   const [previewSource, setPreviewSource] = useState();
   const [fileInputState] = useState("");
   const handleFileInputChange = (e) => {
-    console.log(e);
+    
     const file = e;
     previewFile(file);
   };
@@ -68,20 +68,18 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
     formData.append("price", price);
     formData.append("quantity", quantity);
     formData.append("location", location);
-    console.log(formData)
+   
     postItem({title, description, category, price, quantity, location, image , seller :user.name});
 
 
     e.target.reset();
     handleClose();
   };
-  console.log(user)
+  
   const itemsList = items;
   const postItem = async (data) => {
     try {
       const post = await addItem(data);
-      console.log(post)
-
       setItems((items) => [...items, post]);
       setFilteredItems((filteredItems) => [...itemsList, post]);
     } catch (e) {

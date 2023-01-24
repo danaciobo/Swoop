@@ -5,7 +5,7 @@ const path = require('path');
 const {Sequelize ,Op, Model , Dataypes} = require('sequelize');
 
 
-const sequelize = new Sequelize('postgres', 'postgres', 'helloworld123', {
+const sequelize = new Sequelize('swoop_dev', 'matthew', 'postgres', {
   host: 'localhost',
   dialect: 'postgres',
   port: '5432',

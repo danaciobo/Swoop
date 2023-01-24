@@ -4,7 +4,7 @@ import React from 'react';
 import Profile from './Profile';
 import App from '../App';
 import { useEffect, useState } from 'react';
-
+import { getUserByEmail } from '../services';
 const Login = ({setUser}) => {
 
 

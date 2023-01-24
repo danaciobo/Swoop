@@ -72,7 +72,16 @@ function App() {
         <Banner />
 
         <Routes>
-          <Route path='/' element={<Payment />} />
+          <Route path='/' element={
+              <ItemList
+                items={filteredItems}
+                currentItem={currentItem}
+                setCurrentItem={setCurrentItem}
+                user={user}
+                setUser={setUser}
+              />
+            }
+          />
           <Route path='/completion' element={<Completion />} />
           <Route
             path='/All'
@@ -95,10 +104,6 @@ function App() {
               />
             }
           />
-
-
- f43a49d1c3cb1f96c304daf25b459dc4ff880599
-
 
 
           <Route
