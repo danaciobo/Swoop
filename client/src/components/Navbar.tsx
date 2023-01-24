@@ -15,9 +15,8 @@ import AddItem from './AddItem';
 import Login from './Login';
 import { grey } from '@mui/material/colors';
 import React from 'react';
-
 import {User, Item} from '../Types/Types'
-
+import { useSelector, useDispatch } from 'react-redux';
 const pages = ['All', 'Clothes', 'Accessories', 'Home', 'Electronics', 'Hobbies', 'Freebies'];
 
 const Search = styled('div')(({ theme }) => ({
@@ -66,13 +65,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Navbar({ setItems, setFilteredItems, items, setUser, user }: {
-  setItems: React.Dispatch<React.SetStateAction<Item[]>>;
-  setFilteredItems: React.Dispatch<React.SetStateAction<Item[]>>;
+export default function Navbar({ items, user }: {
+
   items: Item[];
-  setUser: React.Dispatch<React.SetStateAction<User | null>>;
   user: User | null
 }) {
+
+  const appState = useSelector((state: any) => state.App)
+  const dispatch = useDispatch()
 
   const [anchorElNav, setAnchorElNav] = useState<null | EventTarget>(null);
 
@@ -88,12 +88,10 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, use
     const searchWord = e.target.value;
     const filtered = items.filter((item) => item.title.toLowerCase().includes(searchWord.toLowerCase()) || item.category.toLowerCase().includes(searchWord.toLowerCase()))
     if (filtered.length > 0) {
-      setFilteredItems(filtered);
-
+    dispatch({ type: 'APP_FILTERED_ITEMS', payload: filtered })
     } else {
-      setFilteredItems(items);
+     dispatch({ type: 'APP_FILTERED_ITEMS', payload: filtered })
     }
-
   }
 
   const handleFilterCategory = (e:React.MouseEvent<HTMLButtonElement>) => {
@@ -103,16 +101,15 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, use
     const filtered = items.filter((item) => item.category.toLowerCase() === (activeCategory.toLowerCase()))
     if (activeCategory.toLowerCase() === 'all') {
       console.log(items)
-      setFilteredItems(items);
+          dispatch({ type: 'APP_FILTERED_ITEMS', payload: items })
     } else {
-      setFilteredItems(filtered);
+          dispatch({ type: 'APP_FILTERED_ITEMS', payload: filtered })
     }
   }
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" >
         <Toolbar sx={{ background: 'white', color: 'black', justifyContent: 'space-between' }}>
-
           <Typography
             // noWrap
             component='div'
@@ -135,8 +132,8 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, use
           </Search>
           <Stack direction="row" spacing={2} >
             {/* help request about this cause we are confused */}
-            <AddItem data-testid="addItemComp" setItems={setItems} setFilteredItems={setFilteredItems} items={items}/>
-            <Login data-testid = 'login' setUser={setUser} />
+            <AddItem data-testid="addItemComp"  items={items}/>
+            <Login data-testid = 'login' />
           </Stack>
         </Toolbar>
 

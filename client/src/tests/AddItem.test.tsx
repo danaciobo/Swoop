@@ -17,13 +17,13 @@ jest.mock('../services.tsx', () => ({
 }))
 
 test('should render addItem Component', () => {
-  render(<AddItem setItems={() => {}} setFilteredItems={() => {}} items={[]}/>)
+  render(<AddItem items={[]}/>)
   const button = screen.getByText('Sell Now')
   expect(button.textContent).toEqual('Sell Now')
 })
 
 test('renders the form', () => {
-  render(<AddItem setItems={() => {}} setFilteredItems={() => {}} items={[]} />);
+  render(<AddItem items={[]} />);
 
   fireEvent.click(screen.getByText('Sell Now'));
   expect(screen.getByTestId('Title-1')).toHaveStyle('visibility: visible');
@@ -38,7 +38,7 @@ test('renders the form', () => {
 });
 
 test('x closes form', () => {
-  render(<AddItem setItems={() => {}} setFilteredItems={() => {}} items={[]} />);
+  render(<AddItem items={[]} />);
 
   fireEvent.click(screen.getByText('Sell Now'));
   fireEvent.click(screen.getByTestId('closebutton'))
@@ -54,7 +54,7 @@ test('x closes form', () => {
 });
 
 test('form does not close on submit if no forms filled', () => {
-  render(<AddItem setItems={() => {}} setFilteredItems={() => {}} items={[]} />);
+  render(<AddItem items={[]} />);
 
   fireEvent.click(screen.getByText('Sell Now'));
   fireEvent.click(screen.getByTestId('Add Item-1'))
@@ -70,7 +70,7 @@ test('form does not close on submit if no forms filled', () => {
 });
 
 test('Form closes on submission of data', () => {
-  render(<AddItem setItems={() => {}} setFilteredItems={() => {}} items={[]} />);
+  render(<AddItem items={[]} />);
 
   fireEvent.click(screen.getByText('Sell Now'));
 

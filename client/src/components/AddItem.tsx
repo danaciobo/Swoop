@@ -18,11 +18,11 @@ import React from 'react'
 import { Item } from "../Types/Types";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function AddItem({ setItems, setFilteredItems, items }: {setItems: React.Dispatch<React.SetStateAction<Item[]>>, setFilteredItems: React.Dispatch<React.SetStateAction<Item[]>>, items: Item[]}) {
+export default function AddItem({ items }: {items: Item[]}) {
 
   const dispatch = useDispatch()
 
-  const addItemState = useSelector((state: any) => state.AddItem)
+  const addItemState = useSelector((state: any) => state.addItem)
 
   const handleClickOpen = () => {
     dispatch({type: 'ADDITEM_OPEN'});
@@ -32,33 +32,24 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
     dispatch({type: 'ADDITEM_OPEN'});
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    console.log(addItemState.title, addItemState.description, addItemState.category, addItemState.price, addItemState.quantity, addItemState.location, addItemState.image);
-    const formData = new FormData();
-    formData.append('image', addItemState.image);
-    formData.append('title', addItemState.title);
-    formData.append('description', addItemState.description);
-    formData.append('category', addItemState.category);
-    formData.append('price', addItemState.price === undefined ? '0' : addItemState.price);
-    formData.append('quantity', addItemState.quantity === undefined ? '0' : addItemState.quantity);
-    formData.append('location', addItemState.location);
-
-    postItem(formData)
+    const formData = await addItemState
+    await postItem(formData)
     if (e.target) {
       const target = e.target as HTMLFormElement
       target.reset();
     }
     handleClose()
   };
+
   const itemsList = items;
-  const postItem = async (data: FormData) => {
+
+  const postItem = async (data: any) => {
     try {
       const post = await addItem(data);
-
-      setItems((items: Item[]) => [...items, post]);
-      setFilteredItems((filteredItems:Item[]) => [...itemsList, post])
+      dispatch({type:'APP_ITEMS', payoad: post});
+      dispatch({type:'APP_FILTERED_ITEMS', payload: post})
 
     } catch (e) {
       console.log(e);
@@ -85,7 +76,7 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
         <DialogContent>
           <form
           id="sellForm"
-            onSubmit={handleSubmit}
+            onSubmit={e => handleSubmit(e)}
             style={{
               display: "flex",
               flexDirection: "column",
@@ -116,7 +107,7 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
               inputProps={{ "data-testid": "desc-input" }}
               required
               value={addItemState.description}
-              onChange={(e) => dispatch({type:'ADDITEM_CATEGORY', payload: e.target.value})}
+              onChange={(e) => dispatch({type:'ADDITEM_DESCRIPTION', payload: e.target.value})}
             />
             <FormControl id="cat-select-label" sx={{ width: '30em', marginBottom: '0.7em' }}>
               <InputLabel id="cat-select-label">Category</InputLabel>
@@ -145,7 +136,7 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
                 data-testid="Price-1"
                 inputProps={{ "data-testid": "price-input" }}
                 value={addItemState.price}
-                onChange={(e) =>dispatch({type:'ADDITEM_DESCRIPTION', payload: e.target.value})}
+                onChange={(e) =>dispatch({type:'ADDITEM_PRICE', payload: e.target.value})}
               />
 
               <TextField
@@ -211,3 +202,39 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
 
 
 
+  //   const formData = {
+  //     title: addItemState.title,
+  //     description: addItemState.description,
+  //     category: addItemState.category,
+  //     price: addItemState.price,
+  //     quantity: addItemState.quantity,
+  //     location: addItemState.location,
+  //     image: addItemState.image
+  //   }
+  //   postItem(formData)
+  //   if (e.target) {
+  //     const target = e.target as HTMLFormElement
+  //     target.reset();
+  //   }
+  //   handleClose()
+  // };
+  // const itemsList = items;
+  // const postItem = async (data: any) => {
+  //   const formData = new FormData();
+  //   formData.append('image', addItemState.image);
+  //   formData.append('title', addItemState.title);
+  //   formData.append('description', addItemState.description);
+  //   formData.append('category', addItemState.category);
+  //   formData.append('price', addItemState.price === undefined ? '0' : addItemState.price);
+  //   formData.append('quantity', addItemState.quantity === undefined ? '0' : addItemState.quantity);
+  //   formData.append('location', addItemState.location);
+  //   console.log('who are you', formData)
+  //   postItem(formData)
+  //   if (e.target) {
+  //     const target = e.target as HTMLFormElement
+  //     target.reset();
+  //   }
+  //   handleClose()
+  // };
+  // const itemsList = items;
+  // const postItem = async (data: FormData) => {

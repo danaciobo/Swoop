@@ -1,4 +1,4 @@
-const Item = require('../models/item')
+import Item from '../models/item'
 // const { Request, Response, NextFunction } =  require('express');
 import { Request, Response } from "express";
 
@@ -36,18 +36,22 @@ export const getItemById = async (req:Request, res:Response) => {
 
 export const createItem = async (req:Request, res:Response) => {
   try {
+    console.log('typescript')
     console.log(req.body)
-      const newItem = await Item.create({
-        title: req.body.title,
-        description: req.body.description,
-        category: req.body.category,
-        price: req.body.price,
-        quantity: req.body.quantity,
-        location: req.body.location,
-        image: req.body.file.path,
-        date_added: Date.now(),
-        // seller: req.body.user._id
-      });
+    const newItem = await req.body
+      // const newItem = await Item.create({
+      //   title: req.body.title,
+      //   description: req.body.description,
+      //   category: req.body.category,
+      //   price: req.body.price,
+      //   quantity: req.body.quantity,
+      //   location: req.body.location,
+      //   //image: req.body.file.path,
+      //   date_added: Date.now(),
+      //   // seller: req.body.user._id
+      // });
+      await Item.create(newItem)
+
       res.status(201).send(newItem);
   } catch (e) {
     console.log(e);
@@ -57,7 +61,6 @@ export const createItem = async (req:Request, res:Response) => {
 
 export const updateItem = async (req:Request, res:Response) => {
   try {
-
   } catch (e) {
     console.log(e);
     res.status(500);
@@ -73,4 +76,5 @@ export const deleteItem = async (req:Request, res:Response) => {
   }
 };
 
-export default {getItemById, getByCategory, deleteItem, updateItem, createItem, getItems}
+export default { getItemById, getByCategory, deleteItem, updateItem, createItem, getItems }
+

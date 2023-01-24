@@ -13,6 +13,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import moment from 'moment'
 // import React from 'react'
 import { Item, ExpandProps } from '../Types/Types';
+import { useDispatch, useSelector } from 'react-redux'
 
 
 // make this something other than any
@@ -29,10 +30,11 @@ const ExpandMore = styled((props: ExpandProps) => {
 
 
 export default function ItemCard({ item }: {item: Item}) {
-  const [expanded, setExpanded] = useState(false);
+  const dispatch = useDispatch()
+  const itemCardState = useSelector((state:any)=>state.ItemCard)
 
   const handleExpandClick = () => {
-    setExpanded(!expanded);
+    dispatch({type:'EXPAND'});
   };
 
   const [itemClicked, setItemClicked] = useState<null | Item>(null);
@@ -70,9 +72,9 @@ export default function ItemCard({ item }: {item: Item}) {
       <CardActions>
       <Typography paragraph sx={{marginLeft: 2}}>More details</Typography>
       <ExpandMore
-          expand={expanded}
+          expand={itemCardState.expanded}
           onClick={handleExpandClick}
-          aria-expanded={expanded}
+          aria-expanded={itemCardState.expanded}
           aria-label="show more"
           data-testid ='ExpandButton'
         >
@@ -80,7 +82,7 @@ export default function ItemCard({ item }: {item: Item}) {
         </ExpandMore>
 
         </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Collapse in={itemCardState.expanded} timeout="auto" unmountOnExit>
         <CardContent>
         <Typography data-testid="seller" paragraph>
             Seller: {item.seller ? item.seller.firstName + ' ' + item.seller.lastName[0] : 'Dana C'}

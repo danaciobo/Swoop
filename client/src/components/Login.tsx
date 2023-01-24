@@ -12,30 +12,17 @@ import React from "react";
 import { User } from "../Types/Types"
 import { useDispatch, useSelector } from 'react-redux';
 
-
-
-
-export default function Login({ setUser }: { setUser: React.Dispatch<React.SetStateAction<User | null>> }) {
+export default function Login() {
 
   const dispatch = useDispatch()
-
   const loginState = useSelector((state: any) => state.Login)
 
-  // const [loggEmail, setLoggEmail] = useState<string>("");
-  // const [loggPassword, setLoggPassword] = useState<string>("");
-  // const [open, setOpen] = useState<boolean>(false);
-
-  // dispatchEvent({type: 'LOGIN_EMAIL', payload:''})
-  // dispatchEvent({type: 'LOGIN_PASSWORD', payload:''})
-  // dispatchEvent({type: 'OPEN', payload:''})
-
-
   const handleClickOpen = () => {
-      dispatch({type: 'OPEN'})
+      dispatch({type: 'LOGG_OPEN'})
   };
 
   const handleClose = () => {
-    dispatch({type: 'OPEN'})
+    dispatch({type: 'LOGG_OPEN'})
   };
 
   const handleSubmit = (e:any) => {
@@ -45,7 +32,7 @@ export default function Login({ setUser }: { setUser: React.Dispatch<React.SetSt
     // setUser(loggedInUser)
     // setLoggEmail('');
     // setLoggPassword('');
-    // handleClose();
+    handleClose();
   };
 
 

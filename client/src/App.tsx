@@ -14,20 +14,10 @@ import Profile from './components/Profile';
 import Login from './components/Login';
 import { useEffect, useState } from 'react';
 import { Item, User } from './Types/Types';
-import { Provider } from 'react-redux';
-import {compose, createStore} from 'redux'
-import Reducer from './Reducer'
+import { useAuth0 } from '@auth0/auth0-react';
 
+import { useDispatch, useSelector } from 'react-redux';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-  }
-}
-
-const store = createStore(Reducer, composeEnhancers())
 
 const myURL = "http://localhost:3005/items"
 
@@ -50,11 +40,16 @@ const theme = createTheme({
 });
 
 function App() {
-  const [items, setItems] = useState<Item[]>([]);
-  const [filteredItems, setFilteredItems] = useState<Item[]>([])
-  const [user, setUser] = useState<null | User>(null)
-  useEffect(() => {
 
+  const { isLoading, error } = useAuth0();
+  // const [items, setItems] = useState<Item[]>([]);
+  // const [filteredItems, setFilteredItems] = useState<Item[]>([])
+  // const [user, setUser] = useState<null | User>(null)
+
+  const dispatch = useDispatch();
+  const appState = useSelector((state: any) => state.App)
+
+  useEffect(() => {
     const getData = async () => {
       try {
         const response = await fetch(myURL);
@@ -64,12 +59,10 @@ function App() {
           );
         }
         const actualData = await response.json();
-        console.log(items)
         if (actualData) {
-          setItems(actualData);
-          setFilteredItems(actualData)
+          dispatch({ type: 'APP_ITEMS', payload: actualData })
+          dispatch({type: 'APP_FILTERED_ITEMS', payload: actualData})
         }
-
       } catch (err) {
         console.log(err)
       }
@@ -79,25 +72,31 @@ function App() {
 
 
   return (
-    <Provider store={store}>
+
     <ThemeProvider theme={theme}>
       {/* <DataProvider> */}
-      <Navbar setItems={setItems} items={items} setFilteredItems={setFilteredItems} user={user} setUser={setUser}/>
+      <Navbar items={appState.items} user={appState.user} />
+       {error && <p>Authentication Error</p>}
+        {!error && isLoading && <p>Loading...</p>}
       {/* <ItemList items={items} /> */}
+
+      {!error && !isLoading && (
+          <>
       <Banner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<ItemList items={filteredItems}/>} />
-          <Route path="/Profile" element={<Profile items={items} /*user={user} has it own user state, change after redux*/ />} />
+          <Route path="/" element={<ItemList items={appState.filteredItems}/>} />
+          <Route path="/Profile" element={<Profile items={appState.items} /*user={user} has it own user state, change after redux*/ />} />
           {/* <Route path="/AddItem" element={<AddItem />} /> */}
-          <Route path="/Login" element={<Login setUser={setUser}/>} />
+          <Route path="/Login" element={<Login/>} />
           <Route path="/Register" element={<Register />} />
         </Routes>
       </BrowserRouter >
-      <Footer />
+          <Footer />
+        </>
+          )}
       {/* </DataProvider> */}
       </ThemeProvider>
-      </Provider>
   );
 }
 

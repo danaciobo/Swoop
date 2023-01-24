@@ -7,19 +7,21 @@ import ListItem from '@mui/material/ListItem';
 import React from "react";
 import ListItemText from '@mui/material/ListItemText';
 import { User, Item } from "../Types/Types";
+import { useDispatch, useSelector } from 'react-redux';
 
 
 
 
 export default function Profile({items}: {items: Item[]}) {
+  const dispatch = useDispatch()
 
-  const [User, setUser] = useState<User>()
+  const profileState = useSelector((state: any) => state.Profile)
 
   useEffect(() => {
     getUserById('63c983992fed3945324e68f9')
       .then(response => {
         console.log(response)
-        setUser(response)
+        dispatch({type: 'PROFILE_USER', payload: response})
       })
       .catch(err => console.log(err))
   }, [])
@@ -28,7 +30,7 @@ export default function Profile({items}: {items: Item[]}) {
   return (
     <Container >
       <Typography variant='h4' mt={4}>
-        Welcome {User?.firstName}
+        Welcome {profileState.User?.firstName}
       </Typography>
       <Box
         sx={{
@@ -53,14 +55,14 @@ export default function Profile({items}: {items: Item[]}) {
             </CardMedia>
             <CardContent sx={{ alignFont: 'center' }}>
               <Typography gutterBottom variant="h5" component="div" align='center'>
-                {User?.firstName + ' ' + User?.lastName}
+                {profileState.User?.firstName + ' ' + profileState.User?.lastName}
               </Typography>
               <List sx={{ width: '100%', maxWidth: 360, marginTop: 1 }}>
                 <ListItem>
-                  <ListItemText primary="Email address" secondary={User?.email} />
+                  <ListItemText primary="Email address" secondary={profileState.User?.email} />
                 </ListItem>
                 <ListItem>
-                  <ListItemText primary="Phone number" secondary={User?.phoneNumber} />
+                  <ListItemText primary="Phone number" secondary={profileState.User?.phoneNumber} />
                 </ListItem>
               </List>
             </CardContent>

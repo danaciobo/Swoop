@@ -10,7 +10,7 @@ const initialStateRegistration = {
 }
 
 const initialStateLogin = {
-  open: true,
+  open: false,
   loggEmail: '',
   loggPassword: ''
 }
@@ -32,18 +32,53 @@ const initialAppState = {
   user: null
 }
 
+const initialItemCardState = {
+  expanded: false
+}
+
+const InitialProfileState = {
+  User: {
+    email: '',
+    firstName: '',
+    lastName: '',
+    phoneNumber: ''
+  }
+}
+
+const ItemCard  = (state:any=initialItemCardState, action:any)=> {
+  switch (action.type) {
+    case 'EXPAND':
+      return {...state, expanded: !state.expanded}
+    default:
+      return state;
+  }
+}
+
+const Profile = (state:any = InitialProfileState, action:any) => {
+  switch (action.type) {
+    case 'PROFILE_USER':
+      return {...state, User: action.payload}
+    default:
+      return state;
+  }
+}
+
 const App = (state:any=initialAppState, action:any) => {
   switch (action.type) {
     case 'APP_ITEMS':
-      return {...state, items: action.payload};
+      return { ...state, items: [...state.items, action.payload] };
+    case 'APP_FILTERED_ITEMS':
+      return { ...state, filteredItems: [...state.filteredItems, action.payload]} ;
+    case 'APP_USER':
+      return {...state, User: action.payload}
     default:
-      break;
+      return state;
   }
 }
 
 const Login = (state: any = initialStateLogin, action: any) => {
   switch (action.type) {
-    case 'OPEN':
+    case 'LOGG_OPEN':
       return { ...state, open: !state.open }
     case 'LOGG_EMAIL':
       return { ...state, loggEmail: action.payload }
@@ -73,7 +108,7 @@ const Registration = (state:any=initialStateRegistration, action: any) => {
   }
 }
 
-const AddItem = (state:any = initialAddItemState, action:any) => {
+const addItem = (state:any = initialAddItemState, action:any) => {
   switch (action.type) {
     case 'ADDITEM_TITLE':
       return {...state, title: action.payload}
@@ -88,18 +123,22 @@ const AddItem = (state:any = initialAddItemState, action:any) => {
     case 'ADDITEM_CATEGORY':
       return {...state, category: action.payload}
     case 'ADDITEM_IMAGE':
-      return {...state, image: action.payload}
+      const imgURL = URL.createObjectURL(action.payload)
+      return {...state, image: imgURL}
     case 'ADDITEM_OPEN':
       return {...state, open: !state.open}
     default:
-      break;
+      return state;
   }
 }
 
 const Reducer = combineReducers({
   Registration,
   Login,
-  AddItem
+  addItem,
+  App,
+  Profile,
+  ItemCard
 })
 
 export default Reducer

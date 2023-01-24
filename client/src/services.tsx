@@ -1,5 +1,5 @@
 import {User} from './Types/Types'
-const baseURL = "http://localhost:3005"
+const baseURL = "http://localhost:3006"
 
 // export const getData = async () => {
 //   try {
@@ -20,19 +20,19 @@ const baseURL = "http://localhost:3005"
 //   }
 // }
 
-export const addItem = async (data: FormData) => {
-  try {
-    const response = await fetch(`${baseURL}/items`,{
+
+export const addItem = async (data: any) => {
+   console.log("data in services", data)
+    return fetch(`${baseURL}/items`,{
       method: 'POST',
-      // headers: { 'Content-Type': 'multipart/form-data' },
-      body: data
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+      credentials: 'include',
+      mode:'cors'
     })
-    return response.json();
-  }
-   catch (err) {
-  console.log(err)
-  return false
-}
+    .then(data => data.json())
+    .then(result => result)
+    // console.log("this is in the services req", response.json())
 }
 
 export const registerUser = async (userInfo: User) => {
