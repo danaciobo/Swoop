@@ -9,11 +9,9 @@ import Stack from '@mui/material/Stack';
 
 import EditItem from "./EditItem";
 import { useNavigate } from "react-router-dom";
-export default function ItemDetails({ id, item , setCurrentItem, items, setItems}) {
 
+export default function ItemDetails({id, item, setCurrentItem,items ,setItems}) {
   const navigate = useNavigate()
-
-export default function ItemDetails({id, item, setCurrentItem }) {
   useEffect(() => {
     getItemById(id)
       .then((response) => {
