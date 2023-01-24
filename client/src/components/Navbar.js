@@ -1,4 +1,23 @@
 
+import { useState } from "react";
+import AppBar from "@mui/material/AppBar";
+import { styled, alpha } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
+import Logo from "../Swoop.jpg";
+import { Menu, MenuItem, Stack } from "@mui/material";
+import { Link } from "react-router-dom";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import AddItem from "./AddItem";
+import Login from "./Login";
+import Logout from "./Logout";
+
 import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import { styled, alpha } from '@mui/material/styles';
@@ -7,8 +26,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
+
 import MenuIcon from '@mui/icons-material/Menu';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
@@ -17,19 +38,27 @@ import { Menu, MenuItem, Stack } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 
+
 import AddItem from './AddItem';
 import Login from './Login';
 import Logout from './Logout';
 
 
+import AddItem from './AddItem';
+import Login from './Login';
+import Logout from './Logout';
+
 const pages = [
-  'All',
-  'Clothes',
-  'Accessories',
-  'Home',
-  'Electronics',
-  'Hobbies',
-  'Freebies',
+
+  "All",
+  "Clothes",
+  "Accessories",
+  "Home",
+  "Electronics",
+  "Hobbies",
+  "Freebies",
+  "Profile"
+
 ];
 
 const Search = styled('div')(({ theme }) => ({
@@ -77,7 +106,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+
 export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
+
 
   const [anchorElNav, setAnchorElNav] = useState(null);
 
@@ -159,13 +190,19 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
               <SearchIcon />
             </SearchIconWrapper>
           </Search>
-          <Stack direction='row' spacing={2}>
+
+          <ShoppingCartIcon />
+          
+          <Stack direction="row" spacing={2}>
+
             <AddItem
               setItems={setItems}
               setFilteredItems={setFilteredItems}
               items={items}
             />
-            <Login setUser ={setUser} />
+
+            <Login setUser = {setUser}/>
+
             <Logout />
 
             <Link
@@ -221,7 +258,10 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign='center'>
                     <Link
+
                       style={{ textDecoration: 'none', color: 'white' }}
+ f43a49d1c3cb1f96c304daf25b459dc4ff880599
+
                       to={`/${page}`}
                     >
                       {page}
@@ -252,6 +292,7 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
               display: { xs: 'none', md: 'flex', justifyContent: 'center' },
             }}
           >
+
             {pages.map((page) => (
               <Button
                 key={page}

@@ -10,6 +10,7 @@ import {
   Container,
   Grid,
   Typography,
+
   IconButton,
   Input,
   FormControl,
@@ -98,7 +99,9 @@ export default function Profile({ items, user, setCurrentItem }) {
                 component='div'
                 align='center'
               >
-                {user.name}
+
+                {user.given_name + " " + user.family_name}
+
               </Typography>
               <List sx={{ width: '100%', maxWidth: 360, marginTop: 1 }}>
                 <form onSubmit={handleSubmit}>

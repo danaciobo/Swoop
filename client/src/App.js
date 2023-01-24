@@ -1,3 +1,4 @@
+
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Banner from './components/Banner';
@@ -10,6 +11,10 @@ import { useEffect, useState } from 'react';
 import Payment from './Payment';
 import Completion from './Completion';
 import ItemDetails from './components/ItemDetails';
+import WebcamCapture from "./components/WebcamCapture";
+
+ f43a49d1c3cb1f96c304daf25b459dc4ff880599
+
 
 const myURL = 'http://localhost:4001/items';
 
@@ -33,6 +38,7 @@ function App() {
 
   const [currentItem, setCurrentItem] = useState({});
   useEffect(() => {
+    console.log('in App' ,user)
     const getData = async () => {
       try {
         const response = await fetch(myURL);
@@ -91,6 +97,11 @@ function App() {
               />
             }
           />
+
+
+ f43a49d1c3cb1f96c304daf25b459dc4ff880599
+
+
 
           <Route
             path='/ItemDetails'

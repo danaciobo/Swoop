@@ -52,3 +52,22 @@ exports.createProfile = async (req, res) => {
     }
   };
   
+  exports.updateUser = async (req,res) =>{
+    console.log('man is in the controller get me!')
+    try {
+      const updatedUser = await User.update(req.body.updates, {
+        where: {
+          id: req.body.userId,
+        },
+      });
+      if (!updatedUser) {
+        res.send({ error: "unable to update item" });
+      }
+      res.status(202).send(updatedUser);
+    } catch (e) {
+      console.log(e);
+      res.status(500).send();
+
+    }
+  };
+  
