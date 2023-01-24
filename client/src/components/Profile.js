@@ -19,7 +19,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Profile({items, user, setCurrentItem}) {
   const [editButton, setEditButton] = useState(false);
@@ -42,6 +42,8 @@ export default function Profile({items, user, setCurrentItem}) {
     setPhoneNumber('');
     setEmail('');
   }
+
+  console.log(updatedUserDetails);
 
   return (
     <Container>

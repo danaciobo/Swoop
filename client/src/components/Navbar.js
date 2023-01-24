@@ -20,6 +20,7 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const pages = [
+
   'All',
   'Clothes',
   'Accessories',
@@ -118,12 +119,15 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
 
   const handleFilterCategory = (e) => {
     e.preventDefault();
+    console.log(e);
     const activeCategory = e.target.value;
     console.log(activeCategory);
     const filtered = items.filter(
       (item) => item.category.toLowerCase() === activeCategory.toLowerCase()
     );
+    console.log(filtered)
     if (activeCategory.toLowerCase() === 'all') {
+      console.log(items);
       setFilteredItems(items);
     } else {
       setFilteredItems(filtered);
@@ -172,7 +176,9 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
             </SearchIconWrapper>
           </Search>
 
-          <Stack direction='row' spacing={2}>
+
+          
+          <Stack direction="row" spacing={2}>
             <AddItem
               setItems={setItems}
               setFilteredItems={setFilteredItems}
@@ -192,12 +198,11 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
                 fontSize='large'
                 sx={{ display: { xs: 'none', md: 'flex', color: '#E25F1C' } }}
               >
-
-                
-              </ShoppingCartIcon>
               
+              </ShoppingCartIcon>
+           
             </Link>
-
+            
             <Link
               style={{ textDecoration: 'none', color: 'white' }}
               to={'/profile'}
@@ -223,6 +228,9 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
             >
               <MenuIcon />
             </IconButton>
+
+            
+
           </Box>
           <Search
             sx={{
@@ -252,7 +260,12 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
                 onClick={handleFilterCategory}
                 sx={{ my: 2, color: 'white', display: 'block', marginRight: 5 }}
               >
-                {page}
+                <Link
+                  style={{ textDecoration: 'none', color: 'white' }}
+                  to={`/${page}`}
+                >
+                  {page}
+                </Link>
               </Button>
             ))}
           </Box>

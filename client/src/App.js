@@ -95,6 +95,8 @@ function App() {
                 items={filteredItems}
                 currentItem={currentItem}
                 setCurrentItem={setCurrentItem}
+                user={user}
+                setUser = {setUser}
               />
             }
           />
@@ -123,7 +125,8 @@ function App() {
           <Route
             path= {`/ItemDetails/${id}`}
             element={
-              <ItemDetails id= {id} item={currentItem} setCurrentItem={setCurrentItem} />
+
+              <ItemDetails id ={id} item={currentItem} setCurrentItem={setCurrentItem} items={items} setItems ={setItems}/>
             }
           />
         </Routes>
