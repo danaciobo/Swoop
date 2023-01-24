@@ -1,4 +1,3 @@
-
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Banner from './components/Banner';
@@ -34,7 +33,6 @@ function App() {
 
   const [currentItem, setCurrentItem] = useState({});
   useEffect(() => {
-    
     const getData = async () => {
       try {
         const response = await fetch(myURL);
@@ -47,7 +45,7 @@ function App() {
         if (actualData) {
           setItems(actualData);
           setFilteredItems(actualData);
-          setUser(user)
+          setUser(user);
         }
       } catch (err) {
         console.log(err);
@@ -70,7 +68,9 @@ function App() {
         <Banner />
 
         <Routes>
-          <Route path='/' element={
+          <Route
+            path='/'
+            element={
               <ItemList
                 items={filteredItems}
                 currentItem={currentItem}
@@ -93,6 +93,16 @@ function App() {
               />
             }
           />
+            {/* <Route
+            path='/Accessories'
+            element={
+              <ItemList
+                items={filteredItems}
+                currentItem={currentItem}
+                setCurrentItem={setCurrentItem}
+              />
+            } */}
+          {/* /> */}
 
           <Route
             path='/Profile'
@@ -104,7 +114,6 @@ function App() {
               />
             }
           />
-
 
           <Route
             path='/ItemDetails'

@@ -21,7 +21,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { useEffect, useState } from 'react';
 
-export default function Profile({ items, user, setCurrentItem }) {
+export default function Profile({ items, user, setCurrentItem}) {
   const [editButton, setEditButton] = useState(false);
   const [updatedUserDetails, setUpdatedUserDetails] = useState({});
 
@@ -40,10 +40,7 @@ export default function Profile({ items, user, setCurrentItem }) {
     setEmail('');
   }
 
-
-  useEffect(()=>{
-    console.log(user)
-  },[])
+  console.log(updatedUserDetails);
 
   return (
     <Container>
