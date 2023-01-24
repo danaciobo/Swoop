@@ -86,7 +86,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
+export default function Navbar({ setItems, setFilteredItems, items, setUser, cart }) {
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
@@ -202,7 +202,7 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
               </ShoppingCartIcon>
            
             </Link>
-            
+            <p>{cart.length}</p>
             <Link
               style={{ textDecoration: 'none', color: 'white' }}
               to={'/profile'}
