@@ -7,11 +7,10 @@ import Banner from './components/Banner';
 import Navbar from './components/Navbar';
 import { createTheme, ThemeProvider } from '@mui/material';
 import ItemList from './components/ItemsList';
-import Register from './components/Register';
 import Footer from './components/Footer'
 import AddItem from './components/AddItem';
 import Profile from './components/Profile';
-import Login from './components/Login';
+import LoginButton from './components/LoginButton';
 import { useEffect, useState } from 'react';
 import { Item, User } from './Types/Types';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -88,8 +87,7 @@ function App() {
           <Route path="/" element={<ItemList items={appState.filteredItems}/>} />
           <Route path="/Profile" element={<Profile items={appState.items} /*user={user} has it own user state, change after redux*/ />} />
           {/* <Route path="/AddItem" element={<AddItem />} /> */}
-          <Route path="/Login" element={<Login/>} />
-          <Route path="/Register" element={<Register />} />
+          <Route path="/Login" element={<LoginButton/>} />
         </Routes>
       </BrowserRouter >
           <Footer />

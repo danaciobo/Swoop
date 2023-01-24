@@ -12,7 +12,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Logo from '../Swoop.jpg';
 import { Link, Menu, MenuItem, Stack } from '@mui/material';
 import AddItem from './AddItem';
-import Login from './Login';
+import Login from './LoginButton';
 import { grey } from '@mui/material/colors';
 import React from 'react';
 import {User, Item} from '../Types/Types'
@@ -133,7 +133,8 @@ export default function Navbar({ items, user }: {
           <Stack direction="row" spacing={2} >
             {/* help request about this cause we are confused */}
             <AddItem data-testid="addItemComp"  items={items}/>
-            <Login data-testid = 'login' />
+            <Login data-testid = 'login'
+             />
           </Stack>
         </Toolbar>
 

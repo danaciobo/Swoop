@@ -7,7 +7,6 @@ import {compose, createStore} from 'redux'
 import Reducer from './reducer'
 import { Auth0Provider } from '@auth0/auth0-react'
 
-
 const domain:string | undefined = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId:string | undefined = process.env.REACT_APP_AUTH0_CLIENT_ID
 
@@ -25,9 +24,11 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
     <Auth0Provider
-      domain={domain as string}
-      clientId={clientId as string}
-      redirectUri={window.location.origin}
+      domain={'dev-sydr5gofiqca2n6a.us.auth0.com'}
+      clientId={'gv5w1xrNQJAi0AJMyLkIB87QlSjYDO0a'}
+      authorizationParams={{
+      redirect_uri: window.location.origin,
+      }}
     >
       <Provider store={store}>
         <App />
