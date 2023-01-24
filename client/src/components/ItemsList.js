@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { Container, Grid } from "@mui/material";
 import ItemCard from "./ItemCard";
 // import { getUserByEmail } from "../services";
-export default function ItemList({ user, items, setCurrentItem, setUser }) {
-  
-  
+export default function ItemList({ user, items, setCurrentItem, setUser, id }) {
+
+
   return (
     <Container
       maxWidth={false}
@@ -25,8 +25,8 @@ export default function ItemList({ user, items, setCurrentItem, setUser }) {
           items
             .sort((a, b) => new Date(b.date_added) - new Date(a.date_added))
             .map((item) => (
-              <Grid item key={item._id}>
-                <ItemCard item={item} setCurrentItem={setCurrentItem} />
+              <Grid item key={item.id}>
+                <ItemCard id={id} item={item} setCurrentItem={setCurrentItem} />
               </Grid>
             ))
         ) : (

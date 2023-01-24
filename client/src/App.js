@@ -29,8 +29,10 @@ function App() {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
 
+  
+  
   const [user, setUser] = useState({});
-
+  
   const [currentItem, setCurrentItem] = useState({});
   useEffect(() => {
     const getData = async () => {
@@ -39,23 +41,26 @@ function App() {
         if (!response.ok) {
           throw new Error(
             `This is an HTTP error: The status is ${response.status}`
-          );
+            );
+          }
+          const actualData = await response.json();
+          if (actualData) {
+            setItems(actualData);
+            setFilteredItems(actualData);
+            setUser(user);
+          }
+        } catch (err) {
+          console.log(err);
         }
-        const actualData = await response.json();
-        if (actualData) {
-          setItems(actualData);
-          setFilteredItems(actualData);
-          setUser(user);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getData();
-  }, []);
-
-  return (
-    <>
+      };
+      getData();
+    }, []);
+    
+    const id = currentItem.id
+    console.log(id)
+    console.log(currentItem)
+    return (
+      <>
       <ThemeProvider theme={theme}>
         <Navbar
           setItems={setItems}
@@ -72,6 +77,7 @@ function App() {
             path='/'
             element={
               <ItemList
+                id={id}
                 items={filteredItems}
                 currentItem={currentItem}
                 setCurrentItem={setCurrentItem}
@@ -85,6 +91,7 @@ function App() {
             path='/All'
             element={
               <ItemList
+                id={id}
                 items={filteredItems}
                 currentItem={currentItem}
                 setCurrentItem={setCurrentItem}
@@ -114,9 +121,9 @@ function App() {
           />
 
           <Route
-            path='/ItemDetails'
+            path= {`/ItemDetails/${id}`}
             element={
-              <ItemDetails item={currentItem} setCurrentItem={setCurrentItem} />
+              <ItemDetails id= {id} item={currentItem} setCurrentItem={setCurrentItem} />
             }
           />
         </Routes>

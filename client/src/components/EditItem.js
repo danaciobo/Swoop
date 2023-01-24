@@ -1,23 +1,22 @@
-import { useState } from "react";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import { IconButton } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import { updateItem } from "../services";
-import AddIcon from "@mui/icons-material/Add";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import { useState } from 'react';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import { IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import { updateItem } from '../services';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import EditIcon from '@mui/icons-material/Edit';
 
-export default function EditItem({ setItems, setFilteredItems, items,
-id, item, setCurrentItem }) {
+export default function EditItem({ items, item }) {
+
   const [title, setTitle] = useState(item.title);
   const [description, setDescription] = useState(item.description);
   const [price, setPrice] = useState(item.price);
@@ -27,19 +26,19 @@ id, item, setCurrentItem }) {
   const [image, setImage] = useState(item.image);
   const [open, setOpen] = useState(false);
   const [previewSource, setPreviewSource] = useState();
-  const [fileInputState] = useState("");
+  const [fileInputState] = useState('');
   const handleFileInputChange = (e) => {
     console.log(e);
     const file = e;
     previewFile(file);
   };
-  console.log(item)
+
   const previewFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setImage(reader.result);
-      setPreviewSource(reader.result)
+      setPreviewSource(reader.result);
     };
   };
   const handleClickOpen = () => {
@@ -55,18 +54,24 @@ id, item, setCurrentItem }) {
 
     const formData = new FormData();
 
-    formData.append("image", image);
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("category", category);
-    formData.append("price", price);
-    formData.append("quantity", quantity);
-    formData.append("location", location);
-    console.log(formData)
-    editItem(item.id, {title, description, category, price, quantity, location, image});
+    formData.append('image', image);
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('category', category);
+    formData.append('price', price);
+    formData.append('quantity', quantity);
+    formData.append('location', location);
 
+    editItem(item.id, {
+      title,
+      description,
+      category,
+      price,
+      quantity,
+      location,
+      image,
+    });
 
-    // e.target.reset();
     handleClose();
   };
   const itemsList = items;
@@ -74,22 +79,17 @@ id, item, setCurrentItem }) {
   const editItem = async (id, data) => {
     try {
       const edit = await updateItem(id, data);
-      console.log(edit)
-      console.log(id)
-
     } catch (e) {
       console.log(e);
     }
   };
 
-
-
   return (
     <div>
       <Button
-        variant="contained"
+        variant='contained'
         endIcon={<EditIcon />}
-        sx={{ display: { xs: "none", md: "flex", background: "#E25F1C" } }}
+        sx={{ display: { xs: 'none', md: 'flex', background: '#E25F1C' } }}
         onClick={handleClickOpen}
       >
         EDIT
@@ -97,85 +97,85 @@ id, item, setCurrentItem }) {
       <Dialog open={open} onClose={handleClose}>
         <DialogActions>
           <IconButton sx={{ padding: 0 }} onClick={handleClose}>
-            <CloseIcon sx={{ fontSize: "1.3em" }} />
+            <CloseIcon sx={{ fontSize: '1.3em' }} />
           </IconButton>
         </DialogActions>
-        <DialogTitle sx={{ textAlign: "center", padding: 0 }}>
+        <DialogTitle sx={{ textAlign: 'center', padding: 0 }}>
           Edit your item
         </DialogTitle>
         <DialogContent>
           <form
             onSubmit={handleSubmit}
             style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-around",
-              alignItems: "center",
-              padding: "2rem",
-              maxWidth: "600px",
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              padding: '2rem',
+              maxWidth: '600px',
             }}
           >
             <TextField
-              sx={{ width: "30em", marginBottom: "0.7em" }}
-              label="Title"
-              type="text"
-              variant="outlined"
+              sx={{ width: '30em', marginBottom: '0.7em' }}
+              label='Title'
+              type='text'
+              variant='outlined'
               required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
             <TextField
-              sx={{ width: "30em", marginBottom: "0.7em" }}
+              sx={{ width: '30em', marginBottom: '0.7em' }}
               multiline
               rows={5}
-              label="Description"
-              variant="standard"
+              label='Description'
+              variant='standard'
               required
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
             <FormControl
-              id="cat-select-label"
-              sx={{ width: "30em", marginBottom: "0.7em" }}
+              id='cat-select-label'
+              sx={{ width: '30em', marginBottom: '0.7em' }}
             >
-              <InputLabel id="cat-select-label">Category</InputLabel>
+              <InputLabel id='cat-select-label'>Category</InputLabel>
               <Select
-                labelId="cat-select-label"
+                labelId='cat-select-label'
                 value={category}
-                label="Category"
+                label='Category'
                 onChange={(e) => setCategory(e.target.value)}
               >
-                <MenuItem value={"clothes"}>Clothes</MenuItem>
-                <MenuItem value={"accessories"}>Accesories</MenuItem>
-                <MenuItem value={"home"}>Home & Garden</MenuItem>
-                <MenuItem value={"electronics"}>Electronics</MenuItem>
-                <MenuItem value={"hobbies"}>Hobbies</MenuItem>
-                <MenuItem value={"freebies"}>Freebies</MenuItem>
+                <MenuItem value={'clothes'}>Clothes</MenuItem>
+                <MenuItem value={'accessories'}>Accesories</MenuItem>
+                <MenuItem value={'home'}>Home & Garden</MenuItem>
+                <MenuItem value={'electronics'}>Electronics</MenuItem>
+                <MenuItem value={'hobbies'}>Hobbies</MenuItem>
+                <MenuItem value={'freebies'}>Freebies</MenuItem>
               </Select>
             </FormControl>
-            <div display="flex" flexDirection="rows">
+            <div display='flex' flexDirection='rows'>
               <TextField
-                sx={{ width: "10em", marginBottom: "0.7em" }}
-                label="Price"
-                variant="outlined"
+                sx={{ width: '10em', marginBottom: '0.7em' }}
+                label='Price'
+                variant='outlined'
                 required
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
               />
 
               <TextField
-                sx={{ width: "10em", marginBottom: "0.7em" }}
-                label="Quantity"
-                variant="outlined"
+                sx={{ width: '10em', marginBottom: '0.7em' }}
+                label='Quantity'
+                variant='outlined'
                 required
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
               />
 
               <TextField
-                sx={{ width: "10em", marginBottom: "0.7em" }}
-                label="Location"
-                variant="outlined"
+                sx={{ width: '10em', marginBottom: '0.7em' }}
+                label='Location'
+                variant='outlined'
                 required
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
@@ -183,40 +183,40 @@ id, item, setCurrentItem }) {
             </div>
 
             <input
-              accept="image/*"
-              style={{ display: "none" }}
-              id="contained-button-file"
+              accept='image/*'
+              style={{ display: 'none' }}
+              id='contained-button-file'
               value={fileInputState}
               multiple
-              type="file"
+              type='file'
               onChange={(e) => handleFileInputChange(e.target.files[0])}
-              margin="2"
+              margin='2'
             />
 
-            <label htmlFor="contained-button-file">
-              <Button variant="contained" component="span">
+            <label htmlFor='contained-button-file'>
+              <Button variant='contained' component='span'>
                 Upload
               </Button>
               <IconButton
-                color="primary"
-                aria-label="upload picture"
-                component="label"
+                color='primary'
+                aria-label='upload picture'
+                component='label'
               >
                 <PhotoCamera />
               </IconButton>
             </label>
 
             <Button
-              sx={{ width: "16em", height: "3em", margin: 1 }}
-              variant="contained"
-              color="primary"
-              type="submit"
+              sx={{ width: '16em', height: '3em', margin: 1 }}
+              variant='contained'
+              color='primary'
+              type='submit'
             >
               Edit item
             </Button>
           </form>
           {previewSource && (
-            <img src={previewSource} alt="chosen" style={{ height: "200px" }} />
+            <img src={previewSource} alt='chosen' style={{ height: '200px' }} />
           )}
         </DialogContent>
       </Dialog>
