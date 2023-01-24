@@ -36,7 +36,7 @@ function App() {
 
   const [currentItem, setCurrentItem] = useState({});
   useEffect(() => {
-    console.log('in App' ,user)
+    
     const getData = async () => {
       try {
         const response = await fetch(myURL);
