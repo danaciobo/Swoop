@@ -29,24 +29,24 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function ItemCard({ item, setCurrentItem }) {
-  const [expanded, setExpanded] = useState(false);
+export default function ItemCard({item, setCurrentItem, cart, setCart }) {
 
+  const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
   const [itemClicked, setItemClicked] = useState(null);
-
   const handleClick = (e) => {
     setItemClicked(e);
     setCurrentItem(item);
   };
-
-  const handleAddToShoppingCart = (e) => {
-    console.log('hello');
-  };
-
+const addToCart = ()=>{
+const oldCart = cart
+console.log(cart, 'inside cart')
+// if(!oldCart.includes(item)){
+setCart([...oldCart, item])
+localStorage.setItem('myCart', JSON.stringify(cart))
+}
   return (
     <>
       <Card sx={{ width: 250, height: 'auto' }}>
@@ -66,8 +66,9 @@ export default function ItemCard({ item, setCurrentItem }) {
           title={'£' + item.price}
           subheader={item.title}
           action={
-            <Button variant='contained' sx={{ background: '#E25F1C' }}>
-              <ShoppingCartIcon onClick={() => handleAddToShoppingCart(item)} />
+            <Button variant="contained" sx={{ background: "#E25F1C" }} onClick = {addToCart}>
+              <ShoppingCartIcon />
+              
             </Button>
           }
         />

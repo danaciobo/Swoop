@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import Payment from './Payment';
 import Completion from './Completion';
 import ItemDetails from './components/ItemDetails';
+import ShoppingCart from './components/ShoppingCart';
 
 const myURL = 'http://localhost:4001/items';
 
@@ -28,9 +29,7 @@ const theme = createTheme({
 function App() {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
-
-  
-  
+  const [cart, setCart] = useState(JSON.parse(localStorage.getItem('myCart'))||[])
   const [user, setUser] = useState({});
   
   const [currentItem, setCurrentItem] = useState({});
@@ -68,6 +67,7 @@ function App() {
           setFilteredItems={setFilteredItems}
           user={user}
           setUser={setUser}
+          cart={cart}
         />
 
         <Banner />
@@ -83,6 +83,8 @@ function App() {
                 setCurrentItem={setCurrentItem}
                 user={user}
                 setUser={setUser}
+                cart = {cart}
+                setCart = {setCart}
               />
             }
           />
@@ -129,6 +131,7 @@ function App() {
               <ItemDetails id ={id} item={currentItem} setCurrentItem={setCurrentItem} items={items} setItems ={setItems}/>
             }
           />
+          <Route path = 'ShoppingCart' element = {<ShoppingCart cart ={cart} setCart={setCart} />} />
         </Routes>
         <Footer />
       </ThemeProvider>
