@@ -1,18 +1,4 @@
-<<<<<<< HEAD
-import "./App.css";
-import { Route, Routes } from "react-router-dom";
-import Banner from "./components/Banner";
-import Navbar from "./components/Navbar";
-import { createTheme, ThemeProvider } from "@mui/material";
-import ItemList from "./components/ItemsList";
-import Footer from "./components/Footer";
-import Profile from "./components/Profile";
-import { useEffect, useState } from "react";
-import Payment from "./Payment";
-import Completion from "./Completion";
-import ItemDetails from "./components/ItemDetails";
-import WebcamCapture from "./components/WebcamCapture";
-=======
+
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Banner from './components/Banner';
@@ -25,7 +11,10 @@ import { useEffect, useState } from 'react';
 import Payment from './Payment';
 import Completion from './Completion';
 import ItemDetails from './components/ItemDetails';
->>>>>>> f43a49d1c3cb1f96c304daf25b459dc4ff880599
+import WebcamCapture from "./components/WebcamCapture";
+
+ f43a49d1c3cb1f96c304daf25b459dc4ff880599
+
 
 const myURL = 'http://localhost:4001/items';
 
@@ -62,6 +51,7 @@ function App() {
         if (actualData) {
           setItems(actualData);
           setFilteredItems(actualData);
+          setUser(user)
         }
       } catch (err) {
         console.log(err);
@@ -107,12 +97,12 @@ function App() {
               />
             }
           />
-<<<<<<< HEAD
-        <Route path = '/camera' element= {<WebcamCapture />} />
-         
-=======
 
->>>>>>> f43a49d1c3cb1f96c304daf25b459dc4ff880599
+
+ f43a49d1c3cb1f96c304daf25b459dc4ff880599
+
+
+
           <Route
             path='/ItemDetails'
             element={

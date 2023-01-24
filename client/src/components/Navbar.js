@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import { styled, alpha } from "@mui/material/styles";
@@ -17,7 +17,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AddItem from "./AddItem";
 import Login from "./Login";
 import Logout from "./Logout";
-=======
+
 import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import { styled, alpha } from '@mui/material/styles';
@@ -26,20 +26,30 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+
 import MenuIcon from '@mui/icons-material/Menu';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import Logo from '../Swoop.jpg';
 import { Menu, MenuItem, Stack } from '@mui/material';
 import { Link } from 'react-router-dom';
->>>>>>> f43a49d1c3cb1f96c304daf25b459dc4ff880599
+
+
+
+import AddItem from './AddItem';
+import Login from './Login';
+import Logout from './Logout';
+
 
 import AddItem from './AddItem';
 import Login from './Login';
 import Logout from './Logout';
 
 const pages = [
-<<<<<<< HEAD
+
   "All",
   "Clothes",
   "Accessories",
@@ -48,15 +58,7 @@ const pages = [
   "Hobbies",
   "Freebies",
   "Profile"
-=======
-  'All',
-  'Clothes',
-  'Accessories',
-  'Home',
-  'Electronics',
-  'Hobbies',
-  'Freebies',
->>>>>>> f43a49d1c3cb1f96c304daf25b459dc4ff880599
+
 ];
 
 const Search = styled('div')(({ theme }) => ({
@@ -104,11 +106,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-<<<<<<< HEAD
-export default function Navbar({setUser, setItems, setFilteredItems, items}) {
-=======
-export default function Navbar({ setItems, setFilteredItems, items }) {
->>>>>>> f43a49d1c3cb1f96c304daf25b459dc4ff880599
+
+export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
+
+
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (e) => {
@@ -189,20 +190,37 @@ export default function Navbar({ setItems, setFilteredItems, items }) {
               <SearchIcon />
             </SearchIconWrapper>
           </Search>
-<<<<<<< HEAD
+
           <ShoppingCartIcon />
           
           <Stack direction="row" spacing={2}>
-=======
-          <Stack direction='row' spacing={2}>
->>>>>>> f43a49d1c3cb1f96c304daf25b459dc4ff880599
+
             <AddItem
               setItems={setItems}
               setFilteredItems={setFilteredItems}
               items={items}
             />
+
             <Login setUser = {setUser}/>
+
             <Logout />
+
+            <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  to={'/ShoppingCart'}
+                >
+
+              <ShoppingCartIcon variant="outlined" fontSize="large"
+              sx={{ display: { xs: "none", md: "flex", color: "#E25F1C" } }}></ShoppingCartIcon>
+            </Link>
+
+            <Link  style={{ textDecoration: 'none', color:'white' }} to={'/profile'}> 
+              <AccountBoxIcon variant='outlined' fontSize='large'
+              sx ={{color:'black'}}
+               /> 
+            </Link>
+
+
           </Stack>
         </Toolbar>
 
@@ -240,11 +258,10 @@ export default function Navbar({ setItems, setFilteredItems, items }) {
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign='center'>
                     <Link
-<<<<<<< HEAD
-                      style={{ textDecoration: "none", color: "white"  }}
-=======
+
                       style={{ textDecoration: 'none', color: 'white' }}
->>>>>>> f43a49d1c3cb1f96c304daf25b459dc4ff880599
+ f43a49d1c3cb1f96c304daf25b459dc4ff880599
+
                       to={`/${page}`}
                     >
                       {page}

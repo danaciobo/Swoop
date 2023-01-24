@@ -67,7 +67,7 @@ exports.deleteItem = async (req, res) => {
   try {
     await Item.destroy({
       where: {
-        id: req.body.itemId,
+        id: req.body.id,
       },
     });
     res.status(200).send();

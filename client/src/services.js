@@ -1,4 +1,3 @@
-
 const baseURL = "http://localhost:4001"
 
 // export const getData = async () => {
@@ -50,6 +49,39 @@ export const  deleteItem = async (itemId) => {
     return false
   }
 }
+
+export const updateItem = async (id, content) => {
+  try {
+    const response = await fetch(`${baseURL}/items`,{
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({itemId : id ,updates :content})
+    })
+    return response.json();
+  }
+   catch (err) {
+  console.log(err)
+  return false
+}
+}
+
+export const deleteItem = async (id) => {
+  console.log(id);
+  try {
+    const response = await fetch(`${baseURL}/items`,{
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({id: id})
+    })
+    return response
+  }
+   catch (err) {
+  console.log(err)
+  return false
+}
+}
+
+
 export const registerUser = async (userInfo) => {
   try {
     const response = await fetch(`${baseURL}/register`, {
