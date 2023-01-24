@@ -9,33 +9,30 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { IconButton, Link } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { registerUser } from "../services";
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function Register() {
 
-  const [email, setEmail] = useState<string>("");
-  const [firstName, setFirstName] = useState<string>("");
-  const [lastName, setLastName] = useState<string>("");
-  const [phoneNumber, setphoneNumber] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [open, setOpen] = useState<boolean>(true);
+  const registerState = useSelector((state:any) => state.Registration)
+  const dispatch = useDispatch()
 
   const handleClickOpen = () => {
-    setOpen(true);
+    dispatch({type: 'OPEN'});
   };
 
   const handleClose = () => {
-    setOpen(false);
+    dispatch({type: 'OPEN'});
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(e.currentTarget.value)
-    const newUser = { email, firstName, lastName, phoneNumber }
-    setEmail('');
-    setFirstName('');
-    setLastName('');
-    setphoneNumber('');
-    setPassword('');
+    const newUser = { email: registerState.email, firstName: registerState.firstName, lastName: registerState.lastName, phoneNumber: registerState.phoneNumber }
+    dispatch({type: 'REG_EMAIL', payload: ''})
+    dispatch({type: 'FIRST_NAME', payload: ''})
+    dispatch({type: 'LAST_NAME', payload: ''})
+    dispatch({type: 'PHONE_NUMBER', payload: ''})
+    dispatch({type:'REG_PASSWORD', payload:''});
     registerUser(newUser);
     handleClose();
   };
@@ -50,7 +47,7 @@ export default function Register() {
       <Button variant="contained" size='small' sx={{ display: { xs: 'block', md: 'none' } }} onClick={handleClickOpen}>
         Log in/ Register
       </Button> */}
-      <Dialog open={open} onClose={handleClose} >
+      <Dialog open={registerState.open} onClose={handleClose} >
         <DialogActions>
           <IconButton sx={{ padding: 0 }} onClick={handleClose} data-testid = 'closeReg'>
             <CloseIcon sx={{ fontSize: '1.3em' }} />
@@ -76,8 +73,8 @@ export default function Register() {
               variant="outlined"
               inputProps={{ "data-testid": "email-input" }}
               required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={registerState.Email}
+              onChange={(e) => dispatch({type: 'REG_EMAIL', payload: e.target.value})}
             />
             <div style={{display: 'flex', flexDirection: 'row'}}>
               <TextField
@@ -86,8 +83,8 @@ export default function Register() {
                 variant="outlined"
                 inputProps={{ "data-testid": "first-input" }}
                 required
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                value={registerState.firstName}
+                onChange={(e) => dispatch({type: 'FIRST_NAME', payload: e.target.value})}
               />
               <TextField
                 sx={{ width: '8.5em', marginBottom: '0.7em' }}
@@ -95,8 +92,8 @@ export default function Register() {
                 variant="outlined"
                 inputProps={{ "data-testid": "last-input" }}
                 required
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                value={registerState.lastName}
+                onChange={(e) => dispatch({type: 'LAST_NAME', payload: e.target})}
               />
             </div>
             <TextField
@@ -105,8 +102,8 @@ export default function Register() {
               variant="outlined"
               inputProps={{ "data-testid": "phone-input" }}
               required
-              value={phoneNumber}
-              onChange={(e) => setphoneNumber(e.target.value)}
+              value={registerState.phoneNumber}
+              onChange={(e) => dispatch({ type: 'PHONE_NUMBER', payload: e.target.value})}
             />
 
             <TextField
@@ -116,8 +113,8 @@ export default function Register() {
               variant="outlined"
               inputProps={{ "data-testid": "pass-input" }}
               required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={registerState.regPassword}
+              onChange={(e) => dispatch({type: 'REG_PASSWORD', payload:e.target.value})}
             />
             <Button
               sx={{ width: '16em', height: '3em' }}

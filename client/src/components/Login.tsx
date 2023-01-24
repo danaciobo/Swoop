@@ -9,29 +9,38 @@ import { IconButton, Link } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { getUserByEmail } from "../services";
 import React from "react";
-import {User} from "../Types/Types"
+import { User } from "../Types/Types"
+import { useDispatch, useSelector } from 'react-redux';
 
 
-export default function Login({ setUser }: {setUser: React.Dispatch<React.SetStateAction<User | null>>}) {
 
-  const [loggEmail, setLoggEmail] = useState<string>("");
-  const [loggPassword, setLoggPassword] = useState<string>("");
-  const [open, setOpen] = useState<boolean>(false);
+
+export default function Login({ setUser }: { setUser: React.Dispatch<React.SetStateAction<User | null>> }) {
+
+  const dispatch = useDispatch()
+
+  const loginState = useSelector((state: any) => state.Login)
+
+  // const [loggEmail, setLoggEmail] = useState<string>("");
+  // const [loggPassword, setLoggPassword] = useState<string>("");
+  // const [open, setOpen] = useState<boolean>(false);
+
+  // dispatchEvent({type: 'LOGIN_EMAIL', payload:''})
+  // dispatchEvent({type: 'LOGIN_PASSWORD', payload:''})
+  // dispatchEvent({type: 'OPEN', payload:''})
 
 
   const handleClickOpen = () => {
-    setOpen(true);
+      dispatch({type: 'OPEN'})
   };
 
   const handleClose = () => {
-    setOpen(false);
+    dispatch({type: 'OPEN'})
   };
 
   const handleSubmit = (e:any) => {
     e.preventDefault();
-    console.log(e.target.value)
-    const user = { email: loggEmail, password: loggPassword }
-    console.log(user)
+    const user = { email: loginState.loggEmail, password: loginState.loggPassword }
     // const loggedInUser = getUserByEmail(user.email);
     // setUser(loggedInUser)
     // setLoggEmail('');
@@ -48,7 +57,7 @@ export default function Login({ setUser }: {setUser: React.Dispatch<React.SetSta
       <Button variant="contained" size='small' sx={{ display: { xs: 'block', md: 'none' } }} data-testid='LoginButtonPortal' onClick={handleClickOpen}>
         Log in/ Register
       </Button>
-      <Dialog open={open} onClose={handleClose} >
+      <Dialog open={loginState.open} onClose={handleClose} >
         <DialogActions>
           <IconButton  sx={{ padding: 0 }} onClick={handleClose} >
             <CloseIcon sx={{ fontSize: '1.3em' }} />
@@ -73,8 +82,8 @@ export default function Login({ setUser }: {setUser: React.Dispatch<React.SetSta
               type="email"
               variant="outlined"
               required
-              value={loggEmail}
-              onChange={(e) => setLoggEmail(e.target.value)}
+              value={loginState.loggEmail}
+              onChange={(e) => dispatch({type: 'LOG_EMAIL', payload: e.target.value})}
             />
 
             <TextField
@@ -83,8 +92,8 @@ export default function Login({ setUser }: {setUser: React.Dispatch<React.SetSta
               type="password"
               variant="outlined"
               required
-              value={loggPassword}
-              onChange={(e) => setLoggPassword(e.target.value)}
+              value={loginState.loggPassword}
+              onChange={(e) => dispatch({type: "LOGG_PASSWORD", payload: e.target.value})}
             />
             <Link href="/Profile" >
               <Button

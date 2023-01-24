@@ -14,6 +14,20 @@ import Profile from './components/Profile';
 import Login from './components/Login';
 import { useEffect, useState } from 'react';
 import { Item, User } from './Types/Types';
+import { Provider } from 'react-redux';
+import {compose, createStore} from 'redux'
+import Reducer from './Reducer'
+
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+
+const store = createStore(Reducer, composeEnhancers())
 
 const myURL = "http://localhost:3005/items"
 
@@ -65,6 +79,7 @@ function App() {
 
 
   return (
+    <Provider store={store}>
     <ThemeProvider theme={theme}>
       {/* <DataProvider> */}
       <Navbar setItems={setItems} items={items} setFilteredItems={setFilteredItems} user={user} setUser={setUser}/>
@@ -81,7 +96,8 @@ function App() {
       </BrowserRouter >
       <Footer />
       {/* </DataProvider> */}
-    </ThemeProvider>
+      </ThemeProvider>
+      </Provider>
   );
 }
 
