@@ -13,11 +13,7 @@ exports.getItems = async (req, res) => {
 exports.getItemById = async (req, res) => {
   const id = req.params.id
   try {
-    const item = await Item.findOne({
-      where: {
-        id: id,
-      },
-    });
+    const item = await Item.findOne({where: {id: id}})
     return res.status(200).json(item);
   } catch (e) {
     console.log(e);

@@ -10,25 +10,24 @@ import MenuIcon from '@mui/icons-material/Menu';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import Logo from '../Swoop.jpg';
-import { Menu, MenuItem, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import { Link } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddItem from './AddItem';
 import Login from './Login';
 import Logout from './Logout';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const pages = [
 
-  "All",
-  "Clothes",
-  "Accessories",
-  "Home",
-  "Electronics",
-  "Hobbies",
-  "Freebies",
-  "Profile"
-
+  'All',
+  'Clothes',
+  'Accessories',
+  'Home',
+  'Electronics',
+  'Hobbies',
+  'Freebies',
 ];
 
 const Search = styled('div')(({ theme }) => ({
@@ -76,7 +75,24 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
+
 export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
+  const [expanded, setExpanded] = useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (e) => {
@@ -160,10 +176,9 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
             </SearchIconWrapper>
           </Search>
 
-          
+
           
           <Stack direction="row" spacing={2}>
-
             <AddItem
               setItems={setItems}
               setFilteredItems={setFilteredItems}
@@ -182,9 +197,12 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
                 variant='outlined'
                 fontSize='large'
                 sx={{ display: { xs: 'none', md: 'flex', color: '#E25F1C' } }}
-              ></ShoppingCartIcon>
+              >
+              
+              </ShoppingCartIcon>
+           
             </Link>
-
+            
             <Link
               style={{ textDecoration: 'none', color: 'white' }}
               to={'/profile'}
@@ -210,40 +228,9 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
             >
               <MenuIcon />
             </IconButton>
-            <Menu
-              id='menu-appbar'
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign='center'>
-                    <Link
 
-                      style={{ textDecoration: 'none', color: 'white' }}
- f43a49d1c3cb1f96c304daf25b459dc4ff880599
+            
 
-                      to={`/${page}`}
-                    >
-                      {page}
-                    </Link>
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
           <Search
             sx={{
