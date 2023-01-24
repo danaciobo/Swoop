@@ -15,6 +15,32 @@ const initialStateLogin = {
   loggPassword: ''
 }
 
+const initialAddItemState = {
+  title: '',
+  description: '',
+  price:'',
+  quantity:'',
+  location:'',
+  category:'',
+  image:'', //string|File
+  openAddItem:''
+}
+
+const initialAppState = {
+  items: [],
+  filteredItems: [],
+  user: null
+}
+
+const App = (state:any=initialAppState, action:any) => {
+  switch (action.type) {
+    case 'APP_ITEMS':
+      return {...state, items: action.payload};
+    default:
+      break;
+  }
+}
+
 const Login = (state: any = initialStateLogin, action: any) => {
   switch (action.type) {
     case 'OPEN':
@@ -47,9 +73,33 @@ const Registration = (state:any=initialStateRegistration, action: any) => {
   }
 }
 
+const AddItem = (state:any = initialAddItemState, action:any) => {
+  switch (action.type) {
+    case 'ADDITEM_TITLE':
+      return {...state, title: action.payload}
+    case 'ADDITEM_DESCRIPTION':
+      return {...state, description: action.payload}
+    case 'ADDITEM_PRICE':
+      return {...state, price: action.payload}
+    case 'ADDITEM_QUANTITY':
+      return {...state, quantity: action.payload}
+    case 'ADDITEM_LOCATION':
+      return {...state, location: action.payload}
+    case 'ADDITEM_CATEGORY':
+      return {...state, category: action.payload}
+    case 'ADDITEM_IMAGE':
+      return {...state, image: action.payload}
+    case 'ADDITEM_OPEN':
+      return {...state, open: !state.open}
+    default:
+      break;
+  }
+}
+
 const Reducer = combineReducers({
   Registration,
-  Login
+  Login,
+  AddItem
 })
 
 export default Reducer

@@ -16,38 +16,34 @@ import Select from '@mui/material/Select';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import React from 'react'
 import { Item } from "../Types/Types";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function AddItem({ setItems, setFilteredItems, items }: {setItems: React.Dispatch<React.SetStateAction<Item[]>>, setFilteredItems: React.Dispatch<React.SetStateAction<Item[]>>, items: Item[]}) {
 
-  const [title, setTitle] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [price, setPrice] = useState<string>("");
-  const [quantity, setQuantity] = useState<string>("");
-  const [location, setLocation] = useState<string>("");
-  const [category, setCategory] = useState<string>("");
-  const [image, setImage] = useState<string | File>("")
-  const [open, setOpen] = useState<boolean>(false);
+  const dispatch = useDispatch()
+
+  const addItemState = useSelector((state: any) => state.AddItem)
 
   const handleClickOpen = () => {
-    setOpen(true);
+    dispatch({type: 'ADDITEM_OPEN'});
   };
 
   const handleClose = () => {
-    setOpen(false);
+    dispatch({type: 'ADDITEM_OPEN'});
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(title, description, category, price, quantity, location, image);
+    console.log(addItemState.title, addItemState.description, addItemState.category, addItemState.price, addItemState.quantity, addItemState.location, addItemState.image);
     const formData = new FormData();
-    formData.append('image', image);
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('category', category);
-    formData.append('price', price === undefined ? '0' : price);
-    formData.append('quantity', quantity === undefined ? '0' : quantity);
-    formData.append('location', location);
+    formData.append('image', addItemState.image);
+    formData.append('title', addItemState.title);
+    formData.append('description', addItemState.description);
+    formData.append('category', addItemState.category);
+    formData.append('price', addItemState.price === undefined ? '0' : addItemState.price);
+    formData.append('quantity', addItemState.quantity === undefined ? '0' : addItemState.quantity);
+    formData.append('location', addItemState.location);
 
     postItem(formData)
     if (e.target) {
@@ -79,7 +75,7 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
       <Button id="sellNow" variant="contained" startIcon={<AddIcon />} sx={{ display: { xs: 'none', md: 'flex', background: '#E25F1C' } }} onClick={handleClickOpen}>
         Sell Now
       </Button>
-      <Dialog open={open} onClose={handleClose} data-testid='closebutton' >
+      <Dialog open={addItemState.open} onClose={handleClose} data-testid='closebutton' >
         <DialogActions>
           <IconButton sx={{ padding: 0 }} onClick={handleClose} >
             <CloseIcon sx={{ fontSize: '1.3em' }} />
@@ -107,8 +103,8 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
               required
               data-testid="Title-1"
               inputProps={{ "data-testid": "title-input" }}
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={addItemState.title}
+              onChange={(e) => dispatch({type:'ADDITEM_TITLE', payload: e.target.value})}
             />
             <TextField
               sx={{ width: '30em', marginBottom: '0.7em' }}
@@ -119,18 +115,18 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
               data-testid="Description-1"
               inputProps={{ "data-testid": "desc-input" }}
               required
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              value={addItemState.description}
+              onChange={(e) => dispatch({type:'ADDITEM_CATEGORY', payload: e.target.value})}
             />
             <FormControl id="cat-select-label" sx={{ width: '30em', marginBottom: '0.7em' }}>
               <InputLabel id="cat-select-label">Category</InputLabel>
               <Select
                 labelId="cat-select-label"
-                value={category}
+                value={addItemState.category}
                 label="Category"
                 data-testid="Category-1"
                 inputProps={{ "data-testid": "cat-input" }}
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={(e) => dispatch({type:'ADDITEM_CATEGORY', payload: e.target.value})}
               >
                 <MenuItem value={'clothes'}>Clothes</MenuItem>
                 <MenuItem value={'accessories'}>Accesories</MenuItem>
@@ -148,8 +144,8 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
                 required
                 data-testid="Price-1"
                 inputProps={{ "data-testid": "price-input" }}
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                value={addItemState.price}
+                onChange={(e) =>dispatch({type:'ADDITEM_DESCRIPTION', payload: e.target.value})}
               />
 
               <TextField
@@ -159,8 +155,8 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
                 required
                 data-testid="Quantity-1"
                 inputProps={{ "data-testid": "quant-input" }}
-                value={quantity}
-                onChange={(e) => setQuantity(e.target.value)}
+                value={addItemState.quantity}
+                onChange={(e) => dispatch({type:'ADDITEM_QUANTITY', payload: e.target.value})}
               />
 
               <TextField
@@ -170,8 +166,8 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
                 required
                 data-testid="Location-1"
                 inputProps={{ "data-testid": "location-input" }}
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
+                value={addItemState.location}
+                onChange={(e) => dispatch({type:'ADDITEM_LOCATION', payload:e.target.value})}
               />
             </div>
 
@@ -183,7 +179,7 @@ export default function AddItem({ setItems, setFilteredItems, items }: {setItems
                 multiple
                 data-testid="Image-1"
                 type="file"
-                onChange={(e) => setImage(e.target.files === null ? "" : e.target.files[0])}
+                onChange={(e) => dispatch({type:'ADDITEM_IMAGE', payload: e.target.files === null ? "" : e.target.files[0]})}
               />
               <label htmlFor="contained-button-file">
                 <Button variant="contained" component="span">
