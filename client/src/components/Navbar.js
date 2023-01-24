@@ -20,7 +20,6 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const pages = [
-
   'All',
   'Clothes',
   'Accessories',
@@ -125,7 +124,7 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
     const filtered = items.filter(
       (item) => item.category.toLowerCase() === activeCategory.toLowerCase()
     );
-    console.log(filtered)
+    console.log(filtered);
     if (activeCategory.toLowerCase() === 'all') {
       console.log(items);
       setFilteredItems(items);
@@ -176,9 +175,7 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
             </SearchIconWrapper>
           </Search>
 
-
-          
-          <Stack direction="row" spacing={2}>
+          <Stack direction='row' spacing={2}>
             <AddItem
               setItems={setItems}
               setFilteredItems={setFilteredItems}
@@ -197,12 +194,9 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
                 variant='outlined'
                 fontSize='large'
                 sx={{ display: { xs: 'none', md: 'flex', color: '#E25F1C' } }}
-              >
-              
-              </ShoppingCartIcon>
-           
+              ></ShoppingCartIcon>
             </Link>
-            
+
             <Link
               style={{ textDecoration: 'none', color: 'white' }}
               to={'/profile'}
@@ -228,9 +222,6 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
             >
               <MenuIcon />
             </IconButton>
-
-            
-
           </Box>
           <Search
             sx={{
