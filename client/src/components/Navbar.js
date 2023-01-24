@@ -20,7 +20,6 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const pages = [
-
   'All',
   'Clothes',
   'Accessories',
@@ -125,7 +124,7 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, car
     const filtered = items.filter(
       (item) => item.category.toLowerCase() === activeCategory.toLowerCase()
     );
-    console.log(filtered)
+    console.log(filtered);
     if (activeCategory.toLowerCase() === 'all') {
       console.log(items);
       setFilteredItems(items);
@@ -176,9 +175,7 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, car
             </SearchIconWrapper>
           </Search>
 
-
-          
-          <Stack direction="row" spacing={2}>
+          <Stack direction='row' spacing={2}>
             <AddItem
               setItems={setItems}
               setFilteredItems={setFilteredItems}
@@ -197,10 +194,7 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, car
                 variant='outlined'
                 fontSize='large'
                 sx={{ display: { xs: 'none', md: 'flex', color: '#E25F1C' } }}
-              >
-              
-              </ShoppingCartIcon>
-           
+              />
             </Link>
             <p>{cart.length}</p>
             <Link
@@ -228,9 +222,6 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, car
             >
               <MenuIcon />
             </IconButton>
-
-            
-
           </Box>
           <Search
             sx={{
@@ -260,12 +251,7 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, car
                 onClick={handleFilterCategory}
                 sx={{ my: 2, color: 'white', display: 'block', marginRight: 5 }}
               >
-                <Link
-                  style={{ textDecoration: 'none', color: 'white' }}
-                  to={`/${page}`}
-                >
-                  {page}
-                </Link>
+                {page}
               </Button>
             ))}
           </Box>

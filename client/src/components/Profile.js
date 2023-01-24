@@ -27,12 +27,14 @@ export default function Profile({items, user, setCurrentItem}) {
 
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [editEmail, setEditEmail] = useState(false);
 
 
   console.log(items)
 
   function handleClick() {
     setEditButton(!editButton);
+    setEditEmail(!editEmail);
   }
 
   function handleSubmit(e) {
@@ -77,7 +79,7 @@ export default function Profile({items, user, setCurrentItem}) {
           >
             <CardHeader sx={{ height: 5 }}></CardHeader>
             <CardMedia sx={{ height: 100 }}>
-              <IconButton onClick={handleClick}>
+              <IconButton  sx={{ marginLeft: 36 }} onClick={handleClick}>
                 <EditIcon />
               </IconButton>
               <Avatar
@@ -113,7 +115,7 @@ export default function Profile({items, user, setCurrentItem}) {
                       primary='Email address'
                       secondary={
                         !editButton ? (
-                          updatedUserDetails.email
+                          user.email
                         ) : (
                           <Input
                             required
@@ -125,7 +127,7 @@ export default function Profile({items, user, setCurrentItem}) {
                       }
                     />
                   </ListItem>
-                  <ListItem>
+                  {editEmail && <ListItem>
                     <ListItemText
                       primary='Phone number'
                       secondary={
@@ -141,7 +143,7 @@ export default function Profile({items, user, setCurrentItem}) {
                         )
                       }
                     />
-                  </ListItem>
+                  </ListItem>}
                   <input type='submit' hidden />
                 </form>
               </List>
@@ -180,6 +182,7 @@ export default function Profile({items, user, setCurrentItem}) {
                       item
                       key={item.id}
                       onClick={() => setCurrentItem(item)}
+                      sx={{ marginRight: 2 }}
                     >
                       <Card sx={{ width: 100, height: 120 }}>
                         <CardActionArea>

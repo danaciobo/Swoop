@@ -18,7 +18,7 @@ router.get('/items/',itemCtrl.getItems )
 router.delete('/items/:id' , itemCtrl.deleteItem)
 router.put('/items/:id', itemCtrl.updateItem )
 router.get('/items/:id', itemCtrl.getItemById)
-
+router.put('/items/:id', itemCtrl.addBuyer)
 router.get('/items/category/:category', itemCtrl.getItemByCategory)
 // router.get('/items', itemController.getItems);
 // router.get('items/:category', itemController.getByCategory);

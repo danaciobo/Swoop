@@ -41,6 +41,10 @@ const Item = sequelize.define("Item", {
     sold: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
+    },
+    buyer: {
+      type: DataTypes.STRING, 
+      allowNull: true, 
     }
   });
 
