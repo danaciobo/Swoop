@@ -116,7 +116,7 @@ function App() {
           />
 
           <Route
-            path='/ItemDetails'
+            path= {`/ItemDetails/:id`}
             element={
               <ItemDetails item={currentItem} setCurrentItem={setCurrentItem} items={items} setItems ={setItems}/>
             }

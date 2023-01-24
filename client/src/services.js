@@ -17,7 +17,7 @@ export const addItem = async (data) => {
 
 export const  deleteItem = async (itemId) => {
   try {
-    const response = await fetch(`${baseURL}/items`, {
+    const response = await fetch(`${baseURL}/items/${itemId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

@@ -7,15 +7,16 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Stack from '@mui/material/Stack';
 import EditItem from "./EditItem";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 export default function ItemDetails({ id, item , setCurrentItem, items, setItems}) {
+
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    getItemById(id)
+    getItemById(params.id)
       .then(response => {
-        console.log(response)
+        console.log(params.id)
         setCurrentItem(response)
       })
       .catch(err => console.log(err))
@@ -34,6 +35,8 @@ export default function ItemDetails({ id, item , setCurrentItem, items, setItems
     }
   };
 
+  const params = useParams()
+  
   return (
     <Container>
       <Box

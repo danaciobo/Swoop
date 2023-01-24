@@ -11,10 +11,11 @@ exports.getItems = async (req, res) => {
 };
 
 exports.getItemById = async (req, res) => {
+  const id = req.params.id
   try {
-    const item = await Item.findAll({
+    const item = await Item.findOne({
       where: {
-        id: req.body.itemId,
+        id: id,
       },
     });
     return res.status(200).json(item);
@@ -65,14 +66,25 @@ exports.updateItem = async (req, res) => {
 
 exports.deleteItem = async (req, res) => {
   try {
-    await Item.destroy({
+  const deleted =  await Item.destroy({
       where: {
-        id: req.body.id,
+        id: req.params.id
       },
     });
-    res.status(200).send();
+    res.sendStatus(200)
+    // res.send(deleted)
   } catch (e) {
     console.log(e);
     res.status(500);
   }
 };
+
+exports.getItemByCategory = async (req, res) =>{
+  try {
+    const items = await Item.findAll({where:{
+      category: req.params.category
+    }})
+  } catch (error) {
+    console.log(error)
+  }
+}

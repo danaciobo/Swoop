@@ -160,7 +160,7 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
             </SearchIconWrapper>
           </Search>
 
-          <ShoppingCartIcon />
+          
           
           <Stack direction="row" spacing={2}>
 

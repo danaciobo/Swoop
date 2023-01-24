@@ -13,10 +13,13 @@ router.put('/users', /*authMiddleware.decodeToken,*/ userCtrl.getUserByEmail)
 router.get('/users' , userCtrl.getUsers )
 router.put('/user-update', userCtrl.updateUser)
 
-router.post('/items', itemCtrl.createItem)
-router.get('/items',itemCtrl.getItems )
-router.delete('/items' , itemCtrl.deleteItem)
-router.put('/items', itemCtrl.updateItem )
+router.post('/items/', itemCtrl.createItem)
+router.get('/items/',itemCtrl.getItems )
+router.delete('/items/:id' , itemCtrl.deleteItem)
+router.put('/items/:id', itemCtrl.updateItem )
+router.get('/items/:id', itemCtrl.getItemById)
+
+router.get('/items/category/:category', itemCtrl.getItemByCategory)
 // router.get('/items', itemController.getItems);
 // router.get('items/:category', itemController.getByCategory);
 // router.get('/items/:id', itemController.getItemById);

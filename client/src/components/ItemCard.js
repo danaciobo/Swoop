@@ -48,7 +48,7 @@ export default function ItemCard({ item, setCurrentItem }) {
       <Card sx={{ width: 250, height: "auto" }}>
         <CardActionArea onClick={() => handleClick(item)}>
           <CardContent sx={{ padding: 0 }}>
-            <Link component={RouterLink} to="/ItemDetails">
+            <Link component={RouterLink} to= {`/ItemDetails/${item.id}`}>
               <img
                 src={item.image}
                 height="200px"

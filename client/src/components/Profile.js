@@ -172,7 +172,7 @@ export default function Profile({ items, user, setCurrentItem}) {
             >
               {items ? (
                 items.slice(0, 5).map((item, index) => (
-                  <RouterLink to='/ItemDetails'>
+                  <RouterLink to= {`/ItemDetails/${item.id}`}>
                     <Grid
                       item
                       key={item.id}
