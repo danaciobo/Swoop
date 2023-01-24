@@ -7,9 +7,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Stack from '@mui/material/Stack';
 import EditItem from "./EditItem";
+import { useNavigate } from "react-router-dom";
+export default function ItemDetails({ id, item , setCurrentItem, items, setItems}) {
 
-export default function ItemDetails({ id, item , setCurrentItem}) {
-
+  const navigate = useNavigate()
 
   useEffect(() => {
     getItemById(id)
@@ -21,10 +22,13 @@ export default function ItemDetails({ id, item , setCurrentItem}) {
   }, [])
 
 
-  const deleteThis = async (id) => {
+  const deleteThis = async () => {
     try {
-      const res = await deleteItem(id);
-      return res
+      const res = await deleteItem(item.id)
+      const newItemList = items.filter((element) =>{ return element.id !== item.id })
+      setItems(newItemList)
+     navigate('/Profile')
+      
     } catch (e) {
       console.log(e);
     }
@@ -94,7 +98,7 @@ borderColor: 'red'        }}
             </Typography>
         <Stack direction="row" spacing={2}>
           <Button
-          onClick={() => deleteThis(item.id)}
+          onClick={ deleteThis}
           variant="contained"
            sx={{ display: { xs: "none", md: "flex", background: "#E25F1C" } }}endIcon={<DeleteIcon />}>
             Delete

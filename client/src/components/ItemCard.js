@@ -40,7 +40,7 @@ export default function ItemCard({ item, setCurrentItem }) {
   const handleClick = (e) => {
     setItemClicked(e);
     setCurrentItem(item);
-    console.log(item);
+    
   };
 
   return (

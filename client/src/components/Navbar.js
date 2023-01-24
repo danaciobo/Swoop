@@ -21,16 +21,13 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
 
 const pages = [
-
   "All",
   "Clothes",
   "Accessories",
   "Home",
   "Electronics",
   "Hobbies",
-  "Freebies",
-  "Profile"
-
+  "Freebies"
 ];
 
 const Search = styled('div')(({ theme }) => ({
@@ -108,13 +105,14 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
 
   const handleFilterCategory = (e) => {
     e.preventDefault();
-    console.log(e);
+    console.log(e.target.value);
     const activeCategory = e.target.value;
     const filtered = items.filter(
       (item) => item.category.toLowerCase() === activeCategory.toLowerCase()
     );
+    console.log(filtered)
     if (activeCategory.toLowerCase() === 'all') {
-      console.log(items);
+     
       setFilteredItems(items);
     } else {
       setFilteredItems(filtered);
@@ -163,7 +161,6 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
             </SearchIconWrapper>
           </Search>
 
-          <ShoppingCartIcon />
           
           <Stack direction="row" spacing={2}>
 
@@ -226,21 +223,7 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign='center'>
-                    <Link
-
-                      style={{ textDecoration: 'none', color: 'white' }}
- f43a49d1c3cb1f96c304daf25b459dc4ff880599
-
-                      to={`/${page}`}
-                    >
-                      {page}
-                    </Link>
-                  </Typography>
-                </MenuItem>
-              ))}
+            
             </Menu>
           </Box>
           <Search
@@ -271,13 +254,8 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
                 value={page}
                 onClick={handleFilterCategory}
                 sx={{ my: 2, color: 'white', display: 'block', marginRight: 5 }}
-              >
-                <Link
-                  style={{ textDecoration: 'none', color: 'white' }}
-                  to={`/${page}`}
-                >
-                  {page}
-                </Link>
+              > {page}
+             
               </Button>
             ))}
           </Box>

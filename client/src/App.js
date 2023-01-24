@@ -12,8 +12,6 @@ import Payment from './Payment';
 import Completion from './Completion';
 import ItemDetails from './components/ItemDetails';
 
-
-
 const myURL = 'http://localhost:4001/items';
 
 const theme = createTheme({
@@ -90,6 +88,8 @@ function App() {
                 items={filteredItems}
                 currentItem={currentItem}
                 setCurrentItem={setCurrentItem}
+                user={user}
+                setUser = {setUser}
               />
             }
           />
@@ -109,7 +109,7 @@ function App() {
           <Route
             path='/ItemDetails'
             element={
-              <ItemDetails item={currentItem} setCurrentItem={setCurrentItem} />
+              <ItemDetails item={currentItem} setCurrentItem={setCurrentItem} items={items} setItems ={setItems}/>
             }
           />
         </Routes>

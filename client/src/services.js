@@ -22,9 +22,9 @@ export const  deleteItem = async (itemId) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({itemId})
+      body: JSON.stringify({id :itemId})
     })
-    return response.json();
+    return 
   } catch (err) {
     console.log(err)
     return false

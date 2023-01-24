@@ -3,14 +3,7 @@ import { Container, Grid } from "@mui/material";
 import ItemCard from "./ItemCard";
 import { getUserByEmail } from "../services";
 export default function ItemList({ user, items, setCurrentItem, setUser }) {
-  useEffect(() => {
-    console.log(user);
-    getUserByEmail(user.email).then((data) => {
-      if (data) setUser(data);
-      console.log(data)
-    });
-    console.log(user);
-  }, []);
+ 
   return (
     <Container
       maxWidth={false}

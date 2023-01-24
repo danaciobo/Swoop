@@ -33,7 +33,7 @@ id, item, setCurrentItem }) {
     const file = e;
     previewFile(file);
   };
-  console.log(item)
+ 
   const previewFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
