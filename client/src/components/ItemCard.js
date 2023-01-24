@@ -1,7 +1,7 @@
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 import {
   Button,
   CardActionArea,
@@ -10,27 +10,26 @@ import {
   IconButton,
   styled,
   Link,
-} from "@mui/material";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { useState } from "react";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import moment from "moment";
-import { Link as RouterLink } from "react-router-dom";
+} from '@mui/material';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useState } from 'react';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import moment from 'moment';
+import { Link as RouterLink } from 'react-router-dom';
+import { Snackbar } from '@mui/material';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
     duration: theme.transitions.duration.shortest,
   }),
 }));
 
-export default function ItemCard({item, setCurrentItem }) {
-
-
+export default function ItemCard({ item, setCurrentItem }) {
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
@@ -42,36 +41,37 @@ export default function ItemCard({item, setCurrentItem }) {
   const handleClick = (e) => {
     setItemClicked(e);
     setCurrentItem(item);
-    
+  };
+
+  const handleAddToShoppingCart = (e) => {
+    console.log('hello');
   };
 
   return (
     <>
-      <Card sx={{ width: 250, height: "auto" }}>
+      <Card sx={{ width: 250, height: 'auto' }}>
         <CardActionArea onClick={() => handleClick(item)}>
           <CardContent sx={{ padding: 0 }}>
-            <Link component={RouterLink} to= {`/ItemDetails/${item.id}`}    >
-
-
+            <Link component={RouterLink} to={`/ItemDetails/${item.id}`}>
               <img
                 src={item.image}
-                height="200px"
-                width="100%"
+                height='200px'
+                width='100%'
                 alt={item.title}
               />
             </Link>
           </CardContent>
         </CardActionArea>
         <CardHeader
-          title={"£" + item.price}
+          title={'£' + item.price}
           subheader={item.title}
           action={
-            <Button variant="contained" sx={{ background: "#E25F1C" }}>
-              <ShoppingCartIcon />
-              
+            <Button variant='contained' sx={{ background: '#E25F1C' }}>
+              <ShoppingCartIcon onClick={() => handleAddToShoppingCart(item)} />
             </Button>
           }
         />
+
         <CardActions>
           <Typography paragraph sx={{ marginLeft: 2 }}>
             More details
@@ -80,21 +80,21 @@ export default function ItemCard({item, setCurrentItem }) {
             expand={expanded}
             onClick={handleExpandClick}
             aria-expanded={expanded}
-            aria-label="show more"
+            aria-label='show more'
           >
             <ExpandMoreIcon />
           </ExpandMore>
         </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Collapse in={expanded} timeout='auto' unmountOnExit>
           <CardContent>
             <Typography paragraph>
-              Seller: {item.seller ? item.seller : "Dana C"}
+              Seller: {item.seller ? item.seller : 'Dana C'}
             </Typography>
             <Typography paragraph>Location: {item.location}</Typography>
             <Typography paragraph>Category: {item.category}</Typography>
             <Typography paragraph>Description: {item.description}</Typography>
             <Typography paragraph>
-              Added:{" " + moment(item.date_added).format("MMMM Do YYYY")}
+              Added:{' ' + moment(item.date_added).format('MMMM Do YYYY')}
             </Typography>
           </CardContent>
         </Collapse>
