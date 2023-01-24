@@ -177,7 +177,7 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
           </Search>
 
 
-          
+
           <Stack direction="row" spacing={2}>
             <AddItem
               setItems={setItems}
@@ -198,11 +198,11 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
                 fontSize='large'
                 sx={{ display: { xs: 'none', md: 'flex', color: '#E25F1C' } }}
               >
-              
+
               </ShoppingCartIcon>
-           
+
             </Link>
-            
+
             <Link
               style={{ textDecoration: 'none', color: 'white' }}
               to={'/profile'}
@@ -229,7 +229,7 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
               <MenuIcon />
             </IconButton>
 
-            
+
 
           </Box>
           <Search
@@ -260,12 +260,9 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser }) {
                 onClick={handleFilterCategory}
                 sx={{ my: 2, color: 'white', display: 'block', marginRight: 5 }}
               >
-                <Link
-                  style={{ textDecoration: 'none', color: 'white' }}
-                  to={`/${page}`}
-                >
+
                   {page}
-                </Link>
+               
               </Button>
             ))}
           </Box>
