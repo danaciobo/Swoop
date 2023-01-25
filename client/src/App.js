@@ -131,7 +131,7 @@ function App() {
               <ItemDetails user={user} id ={id} item={currentItem} setCurrentItem={setCurrentItem} items={items} setItems ={setItems}/>
             }
           />
-          <Route path = 'ShoppingCart' element = {<ShoppingCart cart ={cart} setCart={setCart} />} />
+          <Route path = 'ShoppingCart' element = {<ShoppingCart cart ={cart} setCart={setCart} item={currentItem} />} />
         </Routes>
         <Footer />
       </ThemeProvider>

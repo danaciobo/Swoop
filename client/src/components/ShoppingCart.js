@@ -3,14 +3,17 @@ import ShoppingCartItem from "./ShoppingCartItem";
 import { Container, Grid, Typography,} from "@mui/material";
 import Button from "@mui/material/Button";
 
-function ShoppingCart({cart, setCart}) {
+function ShoppingCart({item, cart, setCart}) {
+
+  console.log(item)
+
     useEffect(()=>{
         console.log(cart)
         const myCart = JSON.parse(localStorage.getItem('myCart'));
     if (myCart) {
      setCart(myCart);
     }}
-  , []);
+  , [cart]);
 
   return (
     <>
@@ -34,7 +37,7 @@ function ShoppingCart({cart, setCart}) {
         cart.map((cartItem) => (
           <Grid cartItem key={cartItem.id}
           sx={{ marginTop: 3 }}>
-            <ShoppingCartItem cartItem={cartItem} setCart={setCart} />
+            <ShoppingCartItem cartItem={cartItem} setCart={setCart} cart={cart} />
           </Grid>
         ))
       ) : (
