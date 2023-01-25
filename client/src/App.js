@@ -12,7 +12,7 @@ import Completion from "./Completion";
 import ItemDetails from "./components/ItemDetails";
 import ShoppingCart from "./components/ShoppingCart";
 import StripeContainer from "./components/StripeContainer";
-const myURL = "http://localhost:4001/items";
+const myURL = "http://localhost:4002/items";
 
 const theme = createTheme({
   typography: {
@@ -29,9 +29,8 @@ const theme = createTheme({
 function App() {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
-  const [cart, setCart] = useState(
-    JSON.parse(localStorage.getItem("myCart")) || []
-  );
+  const [cart, setCart] = useState([])
+  ;
   const [user, setUser] = useState({});
 
   const [currentItem, setCurrentItem] = useState({});
@@ -58,8 +57,7 @@ function App() {
   }, []);
 
   const id = currentItem.id;
-  console.log(id);
-  console.log(currentItem);
+ 
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -70,6 +68,7 @@ function App() {
           user={user}
           setUser={setUser}
           cart={cart}
+          setCart = {setCart}
         />
 
         <Banner />
@@ -101,6 +100,7 @@ function App() {
                 setCurrentItem={setCurrentItem}
                 user={user}
                 setUser={setUser}
+                
               />
             }
           />
@@ -140,7 +140,7 @@ function App() {
           />
           <Route
             path="ShoppingCart"
-            element={<ShoppingCart cart={cart} setCart={setCart} />}
+            element={<ShoppingCart cart={cart} setCart={setCart} user={user}/>}
           />
         </Routes>
         <Footer />

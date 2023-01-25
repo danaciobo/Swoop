@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import ShoppingCartItem from "./ShoppingCartItem";
 
-function ShoppingCart({cart, setCart}) {
+function ShoppingCart({cart, setCart, user}) {
     useEffect(()=>{
         console.log(cart)
-        const myCart = JSON.parse(localStorage.getItem('myCart'));
+        const myCart = JSON.parse(localStorage.getItem(`myCart-${user.email}`));
     if (myCart) {
      setCart(myCart);
     }}

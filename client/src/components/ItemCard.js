@@ -28,7 +28,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function ItemCard({item, setCurrentItem, cart, setCart }) {
+export default function ItemCard({item, setCurrentItem, cart, setCart, user }) {
 
   const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => {
@@ -44,7 +44,7 @@ const oldCart = cart
 
 if(!oldCart.includes(item)){
 setCart([...oldCart, item])
-localStorage.setItem('myCart', JSON.stringify(cart))
+localStorage.setItem(`myCart-${user.email} `, JSON.stringify(cart))
 }}
   return (
     <>

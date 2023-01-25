@@ -30,8 +30,6 @@ export default function Profile({items, user, setCurrentItem}) {
   const [editEmail, setEditEmail] = useState(false);
 
 
-  console.log(items)
-
   function handleClick() {
     setEditButton(!editButton);
     setEditEmail(!editEmail);
@@ -92,7 +90,7 @@ export default function Profile({items, user, setCurrentItem}) {
                   margin: 'auto',
                 }}
               >
-                {/* {' '} */}
+                
                 
               </Avatar>
             </CardMedia>

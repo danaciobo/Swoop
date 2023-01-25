@@ -1,6 +1,7 @@
-const baseURL = "http://localhost:4001"
+const baseURL = "http://localhost:4002"
 
 export const addItem = async (data) => {
+  console.log(data)
   try {
     const response = await fetch(`${baseURL}/items`,{
       method: 'POST',
@@ -103,3 +104,33 @@ export const getItemByCategory = async (category) => {
   }
 }
 
+export const checkout = async (cart) => {
+  await fetch(`${baseURL}/checkout`, {
+      method: "POST",
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({items: cart.items})
+  }).then((response) => {
+      return response.json();
+  }).then((response) => {
+      if(response.url) {
+          window.location.assign(response.url); // Forwarding user to Stripe
+      }
+  });
+}
+
+export const addToStripe = async (productData) =>{
+  try {
+    const response = await fetch(`${baseURL}/add-item`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body:JSON.stringify(productData)
+    })
+  return response.json()
+  } catch (error) {
+    console.log(error)
+  }
+}

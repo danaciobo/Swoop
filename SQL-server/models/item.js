@@ -45,6 +45,10 @@ const Item = sequelize.define("Item", {
     buyer: {
       type: DataTypes.STRING, 
       allowNull: true, 
+    },
+    stripeId: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   });
 

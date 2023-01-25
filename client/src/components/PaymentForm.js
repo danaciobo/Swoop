@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import {
+  CardNumberElement,
+  CardExpiryElement,
+  CardCvcElement,
+} from "@stripe/react-stripe-js";
 import axios from "axios";
 
 const CARD_OPTIONS = {
@@ -61,7 +66,7 @@ function PaymentForm(props) {
               <CardElement options={CARD_OPTIONS} />
             </div>
           </fieldset>
-          <button>Pay</button>
+          <button type="submit">Pay</button>
         </form>
       ) : (
         <div>

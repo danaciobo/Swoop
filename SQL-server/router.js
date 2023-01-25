@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const userCtrl = require('./controllers/UserControl');
 const itemCtrl =  require('./controllers/ItemController')
+const stripectrl = require('./controllers/StripeController')
 // const itemController = require('./controllers/itemController');
 // // const authController = require('./controllers/authController');
 // const orderController = require('./controllers/orderController')
@@ -20,15 +21,10 @@ router.put('/items/:id', itemCtrl.updateItem )
 router.get('/items/:id', itemCtrl.getItemById)
 router.put('/items/:id', itemCtrl.addBuyer)
 router.get('/items/category/:category', itemCtrl.getItemByCategory)
-// router.get('/items', itemController.getItems);
-// router.get('items/:category', itemController.getByCategory);
-// router.get('/items/:id', itemController.getItemById);
-// router.post('/items', /*authMiddleware.decodeToken,*/ upload.single('image'), itemController.createItem)
-// router.put('/editItem/:id', upload.single('image'), itemController.updateItem)
-// router.delete('/items/:id', itemController.deleteItem);
 
-// router.get('/order/:id',orderController.getOrder);
-// router.post('/order/:id',orderController.checkout);
-// add cart & checkout routes???
 
+//Stripe routes
+
+router.post('/checkout', stripectrl.pay)
+router.post('/add-item' , stripectrl.addProductToStripe)
 module.exports = router;
