@@ -35,10 +35,7 @@ export default function ItemCard({ item }) {
     setItemClicked(e)
 
   }
-  // if (itemClicked) {
-  //   console.log(itemClicked._id)
-  //   return <ItemDetails id={itemClicked._id} onBack={() => setItemClicked(null)} />
-// }
+
 
   return (
     <Card sx={{ width: 250, height: 'auto'}}>

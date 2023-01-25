@@ -1,31 +1,60 @@
-import { getUserById } from "../services"
+
 import { useState, useEffect } from 'react'
 import Box from '@mui/material/Box';
 import { Avatar, Card, CardActionArea, CardContent, CardHeader, CardMedia, Container, Grid, Typography } from "@mui/material";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import { profile } from '../services'
+import AddItem from './AddItem';
 
 
 
-export default function Profile({items}) {
+export default function Profile({items, setItems, setFilteredItems, setState, state}) {
 
-  const [user,setUser] = useState('')
 
+
+
+  const firstName = state.firstName || 'Missing';
+  const lastName = state.lastName || 'No.';
+  const email = state.email || 'Missing';
+  const phoneNumber = state.phoneNumber || 'missing'
+
+  // useEffect(() => {
+  //   getUserById('63c726deeed0a1cc3069691a')
+  //     .then(response => {
+  //       console.log(response)
+  //       setUser(response)
+  //     })
+  //     .catch(err => console.log(err))
+  // }, [])
   useEffect(() => {
-    getUserById('63c726deeed0a1cc3069691a')
-      .then(response => {
-        console.log(response)
-        setUser(response)
-      })
-      .catch(err => console.log(err))
-  }, [])
-
+    const getProfile = async () => {
+      const userInfo = await profile();
+      console.log(userInfo)
+      if (userInfo) {
+        const { firstName, lastName, email, phoneNumber, _id } = userInfo;
+        setState((prevState) => {
+          return {
+            ...prevState,
+            firstName,
+            lastName,
+            email,
+            phoneNumber,
+            _id
+          };
+        });
+      } else {
+        console.log('No user info found 😞');
+      }
+    };
+    getProfile();
+  }, []);
 
   return (
     <Container >
       <Typography variant='h4' mt={4}>
-        Welcome {user.firstName}
+        Welcome {firstName}
       </Typography>
       <Box
         sx={{
@@ -50,14 +79,14 @@ export default function Profile({items}) {
             </CardMedia>
             <CardContent sx={{ alignFont: 'center' }}>
               <Typography gutterBottom variant="h5" component="div" align='center'>
-                {user.firstName + ' ' + user.lastName}
+                {firstName + ' ' + lastName}
               </Typography>
               <List sx={{ width: '100%', maxWidth: 360, marginTop: 1 }}>
                 <ListItem>
-                  <ListItemText primary="Email address" secondary={user.email} />
+                  <ListItemText primary="Email address" secondary={email} />
                 </ListItem>
                 <ListItem>
-                  <ListItemText primary="Phone number" secondary={user.phoneNumber} />
+                  <ListItemText primary="Phone number" secondary={phoneNumber} />
                 </ListItem>
               </List>
             </CardContent>
@@ -77,16 +106,17 @@ export default function Profile({items}) {
           }}
         >
           <Box>
+          <AddItem setItems={setItems} setFilteredItems={setFilteredItems} items={items} state={state}/>
           <Typography variant='h5' m={2}>
         Items for sale
-      </Typography>
+        </Typography>
             <Grid container
               direction="row"
               justifyContent="space-around"
               alignItems="stretch"
               spacing='5'
             >
-              {items ? items.slice(0,5).map((item, index) =>
+              {items? items.sort((a, b) => new Date(b.date_added) - new Date(a.date_added)).slice(0,5).map((item, index) =>
               (
                 <Grid item key={item._id} >
                   <Card sx={{ width: 100, height: 120 }}>
@@ -125,7 +155,7 @@ export default function Profile({items}) {
               alignItems="stretch"
               spacing='5'
             >
-              {items.length >100 ? items.slice(0,5).map((item, index) =>
+              {items? items.slice(0,5).map((item, index) =>
               (
                 <Grid item key={item._id} >
                   <Card sx={{ width: 100, height: 120 }}>

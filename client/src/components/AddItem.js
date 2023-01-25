@@ -16,7 +16,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 
-export default function AddItem({ setItems, setFilteredItems, items }) {
+export default function AddItem({ setItems, setFilteredItems, items, state }) {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -33,12 +33,12 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
 
   const handleClose = () => {
     setOpen(false);
+
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(title, description, category, price, quantity, location, image);
     const formData = new FormData();
     formData.append('image', image);
     formData.append('title', title);
@@ -47,9 +47,16 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
     formData.append('price', price);
     formData.append('quantity', quantity);
     formData.append('location', location);
+    formData.append('seller', state._id);
+    postItem(formData);
+    setTitle('');
+    setDescription('');
+    setPrice('');
+    setQuantity('');
+    setLocation('');
+    setCategory('');
+    setImage('');
 
-    postItem(formData)
-    e.target.reset();
     handleClose()
   };
   const itemsList = items;
@@ -69,7 +76,7 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
   return (
     <div>
       <Button variant="contained" startIcon={<AddIcon />} sx={{ display: { xs: 'none', md: 'flex', background: '#E25F1C' } }} onClick={handleClickOpen}>
-        Sell Now
+        Sell New
       </Button>
       <Dialog open={open} onClose={handleClose} >
         <DialogActions>
@@ -127,7 +134,7 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
             </FormControl>
             <div display="flex" flexDirection="rows">
               <TextField
-                sx={{ width: '10em', marginBottom: '0.7em' }}
+                sx={{ width: '9.5em', marginBottom: '0.7em' }}
                 label="Price"
                 variant="outlined"
                 required
@@ -136,7 +143,7 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
               />
 
               <TextField
-                sx={{ width: '10em', marginBottom: '0.7em' }}
+                sx={{ width: '9.5em', marginBottom: '0.7em' }}
                 label="Quantity"
                 variant="outlined"
                 required
@@ -145,7 +152,7 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
               />
 
               <TextField
-                sx={{ width: '10em', marginBottom: '0.7em' }}
+                sx={{ width: '9.5em', marginBottom: '0.7em' }}
                 label="Location"
                 variant="outlined"
                 required

@@ -22,7 +22,6 @@ exports.getByCategory = async (req, res) => {
 
 exports.getItemById = async (req, res) => {
   try {
-    console.log(req.params);
     const id = req.params.id
     const item = await Item.findById(id)
     return res.status(200).json(item);
@@ -35,7 +34,6 @@ exports.getItemById = async (req, res) => {
 
 exports.createItem = async (req, res) => {
   try {
-    console.log(req.body)
       const newItem = await Item.create({
         title: req.body.title,
         description: req.body.description,
@@ -45,7 +43,7 @@ exports.createItem = async (req, res) => {
         location: req.body.location,
         image: req.file.path,
         date_added: Date.now(),
-        // seller: req.body.user._id
+        seller: req.body.seller
       });
       res.status(201).send(newItem);
   } catch (e) {

@@ -1,5 +1,6 @@
 
-const baseURL = "http://localhost:3005"
+const baseURL = "http://localhost:3005";
+
 
 // export const getData = async () => {
 //   try {
@@ -35,14 +36,16 @@ export const addItem = async (data) => {
 }
 }
 
-export const registerUser = async (userInfo) => {
+export const register = async (user) => {
   try {
     const response = await fetch(`${baseURL}/register`, {
       method: 'POST',
+      credentials: 'include',
+    mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(userInfo)
+      body: JSON.stringify(user)
     })
     return response.json();
   } catch (err) {
@@ -51,25 +54,55 @@ export const registerUser = async (userInfo) => {
   }
 }
 
-export const getUserById = async (id) => {
-  try {
-    const response = await fetch(`${baseURL}/users/${id}`)
-    return response.json();
-  } catch (err) {
-    console.log(err)
-    return false
-  }
-}
+export const login = (user) => {
 
-export const getUserByEmail = async (email) => {
-  try {
-    const response = await fetch(`${baseURL}/users/${email}`)
-    return response.json();
-  } catch (err) {
-    console.log(err)
-    return false
-  }
-}
+  return fetch(`${baseURL}/login`, {
+    method: 'POST',
+    credentials: 'include',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(user),
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+};
+
+
+// export const getUserById = async (id) => {
+//   try {
+//     const response = await fetch(`${baseURL}/users/${id}`)
+//     return response.json();
+//   } catch (err) {
+//     console.log(err)
+//     return false
+//   }
+// }
+
+export const profile = () => {
+
+  return fetch(`${baseURL}/me`, {
+    method: 'GET',
+    credentials: 'include',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+
+};
+
+export const logout = () => {
+
+  return fetch(`${baseURL}/logout`, {
+    method: 'POST',
+    credentials: 'include',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+  // REMOVE-END
+};
 
 export const getItemById = async (id) => {
   try {

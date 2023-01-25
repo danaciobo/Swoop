@@ -3,11 +3,7 @@ import { Container, Grid} from '@mui/material';
 import ItemCard from './ItemCard';
 
 
-
-
-
 export default function ItemList({items}) {
-  console.log(items)
   return (
     <Container maxWidth={false} sx={{ justifyContent: 'space-between', width: '100%', paddingTop: '40px', background: '#EBE6DD' }}>
       <Grid container

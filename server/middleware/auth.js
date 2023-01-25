@@ -1,18 +1,19 @@
 
+const User = require('./../models/user');
 
-class Middleware {
-  async decodeToken(req, res, next) {
-    try {
 
-      if (true) {
-        return next();
-      }
-      return res.status(401).json({ message: 'Please log in first' })
-    } catch (e) {
-      console.log(e);
-      return res.status(500).json({ message: 'Internal error' })
-    }
+const authMiddleware = async (req, res, next) => {
+
+  try {
+    const { uid } = req.session;
+    const user = await User.findOne({ _id: uid });
+    if (!user) throw new Error();
+    req.user = user;
+    next();
+  } catch (error) {
+    return res.sendStatus(401);
   }
-}
 
-module.exports = new Middleware();
+};
+
+module.exports = authMiddleware;

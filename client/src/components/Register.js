@@ -7,17 +7,26 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { IconButton, Link } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import { registerUser } from "../services";
+import auth from '../auth';
+import { register } from '../services';
+import { useNavigate } from 'react-router-dom';
 
 
-export default function Register() {
+const initialState = {
+  email: '',
+  firstName: '',
+  lastName: '',
+  phoneNumber: '',
+  password: ''
+};
 
-  const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phoneNumber, setphoneNumber] = useState("");
-  const [password, setPassword] = useState("");
-  const [open, setOpen] = useState(true);
+
+export default function Register({ setIsAuthenticated }) {
+
+  const navigate = useNavigate();
+  const [state, setState] = useState(initialState);
+  const [open, setOpen] = useState(false);
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -27,24 +36,45 @@ export default function Register() {
     setOpen(false);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(e.target.value)
-    const newUser = { email, firstName, lastName, phoneNumber }
-    setEmail('');
-    setFirstName('');
-    setLastName('');
-    setphoneNumber('');
-    setPassword('');
-    registerUser(newUser);
-    handleClose();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { email, firstName, lastName, phoneNumber, password } = state;
+    const user = { email, firstName, lastName, phoneNumber, password };
+    const res = await register(user);
+    if (res.error) {
+      alert(`${res.message}`);
+      setState(initialState);
+    } else {
 
+      setIsAuthenticated(true);
+      auth.login(() => navigate('/profile'));
+      handleClose();
+    }
+
+  };
+
+  const validateForm = () => {
+    return (
+      !state.email || !state.password || !state.firstName || !state.lastName || !state.phoneNumber
+    );
+  };
 
   return (
     <div>
-
+      <Button variant="contained" sx={{ display: { xs: 'none', md: 'block' } }} onClick={handleClickOpen}>
+        Register
+      </Button>
+      <Button variant="contained" size='small' sx={{ display: { xs: 'block', md: 'none' } }} onClick={handleClickOpen}>
+        Register
+      </Button>
       <Dialog open={open} onClose={handleClose} >
         <DialogActions>
           <IconButton sx={{ padding: 0 }} onClick={handleClose} >
@@ -70,8 +100,9 @@ export default function Register() {
               type="email"
               variant="outlined"
               required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              name="email"
+              value={state.email}
+              onChange={handleChange}
             />
             <div display="flex" flexDirection="rows">
               <TextField
@@ -79,16 +110,18 @@ export default function Register() {
                 label="First Name"
                 variant="outlined"
                 required
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                name="firstName"
+                value={state.firstName}
+                onChange={handleChange}
               />
               <TextField
                 sx={{ width: '8.5em', marginBottom: '0.7em' }}
                 label="Last Name"
                 variant="outlined"
                 required
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                name="lastName"
+                value={state.lastName}
+                onChange={handleChange}
               />
             </div>
             <TextField
@@ -96,8 +129,9 @@ export default function Register() {
               label="Phone Number"
               variant="outlined"
               required
-              value={phoneNumber}
-              onChange={(e) => setphoneNumber(e.target.value)}
+              name="phoneNumber"
+              value={state.phoneNumber}
+              onChange={handleChange}
             />
 
             <TextField
@@ -106,14 +140,16 @@ export default function Register() {
               type="password"
               variant="outlined"
               required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              value={state.password}
+              onChange={handleChange}
             />
             <Button
               sx={{ width: '16em', height: '3em' }}
               variant="contained"
               color="primary"
               type="submit"
+              disabled={validateForm()}
               onClick={handleClose}
             >
               Register

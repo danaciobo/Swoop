@@ -7,16 +7,22 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { IconButton, Link } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import { getUserByEmail } from "../services";
+import { useNavigate } from 'react-router-dom';
+import auth from "../auth";
+import { login } from '../services'
+
+const initialState = {
+  email: '',
+  password: '',
+};
 
 
+export default function Login({ setIsAuthenticated }) {
 
-export default function Login({ setUser }) {
+  let navigate = useNavigate();
+  const [state, setState] = useState(initialState);
 
-  const [loggEmail, setLoggEmail] = useState("");
-  const [loggPassword, setLoggPassword] = useState("");
   const [open, setOpen] = useState(false);
-
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -26,16 +32,33 @@ export default function Login({ setUser }) {
     setOpen(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(e.target.value)
-    const user = { email: loggEmail, password: loggPassword }
-    console.log(user)
-    // const loggedInUser = getUserByEmail(user.email);
-    // setUser(loggedInUser)
-    // setLoggEmail('');
-    // setLoggPassword('');
-    // handleClose();
+
+    const { email, password } = state;
+    const user = { email, password };
+    const res = await login(user);
+    console.log(res)
+    if (res.error) {
+      alert(`${res.message}`);
+      setState(initialState);
+    } else {
+
+      setIsAuthenticated(true);
+      auth.login(() => navigate('/profile'));
+    }
+  };
+
+  const validateForm = () => {
+    return !state.email || !state.password;
   };
 
 
@@ -72,8 +95,9 @@ export default function Login({ setUser }) {
               type="email"
               variant="outlined"
               required
-              value={loggEmail}
-              onChange={(e) => setLoggEmail(e.target.value)}
+              name="email"
+              value={state.email}
+              onChange={handleChange}
             />
 
             <TextField
@@ -82,22 +106,20 @@ export default function Login({ setUser }) {
               type="password"
               variant="outlined"
               required
-              value={loggPassword}
-              onChange={(e) => setLoggPassword(e.target.value)}
+              name="password"
+              value={state.password}
+              onChange={handleChange}
             />
-            <Link href="/Profile" >
               <Button
                 sx={{ width: '16em', height: '3em' }}
                 variant="contained"
                 color="primary"
                 type="submit"
+                disabled={validateForm()}
                 onClick={handleClose}
               >
                 Login
               </Button>
-
-            </Link>
-
             <Link href="/Register" variant="body2" sx={{ padding: 3 }}>
               Don't have an account yet? Register here
             </Link>
