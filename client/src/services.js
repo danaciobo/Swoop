@@ -25,7 +25,7 @@ export const  deleteItem = async (itemId) => {
       },
       body: JSON.stringify({id :itemId})
     })
-    return 
+    return
   } catch (err) {
     console.log(err)
     return false
@@ -69,7 +69,7 @@ export const registerUser = async (userInfo) => {
 export const getUserByEmail = async (email) => {
   try {
     const response = await fetch(`${baseURL}/users`,{
-    
+
     method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -102,6 +102,16 @@ export const getItemByCategory = async (category) => {
     console.log(err)
     return false
   }
+}
+export const getItemByBuyer = async (buyer) => {
+  try {
+    const response = await fetch(`${baseURL}/items/buyer/${buyer}`)
+    return response.json();
+  } catch (err) {
+    console.log(err)
+    return false
+  }
+
 }
 
 export const checkout = async (cart) => {

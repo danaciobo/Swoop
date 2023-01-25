@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import { styled, alpha } from "@mui/material/styles";
@@ -18,6 +19,7 @@ import Login from "./Login";
 import Logout from "./Logout";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 
 const pages = [
   "All",
@@ -85,6 +87,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
+
 export default function Navbar({
   setItems,
   setFilteredItems,
@@ -94,6 +97,7 @@ export default function Navbar({
   user,
   setCart
 }) {
+
   const [expanded, setExpanded] = useState(false);
   const navigate = useNavigate();
   const handleExpandClick = () => {
@@ -130,7 +134,9 @@ export default function Navbar({
 
   const handleFilterCategory = (e) => {
     e.preventDefault();
+
     navigate("/");
+
 
     const activeCategory = e.target.value;
 
@@ -192,31 +198,37 @@ export default function Navbar({
               setItems={setItems}
               setFilteredItems={setFilteredItems}
               items={items}
+              user={user}
             />
 
             <Login setUser={setUser} />
 
             <Logout />
 
-            <Link
-              style={{ textDecoration: "none", color: "white" }}
-              to={"/ShoppingCart"}
-            >
-              <ShoppingCartIcon
-                variant="outlined"
-                fontSize="large"
-                sx={{ display: { xs: "none", md: "flex", color: "#E25F1C" } }}
-              />
-            </Link>
-            {cart ? <p>{cart.length}</p> : ""}
+            <Stack direction='row' spacing={-0.1}>
+              <Link
+                style={{ textDecoration: 'none', color: 'white' }}
+                to={'/ShoppingCart'}
+              >
+                <ShoppingCartIcon
+                  variant='outlined'
+                  fontSize='large'
+                  sx={{ display: { xs: 'none', md: 'flex', color: '#E25F1C' } }}
+                />
+              </Link>
+              <Typography variant='p' mt={4} color='#63171d' >{cart.length}</Typography>
+            </Stack>
+
             <Link
               style={{ textDecoration: "none", color: "white" }}
               to={"/profile"}
             >
               <AccountBoxIcon
-                variant="outlined"
-                fontSize="large"
-                sx={{ color: "black" }}
+
+                variant='outlined'
+                fontSize='large'
+                sx={{ color: '#E25F1C' }}
+
               />
             </Link>
           </Stack>

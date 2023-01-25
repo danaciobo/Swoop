@@ -64,10 +64,11 @@ exports.updateItem = async (req, res) => {
 };
 
 exports.deleteItem = async (req, res) => {
+  const id = req.params.id 
   try {
     const deleted = await Item.destroy({
       where: {
-        id: req.body.itemId,
+        id: id,
       },
     });
     res.sendStatus(200);

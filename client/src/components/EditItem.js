@@ -27,6 +27,7 @@ export default function EditItem({ items, item }) {
   const [open, setOpen] = useState(false);
   const [previewSource, setPreviewSource] = useState();
   const [fileInputState] = useState('');
+
   const handleFileInputChange = (e) => {
     console.log(e);
     const file = e;
@@ -41,6 +42,7 @@ export default function EditItem({ items, item }) {
       setPreviewSource(reader.result);
     };
   };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -62,15 +64,7 @@ export default function EditItem({ items, item }) {
     formData.append('quantity', quantity);
     formData.append('location', location);
 
-    editItem(item.id, {
-      title,
-      description,
-      category,
-      price,
-      quantity,
-      location,
-      image,
-    });
+    editItem(item.id, { title,  description, category, price, quantity, location, image });
 
     handleClose();
   };

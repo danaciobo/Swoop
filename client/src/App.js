@@ -43,6 +43,7 @@ function App() {
             `This is an HTTP error: The status is ${response.status}`
           );
         }
+
         const actualData = await response.json();
         if (actualData) {
           setItems(actualData);
@@ -60,6 +61,7 @@ function App() {
  
   return (
     <>
+
       <ThemeProvider theme={theme}>
         <Navbar
           setItems={setItems}
@@ -129,19 +131,13 @@ function App() {
           <Route
             path={`/ItemDetails/:id`}
             element={
-              <ItemDetails
-                id={id}
-                item={currentItem}
-                setCurrentItem={setCurrentItem}
-                items={items}
-                setItems={setItems}
-              />
+
+
+              <ItemDetails user={user} id ={id} item={currentItem} setCurrentItem={setCurrentItem} items={items} setItems ={setItems}/>
             }
           />
-          <Route
-            path="ShoppingCart"
-            element={<ShoppingCart cart={cart} setCart={setCart} user={user}/>}
-          />
+          <Route path = 'ShoppingCart' element = {<ShoppingCart cart ={cart} setCart={setCart} item={currentItem} user={user} />} />
+
         </Routes>
         <Footer />
       </ThemeProvider>
