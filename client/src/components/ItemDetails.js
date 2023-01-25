@@ -9,15 +9,17 @@ import Stack from '@mui/material/Stack';
 
 import EditItem from "./EditItem";
 import { useNavigate, useParams } from "react-router-dom";
+import { User } from '@auth0/auth0-react';
 
 
 
-export default function ItemDetails({id, item, setCurrentItem,items ,setItems}) {
+export default function ItemDetails({user, id, item, setCurrentItem,items ,setItems}) {
   const navigate = useNavigate()
   useEffect(() => {
     getItemById(params.id)
       .then(response => {
         console.log(params.id)
+
         setCurrentItem(response)
       })
       .catch((err) => console.log(err));
@@ -29,14 +31,16 @@ export default function ItemDetails({id, item, setCurrentItem,items ,setItems}) 
       const newItemList = items.filter((element) =>{ return element.id !== item.id })
       setItems(newItemList)
      navigate('/Profile')
-      
+
     } catch (e) {
       console.log(e);
     }
   };
 
+  console.log(user)
+  console.log(item)
   const params = useParams()
-  
+
   return (
     <Container>
       <Box
@@ -46,13 +50,14 @@ export default function ItemDetails({id, item, setCurrentItem,items ,setItems}) 
           direction: 'row',
           pl: 5,
           m: 1,
-          border: 1,
-          borderColor: 'red',
+          borderRadius: 1,
+          border: 0.5,
+          background: "#EBE6DD",
         }}
       >
 
       <Box sx={{
-        width: 350,
+        width: 450,
         height: 450,
         marginTop: 5,
         marginBottom: 10,
@@ -61,7 +66,7 @@ export default function ItemDetails({id, item, setCurrentItem,items ,setItems}) 
         <img
           src={item.image}
           alt={item.title}
-          height='100%'
+          height='auto'
           width='100%'
           />
     </Box>
@@ -99,8 +104,9 @@ export default function ItemDetails({id, item, setCurrentItem,items ,setItems}) 
        marginBottom: 10,
       }}>
       <Typography gutterBottom variant="h5" component="div" align='left'>
-              {item.seller? item.seller : 'Dana Chubs'}
-            </Typography>
+              {item.seller_name? item.seller_name : ''}
+        </Typography>
+        { item.seller === user.email &&
         <Stack direction="row" spacing={2}>
           <Button
           onClick={ deleteThis}
@@ -108,17 +114,8 @@ export default function ItemDetails({id, item, setCurrentItem,items ,setItems}) 
            sx={{ display: { xs: "none", md: "flex", background: "#E25F1C" } }}endIcon={<DeleteIcon />}>
             Delete
           </Button>
-
             <EditItem id={id} item={item} setCurrentItem={setCurrentItem} />
-
-            {/* <Button onClick={edit} variant="contained" endIcon={<EditIcon
-          id={id}
-          item={item}
-          setCurrentItem={setCurrentItem}
-           />}>
-            Edit
-          </Button> */}
-          </Stack>
+          </Stack>}
         </Box>
       </Box>
     </Container>

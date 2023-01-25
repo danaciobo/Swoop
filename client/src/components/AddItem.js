@@ -16,7 +16,9 @@ import Select from "@mui/material/Select";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import user from './Login'
 import WebcamCapture from "./WebcamCapture";
-export default function AddItem({ setItems, setFilteredItems, items }) {
+
+export default function AddItem({ setItems, setFilteredItems, items ,user}) {
+
   const [cameraPopup, setCameraPopup] = useState(false)
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -28,8 +30,8 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
   const [open, setOpen] = useState(false);
   const [previewSource, setPreviewSource] = useState();
   const [fileInputState] = useState("");
+
   const handleFileInputChange = (e) => {
-    
     const file = e;
     previewFile(file);
   };
@@ -68,14 +70,14 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
     formData.append("price", price);
     formData.append("quantity", quantity);
     formData.append("location", location);
-   
-    postItem({title, description, category, price, quantity, location, image , seller :user.name});
 
+    postItem({title, description, category, price, quantity, location, image, seller_name: user.given_name +" "+ user.family_name, seller: user.email});
+    console.log(user)
 
     e.target.reset();
     handleClose();
   };
-  
+
   const itemsList = items;
   const postItem = async (data) => {
     try {
@@ -204,9 +206,10 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
                 color="primary"
                 aria-label="upload picture"
                 component="label"
+                onClick = {openCamera}
               >
-                <PhotoCamera onClick = {openCamera}/>
-                
+                <PhotoCamera />
+
               </IconButton>
             </label>
 
