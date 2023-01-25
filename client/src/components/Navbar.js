@@ -11,7 +11,7 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import Logo from '../Swoop.jpg';
 import { Stack } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddItem from './AddItem';
 import Login from './Login';
@@ -85,7 +85,14 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function Navbar({ setItems, setFilteredItems, items, setUser, cart }) {
+export default function Navbar({
+  setItems,
+  setFilteredItems,
+  items,
+  setUser,
+  cart,
+}) {
+  const navigate = useNavigate();
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
@@ -118,6 +125,7 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, car
 
   const handleFilterCategory = (e) => {
     e.preventDefault();
+    navigate('/');
     console.log(e);
     const activeCategory = e.target.value;
     console.log(activeCategory);
