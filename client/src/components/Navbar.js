@@ -86,7 +86,7 @@ const ExpandMore = styled((props) => {
 }));
 
 
-export default function Navbar({ setItems, setFilteredItems, items, setUser, cart }) {
+export default function Navbar({ setItems, setFilteredItems, items, user ,setUser, cart }) {
 
   const navigate = useNavigate();
 
@@ -187,6 +187,7 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, car
               setItems={setItems}
               setFilteredItems={setFilteredItems}
               items={items}
+              user={user}
             />
 
             <Login setUser={setUser} />

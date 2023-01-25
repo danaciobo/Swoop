@@ -31,7 +31,7 @@ function App() {
   const [filteredItems, setFilteredItems] = useState([]);
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('myCart'))||[])
   const [user, setUser] = useState({});
-  
+
   const [currentItem, setCurrentItem] = useState({});
   useEffect(() => {
     const getData = async () => {
@@ -54,7 +54,7 @@ function App() {
       };
       getData();
     }, []);
-    
+
     const id = currentItem.id
     console.log(id)
     console.log(currentItem)
@@ -128,7 +128,7 @@ function App() {
             path= {`/ItemDetails/:id`}
             element={
 
-              <ItemDetails id ={id} item={currentItem} setCurrentItem={setCurrentItem} items={items} setItems ={setItems}/>
+              <ItemDetails user={user} id ={id} item={currentItem} setCurrentItem={setCurrentItem} items={items} setItems ={setItems}/>
             }
           />
           <Route path = 'ShoppingCart' element = {<ShoppingCart cart ={cart} setCart={setCart} />} />
