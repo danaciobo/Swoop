@@ -85,14 +85,11 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function Navbar({
-  setItems,
-  setFilteredItems,
-  items,
-  setUser,
-  cart,
-}) {
+
+export default function Navbar({ setItems, setFilteredItems, items, setUser, cart }) {
+
   const navigate = useNavigate();
+
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
@@ -125,7 +122,9 @@ export default function Navbar({
 
   const handleFilterCategory = (e) => {
     e.preventDefault();
+
     navigate('/');
+
     console.log(e);
     const activeCategory = e.target.value;
     console.log(activeCategory);
@@ -193,18 +192,19 @@ export default function Navbar({
             <Login setUser={setUser} />
 
             <Logout />
-
-            <Link
-              style={{ textDecoration: 'none', color: 'white' }}
-              to={'/ShoppingCart'}
-            >
-              <ShoppingCartIcon
-                variant='outlined'
-                fontSize='large'
-                sx={{ display: { xs: 'none', md: 'flex', color: '#E25F1C' } }}
-              />
-            </Link>
-            <p>{cart.length}</p>
+            <Stack direction='row' spacing={-0.1}>
+              <Link
+                style={{ textDecoration: 'none', color: 'white' }}
+                to={'/ShoppingCart'}
+              >
+                <ShoppingCartIcon
+                  variant='outlined'
+                  fontSize='large'
+                  sx={{ display: { xs: 'none', md: 'flex', color: '#E25F1C' } }}
+                />
+              </Link>
+              <Typography variant='p' mt={4} color='#63171d' >{cart.length}</Typography>
+            </Stack>
             <Link
               style={{ textDecoration: 'none', color: 'white' }}
               to={'/profile'}
@@ -212,7 +212,7 @@ export default function Navbar({
               <AccountBoxIcon
                 variant='outlined'
                 fontSize='large'
-                sx={{ color: 'black' }}
+                sx={{ color: '#E25F1C' }}
               />
             </Link>
           </Stack>
