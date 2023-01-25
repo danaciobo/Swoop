@@ -1,10 +1,12 @@
-const { getItems, getItemById } = require('./ItemController');
+const {
+  getItems,
+  getItemById,
+  getItemByCategory,
+} = require('./ItemController');
 const Item = require('../models/item');
 
 describe('getItems', () => {
-  test('returns a list of items', async () => {
-    // Create a mock implementation of the Item.findAll() method
-    // that returns a promise that resolves to a list of items
+  it('should return status 200 and a list of the items', async () => {
     Item.findAll = jest
       .fn()
       .mockResolvedValue([{ name: 'item1' }, { name: 'item2' }]);
@@ -19,6 +21,23 @@ describe('getItems', () => {
       { name: 'item1' },
       { name: 'item2' },
     ]);
+  });
+
+  it('should return status 500 and log the error if there is one', async () => {
+    Item.findAll = jest.fn().mockRejectedValue(new Error('Test Error'));
+
+    const req = {};
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    console.log = jest.fn();
+
+    await getItems(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(console.log).toHaveBeenCalledWith(new Error('Test Error'));
   });
 });
 
