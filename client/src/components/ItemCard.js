@@ -41,11 +41,11 @@ export default function ItemCard({item, setCurrentItem, cart, setCart }) {
   };
 const addToCart = ()=>{
 const oldCart = cart
-console.log(cart, 'inside cart')
-// if(!oldCart.includes(item)){
+
+if(!oldCart.includes(item)){
 setCart([...oldCart, item])
 localStorage.setItem('myCart', JSON.stringify(cart))
-}
+}}
   return (
     <>
       <Card sx={{ width: 250, height: "auto" }}>

@@ -83,16 +83,17 @@ export default function Profile({items, user, setCurrentItem}) {
                 <EditIcon />
               </IconButton>
               <Avatar
+              src={user.picture}
                 sx={{
                   margin: 5,
                   backgroundColor: '#E25F1C',
-                  width: 70,
-                  height: 70,
+                  width: 100,
+                  height: 100,
                   margin: 'auto',
                 }}
               >
-                {' '}
-                DC
+                {/* {' '} */}
+                
               </Avatar>
             </CardMedia>
             {/* THIS IS THE START OF THE CARD  */}
