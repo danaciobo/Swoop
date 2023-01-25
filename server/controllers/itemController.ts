@@ -6,7 +6,8 @@ import { Request, Response } from "express";
 export const getItems = async (req:Request, res:Response) => {
   try {
     const items = await Item.find();
-    return res.status(200).json(items);
+    //console.log('items in controller', items)
+    return res.status(200).send(items);
   } catch (e) {
     console.log(e);
     res.status(500);

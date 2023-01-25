@@ -49,7 +49,7 @@ function App() {
         const response = await fetch(myURL, {
           credentials: 'include',
           mode:'cors'
-        });
+        })
         if (!response.ok) {
           throw new Error(
             `This is an HTTP error: The status is ${response.status}`
@@ -65,7 +65,7 @@ function App() {
       }
     }
     getData()
-  }, []);
+  }, [dispatch]);
 
 
   return (

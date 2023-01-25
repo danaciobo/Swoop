@@ -5,7 +5,7 @@ const DB_NAME = 'swoopDB2'
 const DB_PORT = '27017'
 //mongodb://127.0.0.1/
 mongoose.connect(
-  `mongodb://localhost:${DB_PORT}/${DB_NAME}`,
+  `mongodb://127.0.0.1/${DB_NAME}`,
   (err) => {
     if (err) {
       console.log(`Sorry, something went wrong! ${err}`);
