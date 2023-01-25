@@ -13,15 +13,17 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import React from 'react'
+import React, {useState} from 'react'
 import { Item } from "../Types/Types";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function AddItem({ items }: {items: Item[]}) {
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const addItemState = useSelector((state: any) => state.addItem)
+  const addItemState = useSelector((state: any) => state.addItem);
+
+  const [image, setImage]:any = useState<string | File>("")
 
   const handleClickOpen = () => {
     dispatch({type: 'ADDITEM_OPEN'});
@@ -33,7 +35,18 @@ export default function AddItem({ items }: {items: Item[]}) {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = await addItemState
+
+    // const formData = await addItemState;
+
+    const formData = await new FormData()
+    formData.append('image', image);
+    formData.append('title', addItemState.title);
+    formData.append('description', addItemState.description);
+    formData.append('category', addItemState.category);
+    formData.append('price', addItemState.price);
+    formData.append('quantity', addItemState.quantity);
+    formData.append('location', addItemState.location);
+
     await postItem(formData)
     if (e.target) {
       const target = e.target as HTMLFormElement
@@ -47,7 +60,7 @@ export default function AddItem({ items }: {items: Item[]}) {
     try {
       const post = await addItem(data);
       dispatch({type:'APP_ITEMS', payoad: post});
-      dispatch({type:'APP_FILTERED_ITEMS', payload: post})
+      // dispatch({type:'APP_FILTERED_ITEMS', payload: post})
 
     } catch (e) {
       console.log(e);
@@ -161,14 +174,15 @@ export default function AddItem({ items }: {items: Item[]}) {
             </div>
 
               <input
-                accept="image/*"
-                style={{ display: 'none', margin: "2px" }}
-                id="contained-button-file"
-                // value={image}
-                multiple
-                data-testid="Image-1"
-                type="file"
-                onChange={(e) => dispatch({type:'ADDITEM_IMAGE', payload: e.target.files === null ? "" : e.target.files[0]})}
+              accept="image/*"
+              style={{ display: 'none', margin: "2px" }}
+              id="contained-button-file"
+              // value={addItemState.image}
+              multiple
+              data-testid="Image-1"
+              type="file"
+              // onChange={(e) => dispatch({type:'ADDITEM_IMAGE', payload: e.target.files[0] === null ? "" : e.target.files[0]})}
+              onChange={(e) => setImage(e.target.files === null ? "" : e.target.files[0])}
               />
               <label htmlFor="contained-button-file">
                 <Button variant="contained" component="span">

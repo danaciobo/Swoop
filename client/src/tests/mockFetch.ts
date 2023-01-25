@@ -7,7 +7,7 @@ const mockResponse = {
 
 export default async function mockFetch(url:string) {
   switch (url) {
-    case "http://localhost:3005/items":
+    case "http://localhost:3006/items":
       return {
         json: async () => mockResponse
       }

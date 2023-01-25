@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Container, Grid, Paper } from '@mui/material';
 import ItemCard from './ItemCard';
 import { Item } from '../Types/Types';
@@ -7,6 +6,7 @@ import { Item } from '../Types/Types';
 
 
 export default function ItemList({items}: {items: Item[]}) {
+
   return (
     <Container test-maxWidth={false} sx={{ justifyContent: 'space-between', width: '100%', paddingTop: '40px', background: '#EBE6DD' }}>
       <Grid container

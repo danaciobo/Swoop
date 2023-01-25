@@ -15,6 +15,8 @@ const initialStateLogin = {
   loggPassword: ''
 }
 
+//const initialAddItemState = new FormData()
+
 const initialAddItemState = {
   title: '',
   description: '',
@@ -22,7 +24,6 @@ const initialAddItemState = {
   quantity:'',
   location:'',
   category:'',
-  image:'', //string|File
   openAddItem:''
 }
 
@@ -66,9 +67,9 @@ const Profile = (state:any = InitialProfileState, action:any) => {
 const App = (state:any=initialAppState, action:any) => {
   switch (action.type) {
     case 'APP_ITEMS':
-      return { ...state, items: [...state.items, action.payload] };
+      return { ...state, items: [...state.items, ...action.payload] };
     case 'APP_FILTERED_ITEMS':
-      return { ...state, filteredItems: [...state.filteredItems, action.payload]} ;
+      return { ...state, filteredItems: action.payload} ;
     case 'APP_USER':
       return {...state, User: action.payload}
     default:
@@ -110,9 +111,6 @@ const addItem = (state:any = initialAddItemState, action:any) => {
       return {...state, location: action.payload}
     case 'ADDITEM_CATEGORY':
       return {...state, category: action.payload}
-    case 'ADDITEM_IMAGE':
-      const imgURL = URL.createObjectURL(action.payload)
-      return {...state, image: imgURL}
     case 'ADDITEM_OPEN':
       return {...state, open: !state.open}
     default:

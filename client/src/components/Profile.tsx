@@ -99,7 +99,7 @@ export default function Profile({items}: {items: Item[]}) {
                     <CardActionArea>
                       <CardContent sx={{ padding: 0 }}>
                         <img
-                          src={`http://localhost:3005/${item.image}`}
+                          src={`http://localhost:3006/${item.image}`}
                           height="70px"
                           width="100%"
                           alt={item.title}
@@ -139,7 +139,7 @@ export default function Profile({items}: {items: Item[]}) {
                     <CardActionArea>
                       <CardContent sx={{ padding: 0 }}>
                         <img
-                          src={`http://localhost:3005/${item.image}`}
+                          src={`http://localhost:3006/${item.image}`}
                           height="70px"
                           width="100%"
                           alt={item.title}

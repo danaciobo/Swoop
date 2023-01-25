@@ -34,23 +34,23 @@ export const getItemById = async (req:Request, res:Response) => {
   }
 };
 
-export const createItem = async (req:Request, res:Response) => {
+export const createItem = async (req:any, res:Response) => {
   try {
-    console.log('typescript')
-    console.log(req.body)
-    const newItem = await req.body
-      // const newItem = await Item.create({
-      //   title: req.body.title,
-      //   description: req.body.description,
-      //   category: req.body.category,
-      //   price: req.body.price,
-      //   quantity: req.body.quantity,
-      //   location: req.body.location,
-      //   //image: req.body.file.path,
-      //   date_added: Date.now(),
-      //   // seller: req.body.user._id
-      // });
-      await Item.create(newItem)
+    console.log('creating')
+    // console.log(req.body, req.file)
+      const newItem = await Item.create({
+        title: req.body.title,
+        description: req.body.description,
+        category: req.body.category,
+        price: req.body.price,
+        quantity: req.body.quantity,
+        location: req.body.location,
+        image: req.file.path,
+        date_added: Date.now(),
+        // seller: req.body.user._id
+      });
+      // await Item.create(newItem)
+      console.log(newItem)
 
       res.status(201).send(newItem);
   } catch (e) {

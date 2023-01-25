@@ -22,11 +22,10 @@ const baseURL = "http://localhost:3006"
 
 
 export const addItem = async (data: any) => {
-   console.log("data in services", data)
-    return fetch(`${baseURL}/items`,{
+   console.log("data in services", ...data)
+    return await fetch(`${baseURL}/items`,{
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
+      body: data,
       credentials: 'include',
       mode:'cors'
     })

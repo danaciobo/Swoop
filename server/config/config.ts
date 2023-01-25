@@ -1,5 +1,5 @@
 
 export default {
-  PORT : 3005,
+  PORT : 3006,
   DB_NAME: 'swoopDB2'
 }

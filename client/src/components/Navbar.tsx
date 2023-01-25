@@ -87,22 +87,22 @@ export default function Navbar({ items, user }: {
     const searchWord = e.target.value;
     const filtered = items.filter((item) => item.title.toLowerCase().includes(searchWord.toLowerCase()) || item.category.toLowerCase().includes(searchWord.toLowerCase()))
     if (filtered.length > 0) {
-    dispatch({ type: 'APP_FILTERED_ITEMS', payload: filtered })
+      dispatch({ type: 'APP_FILTERED_ITEMS', payload: filtered })
     } else {
-     dispatch({ type: 'APP_FILTERED_ITEMS', payload: filtered })
+      dispatch({ type: 'APP_FILTERED_ITEMS', payload: filtered })
     }
   }
-
+  // BROKEN NEEDS FIX
   const handleFilterCategory = (e:React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const target = e.target as HTMLButtonElement
     const activeCategory = target.value;
-    const filtered = items.filter((item) => item.category.toLowerCase() === (activeCategory.toLowerCase()))
+    const filtered = items.length === 0 ? items.filter((item) => item.category.toLowerCase() === (activeCategory.toLowerCase())) : []
     if (activeCategory.toLowerCase() === 'all') {
       console.log(items)
-          dispatch({ type: 'APP_FILTERED_ITEMS', payload: items })
+          dispatch({ type: 'APP_FILTERED_ITEMS', payload: appState.items })
     } else {
-          dispatch({ type: 'APP_FILTERED_ITEMS', payload: filtered })
+          dispatch({ type: 'APP_FILTERED_ITEMS', payload: appState.filtered })
     }
   }
   return (

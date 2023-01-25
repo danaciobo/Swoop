@@ -1,9 +1,8 @@
-const multer = require('multer');
 
-// import multer from 'multer'
+import multer from 'multer'
 
-// import SharpMulter from 'sharp-multer'
-const SharpMulter  =  require('sharp-multer');
+import SharpMulter from 'sharp-multer'
+
 
 const fileFilter = (req: Request, file, cb: (error, success)=>any) => {
   if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'|| file.mimetype === 'image/jpg') {

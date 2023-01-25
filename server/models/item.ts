@@ -31,7 +31,7 @@ const itemSchema = new mongoose.Schema({
     },
     image: {
       type: String,
-      required: false,
+      required: true,
     },
     date_added: {
         type: Date,
