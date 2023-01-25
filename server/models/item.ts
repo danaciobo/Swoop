@@ -1,4 +1,4 @@
-import mongoose from '../db.js';
+import mongoose from '../db';
 
 const itemSchema = new mongoose.Schema({
     title: {
@@ -31,7 +31,7 @@ const itemSchema = new mongoose.Schema({
     },
     image: {
       type: String,
-      required: true,
+      required: false,
     },
     date_added: {
         type: Date,

@@ -37,7 +37,7 @@ export const getItemById = async (req:Request, res:Response) => {
 export const createItem = async (req:any, res:Response) => {
   try {
     console.log('creating')
-    // console.log(req.body, req.file)
+    console.log(req.body)
       const newItem = await Item.create({
         title: req.body.title,
         description: req.body.description,
@@ -45,7 +45,7 @@ export const createItem = async (req:any, res:Response) => {
         price: req.body.price,
         quantity: req.body.quantity,
         location: req.body.location,
-        image: req.file.path,
+        image: req.file ? req.file.path : undefined,
         date_added: Date.now(),
         // seller: req.body.user._id
       });

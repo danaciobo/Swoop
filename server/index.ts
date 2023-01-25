@@ -5,8 +5,6 @@ const cors = require('cors');
 import config from './config/config';
 import router from './router';
 import middleware from './middleware/auth'
-import jwt from 'express-jwt'
-import jwks from 'jwks-rsa'
 
 
 // var jwtCheck = jwt({
@@ -23,10 +21,6 @@ import jwks from 'jwks-rsa'
 
 
 // app.use(jwtCheck);
-
-app.get('/authorized', function (req, res) {
-    res.send('Secured Resource');
-});
 
 const corsSettings = {origin: 'http://localhost:3000', credentials: true}
 app.use(cors(corsSettings));
