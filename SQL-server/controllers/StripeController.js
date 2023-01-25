@@ -1,16 +1,15 @@
 
 const stripe = require('stripe')('sk_test_51MTr9bJvTkXt4c3XqzeMuhgswXtG1QJEjwkMeqiSNvTvWcLiEJLteYG1SqGllTU1E9100MQXMf3JGcmQAwFgf8Ft00VmcwaWlp')
-
+const MY_DOMAIN = 'http://localhost:4002';
 exports.pay = async (req, res) => {
   
-    console.log(req.body);
     const items = req.body.items;
     let lineItems = [];
     items.forEach((item)=> {
         lineItems.push(
             {
-                price: item.id,
-                quantity: item.quantity
+                price: item.stripeId,
+                quantity: 1
             }
         )
     });

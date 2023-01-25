@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import ShoppingCartItem from "./ShoppingCartItem";
 import { Container, Grid, Typography,} from "@mui/material";
 import Button from "@mui/material/Button";
-
+import { checkout } from "../services";
 function ShoppingCart({item, cart, setCart , user}) {
 
   console.log(item)
@@ -15,6 +15,11 @@ function ShoppingCart({item, cart, setCart , user}) {
      setCart(myCart);
     }}
   , [cart]);
+
+  const payUp = async()=>{
+    console.log(cart)
+    checkout(cart)
+  }
 
   return (
     <>
@@ -56,6 +61,7 @@ function ShoppingCart({item, cart, setCart , user}) {
         <Button
           variant="contained"
           sx={{ width: 200 }}
+          onClick={payUp}
         >PAY NOW
         </Button>
         <Typography variant='h6' mt={4} sx={{ marginLeft: 10, marginBottom: 5 }}>

@@ -115,12 +115,13 @@ export const getItemByBuyer = async (buyer) => {
 }
 
 export const checkout = async (cart) => {
+  console.log(cart)
   await fetch(`${baseURL}/checkout`, {
       method: "POST",
       headers: {
           'Content-Type': 'application/json'
       },
-      body: JSON.stringify({items: cart.items})
+      body: JSON.stringify({items: cart})
   }).then((response) => {
       return response.json();
   }).then((response) => {
