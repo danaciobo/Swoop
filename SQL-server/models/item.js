@@ -48,6 +48,6 @@ const Item = sequelize.define("Item", {
     }
   });
 
-  Item.sync({ alter: true })
+  // Item.sync({ alter: true })
 
   module.exports = Item

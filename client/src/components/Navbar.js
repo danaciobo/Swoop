@@ -85,7 +85,9 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
+
 export default function Navbar({ setItems, setFilteredItems, items, setUser, cart }) {
+
   const navigate = useNavigate();
 
   const [expanded, setExpanded] = useState(false);
@@ -120,7 +122,9 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, car
 
   const handleFilterCategory = (e) => {
     e.preventDefault();
-    navigate('/')
+
+    navigate('/');
+
     console.log(e);
     const activeCategory = e.target.value;
     console.log(activeCategory);
