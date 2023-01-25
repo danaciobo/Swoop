@@ -16,6 +16,7 @@ export default function Profile({items, user, setCurrentItem}) {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [editEmail, setEditEmail] = useState(false);
 
+
   function handleClick() {
     setEditButton(!editButton);
     setEditEmail(!editEmail);
@@ -65,13 +66,20 @@ export default function Profile({items, user, setCurrentItem}) {
                 <EditIcon />
               </IconButton>
               <Avatar
+              src={user.picture}
                 sx={{
                   margin: 5,
                   backgroundColor: '#E25F1C',
-                  width: 70,
-                  height: 70,
+                  width: 100,
+                  height: 100,
                   margin: 'auto',
-                }}>{user.image}</Avatar>
+
+                }}
+              >
+                
+                
+              </Avatar>
+
             </CardMedia>
             <CardContent sx={{ alignFont: 'center' }}>
               <Typography

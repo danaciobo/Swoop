@@ -17,7 +17,11 @@ import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import user from './Login'
 import WebcamCapture from "./WebcamCapture";
 
+import { addToStripe } from "../services";
+
+
 export default function AddItem({ setItems, setFilteredItems, items ,user}) {
+
 
   const [cameraPopup, setCameraPopup] = useState(false)
   const [title, setTitle] = useState("");
@@ -81,7 +85,10 @@ export default function AddItem({ setItems, setFilteredItems, items ,user}) {
   const itemsList = items;
   const postItem = async (data) => {
     try {
-      const post = await addItem(data);
+      console.log('bad man')
+      const stripeDetails = await addToStripe({price: (data.price* 100), name: data.title})
+      console.log(stripeDetails.default_price.id)
+      const post = await addItem({...data, stripeId: stripeDetails.default_price.id});
       setItems((items) => [...items, post]);
       setFilteredItems((filteredItems) => [...itemsList, post]);
     } catch (e) {

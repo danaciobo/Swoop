@@ -5,6 +5,7 @@ import { getUserByEmail } from "../services";
 
 export default function ItemList({ user, items, setCurrentItem, setUser , cart, setCart}) {
 
+    
   return (
     <Container
       maxWidth={false}
@@ -24,8 +25,11 @@ export default function ItemList({ user, items, setCurrentItem, setUser , cart, 
             .sort((a, b) => new Date(b.date_added) - new Date(a.date_added))
             .map((item) => (
               <Grid item key={item.id}>
-                <ItemCard  item={item} setCurrentItem={setCurrentItem}
-                cart ={cart} setCart ={setCart}/>
+
+                <ItemCard  item={item} setCurrentItem={setCurrentItem} 
+                cart ={cart} setCart ={setCart} user= {user}/>
+
+
               </Grid>
             ))
         ) : (

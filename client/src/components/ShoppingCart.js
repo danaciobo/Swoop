@@ -3,13 +3,14 @@ import ShoppingCartItem from "./ShoppingCartItem";
 import { Container, Grid, Typography,} from "@mui/material";
 import Button from "@mui/material/Button";
 
-function ShoppingCart({item, cart, setCart}) {
+function ShoppingCart({item, cart, setCart , user}) {
 
   console.log(item)
 
+
     useEffect(()=>{
         console.log(cart)
-        const myCart = JSON.parse(localStorage.getItem('myCart'));
+        const myCart = JSON.parse(localStorage.getItem(`myCart-${user.email}`));
     if (myCart) {
      setCart(myCart);
     }}

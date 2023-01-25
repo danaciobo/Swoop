@@ -35,6 +35,7 @@ exports.createItem = async (req, res) => {
       imageId: img,
       seller: req.body.seller,
       buyer: req.body.buyer,
+      stripeId: req.body.stripeId
     });
     res.status(201).send(newItem);
     console.log(newItem);
