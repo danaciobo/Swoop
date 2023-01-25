@@ -11,7 +11,7 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import Logo from '../Swoop.jpg';
 import { Stack } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddItem from './AddItem';
 import Login from './Login';
@@ -86,6 +86,8 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function Navbar({ setItems, setFilteredItems, items, setUser, cart }) {
+  const navigate = useNavigate();
+
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
@@ -118,6 +120,7 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, car
 
   const handleFilterCategory = (e) => {
     e.preventDefault();
+    navigate('/')
     console.log(e);
     const activeCategory = e.target.value;
     console.log(activeCategory);
@@ -185,18 +188,19 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, car
             <Login setUser={setUser} />
 
             <Logout />
-
-            <Link
-              style={{ textDecoration: 'none', color: 'white' }}
-              to={'/ShoppingCart'}
-            >
-              <ShoppingCartIcon
-                variant='outlined'
-                fontSize='large'
-                sx={{ display: { xs: 'none', md: 'flex', color: '#E25F1C' } }}
-              />
-            </Link>
-            <p>{cart.length}</p>
+            <Stack direction='row' spacing={-0.1}>
+              <Link
+                style={{ textDecoration: 'none', color: 'white' }}
+                to={'/ShoppingCart'}
+              >
+                <ShoppingCartIcon
+                  variant='outlined'
+                  fontSize='large'
+                  sx={{ display: { xs: 'none', md: 'flex', color: '#E25F1C' } }}
+                />
+              </Link>
+              <Typography variant='p' mt={4} color='#63171d' >{cart.length}</Typography>
+            </Stack>
             <Link
               style={{ textDecoration: 'none', color: 'white' }}
               to={'/profile'}
@@ -204,7 +208,7 @@ export default function Navbar({ setItems, setFilteredItems, items, setUser, car
               <AccountBoxIcon
                 variant='outlined'
                 fontSize='large'
-                sx={{ color: 'black' }}
+                sx={{ color: '#E25F1C' }}
               />
             </Link>
           </Stack>
