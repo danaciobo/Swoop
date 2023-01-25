@@ -47,14 +47,14 @@ function ShoppingCart({item, cart, setCart}) {
         <Grid
           container
           direction="row"
-          alignItems="stretch"
           spacing={{ xs: 5, md: 1 }}
-
+          alignItems="center"
+          justifyContent="center"
         >
 
         <Button
           variant="contained"
-          sx={{ marginTop: 3, marginLeft: 95, width: 200, height: 40 }}
+          sx={{ width: 200 }}
         >PAY NOW
         </Button>
         <Typography variant='h6' mt={4} sx={{ marginLeft: 10, marginBottom: 5 }}>
