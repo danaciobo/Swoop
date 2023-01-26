@@ -106,8 +106,8 @@ function App() {
               />
             }
           />
-     <Route path = '/success' element = {<Success />} />
-            <Route path = '/unsuccessful' element = {<CardFail /> } />
+     {/* <Route path = '/success' element = {<Success />} /> */}
+            {/* <Route path = '/unsuccessful' element = {<CardFail /> } /> */}
           <Route
             path="/Profile"
             element={
