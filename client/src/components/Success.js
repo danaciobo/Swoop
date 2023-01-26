@@ -21,10 +21,10 @@ console.log(user)
       <Typography variant='h5' mt={2}
       align='center'
       // sx={{ paddingBottom: 5 }}
-      >for you purchase</Typography>
+      >for you purchase!</Typography>
       <Typography variant='h4' mt={2}
       align='center'
-      sx={{ marginBottom: 4 }}>{user.given_name}! 🎉</Typography>
+      sx={{ marginBottom: 4 }}>🎉</Typography>
 
         <Grid
         container

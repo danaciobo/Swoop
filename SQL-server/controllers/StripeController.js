@@ -1,6 +1,6 @@
 
 const stripe = require('stripe')('sk_test_51MTr9bJvTkXt4c3XqzeMuhgswXtG1QJEjwkMeqiSNvTvWcLiEJLteYG1SqGllTU1E9100MQXMf3JGcmQAwFgf8Ft00VmcwaWlp')
-const MY_DOMAIN = 'http://localhost:4002';
+const MY_DOMAIN = 'http://localhost:3000';
 exports.pay = async (req, res) => {
   
     const items = req.body.items;

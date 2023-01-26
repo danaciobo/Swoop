@@ -5,12 +5,6 @@ const cors = require('cors');
 const  PORT  = 4002
 const router = require('./router');
 
-// const paymentIntent = await stripe.paymentIntents.create({
-//   amount: 1099,
-//   currency: 'usd',
-//   payment_method_types: ['card'],
-// });
-
 
 const sequelize = require('./models/index')
 
