@@ -36,8 +36,6 @@ export default function AddItem({ items }: {items: Item[]}) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // const formData = await addItemState;
-
     const formData = await new FormData()
     formData.append('image', image);
     formData.append('title', addItemState.title);
@@ -59,9 +57,9 @@ export default function AddItem({ items }: {items: Item[]}) {
   const postItem = async (data: any) => {
     try {
       const post = await addItem(data);
-      dispatch({type:'APP_ITEMS', payoad: post});
-      // dispatch({type:'APP_FILTERED_ITEMS', payload: post})
-
+      console.log(post)
+      dispatch({ type: 'APP_ITEMS', payload: [...items, post] });
+      dispatch({ type: 'APP_FILTERED_ITEMS', payload: [...items, post] });
     } catch (e) {
       console.log(e);
     }
@@ -177,11 +175,9 @@ export default function AddItem({ items }: {items: Item[]}) {
               accept="image/*"
               style={{ display: 'none', margin: "2px" }}
               id="contained-button-file"
-              // value={addItemState.image}
               multiple
               data-testid="Image-1"
               type="file"
-              // onChange={(e) => dispatch({type:'ADDITEM_IMAGE', payload: e.target.files[0] === null ? "" : e.target.files[0]})}
               onChange={(e) => setImage(e.target.files === null ? "" : e.target.files[0])}
               />
               <label htmlFor="contained-button-file">

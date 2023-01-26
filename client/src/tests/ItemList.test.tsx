@@ -6,6 +6,6 @@ import { MockItem } from './mockFetch';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-expressions
 test('display itemList Container', () => {
-  render(<ItemList items={[MockItem]}/>)
+  render(<ItemList filtereditems={[MockItem]}/>)
   expect(screen.getByTestId('item3')).toBeInTheDocument()
 })

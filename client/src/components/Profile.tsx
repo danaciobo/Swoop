@@ -1,12 +1,12 @@
 import { getUserById } from "../services"
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import Box from '@mui/material/Box';
 import { Avatar, Card, CardActionArea, CardContent, CardHeader, CardMedia, Container, Grid, Typography } from "@mui/material";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import React from "react";
+
 import ListItemText from '@mui/material/ListItemText';
-import { User, Item } from "../Types/Types";
+import { Item } from "../Types/Types";
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -20,11 +20,10 @@ export default function Profile({items}: {items: Item[]}) {
   useEffect(() => {
     getUserById('63c983992fed3945324e68f9')
       .then(response => {
-        console.log(response)
         dispatch({type: 'PROFILE_USER', payload: response})
       })
       .catch(err => console.log(err))
-  }, [])
+  }, [dispatch])
 
 
   return (
@@ -89,7 +88,6 @@ export default function Profile({items}: {items: Item[]}) {
               direction="row"
               justifyContent="space-around"
               alignItems="stretch"
-              // columns={{ xs: 4, sm: 8, md: 12 }}
               spacing='5'
             >
               {items ? items.slice(0,5).map((item:Item) =>
@@ -129,7 +127,6 @@ export default function Profile({items}: {items: Item[]}) {
               direction="row"
               justifyContent="space-around"
               alignItems="stretch"
-              // columns={{ xs: 4, sm: 8, md: 12 }}
               spacing='5'
             >
               {items.length >100 ? items.slice(0,5).map((item:Item)=>

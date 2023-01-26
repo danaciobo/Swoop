@@ -8,15 +8,6 @@ const initialStateRegistration = {
   Email: '',
   lastName: ''
 }
-
-const initialStateLogin = {
-  open: false,
-  loggEmail: '',
-  loggPassword: ''
-}
-
-//const initialAddItemState = new FormData()
-
 const initialAddItemState = {
   title: '',
   description: '',
@@ -30,7 +21,6 @@ const initialAddItemState = {
 const initialAppState = {
   items: [],
   filteredItems: [],
-  user: null
 }
 
 const initialItemCardState = {
@@ -51,7 +41,7 @@ const ItemCard  = (state:any=initialItemCardState, action:any)=> {
     case 'EXPAND':
       return {...state, expanded: !state.expanded}
     default:
-      return state;
+      return {...state};
   }
 }
 
@@ -60,40 +50,18 @@ const Profile = (state:any = InitialProfileState, action:any) => {
     case 'PROFILE_USER':
       return {...state, User: action.payload}
     default:
-      return state;
+      return {...state};
   }
 }
 
 const App = (state:any=initialAppState, action:any) => {
   switch (action.type) {
     case 'APP_ITEMS':
-      return { ...state, items: [...state.items, ...action.payload] };
+      return { ...state, items: action.payload };
     case 'APP_FILTERED_ITEMS':
       return { ...state, filteredItems: action.payload} ;
-    case 'APP_USER':
-      return {...state, User: action.payload}
     default:
-      return state;
-  }
-}
-
-
-const Registration = (state:any=initialStateRegistration, action: any) => {
-  switch (action.type) {
-    case 'OPEN':
-      return {...state, open: !state.open}
-    case 'REG_PASSWORD':
-      return { ...state, reqPassword: action.payload }
-    case 'PHONE_NUMBER':
-      return {...state, phoneNumber: action.payload}
-    case 'REG_EMAIL':
-      return {...state, Email: action.payload}
-    case 'FIRST_NAME':
-      return { ...state, FirstName: action.payload }
-    case 'LAST_NAME':
-      return {...state, lastName: action.payload}
-    default:
-      return state
+      return {...state};
   }
 }
 
@@ -114,12 +82,11 @@ const addItem = (state:any = initialAddItemState, action:any) => {
     case 'ADDITEM_OPEN':
       return {...state, open: !state.open}
     default:
-      return state;
+      return {...state};
   }
 }
 
 const Reducer = combineReducers({
-  Registration,
   addItem,
   App,
   Profile,

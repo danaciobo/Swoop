@@ -4,8 +4,6 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import {  Button, CardActionArea, CardActions, Collapse, IconButton, styled } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { useState } from 'react';
-import ItemDetails from './ItemDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import moment from 'moment'
 import { Item, ExpandProps } from '../Types/Types';
@@ -30,17 +28,9 @@ export default function ItemCard({ item }: {item: Item}) {
     dispatch({type:'EXPAND'});
   };
 
-  const [itemClicked, setItemClicked] = useState<null | Item>(null);
-  const handleClick = (e:any) => {
-      setItemClicked(e)
-    }
-    if (itemClicked) {
-      console.log(itemClicked._id)
-      return <ItemDetails id={itemClicked._id} onBack={() => setItemClicked(null)} />
-  }
   return (
     <Card sx={{ width: 250, height: 'auto'}} >
-      <CardActionArea onClick={() => handleClick(item)}>
+      <CardActionArea >
         <CardContent sx={{ padding: 0 }}>
           <img
             src={`http://localhost:3006/${item.image}`}
@@ -55,8 +45,8 @@ export default function ItemCard({ item }: {item: Item}) {
         title={'£' + item.price}
         subheader={item.title}
         action={<Button variant='contained' sx={{background: '#E25F1C'}}>
-        <ShoppingCartIcon />
-      </Button>}
+          <ShoppingCartIcon />
+        </Button>}
       />
       <CardActions>
       <Typography paragraph sx={{marginLeft: 2}}>More details</Typography>

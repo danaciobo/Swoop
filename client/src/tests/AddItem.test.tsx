@@ -95,53 +95,6 @@ test('Form closes on submission of data', () => {
 });
 
 
-
-
-
-
-
-
-
-// test('should call addItem and add the item input', async () => {
-
-//   render(<App />)
-//   const sellButton = screen.getByText('Sell Now')
-//   fireEvent.click(sellButton);
-//   const AddButton = screen.getByTestId('Add Item-1')
-//   fireEvent.click(AddButton);
-
-
-//   const grid = screen.getByTestId('itemCardGrid')
-//   expect(grid).toHaveTextContent('Seller: Dana C');
-//   // expect(screen.getByTestId('Description-1')).toHaveTextContent('description3');
-
-// })
-
-
-
-
-// it('adds an item', async () => {
-//   render(<App />)
-//   fireEvent.click(screen.getByText('Sell Now'));
-
-//   fireEvent.click(screen.getByTestId('Add Item-1'));
-
-//  fireEvent.change(titleInput, { target: { value: 'item3' } });
-//   fireEvent.change(descriptionInput, { target: { value: 'description3' } });
-//   fireEvent.change(categoryInput, { target: { value: 'category3' } });
-//   fireEvent.change(priceInput, { target: { value: '10' } });
-//   fireEvent.change(quantityInput, { target: { value: '5' } });
-//   fireEvent.change(locationInput, { target: { value: 'location3' } });
-//   fireEvent.change(imageInput, { target: { files: [new File([], 'file.jpg', { type: 'image/jpeg' })] } });
-
-//   fireEvent.submit(getByText('Add Item'));
-
-
-//   expect(screen.getByText('category3'))
-//   // mockFetch();
-
-// });
-
 export {}
 
 

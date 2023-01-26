@@ -1,37 +1,18 @@
-import {User} from './Types/Types'
+import { User } from './Types/Types'
+
 const baseURL = "http://localhost:3006"
 
-// export const getData = async () => {
-//   try {
-//     const response = await fetch(`${baseURL}/items`);
-//     if (!response.ok) {
-//       throw new Error(
-//         `This is an HTTP error: The status is ${response.status}`
-//       );
-//     }
-//     const actualData = await response.json();
-//     console.log(items)
-//     if (actualData) {
-//       setItems(actualData);
-//     }
-
-//   } catch (err) {
-//     console.log(err)
-//   }
-// }
 
 
 export const addItem = async (data: any) => {
-   console.log("data in services", ...data)
-    return await fetch(`${baseURL}/items`,{
-      method: 'POST',
-      body: data,
-      credentials: 'include',
-      mode:'cors'
-    })
-    .then(data => data.json())
-    .then(result => result)
-    // console.log("this is in the services req", response.json())
+  return await fetch(`${baseURL}/items`,{
+    method: 'POST',
+    body: data,
+    credentials: 'include',
+    mode:'cors'
+  })
+  .then(data => data.json())
+  .then(result => result)
 }
 
 export const registerUser = async (userInfo: User) => {

@@ -20,7 +20,6 @@ describe('integration tests', () => {
     try {
       await mongoose.connect(url)
     } catch (error) {
-      console.log('closing previous connection because one was still open')
       await mongoose.connection.close()
       await mongoose.connect(url)
     }
@@ -31,11 +30,8 @@ describe('integration tests', () => {
   });
 
   it('should save an item to the database', async () => {
-    console.log(mock)
     const res = await request.post('/items').send({ ...mock })
-    console.log('this is res', res.body)
     const items = await Item.find({})
-    console.log('this is items', items)
     const item = items[0]
     expect(item.title).toBe('title')
   })
@@ -45,7 +41,6 @@ describe('integration tests', () => {
     await request.post('/items').send({ ...mock })
     await request.post('/items').send({ ...mock })
     const items = await request.get('/items')
-    //const items = await Item.find()
     expect(items.body).toHaveLength(3)
   })
 

@@ -51,7 +51,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: '#393937',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -65,7 +64,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Navbar({ items, user }: {
-
   items: Item[];
   user: User | null
 }) {
@@ -97,12 +95,11 @@ export default function Navbar({ items, user }: {
     e.preventDefault();
     const target = e.target as HTMLButtonElement
     const activeCategory = target.value;
-    const filtered = items.length === 0 ? items.filter((item) => item.category.toLowerCase() === (activeCategory.toLowerCase())) : []
+    const filtered = items.length !== 0 ? items.filter((item) => item.category.toLowerCase() === (activeCategory.toLowerCase())) : []
     if (activeCategory.toLowerCase() === 'all') {
-      console.log(items)
-          dispatch({ type: 'APP_FILTERED_ITEMS', payload: appState.items })
+      dispatch({ type: 'APP_FILTERED_ITEMS', payload: appState.items })
     } else {
-          dispatch({ type: 'APP_FILTERED_ITEMS', payload: appState.filtered })
+      dispatch({ type: 'APP_FILTERED_ITEMS', payload: filtered})
     }
   }
   return (
@@ -110,7 +107,6 @@ export default function Navbar({ items, user }: {
       <AppBar position="static" >
         <Toolbar sx={{ background: 'white', color: 'black', justifyContent: 'space-between' }}>
           <Typography
-            // noWrap
             component='div'
             sx={{ mr: 2, display: 'flex' }}
           >

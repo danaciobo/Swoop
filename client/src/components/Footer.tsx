@@ -8,6 +8,5 @@ export default function Footer () {
     <Typography data-testid="footer" sx={{paddingTop:5, backgroundColor: '#EBE6DD', width: '100%', textAlign: 'center'}}>
         All &copy; copy rights are reserved to Dana Tech {fullYear}
     </Typography>
-
   );
 };
