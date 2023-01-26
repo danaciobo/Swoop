@@ -128,7 +128,8 @@ function App() {
             element={
 
 
-              <ItemDetails user={user} id ={id} item={currentItem} setCurrentItem={setCurrentItem} items={items} setItems ={setItems}/>
+              <ItemDetails user={user} id ={id} item={currentItem} setCurrentItem={setCurrentItem} items={items} setItems ={setItems} cart={cart}
+              setCart = {setCart}/>
             }
           />
           <Route path = 'ShoppingCart' element = {<ShoppingCart cart ={cart} setCart={setCart} item={currentItem} user={user} />} />
