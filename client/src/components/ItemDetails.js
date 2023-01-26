@@ -6,14 +6,14 @@ import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Stack from '@mui/material/Stack';
-
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import EditItem from "./EditItem";
 import { useNavigate, useParams } from "react-router-dom";
 import { User } from '@auth0/auth0-react';
 
 
 
-export default function ItemDetails({user, id, item, setCurrentItem,items ,setItems}) {
+export default function ItemDetails({user, id, item, setCurrentItem,items ,setItems, cart, setCart}) {
   const navigate = useNavigate()
   useEffect(() => {
     getItemById(params.id)
@@ -40,6 +40,15 @@ export default function ItemDetails({user, id, item, setCurrentItem,items ,setIt
   console.log(user)
   console.log(item)
   const params = useParams()
+
+  const addToCart = ()=>{
+    const oldCart = cart
+
+    if(!oldCart.includes(item)){
+    setCart([...oldCart, item])
+
+    localStorage.setItem(`myCart-${user.email} `, JSON.stringify(cart))
+    }}
 
   return (
     <Container>
@@ -106,7 +115,7 @@ export default function ItemDetails({user, id, item, setCurrentItem,items ,setIt
       <Typography gutterBottom variant="h5" component="div" align='left'>
               {item.seller_name? item.seller_name : ''}
         </Typography>
-        { item.seller === user.email &&
+        { item.seller === user.email ?
         <Stack direction="row" spacing={2}>
           <Button
           onClick={ deleteThis}
@@ -115,7 +124,12 @@ export default function ItemDetails({user, id, item, setCurrentItem,items ,setIt
             Delete
           </Button>
             <EditItem id={id} item={item} setCurrentItem={setCurrentItem} />
-          </Stack>}
+          </Stack>
+          :
+          <Button variant="contained" sx={{ background: "#E25F1C" }} onClick = {addToCart}>
+              <ShoppingCartIcon />
+
+            </Button>}
         </Box>
       </Box>
     </Container>
