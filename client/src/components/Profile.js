@@ -1,21 +1,31 @@
 import Box from '@mui/material/Box';
 import { Link as RouterLink } from 'react-router-dom';
-import { Avatar, Card, CardActionArea, CardContent, CardHeader, CardMedia,
-  Container, Grid, Typography, IconButton, Input } from '@mui/material';
+import {
+  Avatar,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  Container,
+  Grid,
+  Typography,
+  IconButton,
+  Input,
+} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { useState } from 'react';
 
-export default function Profile({items, user, setCurrentItem}) {
+export default function Profile({ items, user, setCurrentItem }) {
   const [editButton, setEditButton] = useState(false);
   const [updatedUserDetails, setUpdatedUserDetails] = useState({});
 
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [editEmail, setEditEmail] = useState(false);
-
 
   function handleClick() {
     setEditButton(!editButton);
@@ -61,25 +71,19 @@ export default function Profile({items, user, setCurrentItem}) {
             }}
           >
             <CardHeader sx={{ height: 5 }}></CardHeader>
-            <CardMedia sx={{ height: 100 }}>
-              <IconButton  sx={{ marginLeft: 36 }} onClick={handleClick}>
+            <CardMedia sx={{ height: 140 }}>
+              <IconButton sx={{ marginLeft: 36 }} onClick={handleClick}>
                 <EditIcon />
               </IconButton>
               <Avatar
-              src={user.picture}
+                src={user.picture}
                 sx={{
-                  margin: 5,
                   backgroundColor: '#E25F1C',
                   width: 100,
                   height: 100,
                   margin: 'auto',
-
                 }}
-              >
-                
-                
-              </Avatar>
-
+              ></Avatar>
             </CardMedia>
             <CardContent sx={{ alignFont: 'center' }}>
               <Typography
@@ -87,7 +91,9 @@ export default function Profile({items, user, setCurrentItem}) {
                 variant='h5'
                 component='div'
                 align='center'
-              >{user.given_name + " " + user.family_name}</Typography>
+              >
+                {user.given_name + ' ' + user.family_name}
+              </Typography>
               <List sx={{ width: '100%', maxWidth: 360, marginTop: 1 }}>
                 <form onSubmit={handleSubmit}>
                   <ListItem>
@@ -107,23 +113,25 @@ export default function Profile({items, user, setCurrentItem}) {
                       }
                     />
                   </ListItem>
-                  {editEmail && <ListItem>
-                    <ListItemText
-                      primary='Phone number'
-                      secondary={
-                        !editButton ? (
-                          updatedUserDetails.phoneNumber
-                        ) : (
-                          <Input
-                            required
-                            placeholder={updatedUserDetails.phoneNumber}
-                            value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
-                          />
-                        )
-                      }
-                    />
-                  </ListItem>}
+                  {editEmail && (
+                    <ListItem>
+                      <ListItemText
+                        primary='Phone number'
+                        secondary={
+                          !editButton ? (
+                            updatedUserDetails.phoneNumber
+                          ) : (
+                            <Input
+                              required
+                              placeholder={updatedUserDetails.phoneNumber}
+                              value={phoneNumber}
+                              onChange={(e) => setPhoneNumber(e.target.value)}
+                            />
+                          )
+                        }
+                      />
+                    </ListItem>
+                  )}
                   <input type='submit' hidden />
                 </form>
               </List>
@@ -154,38 +162,41 @@ export default function Profile({items, user, setCurrentItem}) {
               spacing='5'
             >
               {items ? (
-                items.filter((item) => item.seller === user.email).slice(0, 5).map((item) => (
-                  <RouterLink to= {`/ItemDetails/${item.id}`}>
-                    <Grid
-                      key={item.id}
-                      onClick={() => setCurrentItem(item)}
-                      sx={{ marginRight: 2 }}
-                    >
-                      <Card sx={{ width: 100, height: 120 }}>
-                        <CardActionArea>
-                          <CardContent sx={{ padding: 0 }}>
-                            <img
-                              src={item.image}
-                              height='70px'
-                              width='100%'
-                              alt={item.title}
-                            />
-                          </CardContent>
-                        </CardActionArea>
-                        <CardHeader
-                          titleTypographyProps={{
-                            fontSize: 12,
-                          }}
-                          subheaderTypographyProps={{
-                            fontSize: 10,
-                          }}
-                          title={'$' + item.price}
-                          subheader={item.title}
-                        />
-                      </Card>
-                    </Grid>
-                  </RouterLink>
-                ))
+                items
+                  .filter((item) => item.seller === user.email)
+                  .slice(0, 5)
+                  .map((item) => (
+                    <RouterLink to={`/ItemDetails/${item.id}`}>
+                      <Grid
+                        key={item.id}
+                        onClick={() => setCurrentItem(item)}
+                        sx={{ marginRight: 2 }}
+                      >
+                        <Card sx={{ width: 100, height: 120 }}>
+                          <CardActionArea>
+                            <CardContent sx={{ padding: 0 }}>
+                              <img
+                                src={item.image}
+                                height='70px'
+                                width='100%'
+                                alt={item.title}
+                              />
+                            </CardContent>
+                          </CardActionArea>
+                          <CardHeader
+                            titleTypographyProps={{
+                              fontSize: 12,
+                            }}
+                            subheaderTypographyProps={{
+                              fontSize: 10,
+                            }}
+                            title={'$' + item.price}
+                            subheader={item.title}
+                          />
+                        </Card>
+                      </Grid>
+                    </RouterLink>
+                  ))
               ) : (
                 <p>No items for sale yet..</p>
               )}
@@ -203,38 +214,41 @@ export default function Profile({items, user, setCurrentItem}) {
               spacing='5'
             >
               {items ? (
-                items.filter((item) => item.buyer === user.email).slice(0, 5).map((item) => (
-                  <RouterLink to= {`/ItemDetails/${item.id}`}>
-                    <Grid
-                      key={item.id}
-                      onClick={() => setCurrentItem(item)}
-                      sx={{ marginRight: 2 }}
+                items
+                  .filter((item) => item.buyer === user.email)
+                  .slice(0, 5)
+                  .map((item) => (
+                    <RouterLink to={`/ItemDetails/${item.id}`}>
+                      <Grid
+                        key={item.id}
+                        onClick={() => setCurrentItem(item)}
+                        sx={{ marginRight: 2 }}
                       >
-                      <Card sx={{ width: 100, height: 120 }}>
-                        <CardActionArea>
-                          <CardContent sx={{ padding: 0 }}>
-                            <img
-                              src={item.image}
-                              height='70px'
-                              width='100%'
-                              alt={item.title}
-                            />
-                          </CardContent>
-                        </CardActionArea>
-                        <CardHeader
-                          titleTypographyProps={{
-                            fontSize: 12,
-                          }}
-                          subheaderTypographyProps={{
-                            fontSize: 10,
-                          }}
-                          title={'$' + item.price}
-                          subheader={item.title}
-                        />
-                      </Card>
-                    </Grid>
-                  </RouterLink>
-                ))
+                        <Card sx={{ width: 100, height: 120 }}>
+                          <CardActionArea>
+                            <CardContent sx={{ padding: 0 }}>
+                              <img
+                                src={item.image}
+                                height='70px'
+                                width='100%'
+                                alt={item.title}
+                              />
+                            </CardContent>
+                          </CardActionArea>
+                          <CardHeader
+                            titleTypographyProps={{
+                              fontSize: 12,
+                            }}
+                            subheaderTypographyProps={{
+                              fontSize: 10,
+                            }}
+                            title={'$' + item.price}
+                            subheader={item.title}
+                          />
+                        </Card>
+                      </Grid>
+                    </RouterLink>
+                  ))
               ) : (
                 <p>No items bought</p>
               )}

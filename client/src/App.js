@@ -108,8 +108,10 @@ function App() {
               />
             }
           />
+
      <Route path = '/success' element = {<Success user={user}/>} />
             <Route path = '/unsuccessful' element = {<CardFail user={user}/> } />
+
           <Route
             path="/Profile"
             element={
