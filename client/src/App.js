@@ -12,6 +12,8 @@ import Completion from "./Completion";
 import ItemDetails from "./components/ItemDetails";
 import ShoppingCart from "./components/ShoppingCart";
 import StripeContainer from "./components/StripeContainer";
+import Success from "./components/Success";
+import CardFail from "./components/CardFail";
 const myURL = "http://localhost:4002/items";
 
 const theme = createTheme({
@@ -58,7 +60,7 @@ function App() {
   }, []);
 
   const id = currentItem.id;
- 
+
   return (
     <>
 
@@ -102,12 +104,12 @@ function App() {
                 setCurrentItem={setCurrentItem}
                 user={user}
                 setUser={setUser}
-                
+
               />
             }
           />
-     <Route path = '/success' element = {<Success />} />
-            <Route path = '/unsuccessful' element = {<CardFail /> } />
+     <Route path = '/success' element = {<Success user={user}/>} />
+            <Route path = '/unsuccessful' element = {<CardFail user={user}/> } />
           <Route
             path="/Profile"
             element={
