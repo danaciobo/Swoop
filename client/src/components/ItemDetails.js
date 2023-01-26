@@ -4,14 +4,10 @@ import { Box, List, ListItem, ListItemText, Typography } from '@mui/material';
 import { Container } from '@mui/system';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import Stack from '@mui/material/Stack';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import EditItem from "./EditItem";
 import { useNavigate, useParams } from "react-router-dom";
-import { User } from '@auth0/auth0-react';
-
-
 
 export default function ItemDetails({user, id, item, setCurrentItem,items ,setItems, cart, setCart}) {
   const navigate = useNavigate()
@@ -23,7 +19,7 @@ export default function ItemDetails({user, id, item, setCurrentItem,items ,setIt
         setCurrentItem(response)
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, );
 
   const deleteThis = async () => {
     try {
@@ -31,7 +27,7 @@ export default function ItemDetails({user, id, item, setCurrentItem,items ,setIt
       const newItemList = items.filter((element) =>{ return element.id !== item.id })
       setItems(newItemList)
      navigate('/Profile')
-
+      return res
     } catch (e) {
       console.log(e);
     }

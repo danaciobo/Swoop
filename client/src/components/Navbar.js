@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import AppBar from "@mui/material/AppBar";
 import { styled, alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -18,7 +18,7 @@ import AddItem from "./AddItem";
 import Login from "./Login";
 import Logout from "./Logout";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 
 
 const pages = [
@@ -76,16 +76,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
+// const ExpandMore = styled((props) => {
+//   const { expand, ...other } = props;
+//   return <IconButton {...other} />;
+// })(({ theme, expand }) => ({
+//   transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+//   marginLeft: "auto",
+//   transition: theme.transitions.create("transform", {
+//     duration: theme.transitions.duration.shortest,
+//   }),
+// }));
 
 
 export default function Navbar({
@@ -98,24 +98,16 @@ export default function Navbar({
   setCart
 }) {
 
-  const [expanded, setExpanded] = useState(false);
   const navigate = useNavigate();
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  
   useEffect(()=>{
     if(user){
       // localStorage.getItem(`myCart-${user.email}`).then(data => setCart(data))
     }
-  },[])
-  const [anchorElNav, setAnchorElNav] = useState(null);
+  })
+  
 
-  const handleOpenNavMenu = (e) => {
-    setAnchorElNav(e.currentTarget);
-  };
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -241,7 +233,6 @@ export default function Navbar({
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleOpenNavMenu}
               color="inherit"
             >
               <MenuIcon />

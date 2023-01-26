@@ -7,11 +7,10 @@ import ItemList from "./components/ItemsList";
 import Footer from "./components/Footer";
 import Profile from "./components/Profile";
 import { useEffect, useState } from "react";
-import Payment from "./Payment";
 import Completion from "./Completion";
 import ItemDetails from "./components/ItemDetails";
 import ShoppingCart from "./components/ShoppingCart";
-import StripeContainer from "./components/StripeContainer";
+
 import Success from "./components/Success";
 import CardFail from "./components/CardFail";
 const myURL = "http://localhost:4002/items";
@@ -122,7 +121,7 @@ function App() {
               />
             }
           />
-          <Route path={"/payment"} element={<StripeContainer />} />
+         
           <Route
             path={`/ItemDetails/:id`}
             element={

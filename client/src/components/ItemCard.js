@@ -16,7 +16,7 @@ import { useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import moment from 'moment';
 import { Link as RouterLink } from 'react-router-dom';
-import { Snackbar } from '@mui/material';
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -35,9 +35,9 @@ export default function ItemCard({item, setCurrentItem, cart, setCart, user }) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  const [itemClicked, setItemClicked] = useState(null);
+ 
   const handleClick = (e) => {
-    setItemClicked(e);
+    
     setCurrentItem(item);
   };
 

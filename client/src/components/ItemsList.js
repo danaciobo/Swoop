@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React  from "react";
 import { Container, Grid } from "@mui/material";
 import ItemCard from "./ItemCard";
-import { getUserByEmail } from "../services";
+
 
 export default function ItemList({ user, items, setCurrentItem, setUser , cart, setCart}) {
 

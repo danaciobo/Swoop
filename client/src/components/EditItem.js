@@ -68,11 +68,12 @@ export default function EditItem({ items, item }) {
 
     handleClose();
   };
-  const itemsList = items;
+
 
   const editItem = async (id, data) => {
     try {
       const edit = await updateItem(id, data);
+      return edit
     } catch (e) {
       console.log(e);
     }
