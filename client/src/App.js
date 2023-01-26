@@ -106,17 +106,8 @@ function App() {
               />
             }
           />
-          {/* <Route
-            path='/Accessories'
-            element={
-              <ItemList
-                items={filteredItems}
-                currentItem={currentItem}
-                setCurrentItem={setCurrentItem}
-              />
-            } */}
-          {/* /> */}
-
+     <Route path = '/success' element = {<Success />} />
+            <Route = '/unsuccessful' element = {<CardFail /> } />
           <Route
             path="/Profile"
             element={
