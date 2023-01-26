@@ -1,9 +1,13 @@
 import React from 'react';
 import { Container, Typography, Button, Grid} from "@mui/material";
-
+import { useNavigate } from 'react-router-dom';
 function Success({ user }) {
 console.log(user)
 
+const navigate = useNavigate()
+const backToShop = ()=>{
+  navigate('/')
+}
   return (
     <>
       <Container
@@ -34,9 +38,11 @@ console.log(user)
         justifyContent="center"
        >
         <Button
+        onClick={backToShop}
           variant="contained"
           // align='center'
           sx={{ width: 150 }}>BACK TO SHOP
+          
         </Button>
       </Grid>
 
