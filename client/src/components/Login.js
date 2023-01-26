@@ -10,8 +10,6 @@ const Login = ({setUser}) => {
 
   const { loginWithRedirect, isAuthenticated, user } = useAuth0();
 
-  console.log(user)
-
   setUser(user)
 
 
