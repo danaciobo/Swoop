@@ -8,7 +8,7 @@ const app = express();
 const cors = require('cors');
 const router = require('./router');
 const authMiddleware = require ('./middleware/auth');
-const corsSettings = {origin: REACT_APP_HOST || 'http://localhost:3000', credentials: true}
+const corsSettings = {origin: [REACT_APP_HOST || 'http://localhost:3000', 'https://checkout.stripe.com'], credentials: true}
 const session = require ('express-session');
 
 

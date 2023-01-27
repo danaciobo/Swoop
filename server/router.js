@@ -3,6 +3,7 @@ const userController = require('./controllers/userController');
 const itemController = require('./controllers/itemController');
 const authMiddleware = require('./middleware/auth');
 const orderController = require('./controllers/orderController')
+const checkoutController = require('./controllers/checkoutController')
 const upload = require('./middleware/upload')
 
 
@@ -22,7 +23,7 @@ router.put('/editItem/:id',authMiddleware, upload.single('image'), itemControlle
 router.delete('/items/:id',authMiddleware, itemController.deleteItem);
 
 router.get('/order/:id',orderController.getOrder);
-router.post('/order/:id',orderController.checkout);
+router.post('/create-checkout-session', checkoutController.checkout)
 
 
 module.exports = router;
