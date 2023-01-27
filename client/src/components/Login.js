@@ -65,10 +65,10 @@ export default function Login({ setIsAuthenticated }) {
   return (
     <div>
       <Button variant="contained" sx={{ display: { xs: 'none', md: 'block' } }} onClick={handleClickOpen}>
-        Log in/ Register
+        Login
       </Button>
       <Button variant="contained" size='small' sx={{ display: { xs: 'block', md: 'none' } }} onClick={handleClickOpen}>
-        Log in/ Register
+        Login
       </Button>
       <Dialog open={open} onClose={handleClose} >
         <DialogActions>

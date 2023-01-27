@@ -1,4 +1,5 @@
 const Item = require('../models/item');
+const User = require('../models/user')
 
 
 exports.getItems = async (req, res) => {
@@ -45,6 +46,10 @@ exports.createItem = async (req, res) => {
         date_added: Date.now(),
         seller: req.body.seller
       });
+      const user = await User.findOne({_id: req.body.seller})
+      user.itemsForSale.push(newItem._id)
+      const savedUser = await user.save();
+      console.log(savedUser)
       res.status(201).send(newItem);
   } catch (e) {
     console.log(e);

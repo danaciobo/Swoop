@@ -1,8 +1,8 @@
-// import {createContext, useEffect, useState} from 'react'
+import {createContext, useEffect, useState} from 'react'
 
-// const DataContext = createContext({});
+const DataContext = createContext({});
 
-// export const DataProvider = ({children}) => {
+export const DataProvider = ({children}) => {
 
 //   const [items, setItems] = useState([]);
 
@@ -10,13 +10,17 @@
 
 //     getData()
 //   }, []);
+const [cart, setCart] = useState([]);
+const [showCart, setShowCart] = useState(false)
 
-//   return (
-//     <DataContext.Provider value={{}}>
-//       {children}
-//     </DataContext.Provider>
-//   )
-// }
+  return (
+    <DataContext.Provider value={{
+      cart, setCart, showCart, setShowCart
+    }}>
+      {children}
+    </DataContext.Provider>
+  )
+}
 
 
-// export default DataContext;
+export default DataContext;

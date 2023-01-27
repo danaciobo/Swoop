@@ -3,10 +3,11 @@ import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions, Collapse, IconButton, styled } from '@mui/material';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import moment from 'moment'
+import useCart from '../helperFunctions';
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -27,6 +28,8 @@ export default function ItemCard({ item }) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const { addToCart, addToCartText } = useCart(item);
 
   const [itemClicked, setItemClicked] = useState(null);
 
@@ -52,8 +55,8 @@ export default function ItemCard({ item }) {
       <CardHeader
         title={'£' + item.price}
         subheader={item.title}
-        action={<Button variant='contained' sx={{background: '#E25F1C'}}>
-        <ShoppingCartIcon />
+        action={<Button variant='contained' onClick = {addToCart} sx={{background: '#E25F1C'}}>
+        {addToCartText}
       </Button>}
       />
       <CardActions>

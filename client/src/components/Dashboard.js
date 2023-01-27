@@ -4,6 +4,7 @@ import Login from './Login';
 import Profile from './Profile';
 import Logout from './Logout';
 import Home from './Home';
+import Cart from './cart';
 
 export default function Dashboard ({ setIsAuthenticated , items, setItems, setFilteredItems, setState, state}) {
   return (
@@ -21,7 +22,11 @@ export default function Dashboard ({ setIsAuthenticated , items, setItems, setFi
         element={<Profile items={items} setItems={setItems} setFilteredItems={setFilteredItems} setState={setState} state={state} />} />
         <Route
           path="/logout"
-          element={<Logout setIsAuthenticated={setIsAuthenticated} />}
+          element={<Logout setIsAuthenticated={setIsAuthenticated} setState={setState} />}
+        />
+        <Route
+          path="/cart"
+          element={<Cart/>}
         />
         <Route path="/" element={<Home items={items} state={state} />} />
       </Routes>

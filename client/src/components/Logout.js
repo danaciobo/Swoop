@@ -1,16 +1,24 @@
 import auth from '../auth';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../services'
 import { Button } from '@mui/material';
 
-export default function Logout ({setIsAuthenticated}) {
+export default function Logout ({setIsAuthenticated, setState}) {
   let navigate = useNavigate();
   const handleClick = () => {
     logout();
     handleAuth();
+    setState(initialStateUser);
   };
-
+  const initialStateUser = {
+    firstName: '',
+    lastName: '',
+    phoneNumber: '',
+    email: '',
+    _id: '',
+    itemsForSale : [],
+    itemsBought:[]
+  };
   const handleAuth = () => {
     setIsAuthenticated(false);
     auth.logout(() => navigate('/'));

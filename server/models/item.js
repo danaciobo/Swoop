@@ -41,6 +41,10 @@ const itemSchema = new mongoose.Schema({
       type: mongoose.Types.ObjectId,
       ref: 'User'
   },
+  buyer: {
+    type: mongoose.Types.ObjectId,
+    ref: 'User'
+  }
 });
 
 const Item =  mongoose.model('Item',itemSchema);

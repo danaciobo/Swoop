@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react'
+import {  useEffect } from 'react'
 import Box from '@mui/material/Box';
 import { Avatar, Card, CardActionArea, CardContent, CardHeader, CardMedia, Container, Grid, Typography } from "@mui/material";
 import List from '@mui/material/List';
@@ -7,12 +7,11 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { profile } from '../services'
 import AddItem from './AddItem';
+import Cart from './cart';
 
 
 
 export default function Profile({items, setItems, setFilteredItems, setState, state}) {
-
-
 
 
   const firstName = state.firstName || 'Missing';
@@ -20,20 +19,12 @@ export default function Profile({items, setItems, setFilteredItems, setState, st
   const email = state.email || 'Missing';
   const phoneNumber = state.phoneNumber || 'missing'
 
-  // useEffect(() => {
-  //   getUserById('63c726deeed0a1cc3069691a')
-  //     .then(response => {
-  //       console.log(response)
-  //       setUser(response)
-  //     })
-  //     .catch(err => console.log(err))
-  // }, [])
   useEffect(() => {
     const getProfile = async () => {
       const userInfo = await profile();
       console.log(userInfo)
       if (userInfo) {
-        const { firstName, lastName, email, phoneNumber, _id } = userInfo;
+        const { firstName, lastName, email, phoneNumber, _id, itemsForSale, itemsBought } = userInfo;
         setState((prevState) => {
           return {
             ...prevState,
@@ -41,7 +32,9 @@ export default function Profile({items, setItems, setFilteredItems, setState, st
             lastName,
             email,
             phoneNumber,
-            _id
+            _id,
+            itemsForSale,
+            itemsBought
           };
         });
       } else {
@@ -75,7 +68,7 @@ export default function Profile({items, setItems, setFilteredItems, setState, st
           <Card sx={{ maxWidth: 400, padding: '10', height: '100%', background: '#EBE6DD'}}>
             <CardHeader sx={{ height: 5 }}></CardHeader>
             <CardMedia sx={{ height: 100 }} >
-              <Avatar sx={{ margin: 5, backgroundColor: '#E25F1C', width: 70, height: 70, margin: 'auto' }}> DC</Avatar>
+              <Avatar sx={{ backgroundColor: '#E25F1C', width: 70, height: 70, margin: 'auto' }}> DC</Avatar>
             </CardMedia>
             <CardContent sx={{ alignFont: 'center' }}>
               <Typography gutterBottom variant="h5" component="div" align='center'>
@@ -97,7 +90,7 @@ export default function Profile({items, setItems, setFilteredItems, setState, st
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
+            flexWrap: 'wrap',
             border: '1',
             borderColor: '#EBE6DD',
             p: 1,
@@ -112,11 +105,11 @@ export default function Profile({items, setItems, setFilteredItems, setState, st
         </Typography>
             <Grid container
               direction="row"
-              justifyContent="space-around"
+              // justifyContent="space-around"
               alignItems="stretch"
               spacing='5'
             >
-              {items? items.sort((a, b) => new Date(b.date_added) - new Date(a.date_added)).slice(0,5).map((item, index) =>
+              {items? items.filter((item)=> item.seller === state._id).sort((a, b) => new Date(b.date_added) - new Date(a.date_added)).slice(0,5).map((item, index) =>
               (
                 <Grid item key={item._id} >
                   <Card sx={{ width: 100, height: 120 }}>
@@ -155,7 +148,7 @@ export default function Profile({items, setItems, setFilteredItems, setState, st
               alignItems="stretch"
               spacing='5'
             >
-              {items? items.slice(0,5).map((item, index) =>
+              {items? items.filter((item) => item.buyer === state._id ).slice(0,5).map((item, index) =>
               (
                 <Grid item key={item._id} >
                   <Card sx={{ width: 100, height: 120 }}>
@@ -186,6 +179,7 @@ export default function Profile({items, setItems, setFilteredItems, setState, st
             </Box>
           </Box>
         </Box>
+        <Cart />
     </Container>
 
   )

@@ -80,8 +80,8 @@ exports.updateProfile = async (req, res) => {
 exports.getProfile = async (req, res) => {
   try {
     console.log(req.user)
-    const { _id, firstName, lastName, phoneNumber, email } = req.user;
-    const user = { _id, firstName, lastName, phoneNumber, email };
+    const { _id, firstName, lastName, phoneNumber, email, itemsForSale, itemsBought } = req.user;
+    const user = { _id, firstName, lastName, phoneNumber, email , itemsForSale, itemsBought};
     res.status(200).send(user);
 
   } catch (e) {

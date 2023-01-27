@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import { styled, alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -10,15 +10,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import Logo from '../images/Swoop.jpg';
-import { Menu, MenuItem, Stack } from '@mui/material';
-import { Link } from 'react-router-dom'
-import AddItem from './AddItem';
+import { Badge, Menu, MenuItem, Stack } from '@mui/material';
 import Login from './Login';
 import Register from './Register'
 import Logout from './Logout';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
-import { padding } from '@mui/system';
+import DataContext from '../context';
+import ShoppingCart from '@mui/icons-material/ShoppingCart';
 
 const pages = ['All', 'Clothes', 'Accessories', 'Home', 'Electronics', 'Hobbies', 'Freebies'];
 
@@ -72,9 +71,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Navbar({ setItems, setFilteredItems, items, setIsAuthenticated, isAuthenticated, state}) {
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = useState(null);
-
+  const {cart, setShowCart} =useContext(DataContext);
   const handleOpenNavMenu = (e) => {
     setAnchorElNav(e.currentTarget);
   };
@@ -137,13 +136,21 @@ export default function Navbar({ setItems, setFilteredItems, items, setIsAuthent
           </Search>
           <Stack direction="row" spacing={2} >
           <IconButton
+          size="large"
+          edge="end"
+          onClick={()=> setShowCart(true)}>
+            <Badge badgeContent={cart && cart.length} color='success'>
+            <ShoppingCart sx={{color: '#393937'}}  />
+              </Badge>
+          </IconButton>
+          <IconButton
               size="large"
               edge="end"
               aria-label="account of current user"
               onClick={() => navigate('/profile')}
               color="inherit"
             >
-              <AccountCircle />
+              <AccountCircle sx={{color: '#393937'}} />
             </IconButton>
 
             <Logout setIsAuthenticated={setIsAuthenticated} />
@@ -200,7 +207,7 @@ export default function Navbar({ setItems, setFilteredItems, items, setIsAuthent
           </Search>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'center' } }}>
           <Button
-              sx={{ my: 2, size: 'large', color: 'white', display: 'block', marginRight: 3, marginLeft: 4, fontSize: 18, fontWeight: 'bolder', padding: '2'}}
+              sx={{ my: 2, size: 'large', color: 'white', display: { xs: 'none', md: 'block' } , marginRight: 3, marginLeft: 4, fontSize: 18, fontWeight: 'bolder', padding: '2'}}
               onClick={()=> navigate('/')} >
               Home
             </Button>
@@ -228,13 +235,14 @@ export default function Navbar({ setItems, setFilteredItems, items, setIsAuthent
       <AppBar position="static" >
         <Toolbar sx={{ background: 'white', color: 'black', justifyContent: 'space-between' }}>
 
-          <Typography
+        <IconButton
             // noWrap
             component='div'
             sx={{ mr: 2, display: 'flex' }}
+            onClick={()=> navigate('/')}
           >
             <img src={Logo} width='150' height='45' max-width='100%' alt='swoop logo' />
-          </Typography>
+          </IconButton>
 
           <Search sx={{ background: '#EBE6DD', flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <StyledInputBase
@@ -249,6 +257,14 @@ export default function Navbar({ setItems, setFilteredItems, items, setIsAuthent
 
           </Search>
           <Stack direction="row" spacing={2} >
+          <IconButton
+          size="large"
+          edge="end"
+          onClick={()=> setShowCart(true)}>
+            <Badge badgeContent={cart && cart.length} color='success'>
+            <ShoppingCart sx={{color: '#393937'}} />
+              </Badge>
+          </IconButton>
             <Register setIsAuthenticated={setIsAuthenticated} />
             <Login setIsAuthenticated={setIsAuthenticated} />
           </Stack>
@@ -302,6 +318,11 @@ export default function Navbar({ setItems, setFilteredItems, items, setIsAuthent
               onChange={handleChange}
             />
           </Search>
+          <Button
+              sx={{ my: 2, size: 'large', color: 'white', display: { xs: 'none', md: 'block' } , marginRight: 3, marginLeft: 4, fontSize: 18, fontWeight: 'bolder', padding: '2'}}
+              onClick={()=> navigate('/')} >
+              Home
+            </Button>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'center' } }}>
             {pages.map((page) => (
 
@@ -327,31 +348,3 @@ export default function Navbar({ setItems, setFilteredItems, items, setIsAuthent
 }
 
 
-
-
-
-//         {isAuthenticated ? (
-//           <>
-//             <li>
-//               <Link to="/profile">Profile</Link>
-//             </li>
-//             <li>
-//               <Link to="/logout">Logout</Link>
-//             </li>
-//           </>
-//         ) : (
-//           <>
-//             <li>
-//               <Link to="/register">Register</Link>
-//             </li>
-//             <li>
-//               <Link to="/login">Login</Link>
-//             </li>
-//           </>
-//         )}
-//       </ul>
-//     </nav>
-//   );
-// };
-
-// export default Navbar;

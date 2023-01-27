@@ -1,7 +1,6 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import auth from './auth';
-import Home from './pages/Home'
 import Navbar from './components/Navbar';
 import { createTheme, ThemeProvider } from '@mui/material';
 import Footer from './components/Footer';
@@ -30,6 +29,7 @@ const theme = createTheme({
 function App() {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
+
 
   const initialStateUser = {
     firstName: '',
@@ -67,13 +67,13 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <DataProvider> */}
+      <DataProvider>
       <BrowserRouter>
         <Navbar isAuthenticated={isAuthenticated} setItems={setItems} items={items} setFilteredItems={setFilteredItems} setIsAuthenticated={setIsAuthenticated} state={state} />
         <Dashboard setIsAuthenticated={setIsAuthenticated} items={filteredItems} setItems={setItems} setFilteredItems={setFilteredItems} setState={setState} state={state}/>
       </BrowserRouter>
       <Footer />
-      {/* </DataProvider> */}
+      </DataProvider>
     </ThemeProvider>
   );
 }
