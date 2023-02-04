@@ -6,6 +6,7 @@ export const addItem = async (data) => {
   try {
     const response = await fetch(`${baseURL}/items`,{
       method: 'POST',
+      credentials: 'include',
       // headers: { 'Content-Type': 'multipart/form-data' },
       body: data
     })
@@ -21,6 +22,7 @@ export const editItem = async (data, id) => {
   try {
     const response = await fetch(`${baseURL}/editItem/${id}`,{
       method: 'PUT',
+      credentials: 'include',
       body: data
     })
     return response.json();
@@ -35,6 +37,7 @@ export const deleteItem = async (seller, id) => {
   try {
     const response = await fetch(`${baseURL}/items/${seller}/${id}`,{
       method: 'DELETE',
+      credentials: 'include',
     })
     return response;
   }
@@ -128,6 +131,7 @@ export const checkoutStripe = async (cart) =>{
     console.log(cart)
     const response = await fetch(`${baseURL}/create-checkout-session`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
           'Content-Type': 'application/json'
           },
