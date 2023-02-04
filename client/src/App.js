@@ -1,14 +1,13 @@
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import auth from './auth';
-import Navbar from './components/Navbar';
-import { createTheme, ThemeProvider } from '@mui/material';
-import Footer from './components/Footer';
+import { BrowserRouter } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { createTheme, ThemeProvider } from '@mui/material';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import { DataProvider } from './context';
 import Dashboard from './components/Dashboard';
-const { REACT_APP_BACKEND_HOST } = process.env;
 
+const { REACT_APP_BACKEND_HOST } = process.env;
 const myURL = `${REACT_APP_BACKEND_HOST}/items`
 
 const theme = createTheme({
@@ -21,7 +20,7 @@ const theme = createTheme({
   palette: {
     primary: {
       main: '#63171D',
-      secondary: "#E25F1C"
+      secondary: '#E25F1C'
     }
   }
 });
@@ -29,18 +28,6 @@ const theme = createTheme({
 function App() {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
-
-
-  const initialStateUser = {
-    firstName: '',
-    lastName: '',
-    phoneNumber: '',
-    email: ''
-  };
-  const [state, setState] = useState(initialStateUser);
-
-  const initialState = auth.isAuthenticated();
-  const [isAuthenticated, setIsAuthenticated] = useState(initialState);
 
   useEffect(() => {
 
@@ -55,22 +42,22 @@ function App() {
         const actualData = await response.json();
         if (actualData) {
           setItems(actualData);
-          setFilteredItems(actualData)
+          setFilteredItems(actualData);
         }
 
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     }
-    getData()
+    getData();
   }, []);
 
   return (
     <ThemeProvider theme={theme}>
       <DataProvider>
       <BrowserRouter>
-        <Navbar isAuthenticated={isAuthenticated} setItems={setItems} items={items} setFilteredItems={setFilteredItems} setIsAuthenticated={setIsAuthenticated} state={state} />
-        <Dashboard setIsAuthenticated={setIsAuthenticated} items={filteredItems} setItems={setItems} setFilteredItems={setFilteredItems} setState={setState} state={state}/>
+        <Navbar  setItems={setItems} items={items} setFilteredItems={setFilteredItems} />
+        <Dashboard items={filteredItems} setItems={setItems} setFilteredItems={setFilteredItems}/>
       </BrowserRouter>
       <Footer />
       </DataProvider>

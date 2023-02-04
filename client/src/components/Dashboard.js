@@ -5,30 +5,47 @@ import Profile from './Profile';
 import Logout from './Logout';
 import Home from './Home';
 import Cart from './cart';
+import SuccessCheckout from './SuccessCheckout';
+import NotFoundPage from './NotFoundPage';
 
-export default function Dashboard ({ setIsAuthenticated , items, setItems, setFilteredItems, setState, state}) {
+
+export default function Dashboard ({ items, setItems, setFilteredItems }) {
+
   return (
-    <div className="dashboard">
+    <div className='dashboard'>
       <Routes>
         <Route
-          path="/register"
-          element={<Register setIsAuthenticated={setIsAuthenticated} />}
+          path='/register'
+          element={<Register />}
         />
         <Route
-          path="/login"
-          element={<Login setIsAuthenticated={setIsAuthenticated} />}
-        />
-        <Route path="/profile"
-        element={<Profile items={items} setItems={setItems} setFilteredItems={setFilteredItems} setState={setState} state={state} />} />
-        <Route
-          path="/logout"
-          element={<Logout setIsAuthenticated={setIsAuthenticated} setState={setState} />}
+          path='/login'
+          element={<Login />}
         />
         <Route
-          path="/cart"
+        path='/profile'
+        element={<Profile items={items} setItems={setItems} setFilteredItems={setFilteredItems} />}
+        />
+        <Route
+          path='/logout'
+          element={<Logout />}
+        />
+        <Route
+          path='/cart'
           element={<Cart/>}
         />
-        <Route path="/" element={<Home items={items} state={state} />} />
+        <Route
+          path='/success'
+          element={<SuccessCheckout />}
+          />
+        <Route
+        path='/'
+        element={<Home items={items}/>}
+        />
+        <Route
+        path='*'
+        element={<NotFoundPage />}
+        />
       </Routes>
     </div>
   );

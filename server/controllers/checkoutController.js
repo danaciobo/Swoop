@@ -5,6 +5,7 @@ exports.checkout = async (req, res) => {
  const cartT = req.body.cart;
 
   const line_items = cartT.map((cartItem) => {
+
     return {
       price_data: {
         currency: 'gbp',
@@ -17,8 +18,7 @@ exports.checkout = async (req, res) => {
       quantity: 1,
     }
 }
-  )
-  console.log(line_items)
+  );
 
   const session = await stripe.checkout.sessions.create({
     line_items,

@@ -1,15 +1,16 @@
-import { useState } from "react"
+import { useContext, useState } from 'react'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { IconButton, Link } from "@mui/material";
+import { IconButton, Link } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import auth from '../auth';
 import { register } from '../services';
 import { useNavigate } from 'react-router-dom';
+import DataContext from '../context';
 
 
 const initialState = {
@@ -21,8 +22,9 @@ const initialState = {
 };
 
 
-export default function Register({ setIsAuthenticated }) {
+export default function Register() {
 
+  const { setIsAuthenticated } = useContext(DataContext)
   const navigate = useNavigate();
   const [state, setState] = useState(initialState);
   const [open, setOpen] = useState(false);
@@ -69,10 +71,7 @@ export default function Register({ setIsAuthenticated }) {
 
   return (
     <div>
-      <Button variant="contained" sx={{ display: { xs: 'none', md: 'block' } }} onClick={handleClickOpen}>
-        Register
-      </Button>
-      <Button variant="contained" size='small' sx={{ display: { xs: 'block', md: 'none' } }} onClick={handleClickOpen}>
+      <Button variant='contained' sx={{ display: { xs: 'none', md: 'block' } }} onClick={handleClickOpen}>
         Register
       </Button>
       <Dialog open={open} onClose={handleClose} >
@@ -86,75 +85,75 @@ export default function Register({ setIsAuthenticated }) {
           <form
             onSubmit={handleSubmit}
             style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-around",
-              alignItems: "center",
-              padding: "2rem",
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              padding: '2rem',
               maxWidth: '300px'
             }}
           >
             <TextField
               sx={{ width: '17em', marginBottom: '0.7em' }}
-              label="Email"
-              type="email"
-              variant="outlined"
+              label='Email'
+              type='email'
+              variant='outlined'
               required
-              name="email"
+              name='email'
               value={state.email}
               onChange={handleChange}
             />
-            <div display="flex" flexDirection="rows">
+            <div display='flex' flexDirection='rows'>
               <TextField
                 sx={{ width: '8.5em', marginBottom: '0.7em' }}
-                label="First Name"
-                variant="outlined"
+                label='First Name'
+                variant='outlined'
                 required
-                name="firstName"
+                name='firstName'
                 value={state.firstName}
                 onChange={handleChange}
               />
               <TextField
                 sx={{ width: '8.5em', marginBottom: '0.7em' }}
-                label="Last Name"
-                variant="outlined"
+                label='Last Name'
+                variant='outlined'
                 required
-                name="lastName"
+                name='lastName'
                 value={state.lastName}
                 onChange={handleChange}
               />
             </div>
             <TextField
               sx={{ width: '17em', marginBottom: '0.7em' }}
-              label="Phone Number"
-              variant="outlined"
+              label='Phone Number'
+              variant='outlined'
               required
-              name="phoneNumber"
+              name='phoneNumber'
               value={state.phoneNumber}
               onChange={handleChange}
             />
 
             <TextField
               sx={{ width: '17em', marginBottom: '0.7em' }}
-              label="Password"
-              type="password"
-              variant="outlined"
+              label='Password'
+              type='password'
+              variant='outlined'
               required
-              name="password"
+              name='password'
               value={state.password}
               onChange={handleChange}
             />
             <Button
               sx={{ width: '16em', height: '3em' }}
-              variant="contained"
-              color="primary"
-              type="submit"
+              variant='contained'
+              color='primary'
+              type='submit'
               disabled={validateForm()}
               onClick={handleClose}
             >
               Register
             </Button>
-            <Link href="/Login" variant="body2" sx={{ padding: 3 }}>
+            <Link href='/Login' variant='body2' sx={{ padding: 3 }}>
               Already have an account? Sign in
             </Link>
           </form>

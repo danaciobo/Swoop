@@ -1,25 +1,6 @@
 
-const baseURL = "http://localhost:3005";
 
-
-// export const getData = async () => {
-//   try {
-//     const response = await fetch(`${baseURL}/items`);
-//     if (!response.ok) {
-//       throw new Error(
-//         `This is an HTTP error: The status is ${response.status}`
-//       );
-//     }
-//     const actualData = await response.json();
-//     console.log(items)
-//     if (actualData) {
-//       setItems(actualData);
-//     }
-
-//   } catch (err) {
-//     console.log(err)
-//   }
-// }
+const baseURL = 'http://localhost:3005';
 
 export const addItem = async (data) => {
   try {
@@ -34,6 +15,54 @@ export const addItem = async (data) => {
   console.log(err)
   return false
 }
+}
+
+export const editItem = async (data, id) => {
+  try {
+    const response = await fetch(`${baseURL}/editItem/${id}`,{
+      method: 'PUT',
+      body: data
+    })
+    return response.json();
+  }
+   catch (err) {
+  console.log(err)
+  return false;
+}
+}
+
+export const deleteItem = async (seller, id) => {
+  try {
+    const response = await fetch(`${baseURL}/items/${seller}/${id}`,{
+      method: 'DELETE',
+    })
+    return response;
+  }
+   catch (err) {
+  console.log(err)
+  return false;
+}
+}
+
+
+export const getItemById = async (id) => {
+  try {
+    const response = await fetch(`${baseURL}/items/${id}`)
+    return response.json();
+  } catch (err) {
+    console.log(err)
+    return false
+  }
+}
+
+export const getItemByCategory = async (category) => {
+  try {
+    const response = await fetch(`${baseURL}/items/${category}`)
+    return response.json();
+  } catch (err) {
+    console.log(err)
+    return false;
+  }
 }
 
 export const register = async (user) => {
@@ -68,16 +97,6 @@ export const login = (user) => {
 };
 
 
-// export const getUserById = async (id) => {
-//   try {
-//     const response = await fetch(`${baseURL}/users/${id}`)
-//     return response.json();
-//   } catch (err) {
-//     console.log(err)
-//     return false
-//   }
-// }
-
 export const profile = () => {
 
   return fetch(`${baseURL}/me`, {
@@ -101,25 +120,28 @@ export const logout = () => {
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
-  // REMOVE-END
+
 };
 
-export const getItemById = async (id) => {
+export const checkoutStripe = async (cart) =>{
   try {
-    const response = await fetch(`${baseURL}/items/${id}`)
-    return response.json();
+    console.log(cart)
+    const response = await fetch(`${baseURL}/create-checkout-session`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(
+          {cart: cart}
+          ),
+    })
+    const resp = await response.json();
+    window.location.href = resp.url;
   } catch (err) {
     console.log(err)
-    return false
+    return false;
   }
+
 }
 
-export const getItemByCategory = async (category) => {
-  try {
-    const response = await fetch(`${baseURL}/items/category/${category}`)
-    return response.json();
-  } catch (err) {
-    console.log(err)
-    return false
-  }
-}
+

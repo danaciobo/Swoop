@@ -2,13 +2,16 @@ import auth from '../auth';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../services'
 import { Button } from '@mui/material';
+import { useContext } from 'react';
+import DataContext from '../context';
 
-export default function Logout ({setIsAuthenticated, setState}) {
+export default function Logout () {
+  const {setIsAuthenticated, setUser} = useContext(DataContext)
   let navigate = useNavigate();
   const handleClick = () => {
     logout();
     handleAuth();
-    setState(initialStateUser);
+    setUser(initialStateUser);
   };
   const initialStateUser = {
     firstName: '',
@@ -26,10 +29,10 @@ export default function Logout ({setIsAuthenticated, setState}) {
 
   return (
     <div>
-       <Button variant="contained" sx={{ display: { xs: 'none', md: 'block' } }} onClick={() => handleClick()}>
+       <Button variant='contained' sx={{ display: { xs: 'none', md: 'block' } }} onClick={() => handleClick()}>
         Logout
       </Button>
-      <Button variant="contained" size='small' sx={{ display: { xs: 'block', md: 'none' } }} onClick={() => handleClick()}>
+      <Button variant='contained' size='small' sx={{ display: { xs: 'block', md: 'none' } }} onClick={() => handleClick()}>
         Logout
       </Button>
     </div>

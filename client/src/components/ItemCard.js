@@ -2,7 +2,7 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions, Collapse, IconButton, styled } from '@mui/material';
+import { CardActionArea, CardActions, Collapse, IconButton, styled } from '@mui/material';
 import { useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import moment from 'moment'
@@ -29,25 +29,26 @@ export default function ItemCard({ item }) {
     setExpanded(!expanded);
   };
 
-  const { addToCart, addToCartText } = useCart(item);
+  const { addToCartText } = useCart(item);
 
   const [itemClicked, setItemClicked] = useState(null);
 
   const handleClick = (e) => {
 
-    setItemClicked(e)
+    setItemClicked(e);
 
   }
 
 
   return (
-    <Card sx={{ width: 250, height: 'auto'}}>
+
+    <Card sx={{ width: 250, height: 'auto' }}>
       <CardActionArea onClick={() => handleClick(item)}>
         <CardContent sx={{ padding: 0 }}>
           <img
             src={`http://localhost:3005/${item.image}`}
-            height="200px"
-            width="100%"
+            height='200px'
+            width='100%'
             alt={item.title}
           />
         </CardContent>
@@ -55,26 +56,24 @@ export default function ItemCard({ item }) {
       <CardHeader
         title={'£' + item.price}
         subheader={item.title}
-        action={<Button variant='contained' onClick = {addToCart} sx={{background: '#E25F1C'}}>
-        {addToCartText}
-      </Button>}
+        action= {addToCartText}
       />
       <CardActions>
-      <Typography paragraph sx={{marginLeft: 2}}>More details</Typography>
-      <ExpandMore
+        <Typography paragraph sx={{ marginLeft: 2 }}>More details</Typography>
+        <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
           aria-expanded={expanded}
-          aria-label="show more"
+          aria-label='show more'
         >
           <ExpandMoreIcon />
         </ExpandMore>
 
-        </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+      </CardActions>
+      <Collapse in={expanded} timeout='auto' unmountOnExit>
         <CardContent>
-        <Typography paragraph >
-            Seller: {item.seller? item.seller : 'Dana C'}
+          <Typography paragraph >
+            Seller: {item.seller ? item.seller : 'Dana C'}
           </Typography>
           <Typography paragraph>
             Location: {item.location}
@@ -88,10 +87,10 @@ export default function ItemCard({ item }) {
           <Typography paragraph>
             Added:{' ' + moment(item.date_added).format('MMMM Do YYYY')}
           </Typography>
-
         </CardContent>
       </Collapse>
     </Card>
-  )
+
+  );
 
 }

@@ -1,6 +1,6 @@
 
 import { useState, useContext } from 'react';
-import { addItem } from '../services';
+import { editItem } from '../services';
 import DataContext from '../context';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -10,7 +10,6 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import AddIcon from '@mui/icons-material/Add';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -18,9 +17,10 @@ import Select from '@mui/material/Select';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 
 
-export default function AddItem({ setItems, setFilteredItems, items }) {
+export default function EditItem({ setItems, setFilteredItems, items, item }) {
 
   const { user } = useContext(DataContext);
+  const [editedItem, setEditedItem] = useState(item)
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
@@ -30,8 +30,16 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
   const [image, setImage] = useState('');
   const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = async () => {
+
+    setTitle(editedItem.title);
+    setDescription(editedItem.description);
+    setPrice(editedItem.price);
+    setQuantity(editedItem.quantity);
+    setLocation(editedItem.location);
+    setCategory(editedItem.category);
     setOpen(true);
+
   };
 
   const handleClose = () => {
@@ -52,7 +60,7 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
     formData.append('location', location);
     formData.append('seller', user._id);
 
-    postItem(formData);
+    postItem(formData, editedItem._id);
     setTitle('');
     setDescription('');
     setPrice('');
@@ -65,12 +73,12 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
   };
 
   const itemsList = items;
-  const postItem = async (data) => {
+  const postItem = async (data, id) => {
     try {
-
-      const post = await addItem(data);
-      setItems(items => [...items, post]);
-      setFilteredItems(filteredItems => [...itemsList, post]);
+      const updatedItem = await editItem(data, id);
+      console.log(updatedItem)
+      setItems(items => [...items.filter(item => item._id !== id), updatedItem]);
+      setFilteredItems(filteredItems => [...itemsList.filter(item => item._id !== id), updatedItem]);
 
     } catch (e) {
       console.log(e);
@@ -80,8 +88,8 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
 
   return (
     <div>
-      <Button variant='contained' startIcon={<AddIcon />} sx={{ display: { xs: 'none', md: 'flex', background: '#E25F1C' } }} onClick={handleClickOpen}>
-        Sell New
+      <Button variant='outlined' p={0} size='small' onClick={handleClickOpen} disableElevation>
+        Edit
       </Button>
 
       <Dialog open={open} onClose={handleClose} >
@@ -90,7 +98,7 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
             <CloseIcon sx={{ fontSize: '1.3em' }} />
           </IconButton>
         </DialogActions>
-        <DialogTitle sx={{ textAlign: 'center', padding: 0 }}>Add new item for sale</DialogTitle>
+        <DialogTitle sx={{ textAlign: 'center', padding: 0 }}>Edit your item</DialogTitle>
         <DialogContent>
 
           <form
@@ -192,7 +200,7 @@ export default function AddItem({ setItems, setFilteredItems, items }) {
               color='primary'
               type='submit'
             >
-              Add item
+              Save Changes
             </Button>
           </form>
         </DialogContent>

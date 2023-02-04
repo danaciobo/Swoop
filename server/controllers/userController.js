@@ -1,5 +1,5 @@
 const User = require('../models/user');
-const bcrypt = require ('bcrypt')
+const bcrypt = require ('bcrypt');
 
 exports.createProfile = async (req, res) => {
 
@@ -12,11 +12,6 @@ exports.createProfile = async (req, res) => {
      try {
     const hashedPassword = await bcrypt.hash(password, 10);
 
-        // const newUser = new User({
-    //   ...req.body,
-    //   password: hash,
-    // });
-    // const user = await newUser.save();
     const user = await User.create({
       email: email,
       password: hashedPassword,
@@ -31,7 +26,7 @@ exports.createProfile = async (req, res) => {
   } catch (e) {
     console.log(e);
     res.status(400).send({
-      message: "Error creating user"
+      message: 'Error creating user'
     })
   }
 };
@@ -93,8 +88,8 @@ exports.getProfile = async (req, res) => {
 
 exports.getUserByEmail = async (req, res) => {
   try {
-    const email = req.params.email
-    const profile = await User.findOne({email: email})
+    const email = req.params.email;
+    const profile = await User.findOne({email: email});
     return res.status(200).json(profile);
 
   } catch (e) {

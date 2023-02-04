@@ -1,14 +1,11 @@
 import { useContext, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
-import { styled, alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
 import Logo from '../images/Swoop.jpg';
 import { Badge, Menu, MenuItem, Stack } from '@mui/material';
 import Login from './Login';
@@ -18,81 +15,26 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
 import DataContext from '../context';
 import ShoppingCart from '@mui/icons-material/ShoppingCart';
+import SearchBar from './SearchBar';
+import SearchBarXS from './SearchBarXS';
+
 
 const pages = ['All', 'Clothes', 'Accessories', 'Home', 'Electronics', 'Hobbies', 'Freebies'];
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.75),
-    border: 'solid',
-    borderColor: '#bdbdbd',
-    borderWidth: 1
-  },
-  marginLeft: 0,
-  width: 'auto',
-  maxWidth: 550,
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(1),
-    width: 'auto',
-  },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: '#393937',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
-  },
-}));
 
 
-
-export default function Navbar({ setItems, setFilteredItems, items, setIsAuthenticated, isAuthenticated, state}) {
-
+export default function Navbar({ setItems, setFilteredItems, items }) {
+  const { setIsAuthenticated, isAuthenticated, cart, setShowCart } = useContext(DataContext)
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = useState(null);
-  const {cart, setShowCart} =useContext(DataContext);
+
   const handleOpenNavMenu = (e) => {
     setAnchorElNav(e.currentTarget);
   };
+
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
-  const handleChange = (e) => {
-    e.preventDefault();
-    const searchWord = e.target.value;
-    const filtered = items.filter((item) => item.title.toLowerCase().includes(searchWord.toLowerCase()) || item.category.toLowerCase().includes(searchWord.toLowerCase()))
-    if (filtered.length > 0) {
-      setFilteredItems(filtered);
-
-    } else {
-      setFilteredItems(items);
-    }
-
-  }
 
   const handleFilterCategory = (e) => {
     e.preventDefault();
@@ -108,240 +50,125 @@ export default function Navbar({ setItems, setFilteredItems, items, setIsAuthent
 
   return (
     <div>
-    {isAuthenticated? (
       <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" >
-        <Toolbar sx={{ background: 'white', color: 'black', justifyContent: 'space-between' }}>
+        <AppBar position='static' >
+          <Toolbar sx={{ background: 'white', color: 'black', justifyContent: 'space-between' }}>
 
-          <IconButton
-            // noWrap
-            component='div'
-            sx={{ mr: 2, display: 'flex' }}
-            onClick={()=> navigate('/')}
-          >
-            <img src={Logo} width='150' height='45' max-width='100%' alt='swoop logo' />
-          </IconButton>
-
-          <Search sx={{ background: '#EBE6DD', flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-
-              onChange={handleChange}
-            />
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-
-          </Search>
-          <Stack direction="row" spacing={2} >
-          <IconButton
-          size="large"
-          edge="end"
-          onClick={()=> setShowCart(true)}>
-            <Badge badgeContent={cart && cart.length} color='success'>
-            <ShoppingCart sx={{color: '#393937'}}  />
-              </Badge>
-          </IconButton>
-          <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              onClick={() => navigate('/profile')}
-              color="inherit"
-            >
-              <AccountCircle sx={{color: '#393937'}} />
-            </IconButton>
-
-            <Logout setIsAuthenticated={setIsAuthenticated} />
-          </Stack>
-        </Toolbar>
-
-        <Toolbar sx={{ color: 'white', justifyContent: 'space-between' }}>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
+              component='div'
+              sx={{ mr: 2, display: 'flex' }}
+              onClick={() => navigate('/')}
             >
-              <MenuIcon />
+              <img src={Logo} width='150' height='45' max-width='100%' alt='swoop logo' />
             </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          <Search sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none', marginLeft: '10px' } }}>
-            <SearchIconWrapper>
-              <SearchIcon color='#393937' />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-              onChange={handleChange}
-            />
-          </Search>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'center' } }}>
-          <Button
-              sx={{ my: 2, size: 'large', color: 'white', display: { xs: 'none', md: 'block' } , marginRight: 3, marginLeft: 4, fontSize: 18, fontWeight: 'bolder', padding: '2'}}
-              onClick={()=> navigate('/')} >
-              Home
-            </Button>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'center' } }}>
-            {pages.map((page) => (
 
-              <Button
-                key={page}
-                value={page}
-                onClick={handleFilterCategory}
-                sx={{ my: 2, color: 'white', display: 'block', marginRight: 5 }}
+            <SearchBar items={items} setFilteredItems={setFilteredItems} />
+
+            <Stack direction='row' spacing={2} >
+              {isAuthenticated ?
+                (<>
+                  <IconButton
+                    size='large'
+                    edge='end'
+                    onClick={() => setShowCart(true)}>
+                    <Badge badgeContent={cart && cart.length} color='success'>
+                      <ShoppingCart sx={{ color: '#393937' }} />
+                    </Badge>
+                  </IconButton>
+
+                  <IconButton
+                    size='large'
+                    edge='end'
+                    aria-label='account of current user'
+                    onClick={() => navigate('/profile')}
+                    color='inherit'
+                  >
+                    <AccountCircle sx={{ color: '#393937' }} />
+                  </IconButton>
+
+                  <Logout />
+                </>) :
+                (<>
+                  <IconButton
+                    size='large'
+                    edge='end'
+                    onClick={() => setShowCart(true)}>
+                    <Badge badgeContent={cart && cart.length} color='success'>
+                      <ShoppingCart sx={{ color: '#393937' }} />
+                    </Badge>
+                  </IconButton>
+                  <Register setIsAuthenticated={setIsAuthenticated} />
+                  <Login setIsAuthenticated={setIsAuthenticated} />
+                </>)
+              }
+            </Stack>
+
+          </Toolbar>
+
+          <Toolbar sx={{ color: 'white', justifyContent: 'space-between' }}>
+
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+              <IconButton
+                size='large'
+                aria-label='account of current user'
+                aria-controls='menu-appbar'
+                aria-haspopup='true'
+                onClick={handleOpenNavMenu}
+                color='inherit'
               >
-                {page}
-              </Button>
-
-            ))}
-          </Box>
-          </Box>
-        </Toolbar>
-      </AppBar>
-    </Box >
-
-    ) : (
-      <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" >
-        <Toolbar sx={{ background: 'white', color: 'black', justifyContent: 'space-between' }}>
-
-        <IconButton
-            // noWrap
-            component='div'
-            sx={{ mr: 2, display: 'flex' }}
-            onClick={()=> navigate('/')}
-          >
-            <img src={Logo} width='150' height='45' max-width='100%' alt='swoop logo' />
-          </IconButton>
-
-          <Search sx={{ background: '#EBE6DD', flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-
-              onChange={handleChange}
-            />
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-
-          </Search>
-          <Stack direction="row" spacing={2} >
-          <IconButton
-          size="large"
-          edge="end"
-          onClick={()=> setShowCart(true)}>
-            <Badge badgeContent={cart && cart.length} color='success'>
-            <ShoppingCart sx={{color: '#393937'}} />
-              </Badge>
-          </IconButton>
-            <Register setIsAuthenticated={setIsAuthenticated} />
-            <Login setIsAuthenticated={setIsAuthenticated} />
-          </Stack>
-        </Toolbar>
-
-        <Toolbar sx={{ color: 'white', justifyContent: 'space-between' }}>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          <Search sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none', marginLeft: '10px' } }}>
-            <SearchIconWrapper>
-              <SearchIcon color='#393937' />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-              onChange={handleChange}
-            />
-          </Search>
-          <Button
-              sx={{ my: 2, size: 'large', color: 'white', display: { xs: 'none', md: 'block' } , marginRight: 3, marginLeft: 4, fontSize: 18, fontWeight: 'bolder', padding: '2'}}
-              onClick={()=> navigate('/')} >
-              Home
-            </Button>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'center' } }}>
-            {pages.map((page) => (
-
-              <Button
-                key={page}
-                value={page}
-                onClick={handleFilterCategory}
-                sx={{ my: 2, color: 'white', display: 'block', marginRight: 5 }}
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id='menu-appbar'
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: 'block', md: 'none' },
+                }}
               >
-                {page}
-              </Button>
+                {pages.map((page) => (
+                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                    <Typography textAlign='center'>{page}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+              <SearchBarXS items={items} setFilteredItems={setFilteredItems} />
+            </Box>
 
-            ))}
-          </Box>
-        </Toolbar>
-      </AppBar>
-    </Box >
-    )
-    }
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'center' } }}>
+              <Button
+                sx={{ my: 2, size: 'large', color: 'white', display: { xs: 'none', md: 'block' }, marginRight: 3, marginLeft: 4, fontSize: 18, fontWeight: 'bolder', padding: '2' }}
+                onClick={() => navigate('/')} >
+                Home
+              </Button>
+              <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'center' } }}>
+                {pages.map((page) => (
+
+                  <Button
+                    key={page}
+                    value={page}
+                    onClick={handleFilterCategory}
+                    sx={{ my: 2, color: 'white', display: 'block', marginRight: 5 }}
+                  >
+                    {page}
+                  </Button>
+
+                ))}
+              </Box>
+            </Box>
+          </Toolbar>
+        </AppBar>
+      </Box >
     </div>
   );
 

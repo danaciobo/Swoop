@@ -2,7 +2,7 @@ const dotenv = require ('dotenv');
 dotenv.config();
 const { PORT, REACT_APP_HOST, SECRET} = process.env;
 const SERVER_PORT = PORT || 3005;
-const MY_SECRET = SECRET || 'not a secure secret'
+const MY_SECRET = SECRET || 'not a secure secret';
 const express = require('express');
 const app = express();
 const cors = require('cors');
