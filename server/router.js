@@ -18,13 +18,13 @@ router.post('/logout', authMiddleware, userController.logout);
 router.get('/items', itemController.getItems);
 router.get('items/:category', itemController.getByCategory);
 router.get('/items/:id', itemController.getItemById);
-router.post('/items', upload.single('image'), itemController.createItem);
-router.put('/editItem/:id', upload.single('image'), itemController.updateItem);
-router.delete('/items/:seller/:id', itemController.deleteItem);
+router.post('/items', authMiddleware, upload.single('image'), itemController.createItem);
+router.put('/editItem/:id', authMiddleware, upload.single('image'), itemController.updateItem);
+router.delete('/items/:seller/:id', authMiddleware, itemController.deleteItem);
 
 // checkout routes
 router.get('/order/:id',orderController.getOrder);
-router.post('/create-checkout-session', checkoutController.checkout);
+router.post('/create-checkout-session', authMiddleware, checkoutController.checkout);
 
 router.get('/users', userController.getUsers);
 

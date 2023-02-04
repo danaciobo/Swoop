@@ -59,7 +59,6 @@ exports.createItem = async (req, res) => {
 
 exports.updateItem = async (req, res) => {
   try {
-
     const updateItem = await Item.findByIdAndUpdate(req.params.id, {
       title: req.body.title,
       description: req.body.description,
