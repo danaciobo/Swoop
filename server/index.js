@@ -10,7 +10,14 @@ const router = require('./router');
 const authMiddleware = require ('./middleware/auth');
 const corsSettings = {origin: [REACT_APP_HOST || 'http://localhost:3000', 'https://checkout.stripe.com'], credentials: true}
 const session = require ('express-session');
+const path = require("path");
 
+
+app.use(express.static(path.resolve(__dirname, "./client/build")));
+
+app.get("*", function (request, response) {
+  response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+});
 
 app.use(cors(corsSettings));
 app.use('/uploads', express.static('uploads'))
