@@ -10,8 +10,9 @@
 
         "build": "cd client && npm run build",
         "install-client": "cd client && npm install",
-        "heroku-postbuild": "npm run install-client && npm run build",
+        "heroku-postbuild": "npm run install-server && run install-client && npm run build",
         "server": "cd server && nodemon index.js",
+        "install-server": "cd server && npm install",
         "develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\"",
         "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\""
     }
