@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import MainImage from '../main-image.jpg';
+import MainImage from '../images/main-image.jpg';
 export default function Banner() {
   return (
     <Box
