@@ -7,14 +7,8 @@ import Grid from '@mui/material/Grid';
 import ButtonBase from '@mui/material/ButtonBase';
 
 export default function ShoppingCartItem({ cartItem, cart, setCart }) {
-  console.log(cart);
-
-  console.log(cartItem.id);
-
   const removeFromCart = () => {
-    console.log(cart, 'inside cart');
     const newCart = cart.filter((item) => item.id !== cartItem.id);
-    console.log(localStorage.key(0));
     localStorage.setItem('myCart', JSON.stringify(newCart));
   };
 

@@ -9,18 +9,18 @@ const auth0ClientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-
 root.render(
   <React.StrictMode>
     <Auth0Provider
-      domain = {auth0Domain}
-      clientId= {auth0ClientId}
+      domain={auth0Domain}
+      clientId={auth0ClientId}
       authorizationParams={{
         redirect_uri: 'http://localhost:3000/',
-      }}>
+      }}
+    >
       <BrowserRouter>
-      <App />
-       </BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Auth0Provider>
   </React.StrictMode>
 );

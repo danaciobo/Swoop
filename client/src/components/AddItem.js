@@ -1,56 +1,53 @@
-import { useEffect, useState } from "react";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import { IconButton } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import { addItem } from "../services";
-import AddIcon from "@mui/icons-material/Add";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import WebcamCapture from "./WebcamCapture";
+import { useEffect, useState } from 'react';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import { IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import { addItem } from '../services';
+import AddIcon from '@mui/icons-material/Add';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import WebcamCapture from './WebcamCapture';
 
-import { addToStripe } from "../services";
+import { addToStripe } from '../services';
 
-
-export default function AddItem({ setItems, setFilteredItems, items ,user}) {
-
-
-  const [cameraPopup, setCameraPopup] = useState(false)
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [quantity, setQuantity] = useState("");
-  const [location, setLocation] = useState("");
-  const [category, setCategory] = useState("");
-  const [image, setImage] = useState("");
+export default function AddItem({ setItems, setFilteredItems, items, user }) {
+  const [cameraPopup, setCameraPopup] = useState(false);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState('');
+  const [quantity, setQuantity] = useState('');
+  const [location, setLocation] = useState('');
+  const [category, setCategory] = useState('');
+  const [image, setImage] = useState('');
   const [open, setOpen] = useState(false);
   const [previewSource, setPreviewSource] = useState();
-  const [fileInputState] = useState("");
+  const [fileInputState] = useState('');
 
   const handleFileInputChange = (e) => {
     const file = e;
     previewFile(file);
   };
 
-  const openCamera = ()=>{
-    setCameraPopup(true)
-  }
-  useEffect(()=>{
-    setPreviewSource('')
-  },[])
+  const openCamera = () => {
+    setCameraPopup(true);
+  };
+  useEffect(() => {
+    setPreviewSource('');
+  }, []);
   const previewFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setImage(reader.result);
-      setPreviewSource(reader.result)
+      setPreviewSource(reader.result);
     };
   };
   const handleClickOpen = () => {
@@ -66,17 +63,25 @@ export default function AddItem({ setItems, setFilteredItems, items ,user}) {
 
     const formData = new FormData();
 
-    formData.append("image", image);
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("category", category);
-    formData.append("price", price);
-    formData.append("quantity", quantity);
-    formData.append("location", location);
+    formData.append('image', image);
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('category', category);
+    formData.append('price', price);
+    formData.append('quantity', quantity);
+    formData.append('location', location);
 
-    postItem({title, description, category, price, quantity, location, image, seller_name: user.given_name +" "+ user.family_name, seller: user.email});
-    console.log(user)
-
+    postItem({
+      title,
+      description,
+      category,
+      price,
+      quantity,
+      location,
+      image,
+      seller_name: user.given_name + ' ' + user.family_name,
+      seller: user.email,
+    });
     e.target.reset();
     handleClose();
   };
@@ -84,10 +89,14 @@ export default function AddItem({ setItems, setFilteredItems, items ,user}) {
   const itemsList = items;
   const postItem = async (data) => {
     try {
-      console.log('bad man')
-      const stripeDetails = await addToStripe({price: (data.price* 100), name: data.title})
-      console.log(stripeDetails.default_price.id)
-      const post = await addItem({...data, stripeId: stripeDetails.default_price.id});
+      const stripeDetails = await addToStripe({
+        price: data.price * 100,
+        name: data.title,
+      });
+      const post = await addItem({
+        ...data,
+        stripeId: stripeDetails.default_price.id,
+      });
       setItems((items) => [...items, post]);
       setFilteredItems((filteredItems) => [...itemsList, post]);
     } catch (e) {
@@ -98,9 +107,9 @@ export default function AddItem({ setItems, setFilteredItems, items ,user}) {
   return (
     <div>
       <Button
-        variant="contained"
+        variant='contained'
         startIcon={<AddIcon />}
-        sx={{ display: { xs: "none", md: "flex", background: "#E25F1C" } }}
+        sx={{ display: { xs: 'none', md: 'flex', background: '#E25F1C' } }}
         onClick={handleClickOpen}
       >
         Sell Now
@@ -108,85 +117,85 @@ export default function AddItem({ setItems, setFilteredItems, items ,user}) {
       <Dialog open={open} onClose={handleClose}>
         <DialogActions>
           <IconButton sx={{ padding: 0 }} onClick={handleClose}>
-            <CloseIcon sx={{ fontSize: "1.3em" }} />
+            <CloseIcon sx={{ fontSize: '1.3em' }} />
           </IconButton>
         </DialogActions>
-        <DialogTitle sx={{ textAlign: "center", padding: 0 }}>
+        <DialogTitle sx={{ textAlign: 'center', padding: 0 }}>
           Add new item for sale
         </DialogTitle>
         <DialogContent>
           <form
             onSubmit={handleSubmit}
             style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-around",
-              alignItems: "center",
-              padding: "2rem",
-              maxWidth: "600px",
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              padding: '2rem',
+              maxWidth: '600px',
             }}
           >
             <TextField
-              sx={{ width: "30em", marginBottom: "0.7em" }}
-              label="Title"
-              type="text"
-              variant="outlined"
+              sx={{ width: '30em', marginBottom: '0.7em' }}
+              label='Title'
+              type='text'
+              variant='outlined'
               required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
             <TextField
-              sx={{ width: "30em", marginBottom: "0.7em" }}
+              sx={{ width: '30em', marginBottom: '0.7em' }}
               multiline
               rows={5}
-              label="Description"
-              variant="standard"
+              label='Description'
+              variant='standard'
               required
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
             <FormControl
-              id="cat-select-label"
-              sx={{ width: "30em", marginBottom: "0.7em" }}
+              id='cat-select-label'
+              sx={{ width: '30em', marginBottom: '0.7em' }}
             >
-              <InputLabel id="cat-select-label">Category</InputLabel>
+              <InputLabel id='cat-select-label'>Category</InputLabel>
               <Select
-                labelId="cat-select-label"
+                labelId='cat-select-label'
                 value={category}
-                label="Category"
+                label='Category'
                 onChange={(e) => setCategory(e.target.value)}
               >
-                <MenuItem value={"clothes"}>Clothes</MenuItem>
-                <MenuItem value={"accessories"}>Accesories</MenuItem>
-                <MenuItem value={"home"}>Home & Garden</MenuItem>
-                <MenuItem value={"electronics"}>Electronics</MenuItem>
-                <MenuItem value={"hobbies"}>Hobbies</MenuItem>
-                <MenuItem value={"freebies"}>Freebies</MenuItem>
+                <MenuItem value={'clothes'}>Clothes</MenuItem>
+                <MenuItem value={'accessories'}>Accesories</MenuItem>
+                <MenuItem value={'home'}>Home & Garden</MenuItem>
+                <MenuItem value={'electronics'}>Electronics</MenuItem>
+                <MenuItem value={'hobbies'}>Hobbies</MenuItem>
+                <MenuItem value={'freebies'}>Freebies</MenuItem>
               </Select>
             </FormControl>
-            <div display="flex" flexDirection="rows">
+            <div display='flex' flexDirection='rows'>
               <TextField
-                sx={{ width: "10em", marginBottom: "0.7em" }}
-                label="Price"
-                variant="outlined"
+                sx={{ width: '10em', marginBottom: '0.7em' }}
+                label='Price'
+                variant='outlined'
                 required
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
               />
 
               <TextField
-                sx={{ width: "10em", marginBottom: "0.7em" }}
-                label="Quantity"
-                variant="outlined"
+                sx={{ width: '10em', marginBottom: '0.7em' }}
+                label='Quantity'
+                variant='outlined'
                 required
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
               />
 
               <TextField
-                sx={{ width: "10em", marginBottom: "0.7em" }}
-                label="Location"
-                variant="outlined"
+                sx={{ width: '10em', marginBottom: '0.7em' }}
+                label='Location'
+                variant='outlined'
                 required
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
@@ -194,43 +203,48 @@ export default function AddItem({ setItems, setFilteredItems, items ,user}) {
             </div>
 
             <input
-              accept="image/*"
-              style={{ display: "none" }}
-              id="contained-button-file"
+              accept='image/*'
+              style={{ display: 'none' }}
+              id='contained-button-file'
               value={fileInputState}
               multiple
-              type="file"
+              type='file'
               onChange={(e) => handleFileInputChange(e.target.files[0])}
-              margin="2"
+              margin='2'
             />
 
-            <label htmlFor="contained-button-file">
-              <Button variant="contained" component="span">
+            <label htmlFor='contained-button-file'>
+              <Button variant='contained' component='span'>
                 Upload
               </Button>
               <IconButton
-                color="primary"
-                aria-label="upload picture"
-                component="label"
-                onClick = {openCamera}
+                color='primary'
+                aria-label='upload picture'
+                component='label'
+                onClick={openCamera}
               >
                 <PhotoCamera />
-
               </IconButton>
             </label>
 
             <Button
-              sx={{ width: "16em", height: "3em", margin: 1 }}
-              variant="contained"
-              color="primary"
-              type="submit"
+              sx={{ width: '16em', height: '3em', margin: 1 }}
+              variant='contained'
+              color='primary'
+              type='submit'
             >
               Add item
             </Button>
           </form>
-          {cameraPopup && <WebcamCapture setPreviewSource={setPreviewSource} setImage = {setImage} setCameraPopup={setCameraPopup}/>}
+          {cameraPopup && (
+            <WebcamCapture
+              setPreviewSource={setPreviewSource}
+              setImage={setImage}
+              setCameraPopup={setCameraPopup}
+            />
+          )}
           {previewSource && (
-            <img src={previewSource} alt="chosen" style={{ height: "200px" }} />
+            <img src={previewSource} alt='chosen' style={{ height: '200px' }} />
           )}
         </DialogContent>
       </Dialog>

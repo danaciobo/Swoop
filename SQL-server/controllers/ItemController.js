@@ -35,10 +35,9 @@ exports.createItem = async (req, res) => {
       imageId: img,
       seller: req.body.seller,
       buyer: req.body.buyer,
-      stripeId: req.body.stripeId
+      stripeId: req.body.stripeId,
     });
     res.status(201).send(newItem);
-    console.log(newItem);
   } catch (e) {
     console.log(e);
     res.status(500);
@@ -46,11 +45,11 @@ exports.createItem = async (req, res) => {
 };
 
 exports.updateItem = async (req, res) => {
-  const id = req.params.id 
+  const id = req.params.id;
   try {
     const updatedItem = await Item.update(req.body.updates, {
       where: {
-        id: id 
+        id: id,
       },
     });
     if (!updatedItem) {
@@ -64,7 +63,7 @@ exports.updateItem = async (req, res) => {
 };
 
 exports.deleteItem = async (req, res) => {
-  const id = req.params.id 
+  const id = req.params.id;
   try {
     const deleted = await Item.destroy({
       where: {
@@ -72,7 +71,6 @@ exports.deleteItem = async (req, res) => {
       },
     });
     res.sendStatus(200);
-    // res.send(deleted)
   } catch (e) {
     console.log(e);
     res.status(500);
@@ -93,14 +91,12 @@ exports.getItemByCategory = async (req, res) => {
 
 exports.addBuyer = async (req, res) => {
   const id = req.params.id;
-  console.log('this is the ID', id);
   try {
     const updatedBuyer = await Item.update(req.body.updates, {
       where: {
         id: id,
       },
     });
-    console.log(updatedBuyer);
     res.status(202).send(updatedBuyer);
   } catch (error) {
     console.log(error);

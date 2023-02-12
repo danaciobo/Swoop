@@ -17,7 +17,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import moment from 'moment';
 import { Link as RouterLink } from 'react-router-dom';
 
-
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -29,26 +28,31 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function ItemCard({item, setCurrentItem, cart, setCart, user }) {
-
+export default function ItemCard({
+  item,
+  setCurrentItem,
+  cart,
+  setCart,
+  user,
+}) {
   const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
- 
+
   const handleClick = (e) => {
-    
     setCurrentItem(item);
   };
 
-const addToCart = ()=>{
-const oldCart = cart
+  const addToCart = () => {
+    const oldCart = cart;
 
-if(!oldCart.includes(item)){
-setCart([...oldCart, item])
+    if (!oldCart.includes(item)) {
+      setCart([...oldCart, item]);
 
-localStorage.setItem(`myCart-${user.email} `, JSON.stringify(cart))
-}}
+      localStorage.setItem(`myCart-${user.email} `, JSON.stringify(cart));
+    }
+  };
 
   return (
     <>
@@ -69,9 +73,12 @@ localStorage.setItem(`myCart-${user.email} `, JSON.stringify(cart))
           title={'£' + item.price}
           subheader={item.title}
           action={
-            <Button variant="contained" sx={{ background: "#E25F1C" }} onClick = {addToCart}>
+            <Button
+              variant='contained'
+              sx={{ background: '#E25F1C' }}
+              onClick={addToCart}
+            >
               <ShoppingCartIcon />
-              
             </Button>
           }
         />

@@ -1,4 +1,4 @@
-import {PaymentElement} from '@stripe/react-stripe-js';
+import { PaymentElement } from '@stripe/react-stripe-js';
 import React from 'react';
 const CheckoutForm = (props) => {
   return (

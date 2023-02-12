@@ -2,12 +2,6 @@ const router = require('express').Router();
 const userCtrl = require('./controllers/UserControl');
 const itemCtrl =  require('./controllers/ItemController')
 const stripectrl = require('./controllers/StripeController')
-// const itemController = require('./controllers/itemController');
-// // const authController = require('./controllers/authController');
-// const orderController = require('./controllers/orderController')
-// const upload = require('./middleware/upload')
-// const authMiddleware = require ('./middleware/auth')
-
 
 router.post('/users', userCtrl.createProfile);
 router.put('/users', /*authMiddleware.decodeToken,*/ userCtrl.getUserByEmail)

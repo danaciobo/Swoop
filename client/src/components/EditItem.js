@@ -16,7 +16,6 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import EditIcon from '@mui/icons-material/Edit';
 
 export default function EditItem({ items, item }) {
-
   const [title, setTitle] = useState(item.title);
   const [description, setDescription] = useState(item.description);
   const [price, setPrice] = useState(item.price);
@@ -64,16 +63,23 @@ export default function EditItem({ items, item }) {
     formData.append('quantity', quantity);
     formData.append('location', location);
 
-    editItem(item.id, { title,  description, category, price, quantity, location, image });
+    editItem(item.id, {
+      title,
+      description,
+      category,
+      price,
+      quantity,
+      location,
+      image,
+    });
 
     handleClose();
   };
 
-
   const editItem = async (id, data) => {
     try {
       const edit = await updateItem(id, data);
-      return edit
+      return edit;
     } catch (e) {
       console.log(e);
     }
