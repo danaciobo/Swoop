@@ -1,8 +1,10 @@
 # Swoop
 Swoop is an online marketplace for pre-owned items where people can declutter their houses or swoop for a bargain while helping the environment by reusing items already in circulation. Users can sign up, post items for sale, add items to the basket, checkout and complete the payment.
+
 ## Screenshots
-<p align=“center”>
-  <img src=“images/img01.png” />
+
+<p align="center">
+  <img src="client/src/images/img01.png" width = 500 />
 </p>
 
 ## Getting started
