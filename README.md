@@ -4,7 +4,7 @@ Swoop is an online marketplace for pre-owned items where people can declutter th
 ## Screenshots
 
 <p align="center">
-  <img src="client/src/images/img01.png" width = 500 />
+  <img src="client/src/images/img01.png" />
 </p>
 
 ## Getting started
