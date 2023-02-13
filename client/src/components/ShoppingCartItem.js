@@ -8,8 +8,6 @@ import ButtonBase from '@mui/material/ButtonBase';
 
 export default function ShoppingCartItem({ cartItem, cart, setCart,user }) {
  
-
-
   const removeFromCart = () => {
     const newCart = cart.filter((item) => item.id !== cartItem.id);
 

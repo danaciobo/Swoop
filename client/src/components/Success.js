@@ -3,11 +3,11 @@ import { Container, Typography, Button, Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 function Success({ user }) {
 
-const navigate = useNavigate()
-const backToShop = ()=>{
-  navigate('/')
-}
- 
+  const navigate = useNavigate();
+  const backToShop = () => {
+    navigate('/');
+  };
+
   return (
     <>
       <Container
