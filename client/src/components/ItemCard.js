@@ -47,7 +47,7 @@ const oldCart = cart
 if(!oldCart.includes(item)){
 setCart([...oldCart, item])
 
-localStorage.setItem(`myCart-${user.email} `, JSON.stringify(cart))
+localStorage.setItem(`myCart-${user.email}`, JSON.stringify(cart))
 }}
 
   return (

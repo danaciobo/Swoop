@@ -190,7 +190,7 @@ console.log(user.picture)
                             subheaderTypographyProps={{
                               fontSize: 10,
                             }}
-                            title={'$' + item.price}
+                            title={'£' + item.price}
                             subheader={item.title}
                           />
                         </Card>

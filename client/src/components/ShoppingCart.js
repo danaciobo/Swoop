@@ -8,13 +8,13 @@ function ShoppingCart({item, cart, setCart , user}) {
   console.log(item)
 
 
-    useEffect(()=>{
-        console.log(cart)
-        const myCart = JSON.parse(localStorage.getItem(`myCart-${user.email}`));
-    if (myCart) {
-     setCart(myCart);
-    }}
-  , [cart]);
+  //   useEffect(()=>{
+  //       console.log(cart)
+  //       const myCart = JSON.parse(localStorage.getItem(`myCart-${user.email}`));
+  //   if (myCart) {
+  //    setCart(myCart);
+  //   }}
+  // , [cart]);
 
   const payUp = async()=>{
     console.log(cart)
@@ -43,7 +43,7 @@ function ShoppingCart({item, cart, setCart , user}) {
         cart.map((cartItem) => (
           <Grid cartItem key={cartItem.id}
           sx={{ marginTop: 3 }}>
-            <ShoppingCartItem cartItem={cartItem} setCart={setCart} cart={cart} />
+            <ShoppingCartItem cartItem={cartItem} setCart={setCart} cart={cart} user={user} />
           </Grid>
         ))
       ) : (

@@ -19,7 +19,7 @@ export default function ItemDetails({user, id, item, setCurrentItem,items ,setIt
         setCurrentItem(response)
       })
       .catch((err) => console.log(err));
-  }, );
+  },[] );
 
   const deleteThis = async () => {
     try {
@@ -42,9 +42,11 @@ export default function ItemDetails({user, id, item, setCurrentItem,items ,setIt
 
     if(!oldCart.includes(item)){
     setCart([...oldCart, item])
-
+navigate('/')
     localStorage.setItem(`myCart-${user.email} `, JSON.stringify(cart))
     }}
+
+    
 
   return (
     <Container>
