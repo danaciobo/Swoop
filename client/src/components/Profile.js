@@ -76,7 +76,7 @@ export default function Profile({ items, user, setCurrentItem }) {
                 <EditIcon />
               </IconButton>
               <Avatar
-                src= {user.picture}
+                src={user.picture}
                 sx={{
                   backgroundColor: '#E25F1C',
                   width: 100,

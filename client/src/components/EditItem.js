@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function EditItem({ items, item, setCurrentItem}) {
 
+
   const [title, setTitle] = useState(item.title);
   const [description, setDescription] = useState(item.description);
   const [price, setPrice] = useState(item.price);
@@ -65,18 +66,27 @@ const navigate = useNavigate()
     formData.append('quantity', quantity);
     formData.append('location', location);
 
-    editItem(item.id, { title,  description, category, price, quantity, location, image });
+    editItem(item.id, {
+      title,
+      description,
+      category,
+      price,
+      quantity,
+      location,
+      image,
+    });
 
     handleClose();
   };
 
-
   const editItem = async (id, data) => {
     try {
       const edit = await updateItem(id, data);
+
       setCurrentItem(data)
       navigate('/Profile')
       return edit
+
     } catch (e) {
       console.log(e);
     }

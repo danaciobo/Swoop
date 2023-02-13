@@ -2,10 +2,8 @@ import React  from "react";
 import { Container, Grid } from "@mui/material";
 import ItemCard from "./ItemCard";
 
-
 export default function ItemList({ user, items, setCurrentItem, setUser , cart, setCart}) {
 
-    
   return (
     <Container
       maxWidth={false}

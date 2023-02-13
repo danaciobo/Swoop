@@ -4,10 +4,7 @@ const app = express();
 const cors = require('cors');
 const  PORT  = 4002
 const router = require('./router');
-
-
 const sequelize = require('./models/index')
-
 
 app.use(cors());
 

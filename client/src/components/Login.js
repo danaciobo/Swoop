@@ -2,9 +2,9 @@ import Button from '@mui/material/Button';
 import { useAuth0 } from '@auth0/auth0-react';
 import React from 'react';
 
-const Login = ({setUser}) => {
+const Login = ({ setUser }) => {
   const { loginWithRedirect, isAuthenticated, user } = useAuth0();
-  setUser(user)
+  setUser(user);
 
   return (
     <>
@@ -16,7 +16,6 @@ const Login = ({setUser}) => {
         >
           Log In
         </Button>
-
       )}
     </>
   );
