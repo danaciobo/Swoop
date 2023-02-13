@@ -32,7 +32,7 @@ exports.createItem = async (req, res) => {
       quantity: req.body.quantity,
       location: req.body.location,
       image: img.secure_url,
-      imageId: img,
+      imageId: img.asset_id,
       seller: req.body.seller,
       buyer: req.body.buyer,
       stripeId: req.body.stripeId,
