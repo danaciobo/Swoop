@@ -7,10 +7,7 @@ const navigate = useNavigate()
 const backToShop = ()=>{
   navigate('/')
 }
-  const navigate = useNavigate();
-  const backToShop = () => {
-    navigate('/');
-  };
+ 
   return (
     <>
       <Container

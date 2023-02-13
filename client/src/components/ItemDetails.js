@@ -22,9 +22,6 @@ export default function ItemDetails({
   const navigate = useNavigate();
   useEffect(() => {
     getItemById(params.id)
-      .then(response => {
-       
-        setCurrentItem(response)
       .then((response) => {
         setCurrentItem(response);
       })
