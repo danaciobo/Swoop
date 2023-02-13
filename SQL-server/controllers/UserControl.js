@@ -15,7 +15,6 @@ exports.createProfile = async (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       phoneNumber: req.body.phoneNumber,
-      // avatar: req.file.path
     });
     res.status(201).send(newUser);
   } catch (e) {
@@ -56,7 +55,6 @@ exports.getUsers = async (req, res) => {
 };
 
 exports.updateUser = async (req, res) => {
-  console.log("man is in the controller get me!");
   try {
     const updatedUser = await User.update(req.body.updates, {
       where: {

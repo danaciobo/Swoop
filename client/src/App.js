@@ -1,28 +1,27 @@
-import "./App.css";
-import { Route, Routes } from "react-router-dom";
-import Banner from "./components/Banner";
-import Navbar from "./components/Navbar";
-import { createTheme, ThemeProvider } from "@mui/material";
-import ItemList from "./components/ItemsList";
-import Footer from "./components/Footer";
-import Profile from "./components/Profile";
-import { useEffect, useState } from "react";
-import Completion from "./Completion";
-import ItemDetails from "./components/ItemDetails";
-import ShoppingCart from "./components/ShoppingCart";
-
-import Success from "./components/Success";
-import CardFail from "./components/CardFail";
-const myURL = "http://localhost:4002/items";
+import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import Banner from './components/Banner';
+import Navbar from './components/Navbar';
+import { createTheme, ThemeProvider } from '@mui/material';
+import ItemList from './components/ItemsList';
+import Footer from './components/Footer';
+import Profile from './components/Profile';
+import { useEffect, useState } from 'react';
+import Completion from './Completion';
+import ItemDetails from './components/ItemDetails';
+import ShoppingCart from './components/ShoppingCart';
+import Success from './components/Success';
+import CardFail from './components/CardFail';
+const myURL = 'http://localhost:4002/items';
 
 const theme = createTheme({
   typography: {
-    fontFamily: ["Source Sans Pro", "Roboto"].join(","),
+    fontFamily: ['Source Sans Pro', 'Roboto'].join(','),
   },
   palette: {
     primary: {
-      main: "#63171D",
-      secondary: "#E25F1C",
+      main: '#63171D',
+      secondary: '#E25F1C',
     },
   },
 });
@@ -30,8 +29,7 @@ const theme = createTheme({
 function App() {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
-  const [cart, setCart] = useState([])
-  ;
+  const [cart, setCart] = useState([]);
   const [user, setUser] = useState({});
 
   const [currentItem, setCurrentItem] = useState({});
@@ -62,7 +60,6 @@ function App() {
 
   return (
     <>
-
       <ThemeProvider theme={theme}>
         <Navbar
           setItems={setItems}
@@ -71,14 +68,14 @@ function App() {
           user={user}
           setUser={setUser}
           cart={cart}
-          setCart = {setCart}
+          setCart={setCart}
         />
 
         <Banner />
 
         <Routes>
           <Route
-            path="/"
+            path='/'
             element={
               <ItemList
                 id={id}
@@ -92,9 +89,9 @@ function App() {
               />
             }
           />
-          <Route path="/completion" element={<Completion />} />
+          <Route path='/completion' element={<Completion />} />
           <Route
-            path="/All"
+            path='/All'
             element={
               <ItemList
                 id={id}
@@ -103,16 +100,15 @@ function App() {
                 setCurrentItem={setCurrentItem}
                 user={user}
                 setUser={setUser}
-
               />
             }
           />
 
-     <Route path = '/success' element = {<Success user={user}/>} />
-            <Route path = '/unsuccessful' element = {<CardFail user={user}/> } />
+          <Route path='/success' element={<Success user={user} />} />
+          <Route path='/unsuccessful' element={<CardFail user={user} />} />
 
           <Route
-            path="/Profile"
+            path='/Profile'
             element={
               <Profile
                 items={items}
@@ -121,18 +117,33 @@ function App() {
               />
             }
           />
-         
+
           <Route
             path={`/ItemDetails/:id`}
             element={
-
-
-              <ItemDetails user={user} id ={id} item={currentItem} setCurrentItem={setCurrentItem} items={items} setItems ={setItems} cart={cart}
-              setCart = {setCart}/>
+              <ItemDetails
+                user={user}
+                id={id}
+                item={currentItem}
+                setCurrentItem={setCurrentItem}
+                items={items}
+                setItems={setItems}
+                cart={cart}
+                setCart={setCart}
+              />
             }
           />
-          <Route path = 'ShoppingCart' element = {<ShoppingCart cart ={cart} setCart={setCart} item={currentItem} user={user} />} />
-
+          <Route
+            path='ShoppingCart'
+            element={
+              <ShoppingCart
+                cart={cart}
+                setCart={setCart}
+                item={currentItem}
+                user={user}
+              />
+            }
+          />
         </Routes>
         <Footer />
       </ThemeProvider>

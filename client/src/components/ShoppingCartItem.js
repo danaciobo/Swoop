@@ -6,16 +6,16 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import ButtonBase from '@mui/material/ButtonBase';
 
-export default function ShoppingCartItem({ cartItem, cart, setCart,user }) {
-  console.log(cart);
 
+export default function ShoppingCartItem({ cartItem, cart, setCart }) {
 
   const removeFromCart = () => {
-    console.log(cart, 'inside cart');
     const newCart = cart.filter((item) => item.id !== cartItem.id);
+
     console.log(localStorage.key(0));
     localStorage.setItem(`myCart-${user.email}`, JSON.stringify(newCart));
     setCart(newCart)
+
   };
 
   const Img = styled('img')({
