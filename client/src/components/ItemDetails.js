@@ -26,7 +26,9 @@ export default function ItemDetails({
         setCurrentItem(response);
       })
       .catch((err) => console.log(err));
-  });
+
+  },[] );
+
 
   const deleteThis = async () => {
     try {
@@ -47,12 +49,15 @@ export default function ItemDetails({
   const addToCart = () => {
     const oldCart = cart;
 
-    if (!oldCart.includes(item)) {
-      setCart([...oldCart, item]);
 
-      localStorage.setItem(`myCart-${user.email} `, JSON.stringify(cart));
-    }
-  };
+    if(!oldCart.includes(item)){
+    setCart([...oldCart, item])
+navigate('/')
+    localStorage.setItem(`myCart-${user.email} `, JSON.stringify(cart))
+    }}
+
+
+    
 
   return (
     <Container>

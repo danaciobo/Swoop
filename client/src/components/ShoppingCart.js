@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import ShoppingCartItem from './ShoppingCartItem';
 import { Container, Grid, Typography } from '@mui/material';
@@ -10,6 +11,7 @@ function ShoppingCart({ item, cart, setCart, user }) {
       setCart(myCart);
     }
   }, [cart]);
+
 
   const payUp = async () => {
     checkout(cart);
@@ -36,6 +38,7 @@ function ShoppingCart({ item, cart, setCart, user }) {
           spacing={{ xs: 3, md: 4 }}
         >
           {cart ? (
+
             cart.map((cartItem) => (
               <Grid cartItem key={cartItem.id} sx={{ marginTop: 3 }}>
                 <ShoppingCartItem
@@ -48,6 +51,7 @@ function ShoppingCart({ item, cart, setCart, user }) {
           ) : (
             <p>Cart is empty</p>
           )}
+
 
           <Grid
             container

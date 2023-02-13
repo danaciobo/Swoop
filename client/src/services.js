@@ -32,7 +32,9 @@ export const deleteItem = async (itemId) => {
 
 export const updateItem = async (id, content) => {
   try {
-    const response = await fetch(`${baseURL}/items`, {
+
+    const response = await fetch(`${baseURL}/items/${id}`,{
+
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ itemId: id, updates: content }),

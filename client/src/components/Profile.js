@@ -190,7 +190,7 @@ export default function Profile({ items, user, setCurrentItem }) {
                             subheaderTypographyProps={{
                               fontSize: 10,
                             }}
-                            title={'$' + item.price}
+                            title={'£' + item.price}
                             subheader={item.title}
                           />
                         </Card>

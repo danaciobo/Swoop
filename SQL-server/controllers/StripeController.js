@@ -1,4 +1,7 @@
-const stripe = require('stripe')(process.env.STRIPE_PAYMENT_KEY);
+
+require('dotenv').config()
+const stripe = require('stripe')(process.env.STRIPE_CREDENTIALS)
+
 const MY_DOMAIN = 'http://localhost:3000';
 exports.pay = async (req, res) => {
   const items = req.body.items;

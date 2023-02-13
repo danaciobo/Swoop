@@ -14,8 +14,11 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import EditIcon from '@mui/icons-material/Edit';
+import { useNavigate } from 'react-router-dom';
 
-export default function EditItem({ items, item }) {
+export default function EditItem({ items, item, setCurrentItem}) {
+
+
   const [title, setTitle] = useState(item.title);
   const [description, setDescription] = useState(item.description);
   const [price, setPrice] = useState(item.price);
@@ -26,7 +29,7 @@ export default function EditItem({ items, item }) {
   const [open, setOpen] = useState(false);
   const [previewSource, setPreviewSource] = useState();
   const [fileInputState] = useState('');
-
+const navigate = useNavigate()
   const handleFileInputChange = (e) => {
     console.log(e);
     const file = e;
@@ -79,7 +82,11 @@ export default function EditItem({ items, item }) {
   const editItem = async (id, data) => {
     try {
       const edit = await updateItem(id, data);
-      return edit;
+
+      setCurrentItem(data)
+      navigate('/Profile')
+      return edit
+
     } catch (e) {
       console.log(e);
     }
