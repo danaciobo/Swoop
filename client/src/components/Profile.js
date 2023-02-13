@@ -39,7 +39,7 @@ export default function Profile({ items, user, setCurrentItem }) {
     setPhoneNumber('');
     setEmail('');
   }
-console.log(user.picture)
+
   return (
     <Container>
       <Typography variant='h4' mt={4}>

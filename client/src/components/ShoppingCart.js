@@ -5,8 +5,6 @@ import Button from "@mui/material/Button";
 import { checkout } from "../services";
 function ShoppingCart({item, cart, setCart , user}) {
 
-  console.log(item)
-
 
   //   useEffect(()=>{
   //       console.log(cart)
@@ -17,7 +15,7 @@ function ShoppingCart({item, cart, setCart , user}) {
   // , [cart]);
 
   const payUp = async()=>{
-    console.log(cart)
+   
     checkout(cart)
   }
 

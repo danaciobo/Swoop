@@ -135,7 +135,7 @@ export default function Navbar({
     const filtered = items.filter(
       (item) => item.category.toLowerCase() === activeCategory.toLowerCase()
     );
-    console.log(filtered);
+   
     if (activeCategory.toLowerCase() === "all") {
       setFilteredItems(items);
     } else {

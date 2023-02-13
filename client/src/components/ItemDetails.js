@@ -14,8 +14,7 @@ export default function ItemDetails({user, id, item, setCurrentItem,items ,setIt
   useEffect(() => {
     getItemById(params.id)
       .then(response => {
-        console.log(params.id)
-
+       
         setCurrentItem(response)
       })
       .catch((err) => console.log(err));

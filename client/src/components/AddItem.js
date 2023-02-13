@@ -75,7 +75,7 @@ export default function AddItem({ setItems, setFilteredItems, items ,user}) {
     formData.append("location", location);
 
     postItem({title, description, category, price, quantity, location, image, seller_name: user.given_name +" "+ user.family_name, seller: user.email});
-    console.log(user)
+   
 
     e.target.reset();
     handleClose();
@@ -84,9 +84,9 @@ export default function AddItem({ setItems, setFilteredItems, items ,user}) {
   const itemsList = items;
   const postItem = async (data) => {
     try {
-      console.log('bad man')
+      
       const stripeDetails = await addToStripe({price: (data.price* 100), name: data.title})
-      console.log(stripeDetails.default_price.id)
+    
       const post = await addItem({...data, stripeId: stripeDetails.default_price.id});
       setItems((items) => [...items, post]);
       setFilteredItems((filteredItems) => [...itemsList, post]);

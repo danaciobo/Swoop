@@ -2,7 +2,6 @@ import React from 'react';
 import { Container, Typography, Button, Grid} from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 function Success({ user }) {
-console.log(user)
 
 const navigate = useNavigate()
 const backToShop = ()=>{

@@ -30,7 +30,7 @@ export default function EditItem({ items, item, setCurrentItem}) {
   const [fileInputState] = useState('');
 const navigate = useNavigate()
   const handleFileInputChange = (e) => {
-    console.log(e);
+    
     const file = e;
     previewFile(file);
   };
